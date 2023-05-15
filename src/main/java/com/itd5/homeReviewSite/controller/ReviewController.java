@@ -12,15 +12,4 @@ public class ReviewController {
     public String form() {
         return "review/form";
     }
-
-    public String formSubmit() {
-        return "";
-    }
-
-    public String showPreView(){return "";}
-
-    public String showDetail() {return "";}
-    public String delete(){return "redirect:/마이페이지 내가 작성한 승계글";}
-
-     public String certificationResident() {return "";}
 }

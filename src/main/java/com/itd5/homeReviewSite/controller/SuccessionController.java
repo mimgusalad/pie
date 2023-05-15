@@ -11,18 +11,9 @@ public class SuccessionController {
     public String form(){
         return "succession/form";
     }
-
-    public String submitForm(){
-        return "";
-    }
     @GetMapping("list")
-    public String showList(){
+    public String list(){
         return "succession/list";
     }
 
-    public String showDetail() {return "";}
-
-    public String delete(){return "redirect:/마이페이지 내가작성한 승계글";}
-
-    public String certificationContract() {return "";}
 }
