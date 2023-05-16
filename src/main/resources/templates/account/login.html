@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>login</title>
+    <title>Insert title here</title>
 </head>
 <body>
-<p>로그인 화면입니다.</p>
+<div th:if="${userId == null}">
+    <a th:href="@{https://kauth.kakao.com/oauth/authorize(client_id='809168c6a7ed3a39f1f86de8bc4cb57f', redirect_uri='http://localhost:8080/login', response_type='code')}">
+        <img src="/img/kakao_login/ko/kakao_login_medium_wide.png" alt="Kakao Login">
+    </a>
+</div>
+<div th:if="${userId != null}">
+    <h1>로그인 성공입니다</h1>
+</div>
 </body>
 </html>
