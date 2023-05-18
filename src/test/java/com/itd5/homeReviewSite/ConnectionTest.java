@@ -25,7 +25,6 @@ public class ConnectionTest {
             resultSet.close(); //결과 값 종료
 
             connection.close(); //연결 종료
-
             System.out.println("실행완료");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
