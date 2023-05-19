@@ -7,6 +7,7 @@ import lombok.Data;
 @Entity
 public class Review {
     private int reviewId;
+    private String address;
     private int startPoint;
     private String option;
     private String payment;
@@ -16,4 +17,5 @@ public class Review {
     private String date;
     private String houseType;
     private String cons;
+    private String content;
 }

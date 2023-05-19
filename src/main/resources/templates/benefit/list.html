@@ -6,10 +6,65 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="starter-template.css" th:href="@{/starter-template.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/easygpt/default.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
 </nav>
-<p>혜택 기본 화면입니다.</p>
+<div class="container">
+    <!-- Top Section -->
+    <div class="row mb-4">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <label class="fw-bold">나의 혜택 등급</label>
+                </div>
+                <div class="col">
+                    <span>Value1</span>
+                </div>
+                <div class="col">
+                    <label class="fw-bold">적립 포인트</label>
+                </div>
+                <div class="col">
+                    <span>Value2</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <label class="fw-bold">다음 등급까지</label>
+                </div>
+                <div class="col">
+                    <span>Value3</span>
+                </div>
+                <div class="col">
+                    <label class="fw-bold">사용 포인트</label>
+                </div>
+                <div class="col">
+                    <span>Value4</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold mb-3">포인트 사용</h2>
+            <img src="https://source.unsplash.com/1600x300/?nature" alt="Random Image 1">
+            <img src="https://source.unsplash.com/1600x300/?city" alt="Random Image 2">
+            <img src="https://source.unsplash.com/1600x300/?food" alt="Random Image 3">
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
