@@ -1,0 +1,9 @@
+/*p{
+    color: #df013a;
+    transition: color .5s ease-in-out;
+}*/
+
+.clicked {
+    color : #7f8c8d;
+}
+
