@@ -1,0 +1,107 @@
+.slider {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.image-container {
+  display: flex;
+  width: fit-content;
+  animation: slide-left 80s linear infinite; /* Adjust the duration as needed */
+  animation-play-state: running;
+}
+
+.image-container img {
+  width: 200px; /* Adjust the desired image width */
+  height: 300px; /* Adjust the desired image height */
+  object-fit: cover; /* Crop the image if needed */
+  margin-right: 50px; /* Adjust the desired spacing between images */
+}
+
+.slider:hover .image-container {
+  animation-play-state: paused;
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-300%);
+  }
+}
+
+body {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+.slider {
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 20px;
+  -ms-scroll-snap-points-x: repeat(100%);
+  scroll-snap-points-x: repeat(100%);
+  -ms-scroll-snap-type: mandatory;
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+.slider {
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.slider:hover {
+  animation-play-state: paused;
+}
+
+.slider:hover .image-container {
+  animation-play-state: paused;
+}
+
+.slider::-webkit-scrollbar {
+  width: 10px;
+}
+
+.slider::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.slider::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.slider::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.slider-scrolling {
+  animation-timing-function: steps(1, jump-none); /* Remove the stop time gap */
+}
+
+.slider-scrolling .image-container {
+  animation-play-state: paused;
+}
