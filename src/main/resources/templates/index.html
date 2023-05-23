@@ -5,10 +5,60 @@
     <title>Main</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link href="starter-template.css" th:href="@{/starter-template.css}" rel="stylesheet">
+    <link href="/css/starter-template.css" rel="stylesheet">
+    <link href="/css/mainSlide.css" rel="stylesheet">
+
 </head>
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
 </nav>
+<div align="center">
+    <form method="post" name="">
+        <div id="inputAddress">
+            <input type="text" placeholder="원하시는 지역명을 입력해주세요.">
+        </div>
+        <div class="slide">
+            <div class="slideItem">
+                <input id="siNoise" type="checkbox" name="optionItem" value="siNoise">
+                <label for="siNoise">소음</label>
+            </div>
+            <div class="slideItem">
+                <input id="siOptionStatus" type="checkbox" name="optionItem" value="siOptionStatus">
+                <label for="siOptionStatus">옵션 상태</label>
+            </div>
+            <div class="slideItem">
+                <input id="siSecurity" type="checkbox" name="optionItem" value="siSecurity">
+                <label for="siSecurity">치안</label>
+            </div>
+            <div class="slideItem">
+                <input id="siLighting" type="checkbox" name="optionItem" value="siLighting">
+                <label for="siLighting">채광/단열</label>
+            </div>
+            <div class="slideItem">
+                <input id="siGarbage" type="checkbox" name="optionItem" value="siGarbage">
+                <label for="siGarbage">쓰레기 처리</label>
+            </div>
+            <div class="slideItem">
+                <input id="siWorm" type="checkbox" name="optionItem" value="siWorm">
+                <label for="siWorm">벌레</label>
+            </div>
+            <div class="slideItem">
+                <input id="siSmell" type="checkbox" name="optionItem" value="siSmell">
+                <label for="siSmell">냄새</label>
+            </div>
+            <div class="slideItem">
+                <input id="siAmenity" type="checkbox" name="optionItem" value="siAmenity">
+                <label for="siAmenity">편의시설</label>
+            </div>
+
+
+        </div>
+        <div>
+            <p style="font-size:24px;">피하고 싶은 단점 키워드</p>
+            <p style="font-size:16px; color:#a4a4a4;">최대 3개까지 선택이 가능합니다.</p>
+        </div>
+        <input type="submit" value="방찾기" style="font-size:28px; background:#459830; color:#ffffff; border:none;">
+    </form>
+</div>
 </body>
 </html>

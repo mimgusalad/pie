@@ -5,51 +5,47 @@
     <title>Main</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link href="starter-template.css" th:href="@{/starter-template.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="/css/starter-template.css" rel="stylesheet">
+<style>
+
+</style>
 </head>
 <body>
-    <div th:fragments="menu">
+<div>
+    <nav class="navbar" th:fragment="menu">
+        <div class="nav_logo">
+            <a href="" th:href="@{/}">
+                <img alt="siteLogo"></img>
+            </a>
 
-        <nav class="navbar bg-body-tertiary" th:fragment="menu">
-            <div class="d-flex justify-content-evenly">
-                <a class="justify" href="#">
-                    <img src="" alt="BrandName" width="30" height="24">
-                </a>
-                <!--<form class="d-flex content" role="search">
-                    <input class="form-control me-2" type="search" placeholder="원하시는 지역명, 지하철역, 단지명을 입력해주세요." aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>-->
-                <a class="d-flex evenly" href="#">메시지</a>
-                <a class="" href="#" th:href="@{/account/login}">로그인</a>
-                <a class="" href="회원가입" th:href="@{/account/joinMembership}">회원가입 </a>
-                <a class="" href="#">
-                    <img src="" alt="UserImg" width="30" height="24">
-                </a>
-            </div>
-        </nav>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" th:fragment="menu">
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item" th:classappend="${menu} == 'map'? 'active'">
-                        <a class="nav-link" href="#" th:href="@{/map/list}">지도<span class="sr-only" th:if="${menu} == 'map'">(current)</span></a>
-                    </li>
-                    <li class="nav-item" th:classappend="${menu} == 'ai'? 'active'">
-                        <a class="nav-link" href="#" th:href="@{/ai/list}">AI추천 <span class="sr-only" th:if="${menu} == 'ai'">(current)</span></a>
-                    </li>
-                    <li class="nav-item" th:classappend="${menu} == 'board'? 'active'">
-                        <a class="nav-link" href="#" th:href="@{/succession/list}">게시판<span class="sr-only" th:if="${menu} == 'board'">(current)</span></a>
-                    </li>
-                    <li class="nav-item" th:classappend="${menu} == 'benefits'? 'active'">
-                        <a class="nav-link" href="#" th:href="@{/benefit/list}">혜택<span class="sr-only" th:if="${menu} == 'benefits'">(current)</span></a>
-                    </li>
-                </ul>
-            </div>
-            <a type="button" class="" th:href="@{/review/form}">리뷰등록</a>
-            <a type="button" class="" th:href="@{/succession/form}">승계글 등록</a>
-        </nav>
+        </div>
+        <ul class="nav_menu" style="font-size:20px;">
+            <li><a href="" th:href="@{/map/list}">지도</a></li>
+            <li><a href="" th:href="@{/ai/list}">AI 추천</a></li>
+            <li><a href="" th:href="@{/succession/list}">승계방</a></li>
+            <li><a href="" th:href="@{/benefit/list}">혜택</a></li>
+        </ul>
+        <ul class="nav_icons" style="font-size:16px;">
+            <li><a class="fa-brands fa-twitter" href="" th:href="@{/account/login}">로그인</a></li>
+            <li><a class="fa-brands fa-facebook" href="" th:href="@{/account/joinMembership}">회원가입</a></li>
+            <li><a class="fa-brands fa-twitter" href="" th:href="@{/chat}">메시지</a></li>
+            <li><a class="fa-brands fa-facebook" href="" th:href="@{/account/myPage}">마이페이지</a></li>
+            <li class="dropdown">
+                <button class="dropBtn">
+                    글쓰기
+                </button>
+                <div class="dropDownContent">
+                    <a href="" th:href="@{/review/form}">리뷰 작성하기</a>
+                    <a href="" th:href="@{/succession/form}">승계글 작성하기</a>
+                </div>
+            </li>
 
-    </div>
-
-z      
+        </ul>
+        <a href="#" class="navbar_toggleBtn">
+            <i class="fa-solid fa-bars"></i>
+        </a>
+    </nav>
+</div>
 </body>
 </html>

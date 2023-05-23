@@ -15,4 +15,6 @@ public class AccountController {
     public String join(){
         return "account/joinMembership";
     }
+    @GetMapping("myPage")
+    public String myPage(){return "account/myPage";}
 }

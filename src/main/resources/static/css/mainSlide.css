@@ -1,0 +1,16 @@
+.slideItem input[type=checkbox] {
+    display: none;
+}
+
+.slideItem input[type=checkbox]:checked + label{
+    display: inline-block;
+    cursor:pointer;
+    background:;
+}
+.slide{
+    display: flex;
+    flex-wrap:nowrap;
+    overflow: hidden;
+    position: relative;
+    user-select:none;
+}

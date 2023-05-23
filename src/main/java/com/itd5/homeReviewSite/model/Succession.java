@@ -20,4 +20,6 @@ public class Succession {
     private String modifying;
     private String update;
     private String content;
+    private String payment;
+    private String address;
 }

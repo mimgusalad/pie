@@ -5,7 +5,9 @@
     <title>Succession Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link href="starter-template.css" th:href="@{/starter-template.css}" rel="stylesheet">
+    <link href="/css/starter-template.css" rel="stylesheet">
+    <link href="/css/formCheckbox.css" rel="stylesheet">
+
     <style>
         .button{
             display:flex;
@@ -18,82 +20,204 @@
         #chooseFile{
             visibility:hidden;
         }
+
+
     </style>
 </head>
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
 </nav>
-
+<section>
     <div class="container" align="center">
         <form action="#" th:object="${succession}" th:action="@{/succession/form}" method="post">
             <input type="hidden" th:field="*{successionId}">
-            <form method="post" enctype="multipart/form-data">
-                <div class="button">
-                    <label for="chooseFile">
-                        부동산 계약서 인증
-                    </label>
+            <div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="button">
+                        <label for="chooseFile">
+                            부동산 계약서 인증
+                        </label>
+                    </div>
+                    <input type="file" id="chooseFile" name="chooseFile" accept="image/*"
+                           onchange="contractDataExtract(this)">
+                </form>
+            </div>
+
+            <div id="conHouseType" data-ke-size="size26">
+                <h3>방구조</h3>
+                <p>리뷰를 작성할 집의 구조 형태를 선택해주세요.</p>
+                <div class="chooseHouseTypeBtn">
+                    <input id="oneRoom" type="radio" name="houseType" value="oneRoom">
+                    <label for="oneRoom">원룸</label>
                 </div>
-                <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="contractDataExtract(this)">
-            </form>
-
-
-           <!-- <div>
-                <label for="address">주소</label>
-                <input type="text" id="address" th:field="*{address}">
-            </div>-->
-
-            <div>
-                <label for="deposit">보증금</label>
-                <input type="text" id="deposit" th:field="*{deposit}">
-            </div>
-
-
-            <div>
-                <label for="houseType">거주유형</label>
-                <input type="text" id="houseType" th:field="*{houseType}">
-            </div>
-            <div>
-                <label for="fee">월세</label>
-                <input type="text" id="fee" th:field="*{fee}">
-            </div>
-            <div>
-                <label for="period">계약 기간</label>
-                <input type="text" id="period" th:field="*{period}">
-            </div>
-            <div>
-                <p>옵션</p>
-                <label><input type="checkBox" name="option" value="airConditioner" checked>에어컨</label>
-                <label><input type="checkBox" name="option" value="refrigerator"checked>냉장고</label>
-                <label><input type="checkBox" name="option" value="washingMachine"checked>세탁기</label>
-                <label><input type="checkBox" name="option" value="microwave">전자레인지</label>
-                <label><input type="checkBox" name="option" value="bed">침대</label>
-                <label><input type="checkBox" name="option" value="closet">옷장</label>
-                <label><input type="checkBox" name="option" value="desk">책상</label>
-                <label><input type="checkBox" name="option" value="tv">TV</label>
-
-            </div>
-
-            <form method="post" enctype="multipart/form-data">
-                <div class="button">
-                    <label for="choosePhoto">
-                        사진추가
-                    </label>
+                <div class="chooseHouseTypeBtn">
+                    <input id="twoRoom" type="radio" name="houseType" value="twoRoom">
+                    <label for="twoRoom">투룸</label>
                 </div>
-                <input type="file" id="choosePhoto" name="choosePhoto" accept="image/*" onchange="addAndLoadPicture(this)">
-            </form>
+                <div class="chooseHouseTypeBtn">
+                    <input id="threeRoom" type="radio" name="houseType" value="threeRoom">
+                    <label for="threeRoom">쓰리룸</label>
+                </div>
+                <div class="chooseHouseTypeBtn">
+                    <input id="officeTels" type="radio" name="houseType" value="officeTels">
+                    <label for="officeTels">오피스텔</label>
+                </div>
+                <div class="chooseHouseTypeBtn">
+                    <input id="apartment" type="radio" name="houseType" value="apartment">
+                    <label for="apartment">아파트</label>
+                </div>
+            </div>
 
-            <div>
+            <div id="conLocationInfo" data-ke-size="size26">
+                <h3>위치정보 및 계약기간</h3>
+                <p>주소와 거주년도를 입력해주세요.</p>
+                <label for="address"></label>
+                <form method="post">
+                    <input type="text" placeholder="도로명, 건물명 지번 입력" id="address" size="60%" th:field="*{address}">
+                    <input type="submit" value="검색" id="addressSearchBtn">
+                </form>
+                <br>
+                <input type="text" placeholder="상세 주소를 입력해주세요." id="addressDetail" size="80%"><br>
+                <form action="">
+                    <select name="year" id="year" title="거주년도" class="select_year">
+                        년도
+                    </select>
+                    <script src="/js/processYearSelect.js"></script>
+                </form>
+            </div>
+
+            <div id="conTransInfo" data-ke-size="size26">
+                <h3>거래 정보</h3>
+                <p>승계할 집의 정보를 선택해주세요.</p>
+                <div class="chooseRentTypeBtn">
+                    <input id="monthlyRent" type="radio" name="rentType" value="monthlyRent">
+                    <label for="monthlyRent">월세</label>
+                </div>
+                <div class="chooseHouseTypeBtn">
+                    <input id="jeonse" type="radio" name="rentType" value="jeonse">
+                    <label for="jeonse">전세</label>
+                </div>
+
+            </div>
+
+            <div id="conBasicInfo" data-ke-size="size26">
+                <h3>기본 정보</h3>
+                <p>승계할 집의 정보를 선택해주세요.</p>
+                <label for="payment">관리비</label>
+                <input type="text" id="payment" th:field="*{payment}">
+                <div>
+                    <label>금액</label>
+                    <label for="deposit">보증금</label>
+                    <input type="text" id="deposit" th:field="*{deposit}">
+                    <label for="fee">월세</label>
+                    <input type="text" id="fee" th:field="*{fee}">
+                </div>
+                <div>
+                    <label>옵션 항목</label>
+                    <div class="optionItems">
+                        <input id="opSink" type="checkbox" name="optionItem" value="opSink">
+                        <label for="opSink">싱크대</label>
+                    </div>
+                    <div class="optionItems">
+                        <input id="opAirConditioner" type="checkbox" name="optionItem" value="opAirConditioner">
+                        <label for="opAirConditioner">에어컨</label>
+                    </div>
+                    <div class="optionItems">
+                        <input id="opShoeRack" type="checkbox" name="optionItem" value="opShoeRack">
+                        <label for="opShoeRack">신발장</label>
+                    </div>
+                    <div class="optionItems">
+                        <input id="opWashingMachine" type="checkbox" name="optionItem" value="opWashingMachine">
+                        <label for="opWashingMachine">세탁기</label>
+                    </div>
+                    <div class="optionItems">
+                        <input id="opRefrigerator" type="checkbox" name="optionItem" value="opRefrigerator">
+                        <label for="opRefrigerator">냉장고</label>
+                    </div>
+                    <div class="optionItems">
+                        <input id="opCloset" type="checkbox" name="optionItem" value="opCloset">
+                        <label for="opCloset">옷장</label>
+                    </div>
+                    <div class="optionItems">
+                        <input id="opDesk" type="checkbox" name="optionItem" value="opDesk">
+                        <label for="opDesk">책상</label>
+                    </div>
+                    <div class="optionItems">
+                        <input id="opBed" type="checkbox" name="optionItem" value="opBed">
+                        <label for="opBed">침대</label>
+                    </div>
+                    <div class="optionItems">
+                        <input id="opGasStove" type="checkbox" name="optionItem" value="opGasStove">
+                        <label for="opGasStove">가스레인지</label>
+                    </div>
+                    <div class="optionItems">
+                        <input id="opMicrowave" type="checkbox" name="optionItem" value="opMicrowave">
+                        <label for="opMicrowave">전자레인지</label>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <label>승계물품</label>
+                    <div class="successionItems">
+                        <input id="suDesk" type="checkbox" name="optionItem" value="suDesk">
+                        <label for="suDesk">책상</label>
+                    </div>
+                    <div class="successionItems">
+                        <input id="suChair" type="checkbox" name="optionItem" value="suChair">
+                        <label for="suChair">의자</label>
+                    </div>
+                    <div class="successionItems">
+                        <input id="suGlass" type="checkbox" name="optionItem" value="suGlass">
+                        <label for="suGlass">전신거울</label>
+                    </div>
+                    <div class="successionItems">
+                        <input id="suTable" type="checkbox" name="optionItem" value="suTable">
+                        <label for="suTable">탁자</label>
+                    </div>
+                    <div class="successionItems">
+                        <input id="suHanger" type="checkbox" name="optionItem" value="suHanger">
+                        <label for="suHanger">행거</label>
+                    </div>
+                    <div class="successionItems">
+                        <input id="suMattress" type="checkbox" name="optionItem" value="suMattress">
+                        <label for="suMattress">매트리스</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="conText" data-ke-size="size26">
                 <label for="content">추가 내용</label>
-                <textarea class="form-control" id="content" rows="3" th:field="*{content}">
-                <!--th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'">--></textarea>
+                <textarea class="form-control" id="content" rows="3" th:field="*{content}"></textarea>
+                <!--th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'">-->
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">
                     CONTENT ERROR MESSAGE
                 </div>
             </div>
 
+            <form method="post" enctype="multipart/form-data" id="conPhoto" data-ke-size="size26">
+                <div class="button">
+                    <label for="choosePhoto">사진 첨부하기</label><br>
+                    <p>사진을 등록해주세요.</p>
+                </div>
+                <input type="file" id="choosePhoto" name="choosePhoto" accept="image/*"
+                       onchange="addAndLoadPicture(this)">
+            </form>
+
         </form>
-        
+
     </div>
-    <script src="processSuccessionForm.js"></script>
+</section>
+<aside>
+    <ul>
+        <li><a href="#conHouseType">방구조</a></li>
+        <li><a href="#conLocationInfo">위치정보</a></li>
+        <li><a href="#conTerm">계약 기간</a></li>
+        <li><a href="#conTransInfo">거래 정보</a></li>
+        <li><a href="#conBasicInfo">기본 정보</a></li>
+        <li><a href="#conText">추가 내용</a></li>
+        <li><a href="#conPhoto">사진</a></li>
+    </ul>
+</aside>
+<script src="processSuccessionForm.js"></script>
 </body>
 </html>
