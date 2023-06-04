@@ -10,11 +10,11 @@ import NavUnderSide from "./NaviBar/NavUnderSide";
 
 export default function TempPage() {
 
-  useEffect(()=>{
-    axios.get('/api/review')
-      .then(res => console.log(res))
-      .catch()
-  })
+//  useEffect(()=>{
+//    axios.get('/api/review')
+//      .then(res => console.log(res))
+//      .catch()
+//  })
 
   return (
     <div className="layout_root">
