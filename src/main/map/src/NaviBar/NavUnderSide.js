@@ -90,7 +90,10 @@ function NavUnderSide(){
 
   const housePrice = (price) => {
     setPrice(price);
-    if(price == 10){
+    if(price == 0){
+      setCurPrice('전월세 금액')
+    }
+    else if(price == 10){
       setCurPrice('10만~')
     }
     else if(price == 20){
@@ -109,7 +112,10 @@ function NavUnderSide(){
 
   const changeHouseType = (type) =>{
     setHouseType(type);
-    if(type == '오픈형'){
+    if(type == ''){
+      setCurHouseType('방 구조')
+    }
+    else if(type == '오픈형'){
       setCurHouseType('오픈형')
     }
     else if(type == '분리형'){
@@ -661,6 +667,7 @@ function NavUnderSide(){
                 <button className="sub_menus_filter filter_1">{curPrice}</button>
                 {/* <button className="filter__label">전월세 금액</button> */}
                 <div className="filter__details-wrapper">
+                  <a href="#" onClick={() => housePrice(0)}>없음</a>
                   <a href="#" onClick={() => housePrice(10)}>10만~</a>
                   <a href="#" onClick={() => housePrice(20)}>20만~</a>
                   <a href="#" onClick={() => housePrice(30)}>30만~</a>
@@ -671,6 +678,7 @@ function NavUnderSide(){
               <div className="sub_menus_filter filter_2">
                 <button className="sub_menus_filter filter_2">{curHouseType}</button>
                 <div className="filter__details-wrapper">
+                  <a href="#" onClick={() => changeHouseType('')}>없음</a>
                   <a href="#" onClick={() => changeHouseType('오픈형')}>오픈형</a>
                   <a href="#" onClick={() => changeHouseType('분리형')}>분리형</a>
                   <a href="#" onClick={() => changeHouseType('복층형')}>복층형</a>
