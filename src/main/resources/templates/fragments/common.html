@@ -7,16 +7,15 @@
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="/css/starter-template.css" rel="stylesheet">
-<style>
+    <link href="/css/footerCss.css" rel="stylesheet">
 
-</style>
 </head>
 <body>
 <div>
     <nav class="navbar" th:fragment="menu">
         <div class="nav_logo">
             <a href="" th:href="@{/}">
-                <img alt="siteLogo"></img>
+                <img class="siteLogo" alt="siteLogo" src="/img/siteLogo.png">
             </a>
 
         </div>
@@ -47,5 +46,24 @@
         </a>
     </nav>
 </div>
+<footer class="bottomBar" th:fragment="bottomBar">
+    <div class="moreSiteInfoLink">
+        <span>서비스 소개</span>
+        <span>고객센터</span>
+        <span>자주 찾는 질문</span>
+        <span>이용안내</span>
+    </div>
+    <div class="siteInfo">
+        <div class="siteName">
+            <h3>못난집</h3>
+        </div>
+        <span>대표이사:박기홍</span>
+        <span>경북 경산시 대학로 280</span>
+        <span>사업자등록번호 : 123-45-67890</span><br>
+        <span>개인정보보호책임자 : 박기홍</span>
+        <h4>Copyright © 2023 Yeungnam University All rights reserved.</h4>
+
+    </div>
+</footer>
 </body>
 </html>

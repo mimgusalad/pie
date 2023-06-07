@@ -2,196 +2,415 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Review</title>
+    <title>Review form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="/css/starter-template.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
-    <link href="/css/formCheckbox.css" rel="stylesheet">
-    <link href="/css/starPoint.css" rel="stylesheet">
+    <link href="/css/form/formCheckbox.css" rel="stylesheet">
+    <link href="/css/form/starPoint.css" rel="stylesheet">
+    <link href="/css/form/loadPhoto.css" rel="stylesheet">
+    <link href="/css/form/formNavbar.css" rel="stylesheet">
+    <link href="/css/form/formSidebar.css" rel="stylesheet">
+    <link href="/css/form/reviewForm.css" rel="stylesheet">
+    <link href="/css/form/certificateModal.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <style>
-        .real-upload{
-            display: none;
-        }
-        .upload{
-            width: 200px;
-            height: 200px;
-            background-color: antiquewhite;
-        }
+    #contentTitle{
+    border: 0;
+    border-bottom: 1px solid #c9cdd2;
+    width: 100%;
+    margin-bottom: 20px;
+
+    font-size:16px;
+    font-weight: 500;
+    line-height:20px;
+    color: #a4a4a4;
+    }
+
+
+
+        <!--사진 업로드 구역 css-->
+        li {
+    list-style: none;
+}
+
+li img {
+    width: 152px;
+    height: 168px;
+    border : 1px solid #C9CDD2;
+    border-radius: 4px;
+    float:left;
+}
+.real-upload{
+    display: none;
+}
+.upload{
+    width: 152px;
+    height: 168px;
+    display: flex;
+    border : 1px solid #C9CDD2;
+    position : relative;
+    float:left;
+}
+
+.upload img{
+    width:61px;
+    height:56px;
+    position: absolute;
+    top:32%;
+    left:31%;
+}
+
+.image-preview {
+    width: 620px;
+    height: 180px;
+    display: flex;
+    gap: 8px;
+    flex-wrap:wrap;
+    float:right;
+}
+
     </style>
+
 </head>
-<body>
+<body style="height: 2000px; background : #f5f5f5;">
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
 </nav>
+<nav class="writeNav">
+    <ul>
+        <li><a href="" th:href="@{/review/form}">리뷰쓰기</a></li>
+        <li><a href="" th:href="@{/review/myReview}">내가 작성한 리뷰</a></li>
+    </ul>
+</nav>
+<section class="container">
+    <form action="#" th:object="${review}" th:action="@{/review/form}" method="post" enctype="multipart/form-data">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebarContent">
+                <p>리뷰 항목</p>
+                <ul>
+                    <li><a href="#conHouseType">방구조</a></li>
+                    <li><a href="#conPayType">거래 정보</a></li>
+                    <li><a href="#conBasicInfo">기본정보</a></li>
+                    <li><a href="#conLocationInfo">위치정보</a></li>
+                    <li><a href="#conWeakKeyword">단점 키워드</a></li>
+                    <li><a href="#conText">내용 / 별점</a></li>
+                    <li><a href="#conPhoto">사진</a></li>
+                    <li><input id="submitReview" type="submit" value="제출하기"></li>
+                    <li><input id="returnPage" type="button" value="뒤로가기" onclick="history.back()"></li>
+                    <li><h2 class="certificateResident">입주민 인증하기 ></h2></li>
+                </ul>
+            </div>
+        </aside>
 
-<section>
-    <div class="container" align="center">
-        <h2>리뷰 작성</h2>
-        <form action="#" th:object="${review}" th:action="@{/review/form}" method="post">
-            <input type="hidden" th:field="*{reviewId}">
-            <div id="conHouseType" data-ke-size="size26">
+        <div class="content" align="center">
+            <input type="hidden" th:field="*{articleNo}">
+            <div id="conHouseType" data-ke-size="size26" style="height:165px; margin-top: 20px;">
                 <h3>방구조</h3>
                 <p>리뷰를 작성할 집의 구조 형태를 선택해주세요.</p>
-                <div class="chooseHouseTypeBtn">
+                <div class="chooseRadioBtn">
                     <input id="oneRoom" type="radio" name="houseType" value="oneRoom">
                     <label for="oneRoom">원룸</label>
                 </div>
-                <div class="chooseHouseTypeBtn">
+                <div class="chooseRadioBtn">
                     <input id="twoRoom" type="radio" name="houseType" value="twoRoom">
                     <label for="twoRoom">투룸</label>
                 </div>
-                <div class="chooseHouseTypeBtn">
+                <div class="chooseRadioBtn">
                     <input id="threeRoom" type="radio" name="houseType" value="threeRoom">
                     <label for="threeRoom">쓰리룸</label>
                 </div>
-                <div class="chooseHouseTypeBtn">
+                <div class="chooseRadioBtn">
                     <input id="officeTels" type="radio" name="houseType" value="officeTels">
                     <label for="officeTels">오피스텔</label>
                 </div>
-                <div class="chooseHouseTypeBtn">
+                <div class="chooseRadioBtn">
                     <input id="apartment" type="radio" name="houseType" value="apartment">
                     <label for="apartment">아파트</label>
                 </div>
             </div>
 
-            <div id="conLocationInfo" data-ke-size="size26">
+            <div id="conPayType" data-ke-size="size26" style="height: 165px; margin-top: 20px;">
+                <h3>거래 정보</h3>
+                <p>리뷰를 작성할 집의 정보를 선택해주세요</p>
+                <div class="chooseRadioBtn">
+                    <input id="monthlyRent" type="radio" name="payType" value="monthlyRent">
+                    <label for="monthlyRent">월세</label>
+                </div>
+                <div class="chooseRadioBtn">
+                    <input id="jeonse" type="radio" name="payType" value="jeonse">
+                    <label for="jeonse">전세</label>
+                </div>
+
+            </div>
+
+            <div id="conBasicInfo" data-ke-size="size26" style="height: 217px;margin-top: 20px;">
+                <h3>기본 정보</h3>
+                <p>리뷰를 작성할 집의 정보를 선택해주세요.</p>
+                <div align="left" style="margin-left:46px; border: none;">
+                    <label for="payment">관리비</label>
+                    <input type="text" id="payment" th:field="*{payment}" placeholder="예) 5만원">
+                    <br>
+                    <div style="border: none; position: absolute; top: 692px;">
+                        <label>금액</label>
+                        <h4 for="deposit">보증금</h4>
+                        <input type="text" id="deposit" th:field="*{deposit}" placeholder="가격(단위: 만원)">
+                        <h4 for="fee">월세</h4>
+                        <input type="text" id="fee" th:field="*{fee}" placeholder="가격(단위 : 만원)">
+                    </div>
+                </div>
+            </div>
+
+            <div id="conLocationInfo" data-ke-size="size26" style="height:210px; margin-top: 20px;">
                 <h3>위치정보</h3>
                 <p>주소와 거주년도를 입력해주세요.</p>
                 <label for="address"></label>
                 <form method="post">
                     <input type="text" placeholder="도로명, 건물명 지번 입력" id="address" size="60%" th:field="*{address}">
-                    <input type="submit" value="검색" id="addressSearchBtn">
+                    <input type="button" value="검색" id="addressSearchBtn" onclick="sample6_execDaumPostcode()">
                     <form action="">
-                        <select name="year" id="year" title="거주년도" class="select_year">
-                            년도
+                        <select name="livingYear" id="year" title="거주년도" class="select_year">
+                            <option value="">거주년도</option>
                         </select>
                         <script src="/js/processYearSelect.js"></script>
                     </form>
                 </form>
                 <br>
-                <input type="text" placeholder="상세 주소를 입력해주세요." id="addressDetail" size="80%"><br>
+                <input type="text" placeholder="상세 주소를 입력해주세요." id="addressDetail"  th:field="*{addressDetail}"size="80%"><br>
             </div>
 
-            <form method="post" enctype="multipart/form-data">
-                <div class="button">
-                    <h3 for="chooseFile">입주민 인증</h3>
-                </div>
-                <input type="file" id="chooseFile" name="chooseFile" accept="image/*"
-                       onchange="contractDataExtract(this)">
-            </form>
-
-            <h3>전체 평점</h3>
-            <div class="rating_box">
-            <span class="rating">
-                ★★★★★
-                <span class="rating_star">★★★★★</span>
-                <input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
-                <script src="/js/starPoint.js"></script>
-            </span>
-
-            </div>
-
-            <div id="conWeakKeyword" data-ke-size="size26">
+            <div id="conWeakKeyword" data-ke-size="size26" style="height:619px; margin-top: 20px;">
                 <h3>단점 키워드</h3>
-                <p>위험 단계는 최대 3개, 문제 없음에는 최대 4개까지 선택 가능합니다.</p>
-                <!--            <div class="redWarning">
-                                <h4>심각</h4>
-                                <p class="noise">소음</p>
-                                <p id="smell">냄새</p>
-                                <p id="worm">벌레</p>
-                                <p id="security">치안</p>
-                                <p id="optionStatus">옵션상태</p>
-                                <p id="amenity">편의시설</p>
-                                <p id="lighting">채광/단열</p>
-                                <p id="garbage">쓰레기 처리</p>
-                                <script src="/js/index.js"></script>
-                            </div>
-                            <div class="orangeWarning">
-                                <h4>경계</h4>
-                                <p class="noise">소음</p>
-                            </div>
-                            <div class="yellowWarning">
-                                <h4>주의</h4>
-                            </div>
-                            <div class="none">
-                                <h4>문제없음</h4>
-                            </div>-->
-                <div class="weaknessKeyword">
-                    <input id="noise" type="checkbox" name="keyword" value="noise">
-                    <label for="noise">원룸</label>
+                <p>심각, 경계, 주의 순으로 단점 키워드를 선택해주세요.</p>
+                <div style="border: none;" class="warningIdx">
+                    <h4 style="border-bottom: 1px solid #fc453a;">심각</h4>
+                    <h4 style="border-bottom: 1px solid #ff8b72;">경계</h4>
+                    <h4 style="border-bottom: 1px solid #ffc34e;">주의</h4>
+                    <h4 style="border-bottom: 1px solid #c9cdd2;">문제없음</h4>
                 </div>
-                <div class="weaknessKeyword">
-                    <input id="optionState" type="checkbox" name="keyword" value="optionState">
-                    <label for="optionState">옵션 상태</label>
-                </div>
-                <div class="weaknessKeyword">
-                    <input id="security" type="checkbox" name="keyword" value="security">
-                    <label for="security">치안</label>
-                </div>
-                <div class="weaknessKeyword">
-                    <input id="lighting" type="checkbox" name="keyword" value="lighting">
-                    <label for="lighting">채광/단열</label>
-                </div>
-                <div class="weaknessKeyword">
-                    <input id="garbage" type="checkbox" name="keyword" value="garbage">
-                    <label for="garbage">쓰레기 처리</label>
-                </div>
-                <div class="weaknessKeyword">
-                    <input id="bug" type="checkbox" name="keyword" value="bug">
-                    <label for="bug">벌레</label>
-                </div>
-                <div class="weaknessKeyword">
-                    <input id="smell" type="checkbox" name="keyword" value="smell">
-                    <label for="smell">냄새</label>
-                </div>
-                <div class="weaknessKeyword">
-                    <input id="amenity" type="checkbox" name="keyword" value="amenity">
-                    <label for="amenity">편의시설</label>
+                <div class="warningKeyword" style="border: none;">
+                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
+                        <label style="margin-right:94px;">소음</label>
+                        <input class="weakRadioBtn" name="noise" value="redWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="noise" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="noise" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="noise" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    </div>
+                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
+                        <label style="margin-right:94px;">치안</label>
+                        <input class="weakRadioBtn" name="safety" value="redWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="safety" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="safety" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="safety" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    </div>
+                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
+                        <label style="margin-right:48px;">쓰레기 처리</label>
+                        <input class="weakRadioBtn" name="trash" value="redWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="trash" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="trash" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="trash" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    </div>
+                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
+                        <label style="margin-right:94px;">냄새</label>
+                        <input class="weakRadioBtn" name="smell" value="redWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="smell" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="smell" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="smell" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    </div>
+                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
+                        <label style="margin-right:62px;">옵션 상태</label>
+                        <input class="weakRadioBtn" name="optionQuality" value="redWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="optionQuality" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="optionQuality" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="optionQuality" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    </div>
+                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
+                        <label style="margin-right:80px;">일조량</label>
+                        <input class="weakRadioBtn" name="sunlight" value="redWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="sunlight" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="sunlight" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="sunlight" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    </div>
+                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
+                        <label style="margin-right:94px;">벌레</label>
+                        <input class="weakRadioBtn" name="insect" value="redWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="insect" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="insect" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="insect" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    </div>
+                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
+                        <label style="margin-right:66px;">편의시설</label>
+                        <input class="weakRadioBtn" name="convenience" value="redWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="convenience" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="convenience" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
+                        <input class="weakRadioBtn" name="convenience" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    </div>
                 </div>
             </div>
 
-            <form method="post" enctype="multipart/form-data" id="conPhoto" data-ke-size="size26">
-                <div class="button">
-                    <h3 for="choosePhoto">사진 첨부하기</h3>
-                    <p>방 리뷰할 사진을 등록해주세요.</p>
-                </div>
-                <input type="file" id="choosePhoto" name="choosePhoto" accept="image/*"
-                       onchange="addAndLoadPicture(this)">
-            </form>
-
-            <div id="conText" data-ke-size="size26">
+            <div id="conText" data-ke-size="size26" style="height: 417px; margin-top: 20px;">
                 <h3 for="content">추가 내용</h3>
-                <textarea class="form-control" id="content" rows="3" th:field="*{content}"></textarea>
+                <input type="text" id="contentTitle" name="contentTitle" placeholder="제목을 작성해주세요."
+                       th:field="*{contentTitle}"><br>
+                <textarea class="form-control" id="contentText" rows="10" th:field="*{contentText}"></textarea>
                 <!--th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'">-->
-                <div class="invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('contentText')}" th:errors="*{contentText}">
                     CONTENT ERROR MESSAGE
                 </div>
+                <span>별점</span>
+                <span class="rating">
+                ★★★★★
+                <span class="rating_star">★★★★★</span>
+                <input name="rating" th:field="*{rating}" type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+                <script src="/js/starPoint.js"></script>
+                </span>
             </div>
 
-            <div>
-                <input type="file" class="real-upload" accept="image/*" required multiple style="display:none;">
-                <div class="upload"></div>
-                <script>
-                    const realUpload = document.querySelector('.real-upload');
-                    const upload = document.querySelector('.upload');
-
-                    upload.addEventListener('click', ()=> realUpload.click());
-                </script>
+            <div id="conPhoto" data-ke-size="size26" style="height:311px; margin-top: 20px;">
+                <h3>사진 첨부하기</h3>
+                <p>방 리뷰할 사진을 등록해주세요.</p>
+                <input type="file" name="files" class="real-upload" accept="image/*" style="display:none;">
+                <div class="upload" style="position: inline;">
+                    <img src="/img/writeForm/uploadPhoto.png" alt="사진올리기">
+                </div>
+                <ul class="image-preview"></ul>
             </div>
+        </div>
 
-        </form>
+    </form>
 
-    </div>
 </section>
-<aside>
-    <ul>
-        <li><a href="#conHouseType">방구조</a></li>
-        <li><a href="#conLocationInfo">위치정보</a></li>
-        <li><a href="#conWeakKeyword">단점 키워드</a></li>
-        <li><a href="#conText">내용 / 별점</a></li>
-        <li><a href="#conPhoto">사진</a></li>
-    </ul>
-</aside>
+
 <script src="/js/processReviewForm.js"></script>
+<script src="/js/loadPhoto.js"></script>
+<!--<script>
+    function getImageFiles(e) {
+    const uploadFiles = [];
+    const files = e.currentTarget.files;
+    const imagePreview = document.querySelector('.image-preview');
+    const docFrag = new DocumentFragment();
+
+    if ([...files].length >= 7) {
+        alert('이미지는 최대 6개 까지 업로드가 가능합니다.');
+        return;
+    }
+
+    // 파일 타입 검사
+    [...files].forEach(file => {
+        if (!file.type.match("image/.*")) {
+        alert('이미지 파일만 업로드가 가능합니다.');
+        return
+    }
+
+    // 파일 갯수 검사
+    if ([...files].length < 7) {
+        uploadFiles.push(file);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+        const preview = createElement(e, file);
+        imagePreview.appendChild(preview);
+        };
+        reader.readAsDataURL(file);
+        }
+    });
+}
+
+function createElement(e, file) {
+    const li = document.createElement('li');
+    const img = document.createElement('img');
+    img.setAttribute('src', e.target.result);
+    img.setAttribute('data-file', file.name);
+    li.appendChild(img);
+
+    return li;
+}
+
+const realUpload = document.querySelector('.real-upload');
+const upload = document.querySelector('.upload');
+
+upload.addEventListener('click', () => realUpload.click());
+
+realUpload.addEventListener('change', getImageFiles);
+
+
+</script>-->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/js/searchAddress.js"></script>
+
+<div class="modal hidden" id="jsModal">
+    <div class="bg"></div>
+    <div class="modalBox">
+        <h2>입주민 인증</h2>
+        <button class="modalCloseBtn" id="jsCloseBtn">X</button>
+        <h1>계약서 사진을 업로드해주세요.</h1>
+        <p>사진을 드래그 앤 드롭으로 올려주시거나 눌러서 업로드해주세요.</p>
+        <div class="insertContract">
+            <input type="file" class="realUpload" accept="image/*" multiple style="display:none;">
+            <div class="uploadContract">
+                <img src="/img/writeForm/uploadContract.png" alt="사진올리기">
+            </div>
+            <div>
+                <ul class="contractPreview"></ul>
+            </div>
+        </div>
+        <button class="modalComplete">확인</button>
+    </div>
+</div>
+<script>
+$(document).ready(function(){
+        setDateBox();
+    });
+
+    // select box 연도 , 월 표시
+    function setDateBox(){
+        var dt = new Date();
+        var year = "";
+        var com_year = dt.getFullYear();
+        // 발행 뿌려주기
+        // 올해 기준으로 -1년부터 +5년을 보여준다.
+        for(var y = (com_year); y > (com_year-12); y--){
+            $("#year").append("<option value='"+ y +"'>"+ y + "년" +"</option>");
+        }
+    }
+
+    const openBtn= document.querySelector(".certificateResident");
+        const closeBtn=document.querySelector(".modalCloseBtn");
+        const modal = document.querySelector(".modal");
+
+        const open= () => {
+        modal.classList.remove("hidden");
+        }
+
+        const close = () => {
+        modal.classList.add("hidden");
+        }
+
+        openBtn.addEventListener("click", open);
+        closeBtn.addEventListener("click", close);
+
+
+
+
+</script>
+
+<script>
+    function changeBgColor(element){
+
+      if(element.value == "redWarning"){
+      element.style.background-color="#fc453a";
+      }
+      else if(element.value == "orangeWarning"){
+      element.style.background-color="#ff8b72";
+      }
+      else if(element.value == "yellowWarning"){
+      element.style.background-color="#ffc34e";
+      }
+      else{
+        element.style.background-color="#454c53";
+      }
+    }
+</script>
+
 </body>
 </html>
