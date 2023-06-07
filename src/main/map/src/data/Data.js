@@ -7,7 +7,7 @@ export const Data = [
         fee: "월세 100 / 18",
         price: 18,
         houseType: "오픈형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "소음",
@@ -32,7 +32,7 @@ export const Data = [
         fee: "월세 300 / 37",
         price: 37,
         houseType: "분리형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "냄새",
@@ -57,7 +57,7 @@ export const Data = [
         fee: "월세 100 / 24",
         price: 24,
         houseType: "복층형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "옵션 상태",
@@ -82,7 +82,7 @@ export const Data = [
         fee: "월세 200 / 40",
         price: 40,
         houseType: "지상층",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "옵션 상태",
@@ -107,7 +107,7 @@ export const Data = [
         fee: "월세 400 / 41",
         price: 41,
         houseType: "반지하",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "치안",
@@ -132,7 +132,7 @@ export const Data = [
         fee: "월세 500 / 51",
         houseType: "옥탑",
         price: 51,
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "편의시설",
@@ -157,7 +157,7 @@ export const Data = [
         fee: "월세 300 / 40",
         price: 40,
         houseType: "오픈형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "일조량",
@@ -182,7 +182,7 @@ export const Data = [
         fee: "월세 100 / 27",
         price: 27,
         houseType: "분리형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "쓰레기 처리",
@@ -209,7 +209,7 @@ export const Data = [
         fee: "월세 200 / 30",
         price: 30,
         houseType: "복층형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "소음",
@@ -234,7 +234,7 @@ export const Data = [
         fee: "월세 200 / 33",
         price: 33,
         houseType: "지상층",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "옵션 상태",
@@ -259,7 +259,7 @@ export const Data = [
         fee: "월세 200 / 23",
         price: 23,
         houseType: "반지하",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "벌레",
@@ -284,7 +284,7 @@ export const Data = [
         fee: "월세 400 / 50",
         price: 50,
         houseType: "복층",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "편의시설",
@@ -309,7 +309,7 @@ export const Data = [
         fee: "월세 150 / 19",
         price: 19,
         houseType: "분리형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "소음",
@@ -334,7 +334,7 @@ export const Data = [
         fee: "월세 150 / 25",
         price: 25,
         houseType: "지상층",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "치안",
@@ -359,7 +359,7 @@ export const Data = [
         fee: "월세 200 / 30",
         price: 30,
         houseType: "오픈형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "쓰레기 처리",
@@ -384,7 +384,7 @@ export const Data = [
         fee: "월세 200 / 31",
         price: 31,
         houseType: "분리형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "일조량",
@@ -409,7 +409,7 @@ export const Data = [
         fee: "월세 100 / 27",
         price: 27,
         houseType: "지상층",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "냄새",
@@ -434,7 +434,7 @@ export const Data = [
         fee: "월세 300 / 31",
         price: 31,
         houseType: "오픈형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "치안",
@@ -459,7 +459,7 @@ export const Data = [
         fee: "월세 200 / 26",
         price: 26,
         houseType: "분리형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "소음",
@@ -476,7 +476,6 @@ export const Data = [
         ],
         rating: 3.4,
     },
-    // 새로운 데이터 tag들 손보기
     {
         lat: 35.8384081504613,
         lng: 128.75723624076,
@@ -485,7 +484,7 @@ export const Data = [
         fee: "월세 200 / 30",
         price: 30,
         houseType: "분리형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "옵션 상태",
@@ -510,7 +509,7 @@ export const Data = [
         fee: "월세 300 / 33",
         price: 33,
         houseType: "오픈형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "일조량",
@@ -535,7 +534,7 @@ export const Data = [
         fee: "월세 150 / 24",
         price: 24,
         houseType: "옥탑",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "치안",
@@ -560,7 +559,7 @@ export const Data = [
         fee: "월세 200 / 26",
         price: 26,
         houseType: "오픈형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "쓰레기 처리",
@@ -585,7 +584,7 @@ export const Data = [
         fee: "월세 300 / 37",
         price: 37,
         houseType: "분리형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "벌레",
@@ -610,7 +609,7 @@ export const Data = [
         fee: "월세 100 / 18",
         price: 18,
         houseType: "반지하",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "냄새",
@@ -635,7 +634,7 @@ export const Data = [
         fee: "월세 100 / 18",
         price: 19,
         houseType: "반지하",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "편의시설",
@@ -660,7 +659,7 @@ export const Data = [
         fee: "월세 300 / 40",
         price: 40,
         houseType: "복층",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "소음",
@@ -685,7 +684,7 @@ export const Data = [
         fee: "월세 300 / 45",
         price: 40,
         houseType: "복층",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "옵션 상태",
@@ -710,7 +709,7 @@ export const Data = [
         fee: "월세 300 / 21",
         price: 21,
         houseType: "오픈형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "치안",
@@ -735,7 +734,7 @@ export const Data = [
         fee: "월세 200 / 25",
         price: 25,
         houseType: "옥탑",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "일조량",
@@ -760,7 +759,7 @@ export const Data = [
         fee: "월세 200 / 25",
         price: 25,
         houseType: "옥탑",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "벌레",
@@ -785,7 +784,7 @@ export const Data = [
         fee: "월세 300 / 30",
         price: 30,
         houseType: "오픈형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "냄새",
@@ -810,7 +809,7 @@ export const Data = [
         fee: "월세 300 / 33",
         price: 33,
         houseType: "지상층",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "편의시설",
@@ -835,7 +834,7 @@ export const Data = [
         fee: "월세 200 / 27",
         price: 27,
         houseType: "분리형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "소음",
@@ -860,7 +859,7 @@ export const Data = [
         fee: "월세 100 / 17",
         price: 17,
         houseType: "반지하",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "옵션 상태",
@@ -885,7 +884,7 @@ export const Data = [
         fee: "월세 200 / 24",
         price: 24,
         houseType: "오픈형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "일조량",
@@ -910,7 +909,7 @@ export const Data = [
         fee: "월세 200 / 28",
         price: 28,
         houseType: "옥탑",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "쓰레기 처리",
@@ -935,7 +934,7 @@ export const Data = [
         fee: "월세 300 / 41",
         price: 41,
         houseType: "복층",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "벌레",
@@ -960,7 +959,7 @@ export const Data = [
         fee: "월세 300 / 45",
         price: 45,
         houseType: "복층",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "냄새",
@@ -985,7 +984,7 @@ export const Data = [
         fee: "월세 500 / 51",
         price: 51,
         houseType: "복층",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "편의시설",
@@ -1010,7 +1009,7 @@ export const Data = [
         fee: "월세 300 / 32",
         price: 32,
         houseType: "오픈형",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "소음",
@@ -1035,7 +1034,7 @@ export const Data = [
         fee: "월세 300 / 40",
         price: 40,
         houseType: "복층",
-        reviews: 64,
+        reviews: 1,
         tags: [
             {
                 label: "소음",
