@@ -1,0 +1,112 @@
+.modal{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal .bg{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modalBox{
+    position: absolute;
+    background-color: #fff;
+    width: 620px;
+    height:588px;
+    padding: 15px;
+    border-radius: 20px;
+}
+
+.modalBox .modalCloseBtn{
+    position: absolute;
+    top: 24px;
+    left: 552px;
+
+    width:28px;
+    height: 28px;
+    background-color: white;
+    border: 0px solid;
+}
+
+.modalBox h2{
+    position: absolute;
+    top: 25px;
+    left: 264px;
+
+    font-weight: 700;
+    font-size: 20px;
+    color: #1b1d1f;
+}
+
+.modalBox h2:after{
+    content: "";
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #d9d9d9;
+    margin: 16px auto;
+}
+
+.modalBox h1{
+    position: absolute;
+    left: 40px;
+    top: 88px;
+
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 38px;
+    color: #222222;
+}
+
+.modalBox p{
+    position: absolute;
+    left: 40px;
+    top: 134px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #666666;
+}
+
+.insertContract{
+    position: absolute;
+    width: 540px;
+    height: 276px;
+
+    top: 194px;
+    left: 40px;
+    border: 1px dashed #c9cdd2;
+    border-radius: 4px;
+}
+
+.modalComplete{
+    position: absolute;
+    width: 82px;
+    height: 34px;
+
+    left: 500px;
+    top: 530px;
+
+    background: #459830;
+    border: 0px;
+    border-radius: 10px;
+    color: white;
+}
+
+.uploadContract{
+    position: absolute;
+    top: 98px;
+    left: 172px;
+
+    width:196px;
+    height: 80px;
+}
+
+.hidden{
+    display: none;
+}
