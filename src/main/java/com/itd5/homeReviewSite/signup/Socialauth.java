@@ -1,8 +1,5 @@
 package com.itd5.homeReviewSite.signup;
 
-//import jakarta.persistence.Entity;
-//import jakarta.persistence.GeneratedValue;
-//import jakarta.persistence.GenerationType;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,12 +8,13 @@ import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-//import org.springframework.data.annotation.Id;
+import lombok.Setter;
 
-@Getter
 @Entity
 @NoArgsConstructor
-public class Socialauth {
+@Getter
+@Setter
+public class SocialAuth {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; //기본키
@@ -27,7 +25,7 @@ public class Socialauth {
     private String provider; //공급자 (google, facebook ...)
     private String providerId; //공급 아이디
     @Builder
-    public Socialauth(String name, String password, String email, String role, String provider, String providerId) {
+    public SocialAuth(String name, String password, String email, String role, String provider, String providerId) {
         this.name = name;
         this.password = password;
         this.email = email;

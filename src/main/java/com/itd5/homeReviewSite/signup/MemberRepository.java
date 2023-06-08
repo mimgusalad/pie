@@ -1,12 +1,10 @@
 package com.itd5.homeReviewSite.signup;
 
-//import org.springframework.data.jpa.repository.JpaRepository;
-//import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface MemberRepository extends JpaRepository<Socialauth, Long> {
-    public Optional<Socialauth> findByName(String name);
+public interface MemberRepository extends JpaRepository<SocialAuth, Long> {
+    public Optional<SocialAuth> findByProviderId(String providerId);
+    public Optional<SocialAuth> findByName(String username);
 }
