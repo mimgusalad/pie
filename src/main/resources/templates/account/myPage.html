@@ -11,5 +11,11 @@
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
 </nav>
 <p>마이페이지 입니다.</p>
+<form action="/myPage" method="post">
+    <input type="text" name="name" placeholder="name" value="닉네임변경">
+    <button type="submit">Update</button>
+</form>
+<a href="/index">취소</a>
+<button type="button" onclick="location=href='withdrawal.html'">회원탈퇴</button>
 </body>
 </html>

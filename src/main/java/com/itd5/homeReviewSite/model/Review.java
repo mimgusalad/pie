@@ -1,11 +1,13 @@
 package com.itd5.homeReviewSite.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
 @Entity
 public class Review {
+    @Id
     private int reviewId;
     private String address;
     private int startPoint;

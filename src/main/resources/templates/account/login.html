@@ -10,6 +10,14 @@
         <img src="/img/kakao_login/ko/kakao_login_medium_wide.png" alt="Kakao Login">
     </a>
 </div>
+<a href="/oauth2/authorization/google">
+<img src="/img.google/googlelogin.png" alt="google login">
+</a>
+<form action="/login" method="post">
+    <input type="text" name="name" placeholder="id">
+    <input type="password" name="password" placeholder="password">
+    <button type="submit">로그인</button>
+</form>
 <div th:if="${userId != null}">
     <h1>로그인 성공입니다</h1>
 </div>

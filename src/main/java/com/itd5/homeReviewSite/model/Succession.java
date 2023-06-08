@@ -2,11 +2,12 @@ package com.itd5.homeReviewSite.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Data;
 @Data
 @Entity
 public class Succession {
-
+    @Id
     private int successionId;
     private String fee;
     private String area;

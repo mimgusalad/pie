@@ -18,15 +18,29 @@ public class OAuthController {
 
     @GetMapping("/index")
     public String index(){return "index";}
-    @GetMapping("/loginForm")
+    @GetMapping("/login")
     public String home() {
-        return "loginForm";
+        return "login";
     }
-    @GetMapping("/updateForm")
-    public String updateForm() {
-        return "updateForm";
+    @GetMapping("/joinMembership")
+    public String joinForm() {
+        return "joinMembership";
     }
-    @PostMapping("/updateForm")
+    @PostMapping("/join")
+    public String join(SocialAuth member) {
+        String rawPwd = member.getPassword();
+        System.out.println("member = " + member);
+        member.setRole("ROLE_USER");
+        member.setPassword(encoder.encode(rawPwd));
+        memberRepository.save(member);
+        return "redirect:/index";
+    }
+
+    @GetMapping("/myPage")
+    public String myPage() {
+        return "myPage";
+    }
+    @PostMapping("/myPage")
     public String updateMember(@ModelAttribute SocialAuth updatedMember) {
         Optional<SocialAuth> existingMemberOptional = memberRepository.findByProviderId(updatedMember.getProviderId());
 

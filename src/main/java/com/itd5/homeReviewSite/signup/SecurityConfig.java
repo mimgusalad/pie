@@ -1,6 +1,5 @@
 package com.itd5.homeReviewSite.signup;
 
-import com.example.oauth2.domain.OAuth2MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
