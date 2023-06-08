@@ -1,0 +1,36 @@
+/*리뷰 작성 form navbar*/
+nav.writeNav{
+    background: #fff;
+    height: 72px;
+}
+
+nav.writeNav ul{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
+nav.writeNav ul li{
+    padding:10px;
+    display: inline-block;
+}
+
+nav.writeNav ul a{
+    text-decoration: none;
+    color: #a4a4a4;
+
+    font-size: 18px;
+    font-weight: 600;
+    line-height:24px;
+}
+
+nav.writeNav ul a:hover{
+    color:#459830;
+}
+
+nav.writeNav ul a:hover:after{
+    content: "";
+    display: block;
+    border-bottom: 1px solid #459830;
+    margin: 13px auto;
+}
