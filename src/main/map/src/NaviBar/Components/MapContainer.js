@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import {markerData} from "../../data/markerData.js"
 
 const {kakao} = window;
 
@@ -33,14 +32,24 @@ function MapContainer({searchPlace}){
               }
           };
 
-          markerData.forEach((el) => {
-            new kakao.maps.Marker({
-              map : map,
-              position : new kakao.maps.LatLng(el.lat, el.lng)
-            });
-          });
-
       }, [searchPlace]);
+
+      // useEffect(()=>{
+      //   const container = document.getElementById('map');
+      //   const options = {
+      //   center: new kakao.maps.LatLng(state.center.lat, state.center.lng),
+      //   level: 3
+      // };
+
+      //   const map = new kakao.maps.Map(container, options);
+
+      //   Data.forEach((el) => {
+      //     new kakao.maps.Marker({
+      //       map : map,
+      //       position : new kakao.maps.LatLng(el.lat, el.lng)
+      //     });
+      //   });
+      // },[])
       //
       // useEffect(()=>{
       //   const container = document.getElementById('map');
