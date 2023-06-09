@@ -38,8 +38,8 @@ function MapContainer({searchPlace}){
       return (
         //<Main>
           <div id='map' style={{
-              width: '1130px',
-              height: '600px',
+              width: '1264px',
+              height: '947px',
               // marginTop: '133px',
               // marginLeft: '454px'
           }}></div>

@@ -793,8 +793,8 @@ function NavUnderSide(){
             </div>
           </div>
           <div id='map' style={{
-              width: '1130px',
-              height: '600px',
+              width: '1264px',
+              height: '947px',
           }}></div>
         </div>
       </div>
