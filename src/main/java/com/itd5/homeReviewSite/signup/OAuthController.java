@@ -36,7 +36,7 @@ public class OAuthController {
         return "redirect:/index";
     }
     @GetMapping("/logout")
-    public String logout(){return "redirect:/index";}
+    public String logout(){return "login";}
     @GetMapping("/myPage")
     public String myPage() {
         return "myPage";

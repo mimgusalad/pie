@@ -1,3 +1,32 @@
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html xmlns:th="http://www.thymeleaf.org">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Insert title here</title>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<div th:if="${userId == null}">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <a th:href="@{https://kauth.kakao.com/oauth/authorize(client_id='809168c6a7ed3a39f1f86de8bc4cb57f', redirect_uri='http://localhost:8080/login', response_type='code')}">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <img src="/img/kakao_login/ko/kakao_login_medium_wide.png" alt="Kakao Login">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    </a>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<a href="/oauth2/authorization/kakao">&ndash;&gt;-->
+<!--&lt;!&ndash;    <img src="/img/kakao_login/ko/kakao_login_medium_wide.png" alt="Kakao&ndash;&gt;-->
+<!--&lt;!&ndash;</a>&ndash;&gt;-->
+<!--&lt;!&ndash;<a href="/oauth2/authorization/google">&ndash;&gt;-->
+<!--&lt;!&ndash;<img src="/img.google/googlelogin.png" alt="google login">&ndash;&gt;-->
+<!--&lt;!&ndash;</a>&ndash;&gt;-->
+<!--&lt;!&ndash;<form action="/login" method="post">&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="text" name="name" placeholder="id">&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="password" name="password" placeholder="password">&ndash;&gt;-->
+<!--&lt;!&ndash;    <button type="submit">로그인</button>&ndash;&gt;-->
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<div th:if="${userId != null}">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <h1>로그인 성공입니다</h1>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
 <!--<!DOCTYPE html>-->
 <!--<html lang="en">-->
 <!--<head>-->
@@ -5,7 +34,25 @@
 <!--    <title>Title</title>-->
 <!--</head>-->
 <!--<body>-->
-<!--<a href="/oauth2/authorization/google">구글 로그인</a>-->
+<!--<form action="/login" method="post">-->
+<!--    <input type="text" name="name">-->
+<!--    <input type="password" name="password">-->
+<!--    <button type="submit">제출</button>-->
+<!--</form>-->
+<!--<div>-->
+<!--    <a href="/oauth2/authorization/kakao">-->
+<!--        <img src="img.google/kakao_login_medium_wide.png" alt="Kakao login"</a>-->
+<!--</div>-->
+<!--<div>-->
+<!--    <a href="/oauth2/authorization/google">-->
+<!--        <img src="/img.google/googlelogin.png" alt="google login">-->
+<!--    </a>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--    <a href="/logout">로그아웃</a>-->
+<!--</div>-->
 
 <!--</body>-->
+
 <!--</html>-->
