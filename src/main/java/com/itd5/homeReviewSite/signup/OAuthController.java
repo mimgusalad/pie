@@ -35,7 +35,8 @@ public class OAuthController {
         memberRepository.save(member);
         return "redirect:/index";
     }
-
+    @GetMapping("/logout")
+    public String logout(){return "redirect:/index";}
     @GetMapping("/myPage")
     public String myPage() {
         return "myPage";
