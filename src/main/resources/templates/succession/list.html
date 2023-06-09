@@ -197,12 +197,16 @@
         .tableList td{
         margin: 20px auto 20px 12px;
 
+        border-bottom: 1px solid #e8ebed;
         font-weight: 500;
         font-size: 16px;
         line-height: 20px;
 
         color : #222222;
         }
+
+
+
         .tableList #tbAddress{
         width: 180px;
         }
@@ -270,7 +274,7 @@
     </div>
 
     <div class="formResultList">
-        <div class="sortSuccession" th:each="sortSuccession: ${sortSuccessionList}" th:href="@{/succession/detail?id=${sortSuccession.articleNo}}">
+        <div class="sortSuccession" th:each="sortSuccession: ${sortSuccessionList}" th:onclick="|location.href='@{/succession/detail(id=${sortSuccession.articleNo})}'|">
             <div class="sortSuccessionImgInfo">
                 <img id="roomImg" src="/img/reviewUploadImg/altRoomPicture.png">
                 <div class="innerAddressInfo">
@@ -307,7 +311,7 @@
             </tr>
             </thead>
             <tbody>
-                <tr th:each="succession : ${successionList}" th:href="@{/succession/detail?id=${succession.articleNo}}">
+                <tr th:each="succession : ${successionList}" th:onclick="|location.href='@{/succession/detail(id=${succession.articleNo})}'|">
                     <td th:text="${succession.address}">지역</td>
                     <td th:text="${succession.contentTitle}">제목</td>
                     <td th:text="${succession.deposit}+'/'+${succession.fee}">보증금/월세</td>

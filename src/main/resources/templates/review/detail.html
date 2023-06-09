@@ -61,7 +61,7 @@
         color: #222222;
         }
 
-        #starPoint{
+        .starPoint{
         float: right;
         display: inline;
 
@@ -71,23 +71,23 @@
         color: #666666;
         }
 
-        #starImg{
+        .starImg{
         float: right;
         display: inline;
 
         width: 20px;
         height: 20px;
 
-        background: #ffca10;
+        color: #ffca10;
         }
 
-        #starImg:after{
+        #seContent:before{
         content: "";
+        display: block;
 
-        border-right : 1px solid #a4a4a4;
-        margin: auto 20px;
+        border: 1px solid #222222;
+        margin: 20px auto;
         }
-
 
 
         #seContent{
@@ -235,10 +235,13 @@
       <br>
       <img src="/img/disadvantageMark/redMark.png">
       <h5>심각</h5>
+      <br>
       <img src="/img/disadvantageMark/orangeMark.png">
       <h5>경계</h5>
+      <br>
       <img src="/img/disadvantageMark/yellowMark.png">
       <h5>주의</h5>
+      <br>
       <img src="/img/disadvantageMark/noneMark.png">
       <h5>문제없음</h5>
     </div>
