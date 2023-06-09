@@ -1,0 +1,107 @@
+aside.sidebar{
+    height: 2000px;
+    width:200px;
+    float:right;
+}
+
+div.sidebarContent{
+    position: sticky;
+
+    background: #fff;
+    top:0;
+    border: 1px solid #c9cdd2;
+    border-radius:8px;
+}
+
+.sidebarContent a{
+    font-size:16px;
+    font-weight:500;
+    text-decoration: none;
+}
+
+aside.sidebar p{
+    font-size:18px;
+    font-weight:600;
+    margin: 16px 20px;
+}
+
+aside.sidebar p:after{
+    content: "";
+    display: block;
+    border-bottom: 1px solid #e8ebed;
+    margin: 11px auto;
+}
+
+aside.sidebar h2{
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #a4a4a4;
+}
+
+#submitReview{
+    width:140px;
+    height: 40px;
+    margin: 8px 0px;
+
+    background: #459830;
+    color:#ffffff;
+
+    border: 0px;
+    border-radius: 4px;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height:24px;
+}
+
+
+.certificateContract{
+    width: 140px;
+    height: 40px;
+    margin: 8px 0px;
+
+    background: #459830;
+    color: #ffffff;
+
+    border: 0px;
+    border-radius: 4px;
+
+    font-weight: 600px;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+
+#submitSuccession{
+    width: 140px;
+    height: 40px;
+    margin: 8px 0px;
+
+    background: #459830;
+    color: #ffffff;
+
+    border: 0px;
+    border-radius: 4px;
+
+    font-weight: 600px;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+
+#returnPage{
+    width: 140px;
+    height: 40px;
+
+    background:#ffffff;
+    color: #459830;
+
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+
+    border: 1px solid #77c662;
+    border-radius: 4px;
+}
