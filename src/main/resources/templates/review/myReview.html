@@ -106,7 +106,7 @@
     </ul>
 </nav>
 <div class="container">
-    <div th:each="myReview : ${myReviewList}" class="reviewArea">
+    <div th:each="myReview : ${myReviewList}" class="reviewArea" th:onclick="|location.href='@{/review/detail(id=${myReview.articleNo})}'|">
         <span th:each="myPicture : ${myPictureList}" >
         <img th:if="${myReview.picture == myPicture.pictureId}" th:src="${myPicture.fileUrl}+${myPicture.fileName}"
               alt="reviewImg">
@@ -115,10 +115,10 @@
         </span>
 
         <h1 id="mrAddress" th:text="${myReview.address}">주소</h1>
-        <div class="rating_box" >
+        <!--<div class="rating_box" >
             <span class="rating">★★★★★</span>
             <span class="rating_star" th:width="${myReview.rating}/10">★★★★★</span>
-        </div>
+        </div>-->
         <h1 id="mrStarPoint" th:text="${myReview.rating}" type="hidden">별점</h1>
 
             <!--<input th:value="${myReview.starpoint}" type="range" oninput="drawStar(this)" value="1" step="1" min="0"

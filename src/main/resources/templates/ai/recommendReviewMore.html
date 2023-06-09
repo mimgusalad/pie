@@ -56,17 +56,17 @@
         .contentReview{
         flex-wrap: wrap;
         float:left;
-        width: 1300px;
+        width: 1320px;
         height: 1060px;
 
         margin-left: 320px;
         }
 
         .oneReview{
-
+        float: left;
         width: 620px;
         height: 212px;
-        margin: 14px 20px;
+        margin: 14px 10px;
         padding: 24px 20px;
 
         background: #fff;
@@ -154,7 +154,7 @@
         <h1>회원님의 주소 및 활동을 기반으로 분석했습니다.</h1>
     </div>
     <div class="contentReview">
-        <div th:each="review : ${reviewList}" class="oneReview">
+        <div th:each="review : ${reviewList}" class="oneReview" th:onclik="|location.href='@{/review/detail(id=${review.articleNo})}'|">
             <img class="disMarkImg" src="/img/disadvantageMark/yellowMark.png" alt="주의">
             <img class="disMarkImg" src="/img/disadvantageMark/orangeMark.png" alt="경계">
             <img class="disMarkImg" src="/img/disadvantageMark/redMark.png" alt="심각">
@@ -172,6 +172,6 @@
     </div>
 
 </div>
-<footer th:replace="fragments/common :: bottomBar"></footer>
+
 </body>
 </html>
