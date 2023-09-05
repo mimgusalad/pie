@@ -42,6 +42,9 @@ public class SuccessionController {
         java.sql.Timestamp sqlDate = new java.sql.Timestamp(utilDate.getTime());
         succession.setRegDate(sqlDate);
 
+        // 회원 userId 가지고 오기
+
+
         // 사진 업로드
         PhotoFile photoFile = new PhotoFile();
         String sourceFileName = files.getOriginalFilename();

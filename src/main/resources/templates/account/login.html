@@ -1,58 +1,62 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Insert title here</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--&lt;!&ndash;<div th:if="${userId == null}">&ndash;&gt;-->
-<!--&lt;!&ndash;    <a th:href="@{https://kauth.kakao.com/oauth/authorize(client_id='809168c6a7ed3a39f1f86de8bc4cb57f', redirect_uri='http://localhost:8080/login', response_type='code')}">&ndash;&gt;-->
-<!--&lt;!&ndash;        <img src="/img/kakao_login/ko/kakao_login_medium_wide.png" alt="Kakao Login">&ndash;&gt;-->
-<!--&lt;!&ndash;    </a>&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--<a href="/oauth2/authorization/kakao">-->
-<!--    <img src="/img/kakao_login/ko/kakao_login_medium_wide.png" alt="Kakao-->
-<!--</a>-->
-<!--<a href="/oauth2/authorization/google">-->
-<!--<img src="/img.google/googlelogin.png" alt="google login">-->
-<!--</a>-->
-<!--<form action="/login" method="post">-->
-<!--    <input type="text" name="name" placeholder="id">-->
-<!--    <input type="password" name="password" placeholder="password">-->
-<!--    <button type="submit">로그인</button>-->
-<!--</form>-->
-<!--&lt;!&ndash;<div th:if="${userId != null}">&ndash;&gt;-->
-<!--&lt;!&ndash;    <h1>로그인 성공입니다</h1>&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="/css/loginModal.css" rel="stylesheet">
+
 </head>
-<body>
-<form action="/login" method="post">
-    <input type="text" name="name">
-    <input type="password" name="password">
-    <button type="submit">제출</button>
-</form>
-<div>
-    <a href="/oauth2/authorization/kakao">
-        <img src="/img.google/kakao_login_medium_wide.png" alt="Kakao login"</a>
-</div>
-<div>
-    <a href="/oauth2/authorization/google">
-        <img src="/img.google/googlelogin.png" alt="google login">
-    </a>
-</div>
+<th:block th:fragment="login">
+    <body>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" align="center"/>로그인
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="member_login">
+                    <form th:action="@{/login}" th:method="POST">
+                        <div class="member_login_input">
+                            <input type="text" name="name" placeholder="아이디">
+                        </div>
 
-<div>
-    <a href="/logout">로그아웃</a>
-</div>
+                        <div class="member_login_input">
+                            <input type="password" name="password" placeholder="비밀번호">
+                        </div>
 
-</body>
+                        <div class="loginMid">
+                            <label class="autoLogin" for="hint">
+                                <input type="checkbox" id="hint"/>로그인 유지하기
+                            </label>
+                            <div class="autoLogin">
+                                <a href="/forgot-password">아이디/비밀번호 찾기</a>
+                            </div>
+                        </div>
+
+                        <input class="member_login_btn" type="submit" id="btn-login" value="로그인">
+
+                        <div class="login_api">
+                            <a href="/oauth2/authorization/kakao">
+                                <img src="/img.google/kakao_login_medium_wide.png" alt="KAKAO LOGIN">
+                            </a>
+                        </div>
+
+                        <div class="login_api">
+                            <a href="/oauth2/authorization/google">
+                                <img src="/img.google/googlelogin.png" alt="GOOGLE LOGIN">
+                            </a>
+                        </div>
+                        <div class="joinLine">
+                            회원이 아니신가요?
+                            <a class="member_join_btn" value="회원가입" onclick="location.href='/account/joinMembership'">회원가입</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </body>
+</th:block>
 
 </html>

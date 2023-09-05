@@ -16,8 +16,9 @@ public class review_article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int articleNo;
     private double rating;
-    private String cons;
-    private String optionQuality;
+    private String cons1;
+    private String cons2;
+    private String cons3;
     private String payment;
     private String picture;
     private int livingYear;
@@ -27,6 +28,8 @@ public class review_article {
     private float latitude;
     private float longitude;
     private int certification;
+
+    private int userId;
 
 
     // 추가
