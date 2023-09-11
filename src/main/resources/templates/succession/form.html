@@ -8,225 +8,220 @@
     <link href="/css/starter-template.css" rel="stylesheet">
     <link href="/css/form/formCheckbox.css" rel="stylesheet">
     <link href="/css/form/loadPhoto.css" rel="stylesheet">
+    <link href="/css/form/reviewForm.css" rel="stylesheet">
     <link href="/css/form/formNavbar.css" rel="stylesheet">
-    <link href="/css/form/formSidebar.css" rel="stylesheet">
-    <link href="/css/form/successionForm.css" rel="stylesheet">
     <link href="/css/form/certificateModal.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css'>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <style>
-        #contentTitle{
-    border: 0;
-    border-bottom: 1px solid #c9cdd2;
-    width: 100%;
-    margin-bottom: 20px;
-
-    font-size:16px;
-    font-weight: 500;
-    line-height:20px;
-    color: #a4a4a4;
-    }
-
-    </style>
 
 </head>
 <body style="background : #f5f5f5;">
 <nav class="navbar bg-body-tertiary" th:replace="~{fragments/common :: menu}">
 </nav>
-<nav class="writeNav">
+
+<nav class="formNav">
     <ul>
-        <li><a href="" th:href="@{/succession/form}">승계글 쓰기</a></li>
-        <li><a href="" th:href="@{/succession/detail?id=1}">내가 작성한 글</a></li>
+        <li><a class="formNav_link" href="" th:href="@{/succession/form}">승계글 쓰기</a></li>
+        <li><a class="formNav_link" href="" th:href="@{/succession/detail}">내가 작성한 글</a></li>
     </ul>
 </nav>
 
 <section class="container">
     <form action="#" th:object="${succession}" th:action="@{/succession/form}" method="post" enctype="multipart/form-data">
         <aside class="sidebar" id="sidebar">
-            <div class="sidebarContent">
-                <p>승계글 항목</p>
+            <div class="sidebar_content">
+                <p class="sidebar_title">승계글 항목</p>
                 <ul>
-                    <li><a href="#conHouseType">방구조</a></li>
-                    <li><a href="#conLocationInfo">위치정보</a></li>
-                    <li><a href="#conTerm">계약 기간</a></li>
-                    <li><a href="#conTransInfo">거래 정보</a></li>
-                    <li><a href="#conBasicInfo">기본 정보</a></li>
-                    <li><a href="#conText">추가 내용</a></li>
-                    <li><a href="#conPhoto">사진</a></li>
-                    <li><input class="certificateContract" type="button" value="계약서 인증"></li>
-                    <li><input id="submitSuccession" type="submit" value="작성하기"></li>
-                    <li><input id="returnPage" type="button" value="뒤로가기" onclick="history.back()"></li>
+                    <li><a class="sidebar_content_title" href="#conHouseType">방구조</a></li>
+                    <li><a class="sidebar_content_title" href="#conLocationInfo">위치정보</a></li>
+                    <li><a class="sidebar_content_title" href="#conTerm">계약 기간</a></li>
+                    <li><a class="sidebar_content_title" href="#conTransInfo">거래 정보</a></li>
+                    <li><a class="sidebar_content_title" href="#conBasicInfo">기본 정보</a></li>
+                    <li><a class="sidebar_content_title" href="#conText">추가 내용</a></li>
+                    <li><a class="sidebar_content_title" href="#conPhoto">사진</a></li>
+                    <li><input class="sidebar_btn_certificatation" type="button" value="계약서 인증"></li>
+                    <li><input id="sidebar_btn_submit" type="submit" value="작성하기"></li>
+                    <li><input id="sidebar_btn_return" type="button" value="뒤로가기" onclick="history.back()"></li>
                 </ul>
             </div>
         </aside>
+
         <div class="content" align="center">
             <input type="hidden" th:field="*{articleNo}">
 
-            <div id="conHouseType" data-ke-size="size26" style="margin-top: 20px;">
-                <h3>방구조</h3>
-                <p>리뷰를 작성할 집의 구조 형태를 선택해주세요.</p>
-                <div class="chooseRadioBtn">
-                    <input id="oneRoom" type="radio" name="houseType" value="oneRoom">
+            <div class="content_form" id="conHouseType" data-ke-size="size26" style="margin-top: 20px;">
+                <h3 class="content_form_title">방구조</h3>
+                <p class="content_form_subtitle">리뷰를 작성할 집의 구조 형태를 선택해주세요.</p>
+                <div class="content_form_radioBtn">
+                    <input id="oneRoom" type="radio" name="houseType" value="원룸">
                     <label for="oneRoom">원룸</label>
                 </div>
-                <div class="chooseRadioBtn">
-                    <input id="twoRoom" type="radio" name="houseType" value="twoRoom">
+                <div class="content_form_radioBtn">
+                    <input id="twoRoom" type="radio" name="houseType" value="투룸">
                     <label for="twoRoom">투룸</label>
                 </div>
-                <div class="chooseRadioBtn">
-                    <input id="threeRoom" type="radio" name="houseType" value="threeRoom">
+                <div class="content_form_radioBtn">
+                    <input id="threeRoom" type="radio" name="houseType" value="쓰리룸">
                     <label for="threeRoom">쓰리룸</label>
                 </div>
-                <div class="chooseRadioBtn">
-                    <input id="officeTels" type="radio" name="houseType" value="officeTels">
+                <div class="content_form_radioBtn">
+                    <input id="officeTels" type="radio" name="houseType" value="오피스텔">
                     <label for="officeTels">오피스텔</label>
                 </div>
-                <div class="chooseRadioBtn">
-                    <input id="apartment" type="radio" name="houseType" value="apartment">
+                <div class="content_form_radioBtn">
+                    <input id="apartment" type="radio" name="houseType" value="아파트">
                     <label for="apartment">아파트</label>
                 </div>
             </div>
 
-            <div id="conLocationInfo" data-ke-size="size26" style="height: 265px;">
-                <h3>위치정보 및 계약기간</h3>
-                <p>주소와 거주년도를 입력해주세요.</p>
+            <div class="content_form" id="conLocationInfo" data-ke-size="size26" style="height: 265px;">
+                <h3 class="content_form_title">위치정보 및 계약기간</h3>
+                <p class="content_form_subtitle">주소와 거주년도를 입력해주세요.</p>
                 <label for="address"></label>
-                <form method="post">
-                    <input type="text" placeholder="도로명, 건물명 지번 입력" id="address" size="60%" th:field="*{address}">
-                    <input type="button" value="검색" id="addressSearchBtn" onclick="sample6_execDaumPostcode()">
+                <form class="content_form_location" method="post">
+                    <input  class="content_form_addressInput" type="text" placeholder="도로명, 건물명 지번 입력" id="address" size="60%" th:field="*{address}">
+                    <input class="content_form_location_submit" type="button" value="검색" id="addressSearchBtn" onclick="sample6_execDaumPostcode()">
                 </form>
 
-                <input type="text" placeholder="상세 주소를 입력해주세요." id="addressDetail" size="80%" th:field="*{addressDetail}"><br>
-               <span>계약기간</span>
-                <select name="periodYear" id="periodYear" title="거주년도" class="select_year">
-                    <option value="">거주년도</option>
-                </select>
-                <select name="periodMonth" id="periodMonth" title="월" class="select_month">
-                    <option value="">월</option>
-                </select>
-                <select name="periodDay" id="periodDay" title="일" class="select_day">
-                    <option value="">일</option>
-                </select>
-                <script src="/js/processYearSelect.js"></script>
-
+                <input class="content_form_addressInput" type="text" placeholder="상세 주소를 입력해주세요." id="addressDetail" size="80%" th:field="*{addressDetail}"><br>
+                <div class="content_term">
+                    <span class="content_term_title">계약기간</span>
+                    <select name="periodYear" id="periodYear" title="거주년도" class="content_term_select">
+                        <option value="">거주년도</option>
+                    </select>
+                    <select name="periodMonth" id="periodMonth" title="월" class="content_term_select">
+                        <option value="">월</option>
+                    </select>
+                    <select name="periodDay" id="periodDay" title="일" class="content_term_select">
+                        <option value="">일</option>
+                    </select>
+                    <script src="/js/processYearSelect.js"></script>
+                </div>
             </div>
 
-            <div id="conTransInfo" data-ke-size="size26">
-                <h3>거래 정보</h3>
-                <p>승계할 집의 정보를 선택해주세요.</p>
-                <div class="chooseRadioBtn">
-                    <input id="monthlyRent" type="radio" name="payType" value="monthlyRent">
+            <div class="content_form" id="conTransInfo" data-ke-size="size26">
+                <h3 class="content_form_title">거래 정보</h3>
+                <p class="content_form_subtitle">승계할 집의 정보를 선택해주세요.</p>
+                <div class="content_form_radioBtn">
+                    <input id="monthlyRent" type="radio" name="payType" value="월세">
                     <label for="monthlyRent">월세</label>
                 </div>
-                <div class="chooseRadioBtn">
-                    <input id="jeonse" type="radio" name="payType" value="jeonse">
+                <div class="content_form_radioBtn">
+                    <input id="jeonse" type="radio" name="payType" value="전세">
                     <label for="jeonse">전세</label>
                 </div>
 
             </div>
 
-            <div id="conBasicInfo" data-ke-size="size26">
-                <h3>기본 정보</h3>
-                <p>승계할 집의 정보를 선택해주세요.</p>
-                <div align="left" style="margin-left:46px; border: none;">
-                    <label for="payment">관리비</label>
-                    <input type="text" id="payment" th:field="*{payment}" placeholder="예) 5만원">
-                    <br>
-                    <div style="border: none;">
-                        <label>금액</label>
-                        <h4 for="deposit">보증금</h4>
-                        <input type="text" id="deposit" th:field="*{deposit}" placeholder="가격(단위: 만원)">
-                        <h4 for="fee">월세</h4>
-                        <input type="text" id="fee" th:field="*{fee}" placeholder="가격(단위 : 만원)">
-                    </div>
+            
+
+            <div class="content_form" id="conBasicInfo" data-ke-size="size26">
+                <h3 class="content_form_title">기본 정보</h3>
+                <p class="content_form_subtitle">승계할 집의 정보를 선택해주세요.</p>
+                <div class="content_input_fee">
+                    <label class="content_input_fee_title" for="payment">관리비</label>
+                    <input type="text" id="payment" th:field="*{payment}" placeholder="예)5만원">
                 </div>
-                <div style="border: none;">
-                    <label>옵션 항목</label>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="opSink" type="checkbox" name="optionQuality" value="opSink">
+                <div class="content_input_fee">
+                    <label class="content_input_fee_title">금액</label>
+                        <h4 class="content_input_fee_subtitle" for="deposit">보증금</h4>
+                        <input type="text" id="deposit" th:field="*{deposit}" placeholder="가격(단위:만원)">
+                        <h4 class="content_input_fee_subtitle" for="fee">월세</h4>
+                        <input type="text" id="fee" th:field="*{fee}" placeholder="가격(단위:만원)">
+                </div>
+                <div class="content_input_product">
+                    <label class="content_input_fee_title">옵션 항목</label>
+                    <div style="display:inline-block; width: 520px;">
+                    <div class="content_form_checkBtn">
+                        <input id="opSink" type="checkbox" name="optionQuality" value="싱크대">
                         <label for="opSink">싱크대</label>
                     </div>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="opAirConditioner" type="checkbox" name="optionQuality" value="opAirConditioner">
+                    <div class="content_form_checkBtn">
+                        <input id="opAirConditioner" type="checkbox" name="optionQuality" value="에어컨">
                         <label for="opAirConditioner">에어컨</label>
                     </div>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="opShoeRack" type="checkbox" name="optionQuality" value="opShoeRack">
+                    <div class="content_form_checkBtn">
+                        <input id="opShoeRack" type="checkbox" name="optionQuality" value="신발장">
                         <label for="opShoeRack">신발장</label>
                     </div>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="opWashingMachine" type="checkbox" name="optionQuality" value="opWashingMachine">
+                    <div class="content_form_checkBtn">
+                        <input id="opWashingMachine" type="checkbox" name="optionQuality" value="세탁기">
                         <label for="opWashingMachine">세탁기</label>
                     </div>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="opRefrigerator" type="checkbox" name="optionQuality" value="opRefrigerator">
+                    <div class="content_form_checkBtn">
+                        <input id="opRefrigerator" type="checkbox" name="optionQuality" value="냉장고">
                         <label for="opRefrigerator">냉장고</label>
                     </div>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="opCloset" type="checkbox" name="optionQuality" value="opCloset">
+                    <div class="content_form_checkBtn">
+                        <input id="opCloset" type="checkbox" name="optionQuality" value="옷장">
                         <label for="opCloset">옷장</label>
                     </div>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="opDesk" type="checkbox" name="optionQuality" value="opDesk">
+                    <div class="content_form_checkBtn">
+                        <input id="opDesk" type="checkbox" name="optionQuality" value="책상">
                         <label for="opDesk">책상</label>
                     </div>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="opBed" type="checkbox" name="optionQuality" value="opBed">
+                    <div class="content_form_checkBtn">
+                        <input id="opBed" type="checkbox" name="optionQuality" value="침대">
                         <label for="opBed">침대</label>
                     </div>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="opGasStove" type="checkbox" name="optionQuality" value="opGasStove">
+                    <div class="content_form_checkBtn">
+                        <input id="opGasStove" type="checkbox" name="optionQuality" value="가스레인지">
                         <label for="opGasStove">가스레인지</label>
                     </div>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="opMicrowave" type="checkbox" name="optionQuality" value="opMicrowave">
+                    <div class="content_form_checkBtn">
+                        <input id="opMicrowave" type="checkbox" name="optionQuality" value="전자레인지">
                         <label for="opMicrowave">전자레인지</label>
                     </div>
                 </div>
-                <br>
-                <div style="border: none;">
-                    <label>승계물품</label>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="suDesk" type="checkbox" name="successionQuality" value="suDesk">
+                </div>
+
+                <div class="content_input_product">
+                    <label class="content_input_fee_title">승계물품</label>
+                    <div class="content_form_checkBtn">
+                        <input id="suDesk" type="checkbox" name="successionQuality" value="책상">
                         <label for="suDesk">책상</label>
                     </div>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="suChair" type="checkbox" name="successionQuality" value="suChair">
+                    <div class="content_form_checkBtn">
+                        <input id="suChair" type="checkbox" name="successionQuality" value="의자">
                         <label for="suChair">의자</label>
                     </div>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="suGlass" type="checkbox" name="successionQuality" value="suGlass">
+                    <div class="content_form_checkBtn">
+                        <input id="suGlass" type="checkbox" name="successionQuality" value="전신거울">
                         <label for="suGlass">전신거울</label>
                     </div>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="suTable" type="checkbox" name="successionQuality" value="suTable">
+                    <div class="content_form_checkBtn">
+                        <input id="suTable" type="checkbox" name="successionQuality" value="탁자">
                         <label for="suTable">탁자</label>
                     </div>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="suHanger" type="checkbox" name="successionQuality" value="suHanger">
+                    <div class="content_form_checkBtn">
+                        <input id="suHanger" type="checkbox" name="successionQuality" value="행거">
                         <label for="suHanger">행거</label>
                     </div>
-                    <div class="chooseCheckBoxBtn">
-                        <input id="suMattress" type="checkbox" name="successionQuality" value="suMattress">
+                    <div class="content_form_checkBtn">
+                        <input id="suMattress" type="checkbox" name="successionQuality" value="매트리스">
                         <label for="suMattress">매트리스</label>
                     </div>
                 </div>
                 </div>
 
-            <div id="conText" data-ke-size="size26">
-                <h3>상세 설명</h3>
-                <p>집에 대한 정보를 상세하게 적어주세요.</p>
-                <label for="contentText"></label>
-                <input type="text" id="contentTitle" name="contentTitle" placeholder="제목을 작성해주세요." th:field="*{contentTitle}"><br>
-                <textarea class="form-control" id="contentText" rows="10" th:field="*{contentText}"></textarea>
+            <div class="content_form" id="conText" data-ke-size="size26">
+                <h3 class="content_form_title">상세 설명</h3>
+                <p class="content_form_subtitle">집에 대한 정보를 상세하게 적어주세요.</p>
+                <div class="content_input_text">
+                    <input type="text" id="contentTitle" name="contentTitle" placeholder="제목을 작성해주세요."
+                        th:field="*{contentTitle}"><br>
+                    <textarea class="form-control" id="contentText" rows="10" th:field="*{contentText}"
+                    placeholder="내용을 입력해주세요"></textarea>
+                </div>
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('contentText')}" th:errors="*{contentText}">
                     CONTENT ERROR MESSAGE
                 </div>
             </div>
 
-            <div id="conPhoto" data-ke-size="size26">
-                <h3>사진 첨부하기</h3>
-                <p>사진을 등록해주세요.</p>
+            <div class="content_form" id="conPhoto" data-ke-size="size26">
+                <h3 class="content_form_title">사진 첨부하기</h3>
+                <p class="content_form_subtitle">사진을 등록해주세요.</p>
                 <input type="file" name="files" class="real-upload" accept="image/*" style="display:none;">
                 <div class="upload">
                     <img src="/img/writeForm/uploadPhoto.png" alt="사진올리기">

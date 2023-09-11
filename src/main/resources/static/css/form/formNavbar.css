@@ -1,36 +1,42 @@
 /*리뷰 작성 form navbar*/
-nav.writeNav{
-    background: #fff;
-    height: 72px;
+.formNav{
+    width: 1920px;
+    height: 52px;
+    flex-shrink: 0;
+
+    background: var(--text-white, #FFF);
 }
 
-nav.writeNav ul{
+.formNav ul{
     margin:0;
-    padding:0;
+    padding-left:320px;
     list-style:none;
 }
 
-nav.writeNav ul li{
-    padding:10px;
+.formNav li{
+    padding:14px;
     display: inline-block;
 }
 
-nav.writeNav ul a{
-    text-decoration: none;
-    color: #a4a4a4;
+.formNav_link{
+    color: var(--text-tertiary, #A4A4A4);
+    text-decoration:none;
 
+    /* Title 2/SemiBold */
+    font-family: Pretendard;
     font-size: 18px;
+    font-style: normal;
     font-weight: 600;
-    line-height:24px;
+    line-height: 24px; /* 133.333% */
 }
 
-nav.writeNav ul a:hover{
-    color:#459830;
+.formNav_link:hover{
+    color: var(--primary-normal, #459830);
 }
 
-nav.writeNav ul a:hover:after{
+.formNav_link:hover:after{
     content: "";
     display: block;
     border-bottom: 1px solid #459830;
-    margin: 13px auto;
+    margin: 14px auto;
 }

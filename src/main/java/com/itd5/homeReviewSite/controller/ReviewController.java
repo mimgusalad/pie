@@ -1,17 +1,24 @@
 package com.itd5.homeReviewSite.controller;
 
 import com.itd5.homeReviewSite.model.PhotoFile;
+import com.itd5.homeReviewSite.model.keyword;
 import com.itd5.homeReviewSite.model.review_article;
 import com.itd5.homeReviewSite.repository.FileRepository;
+import com.itd5.homeReviewSite.repository.KeywordRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
+import com.itd5.homeReviewSite.signup.PrincipalDetails;
+import com.itd5.homeReviewSite.signup.SocialAuth;
+import com.itd5.homeReviewSite.validator.ReviewValidator;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.commons.codec.Resources;
+import jakarta.validation.Valid;
 import org.apache.commons.compress.utils.FileNameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.WebProperties;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,21 +36,33 @@ public class ReviewController {
     @Autowired
     ReviewRepository reviewRepository;
     @Autowired
+    ReviewValidator reviewValidator;
+    @Autowired
     FileRepository fileRepository;
+    @Autowired
+    KeywordRepository keywordRepository;
 
     @GetMapping("form")
     public String form(Model model) {
         model.addAttribute("review", new review_article());
+        model.addAttribute("keyword", new keyword());
         return "review/form";
     }
 
-
     @PostMapping("form")
-    public String submitReview(HttpServletRequest request, @RequestPart MultipartFile files, @ModelAttribute review_article review) throws Exception{
+    public String submitReview(HttpServletRequest request, @RequestPart MultipartFile files,
+                               @ModelAttribute @Valid review_article review, @ModelAttribute keyword keyword,
+                               BindingResult bindingResult) throws Exception{
         // 현재 날짜 설정해주기
-        java.util.Date utilDate = new java.util.Date();
+/*        java.util.Date utilDate = new java.util.Date();
         java.sql.Timestamp sqlDate = new java.sql.Timestamp(utilDate.getTime());
         review.setRegdate(sqlDate);
+        System.out.println(keyword.getInsect());*/
+
+        if(bindingResult.hasErrors()){
+            System.out.println("error 발생");
+            return "review/form";
+        }
 
         // 사진 업로드
         PhotoFile photoFile = new PhotoFile();
@@ -53,7 +72,6 @@ public class ReviewController {
         String destinationFileName;
 
         String fileUrl = request.getSession().getServletContext().getRealPath("/reviewUploadImg");
-        System.out.println(fileUrl);
         do{
             destinationFileName = RandomStringUtils.randomAlphanumeric(32)+"."+ sourcedFileNameExtension;
             destinationFile = new File(fileUrl+destinationFileName);
@@ -72,17 +90,30 @@ public class ReviewController {
         if(coord[0] != null){
             review.setLongitude(coord[0]);
             review.setLatitude(coord[1]);
-            System.out.println(coord[0] + "  " + coord[1]);
         }
 
+        // userId set
+        review.setUserId(getLoginUserId());
+
+        // rating  set
+        review.setRating(review.getRating() /2);
+
+        // review db save
         reviewRepository.save(review);
         fileRepository.save(photoFile);
+
+        // keyword db save
+        keyword.setReview_id(review.getArticleNo());
+        keywordRepository.save(keyword);
+
         return "redirect:/review/myReview";
     }
 
     @GetMapping("myReview")
     public String myReview(Model model){
-        List<review_article> myReviewList = reviewRepository.findAll();
+        Long userId = getLoginUserId();
+
+        List<review_article> myReviewList = reviewRepository.findByUserId(userId);
         //List<Picture> myPictureList = pictureRepository.findAll();
         model.addAttribute("myReviewList", myReviewList);
         return "review/myReview";
@@ -145,5 +176,13 @@ public class ReviewController {
             e.printStackTrace();
         }
         return coord;
+    }
+
+    public Long getLoginUserId(){
+        Object principal= SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        PrincipalDetails principalDetails = (PrincipalDetails) principal;
+        Long userId = principalDetails.getMember().getId();
+
+        return userId;
     }
 }

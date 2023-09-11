@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Review form</title>
@@ -8,273 +8,240 @@
     <link href="/css/starter-template.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
     <link href="/css/form/formCheckbox.css" rel="stylesheet">
-    <link href="/css/form/starPoint.css" rel="stylesheet">
     <link href="/css/form/loadPhoto.css" rel="stylesheet">
-    <link href="/css/form/formNavbar.css" rel="stylesheet">
-    <link href="/css/form/formSidebar.css" rel="stylesheet">
     <link href="/css/form/reviewForm.css" rel="stylesheet">
+    <link href="/css/form/formNavbar.css" rel="stylesheet">
     <link href="/css/form/certificateModal.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css'>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <style>
-    #contentTitle{
-    border: 0;
-    border-bottom: 1px solid #c9cdd2;
-    width: 100%;
-    margin-bottom: 20px;
-
-    font-size:16px;
-    font-weight: 500;
-    line-height:20px;
-    color: #a4a4a4;
-    }
-
-
-
-        <!--사진 업로드 구역 css-->
-        li {
-    list-style: none;
-}
-
-li img {
-    width: 152px;
-    height: 168px;
-    border : 1px solid #C9CDD2;
-    border-radius: 4px;
-    float:left;
-}
-.real-upload{
-    display: none;
-}
-.upload{
-    width: 152px;
-    height: 168px;
-    display: flex;
-    border : 1px solid #C9CDD2;
-    position : relative;
-    float:left;
-}
-
-.upload img{
-    width:61px;
-    height:56px;
-    position: absolute;
-    top:32%;
-    left:31%;
-}
-
-.image-preview {
-    width: 620px;
-    height: 180px;
-    display: flex;
-    gap: 8px;
-    flex-wrap:wrap;
-    float:right;
-}
-
-    </style>
 
 </head>
 <body style="height: 2000px; background : #f5f5f5;">
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
 </nav>
-<nav class="writeNav">
+
+<nav class="formNav">
     <ul>
-        <li><a href="" th:href="@{/review/form}">리뷰쓰기</a></li>
-        <li><a href="" th:href="@{/review/myReview}">내가 작성한 리뷰</a></li>
+        <li><a class="formNav_link" href="" th:href="@{/review/form}">리뷰쓰기</a></li>
+        <li><a class="formNav_link" href="" th:href="@{/review/myReview}">내가 작성한 리뷰</a></li>
     </ul>
 </nav>
+
 <section class="container">
-    <form action="#" th:object="${review}" th:action="@{/review/form}" method="post" enctype="multipart/form-data">
+    <form action="/review/form" th:object="${review}" th:action="@{/review/form}" method="post" enctype="multipart/form-data">
         <aside class="sidebar" id="sidebar">
-            <div class="sidebarContent">
-                <p>리뷰 항목</p>
+            <div class="sidebar_content">
+                <p class="sidebar_title" >리뷰 항목</p>
                 <ul>
-                    <li><a href="#conHouseType">방구조</a></li>
-                    <li><a href="#conPayType">거래 정보</a></li>
-                    <li><a href="#conBasicInfo">기본정보</a></li>
-                    <li><a href="#conLocationInfo">위치정보</a></li>
-                    <li><a href="#conWeakKeyword">단점 키워드</a></li>
-                    <li><a href="#conText">내용 / 별점</a></li>
-                    <li><a href="#conPhoto">사진</a></li>
-                    <li><input id="submitReview" type="submit" value="제출하기"></li>
-                    <li><input id="returnPage" type="button" value="뒤로가기" onclick="history.back()"></li>
-                    <li><h2 class="certificateResident">입주민 인증하기 ></h2></li>
+                    <li><a class="sidebar_content_title" href="#conHouseType">방구조</a></li>
+                    <li><a class="sidebar_content_title" href="#conPayType">거래 정보</a></li>
+                    <li><a class="sidebar_content_title" href="#conBasicInfo">기본정보</a></li>
+                    <li><a class="sidebar_content_title" href="#conLocationInfo">위치정보</a></li>
+                    <li><a class="sidebar_content_title" href="#conWeakKeyword">단점 키워드</a></li>
+                    <li><a class="sidebar_content_title" href="#conText">내용 / 별점</a></li>
+                    <li><a class="sidebar_content_title" href="#conPhoto">사진</a></li>
+                    <li><input id="sidebar_btn_submit" type="submit" value="제출하기"></li>
+                    <li><input id="sidebar_btn_return" type="button" value="뒤로가기" onclick="history.back()"></li>
+                    <li><h2 class="sidebar_btn_certificatation" />입주민 인증하기 ></li>
                 </ul>
             </div>
         </aside>
 
         <div class="content" align="center">
             <input type="hidden" th:field="*{articleNo}">
-            <div id="conHouseType" data-ke-size="size26" style="height:165px; margin-top: 20px;">
-                <h3>방구조</h3>
-                <p>리뷰를 작성할 집의 구조 형태를 선택해주세요.</p>
-                <div class="chooseRadioBtn">
-                    <input id="oneRoom" type="radio" name="houseType" value="oneRoom">
+            
+            <div class="content_form" id="conHouseType" data-ke-size="size26" style="height:165px;">
+                <h3 class="content_form_title">방구조</h3>
+                <p class="content_form_subtitle">리뷰를 작성할 집의 구조 형태를 선택해주세요.</p>
+                <div class="content_form_radioBtn">
+                    <input id="oneRoom" type="radio" name="houseType" value="원룸" th:field="*{houseType}">
                     <label for="oneRoom">원룸</label>
                 </div>
-                <div class="chooseRadioBtn">
-                    <input id="twoRoom" type="radio" name="houseType" value="twoRoom">
+                <div class="content_form_radioBtn">
+                    <input id="twoRoom" type="radio" name="houseType" value="투룸" th:field="*{houseType}">
                     <label for="twoRoom">투룸</label>
                 </div>
-                <div class="chooseRadioBtn">
-                    <input id="threeRoom" type="radio" name="houseType" value="threeRoom">
+                <div class="content_form_radioBtn">
+                    <input id="threeRoom" type="radio" name="houseType" value="쓰리룸"  th:field="*{houseType}">
                     <label for="threeRoom">쓰리룸</label>
                 </div>
-                <div class="chooseRadioBtn">
-                    <input id="officeTels" type="radio" name="houseType" value="officeTels">
+                <div class="content_form_radioBtn">
+                    <input id="officeTels" type="radio" name="houseType" value="오피스텔"  th:field="*{houseType}">
                     <label for="officeTels">오피스텔</label>
                 </div>
-                <div class="chooseRadioBtn">
-                    <input id="apartment" type="radio" name="houseType" value="apartment">
+                <div class="content_form_radioBtn">
+                    <input id="apartment" type="radio" name="houseType" value="아파트" th:field="*{houseType}">
                     <label for="apartment">아파트</label>
                 </div>
+                <span th:if="${#fields.hasErrors('houseType')}" th:errors="*{houseType}"> 입력해주세요</span>
+
             </div>
 
-            <div id="conPayType" data-ke-size="size26" style="height: 165px; margin-top: 20px;">
-                <h3>거래 정보</h3>
-                <p>리뷰를 작성할 집의 정보를 선택해주세요</p>
-                <div class="chooseRadioBtn">
-                    <input id="monthlyRent" type="radio" name="payType" value="monthlyRent">
+            <div class="content_form" id="conPayType" data-ke-size="size26" style="height: 165px;">
+                <h3 class="content_form_title">거래 정보</h3>
+                <p class="content_form_subtitle">리뷰를 작성할 집의 정보를 선택해주세요</p>
+                <div class="content_form_radioBtn">
+                    <input id="monthlyRent" type="radio" name="payType" value="월세">
                     <label for="monthlyRent">월세</label>
                 </div>
-                <div class="chooseRadioBtn">
-                    <input id="jeonse" type="radio" name="payType" value="jeonse">
+                <div class="content_form_radioBtn">
+                    <input id="jeonse" type="radio" name="payType" value="전세">
                     <label for="jeonse">전세</label>
                 </div>
-
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('payment')}" th:errors="*{payment}">More example invalid feedback text</div>
             </div>
 
-            <div id="conBasicInfo" data-ke-size="size26" style="height: 217px;margin-top: 20px;">
-                <h3>기본 정보</h3>
-                <p>리뷰를 작성할 집의 정보를 선택해주세요.</p>
-                <div align="left" style="margin-left:46px; border: none;">
-                    <label for="payment">관리비</label>
-                    <input type="text" id="payment" th:field="*{payment}" placeholder="예) 5만원">
-                    <br>
-                    <div style="border: none; position: absolute; top: 692px;">
-                        <label>금액</label>
-                        <h4 for="deposit">보증금</h4>
-                        <input type="text" id="deposit" th:field="*{deposit}" placeholder="가격(단위: 만원)">
-                        <h4 for="fee">월세</h4>
-                        <input type="text" id="fee" th:field="*{fee}" placeholder="가격(단위 : 만원)">
-                    </div>
+            <div class="content_form" id="conBasicInfo" data-ke-size="size26" style="height: 217px;">
+                <h3 class="content_form_title">기본 정보</h3>
+                <p class="content_form_subtitle">리뷰를 작성할 집의 정보를 선택해주세요.</p>
+                <div class="content_input_fee">
+                    <label class="content_input_fee_title" for="payment">관리비</label>
+                    <input type="text" id="payment" th:field="*{payment}" placeholder="예)5만원">
+                </div>
+                <div class="content_input_fee">
+                    <label class="content_input_fee_title">금액</label>
+                        <h4 class="content_input_fee_subtitle" for="deposit">보증금</h4>
+                        <input type="text" id="deposit" th:field="*{deposit}" placeholder="가격(단위:만원)">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('deposit')}" th:errors="*{deposit}">
+                            Please provide a valid city.
+                        </div>
+                        <h4 class="content_input_fee_subtitle" for="fee">월세</h4>
+                        <input type="text" id="fee" th:field="*{fee}" placeholder="가격(단위:만원)">
                 </div>
             </div>
 
-            <div id="conLocationInfo" data-ke-size="size26" style="height:210px; margin-top: 20px;">
-                <h3>위치정보</h3>
-                <p>주소와 거주년도를 입력해주세요.</p>
+            <div class="content_form" id="conLocationInfo" data-ke-size="size26" style="height:210px; ">
+                <h3 class="content_form_title">위치정보</h3>
+                <p class="content_form_subtitle">주소와 거주년도를 입력해주세요.</p>
                 <label for="address"></label>
-                <form method="post">
-                    <input type="text" placeholder="도로명, 건물명 지번 입력" id="address" size="60%" th:field="*{address}">
-                    <input type="button" value="검색" id="addressSearchBtn" onclick="sample6_execDaumPostcode()">
+                <form class="content_form_location" method="post">
+                    <input class="content_form_addressInput" type="text" placeholder="도로명, 건물명 지번 입력" id="address"  th:field="*{address}">
+                    <input class="content_form_location_submit" type="button" value="검색" id="addressSearchBtn" onclick="sample6_execDaumPostcode()">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
+                        Please provide a valid city.
+                    </div>
                     <form action="">
                         <select name="livingYear" id="year" title="거주년도" class="select_year">
                             <option value="">거주년도</option>
                         </select>
+                        <div class="invalid-feedback"  th:if="${#fields.hasErrors('livingYear')}" th:errors="*{livingYear}" >
+                            Living Year empty
+                        </div>
                         <script src="/js/processYearSelect.js"></script>
                     </form>
                 </form>
                 <br>
-                <input type="text" placeholder="상세 주소를 입력해주세요." id="addressDetail"  th:field="*{addressDetail}"size="80%"><br>
+                <input class="content_form_addressInput" type="text" placeholder="상세 주소를 입력해주세요." id="addressDetail"  th:field="*{addressDetail}"><br>
             </div>
 
-            <div id="conWeakKeyword" data-ke-size="size26" style="height:619px; margin-top: 20px;">
-                <h3>단점 키워드</h3>
-                <p>심각, 경계, 주의 순으로 단점 키워드를 선택해주세요.</p>
-                <div style="border: none;" class="warningIdx">
-                    <h4 style="border-bottom: 1px solid #fc453a;">심각</h4>
-                    <h4 style="border-bottom: 1px solid #ff8b72;">경계</h4>
-                    <h4 style="border-bottom: 1px solid #ffc34e;">주의</h4>
-                    <h4 style="border-bottom: 1px solid #c9cdd2;">문제없음</h4>
+            <div class="content_form" id="conWeakKeyword" data-ke-size="size26" style="height:619px;">
+                <h3 class="content_form_title">단점 키워드</h3>
+                <p class="content_form_subtitle">심각, 경계, 주의 순으로 단점 키워드를 선택해주세요.</p>
+                <div style="border: none;" class="content_cons_header">
+                    <h4 class="content_cons_title" style="border-bottom: 1px solid #fc453a;">심각</h4>
+                    <h4 class="content_cons_title" style="border-bottom: 1px solid #ff8b72;">경계</h4>
+                    <h4 class="content_cons_title" style="border-bottom: 1px solid #ffc34e;">주의</h4>
+                    <h4 class="content_cons_title" style="border-bottom: 1px solid #c9cdd2;">문제없음</h4>
                 </div>
-                <div class="warningKeyword" style="border: none;">
-                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
-                        <label style="margin-right:94px;">소음</label>
-                        <input class="weakRadioBtn" name="noise" value="redWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="noise" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="noise" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="noise" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                <div class="content_cons_form" style="border: none;">
+                    <div class="content_cons_form_keyword" >
+                        <label class="content_cons_form_keyword_title">소음</label>
+                        <input class="content_cons_form_radiobtn_red" th:field="${keyword.noise}" name="noise" value="1.0"type="radio">
+                        <input class="content_cons_form_radiobtn_orange" th:field="${keyword.noise}" name="noise" value="2.0" type="radio">
+                        <input class="content_cons_form_radiobtn_yellow" th:field="${keyword.noise}" name="noise" value="3.0" type="radio">
+                        <input class="content_cons_form_radiobtn_grey" th:field="${keyword.noise}" name="noise" value="4.0" type="radio"  >
                     </div>
-                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
-                        <label style="margin-right:94px;">치안</label>
-                        <input class="weakRadioBtn" name="safety" value="redWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="safety" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="safety" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="safety" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    <div class="content_cons_form_keyword" >
+                        <label class="content_cons_form_keyword_title" >치안</label>
+                        <input class="content_cons_form_radiobtn_red" th:field="${keyword.safety}" name="safety" value="1.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_orange" th:field="${keyword.safety}" name="safety" value="2.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_yellow" th:field="${keyword.safety}" name="safety" value="3.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_grey" th:field="${keyword.safety}" name="safety" value="4.0" type="radio"  >
                     </div>
-                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
-                        <label style="margin-right:48px;">쓰레기 처리</label>
-                        <input class="weakRadioBtn" name="trash" value="redWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="trash" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="trash" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="trash" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    <div class="content_cons_form_keyword">
+                        <label class="content_cons_form_keyword_title">쓰레기 처리</label>
+                        <input class="content_cons_form_radiobtn_red" th:field="${keyword.trash}" name="trash" value="1.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_orange" th:field="${keyword.trash}" name="trash" value="2.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_yellow"th:field="${keyword.trash}"  name="trash" value="3.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_grey" th:field="${keyword.trash}" name="trash" value="4.0" type="radio"  >
                     </div>
-                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
-                        <label style="margin-right:94px;">냄새</label>
-                        <input class="weakRadioBtn" name="smell" value="redWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="smell" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="smell" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="smell" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    <div class="content_cons_form_keyword" >
+                        <label class="content_cons_form_keyword_title" >냄새</label>
+                        <input class="content_cons_form_radiobtn_red" th:field="${keyword.smell}" name="smell" value="1.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_orange" th:field="${keyword.smell}" name="smell" value="2.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_yellow" th:field="${keyword.smell}" name="smell" value="3.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_grey" th:field="${keyword.smell}" name="smell" value="4.0" type="radio"  >
                     </div>
-                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
-                        <label style="margin-right:62px;">옵션 상태</label>
-                        <input class="weakRadioBtn" name="optionQuality" value="redWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="optionQuality" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="optionQuality" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="optionQuality" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    <div class="content_cons_form_keyword" >
+                        <label class="content_cons_form_keyword_title" >옵션 상태</label>
+                        <input class="content_cons_form_radiobtn_red" th:field="${keyword.optionQuality}" name="optionQuality" value="1.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_orange" th:field="${keyword.optionQuality}" name="optionQuality" value="2.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_yellow" th:field="${keyword.optionQuality}" name="optionQuality" value="3.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_grey" th:field="${keyword.optionQuality}" name="optionQuality" value="4.0" type="radio"  >
                     </div>
-                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
-                        <label style="margin-right:80px;">일조량</label>
-                        <input class="weakRadioBtn" name="sunlight" value="redWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="sunlight" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="sunlight" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="sunlight" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    <div class="content_cons_form_keyword" >
+                        <label class="content_cons_form_keyword_title" >일조량</label>
+                        <input class="content_cons_form_radiobtn_red" th:field="${keyword.sunlight}" name="sunlight" value="1.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_orange" th:field="${keyword.sunlight}"  name="sunlight" value="2.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_yellow" th:field="${keyword.sunlight}" name="sunlight" value="3.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_grey" th:field="${keyword.sunlight}" name="sunlight" value="4.0" type="radio"  >
                     </div>
-                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
-                        <label style="margin-right:94px;">벌레</label>
-                        <input class="weakRadioBtn" name="insect" value="redWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="insect" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="insect" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="insect" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    <div class="content_cons_form_keyword" >
+                        <label class="content_cons_form_keyword_title" >벌레</label>
+                        <input class="content_cons_form_radiobtn_red" th:field="${keyword.insect}" name="insect" value="1.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_orange" th:field="${keyword.insect}" name="insect" value="2.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_yellow" th:field="${keyword.insect}" name="insect" value="3.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_grey" th:field="${keyword.insect}" name="insect" value="4.0" type="radio"  >
                     </div>
-                    <div class="weaknessKeyword" style="border: none; margin-bottom: 35px;">
-                        <label style="margin-right:66px;">편의시설</label>
-                        <input class="weakRadioBtn" name="convenience" value="redWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="convenience" value="orangeWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="convenience" value="yellowWarning" type="radio" onclick="changeBgColor(this)">
-                        <input class="weakRadioBtn" name="convenience" value="noneWarning" type="radio" onclick="changeBgColor(this)">
+                    <div class="content_cons_form_keyword">
+                        <label class="content_cons_form_keyword_title" >편의시설</label>
+                        <input class="content_cons_form_radiobtn_red" th:field="${keyword.convenience}" name="convenience" value="1.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_orange" th:field="${keyword.convenience}" name="convenience" value="2.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_yellow" th:field="${keyword.convenience}" name="convenience" value="3.0" type="radio"  >
+                        <input class="content_cons_form_radiobtn_grey" th:field="${keyword.convenience}" name="convenience" value="4.0" type="radio"  >
                     </div>
                 </div>
             </div>
 
-            <div id="conText" data-ke-size="size26" style="height: 417px; margin-top: 20px;">
-                <h3 for="content">추가 내용</h3>
-                <input type="text" id="contentTitle" name="contentTitle" placeholder="제목을 작성해주세요."
-                       th:field="*{contentTitle}"><br>
-                <textarea class="form-control" id="contentText" rows="10" th:field="*{contentText}"></textarea>
+            <div class="content_form" id="conText" data-ke-size="size26" style="height: 417px;">
+                <h3 class="content_form_title" for="content">상세 설명</h3>
+                <p class="content_form_subtitle">집에 대한 정보를 상세하게 적어주세요.</p>
+                <div class="content_input_text">
+                    <input type="text" id="contentTitle" name="contentTitle" placeholder="제목을 작성해주세요."
+                        th:field="*{contentTitle}"><br>
+                    <textarea class="form-control" id="contentText" rows="10" th:field="*{contentText}"
+                    placeholder="내용을 입력해주세요"></textarea>
+                </div>
                 <!--th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'">-->
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('contentText')}" th:errors="*{contentText}">
                     CONTENT ERROR MESSAGE
                 </div>
-                <span>별점</span>
-                <span class="rating">
-                ★★★★★
-                <span class="rating_star">★★★★★</span>
-                <input name="rating" th:field="*{rating}" type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
-                <script src="/js/starPoint.js"></script>
-                </span>
+                <div class="content_input_star">
+                    <span class="content_input_star_title">별점</span>
+                    <span class="rating">
+                    ★★★★★
+                    <span class="rating_star">★★★★★</span>
+                    <input name="rating" th:field="*{rating}" type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+                    <script src="/js/starPoint.js"></script>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">
+                        Please provide a valid city.
+                    </div>
+                    </span>
+                </div>
             </div>
 
-            <div id="conPhoto" data-ke-size="size26" style="height:311px; margin-top: 20px;">
-                <h3>사진 첨부하기</h3>
-                <p>방 리뷰할 사진을 등록해주세요.</p>
-                <input type="file" name="files" class="real-upload" accept="image/*" style="display:none;">
-                <div class="upload" style="position: inline;">
-                    <img src="/img/writeForm/uploadPhoto.png" alt="사진올리기">
+            <div class="content_form" id="conPhoto" data-ke-size="size26" style="height:311px;">
+                <h3 class="content_form_title">사진 첨부하기</h3>
+                <p class="content_form_subtitle">방 리뷰할 사진을 등록해주세요.</p>
+                <div class="content_photo">
+                    <input class="content_photo_input" type="file" name="files" accept="image/*">
+                    <div class="content_photo_imgarea">
+                        <img src="/img/writeForm/uploadPhoto.png" alt="사진올리기">
+                        
+                    </div>
+                    <ul class="content_photo_preview"></ul>
                 </div>
-                <ul class="image-preview"></ul>
             </div>
         </div>
 
@@ -284,11 +251,11 @@ li img {
 
 <script src="/js/processReviewForm.js"></script>
 <script src="/js/loadPhoto.js"></script>
-<!--<script>
+<script>
     function getImageFiles(e) {
     const uploadFiles = [];
     const files = e.currentTarget.files;
-    const imagePreview = document.querySelector('.image-preview');
+    const imagePreview = document.querySelector('.content_photo_preview');
     const docFrag = new DocumentFragment();
 
     if ([...files].length >= 7) {
@@ -326,15 +293,15 @@ function createElement(e, file) {
     return li;
 }
 
-const realUpload = document.querySelector('.real-upload');
-const upload = document.querySelector('.upload');
+const realUpload = document.querySelector('.content_photo_input');
+const upload = document.querySelector('.content_photo_imgarea');
 
 upload.addEventListener('click', () => realUpload.click());
 
 realUpload.addEventListener('change', getImageFiles);
 
 
-</script>-->
+</script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/searchAddress.js"></script>
 
@@ -393,24 +360,15 @@ $(document).ready(function(){
 
 
 </script>
-
 <script>
-    function changeBgColor(element){
+    const rating_input = document.querySelector('.rating input');
+const rating_star = document.querySelector('.rating_star');
 
-      if(element.value == "redWarning"){
-      element.style.background="#fc453a";
-      }
-      else if(element.value == "orangeWarning"){
-      element.style.background="#ff8b72";
-      }
-      else if(element.value == "yellowWarning"){
-      element.style.background="#ffc34e";
-      }
-      else{
-        element.style.background="#454c53";
-      }
-    }
+// 별점 드래그 할 때
+rating_input.addEventListener('input', () => {
+  rating_star.style.width = `${rating_input.value * 10}%`;
+});
+
 </script>
-
 </body>
 </html>
