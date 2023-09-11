@@ -99,12 +99,13 @@
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
 </nav>
-<nav class="writeNav">
+<nav class="formNav">
     <ul>
-        <li><a href="" th:href="@{/review/form}">리뷰쓰기</a></li>
-        <li><a href="" th:href="@{/review/myReview}">내가 작성한 리뷰</a></li>
+        <li><a class="formNav_link" href="" th:href="@{/review/form}">리뷰쓰기</a></li>
+        <li><a class="formNav_link" href="" th:href="@{/review/myReview}">내가 작성한 리뷰</a></li>
     </ul>
 </nav>
+
 <div class="container">
     <div th:each="myReview : ${myReviewList}" class="reviewArea" th:onclick="|location.href='@{/review/detail(id=${myReview.articleNo})}'|">
         <span th:each="myPicture : ${myPictureList}" >

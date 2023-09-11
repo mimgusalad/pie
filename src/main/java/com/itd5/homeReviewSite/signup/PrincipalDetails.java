@@ -1,5 +1,6 @@
 package com.itd5.homeReviewSite.signup;
 
+import lombok.Data;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 @Getter
+@Data
 public class PrincipalDetails implements  OAuth2User, UserDetails{
     private SocialAuth member;
     private Map<String, Object> attributes;
@@ -21,7 +23,6 @@ public class PrincipalDetails implements  OAuth2User, UserDetails{
         this.member=member;
         this.attributes=attributes;
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -44,7 +45,6 @@ public class PrincipalDetails implements  OAuth2User, UserDetails{
     public String getUsername() {
         return member.getName();
     }
-
 
     @Override
     public boolean isAccountNonExpired() {

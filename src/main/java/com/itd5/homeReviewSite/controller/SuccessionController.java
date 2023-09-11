@@ -4,10 +4,12 @@ import com.itd5.homeReviewSite.model.PhotoFile;
 import com.itd5.homeReviewSite.model.succession_article;
 import com.itd5.homeReviewSite.repository.FileRepository;
 import com.itd5.homeReviewSite.repository.SuccessionRepository;
+import com.itd5.homeReviewSite.signup.PrincipalDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.compress.utils.FileNameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,15 +37,13 @@ public class SuccessionController {
     }
 
     @PostMapping("form")
-    public String submitSuccession(HttpServletRequest request, @RequestPart MultipartFile files, @ModelAttribute succession_article succession) throws Exception{
+    public String submitSuccession(HttpServletRequest request, @RequestPart MultipartFile files,
+                                   @ModelAttribute succession_article succession) throws Exception{
 
         // 작성한 날짜 설정
         java.util.Date utilDate = new java.util.Date();
         java.sql.Timestamp sqlDate = new java.sql.Timestamp(utilDate.getTime());
         succession.setRegDate(sqlDate);
-
-        // 회원 userId 가지고 오기
-
 
         // 사진 업로드
         PhotoFile photoFile = new PhotoFile();
@@ -53,7 +53,6 @@ public class SuccessionController {
         String destinationFileName;
 
         String fileUrl = request.getSession().getServletContext().getRealPath("/reviewUploadImg");
-        System.out.println(fileUrl);
         do{
             destinationFileName = RandomStringUtils.randomAlphanumeric(32)+"."+ sourcedFileNameExtension;
             destinationFile = new File(fileUrl+destinationFileName);
@@ -71,9 +70,12 @@ public class SuccessionController {
         if(coord[0] != null){
             succession.setLongitude(coord[0]);
             succession.setLatitude(coord[1]);
-            System.out.println(coord[0] + "  " + coord[1]);
         }
 
+        // userId set
+        succession.setUserId(getLoginUserId());
+
+        // succession db save
         successionRepository.save(succession);
         fileRepository.save(photoFile);
         return "redirect:/succession/detail?id="+succession.getArticleNo();
@@ -88,15 +90,17 @@ public class SuccessionController {
         return "succession/list";
     }
     @GetMapping("detail")
-    public String detail(Model model, @RequestParam(required = false)Long id){
+    public String detail(Model model){
 
         succession_article succession;
-        if(id == null){
+        Long userId = getLoginUserId();
+
+        succession= successionRepository.findByUserId(userId);
+
+        if(succession == null){
             succession = new succession_article();
         }
-        /*Succession succession = successionRepository.findById(id).orElse(null);*/
 
-        succession= successionRepository.findById(id).orElse(null);
         model.addAttribute("succession", succession);
 
         return "succession/detail";
@@ -143,5 +147,13 @@ public class SuccessionController {
             e.printStackTrace();
         }
         return coord;
+    }
+
+    public Long getLoginUserId(){
+        Object principal= SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        PrincipalDetails principalDetails = (PrincipalDetails) principal;
+        Long userId = principalDetails.getMember().getId();
+
+        return userId;
     }
 }
