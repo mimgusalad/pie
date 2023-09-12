@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### node_modules ###
+/src/main/chat-app2/node_modules
+
+### env ###
+src/main/chat-app2/.env
