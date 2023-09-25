@@ -28,6 +28,11 @@ function CustomizedApp(props) {
               }
             }}
             disableAutoSelect
+            queries={{
+              channelListQuery: {
+                includeEmpty: true
+              }
+            }}
           />
         </div>
       ) : (
