@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Review form</title>
@@ -7,15 +7,15 @@
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="/css/starter-template.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
-    <link href="/css/form/formCheckbox.css" rel="stylesheet">
-    <link href="/css/form/loadPhoto.css" rel="stylesheet">
     <link href="/css/form/reviewForm.css" rel="stylesheet">
     <link href="/css/form/formNavbar.css" rel="stylesheet">
+    <link href="/css/form/formCheckbox.css" rel="stylesheet">
     <link href="/css/form/certificateModal.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css'>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
 </head>
 <body style="height: 2000px; background : #f5f5f5;">
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
@@ -29,7 +29,7 @@
 </nav>
 
 <section class="container">
-    <form action="/review/form" th:object="${review}" th:action="@{/review/form}" method="post" enctype="multipart/form-data">
+    <form id = "content_form" action="/review/form" th:object="${review}" th:action="@{/review/form}" method="post" enctype="multipart/form-data">
         <aside class="sidebar" id="sidebar">
             <div class="sidebar_content">
                 <p class="sidebar_title" >리뷰 항목</p>
@@ -42,13 +42,13 @@
                     <li><a class="sidebar_content_title" href="#conText">내용 / 별점</a></li>
                     <li><a class="sidebar_content_title" href="#conPhoto">사진</a></li>
                     <li><input id="sidebar_btn_submit" type="submit" value="제출하기"></li>
-                    <li><input id="sidebar_btn_return" type="button" value="뒤로가기" onclick="history.back()"></li>
+                    <li><input id="sidebar_btn_return" type="button" value="뒤로가기"></li>
                     <li><h2 class="sidebar_btn_certificatation" />입주민 인증하기 ></li>
                 </ul>
             </div>
         </aside>
 
-        <div class="content" align="center">
+        <div id = "content" class="content" align="center">
             <input type="hidden" th:field="*{articleNo}">
             
             <div class="content_form" id="conHouseType" data-ke-size="size26" style="height:165px;">
@@ -74,7 +74,7 @@
                     <input id="apartment" type="radio" name="houseType" value="아파트" th:field="*{houseType}">
                     <label for="apartment">아파트</label>
                 </div>
-                <span th:if="${#fields.hasErrors('houseType')}" th:errors="*{houseType}"> 입력해주세요</span>
+                <span class="invalid-feedback" th:if="${#fields.hasErrors('houseType')}" th:errors="*{houseType}"> 입력해주세요</span>
 
             </div>
 
@@ -89,7 +89,6 @@
                     <input id="jeonse" type="radio" name="payType" value="전세">
                     <label for="jeonse">전세</label>
                 </div>
-                <div class="invalid-feedback" th:if="${#fields.hasErrors('payment')}" th:errors="*{payment}">More example invalid feedback text</div>
             </div>
 
             <div class="content_form" id="conBasicInfo" data-ke-size="size26" style="height: 217px;">
@@ -97,16 +96,13 @@
                 <p class="content_form_subtitle">리뷰를 작성할 집의 정보를 선택해주세요.</p>
                 <div class="content_input_fee">
                     <label class="content_input_fee_title" for="payment">관리비</label>
-                    <input type="text" id="payment" th:field="*{payment}" placeholder="예)5만원">
+                    <input type="text" id="payment" th:field="*{payment}" placeholder="예)5만원" required>
                 </div>
                 <div class="content_input_fee">
                     <label class="content_input_fee_title">금액</label>
-                        <h4 class="content_input_fee_subtitle" for="deposit">보증금</h4>
-                        <input type="text" id="deposit" th:field="*{deposit}" placeholder="가격(단위:만원)">
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('deposit')}" th:errors="*{deposit}">
-                            Please provide a valid city.
-                        </div>
-                        <h4 class="content_input_fee_subtitle" for="fee">월세</h4>
+                        <label class="content_input_fee_subtitle" for="deposit">보증금</label>
+                        <input type="text" id="deposit" th:field="*{deposit}" placeholder="가격(단위:만원)" value="null"required >
+                        <label class="content_input_fee_subtitle" for="fee">월세</label>
                         <input type="text" id="fee" th:field="*{fee}" placeholder="가격(단위:만원)">
                 </div>
             </div>
@@ -116,23 +112,23 @@
                 <p class="content_form_subtitle">주소와 거주년도를 입력해주세요.</p>
                 <label for="address"></label>
                 <form class="content_form_location" method="post">
-                    <input class="content_form_addressInput" type="text" placeholder="도로명, 건물명 지번 입력" id="address"  th:field="*{address}">
+                    <input class="content_form_addressInput" type="text" placeholder="도로명, 건물명 지번 입력" id="address"  th:field="*{address}" required >
                     <input class="content_form_location_submit" type="button" value="검색" id="addressSearchBtn" onclick="sample6_execDaumPostcode()">
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
                         Please provide a valid city.
                     </div>
                     <form action="">
-                        <select name="livingYear" id="year" title="거주년도" class="select_year">
+                        <select name="livingYear" id="year" title="거주년도" class="select_year" required >
                             <option value="">거주년도</option>
                         </select>
                         <div class="invalid-feedback"  th:if="${#fields.hasErrors('livingYear')}" th:errors="*{livingYear}" >
                             Living Year empty
                         </div>
-                        <script src="/js/processYearSelect.js"></script>
+
                     </form>
                 </form>
                 <br>
-                <input class="content_form_addressInput" type="text" placeholder="상세 주소를 입력해주세요." id="addressDetail"  th:field="*{addressDetail}"><br>
+                <input class="content_form_addressInput" type="text" placeholder="상세 주소를 입력해주세요." id="addressDetail"  th:field="*{addressDetail}" required>
             </div>
 
             <div class="content_form" id="conWeakKeyword" data-ke-size="size26" style="height:619px;">
@@ -213,7 +209,7 @@
                     <textarea class="form-control" id="contentText" rows="10" th:field="*{contentText}"
                     placeholder="내용을 입력해주세요"></textarea>
                 </div>
-                <!--th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'">-->
+
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('contentText')}" th:errors="*{contentText}">
                     CONTENT ERROR MESSAGE
                 </div>
@@ -222,8 +218,7 @@
                     <span class="rating">
                     ★★★★★
                     <span class="rating_star">★★★★★</span>
-                    <input name="rating" th:field="*{rating}" type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
-                    <script src="/js/starPoint.js"></script>
+                    <input class="rating_input" id="rating" name="rating" th:field="*{rating}" type="range" value="1" step="1" min="0" max="10">
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">
                         Please provide a valid city.
                     </div>
@@ -235,75 +230,17 @@
                 <h3 class="content_form_title">사진 첨부하기</h3>
                 <p class="content_form_subtitle">방 리뷰할 사진을 등록해주세요.</p>
                 <div class="content_photo">
-                    <input class="content_photo_input" type="file" name="files" accept="image/*">
+                    <input class="content_photo_input" type="file" name="files" multiple="multiple" accept="image/*">
                     <div class="content_photo_imgarea">
                         <img src="/img/writeForm/uploadPhoto.png" alt="사진올리기">
-                        
                     </div>
-                    <ul class="content_photo_preview"></ul>
+                    <output id="content_photo_preview" class="content_photo_preview"></output>
                 </div>
             </div>
         </div>
 
     </form>
-
 </section>
-
-<script src="/js/processReviewForm.js"></script>
-<script src="/js/loadPhoto.js"></script>
-<script>
-    function getImageFiles(e) {
-    const uploadFiles = [];
-    const files = e.currentTarget.files;
-    const imagePreview = document.querySelector('.content_photo_preview');
-    const docFrag = new DocumentFragment();
-
-    if ([...files].length >= 7) {
-        alert('이미지는 최대 6개 까지 업로드가 가능합니다.');
-        return;
-    }
-
-    // 파일 타입 검사
-    [...files].forEach(file => {
-        if (!file.type.match("image/.*")) {
-        alert('이미지 파일만 업로드가 가능합니다.');
-        return
-    }
-
-    // 파일 갯수 검사
-    if ([...files].length < 7) {
-        uploadFiles.push(file);
-        const reader = new FileReader();
-        reader.onload = (e) => {
-        const preview = createElement(e, file);
-        imagePreview.appendChild(preview);
-        };
-        reader.readAsDataURL(file);
-        }
-    });
-}
-
-function createElement(e, file) {
-    const li = document.createElement('li');
-    const img = document.createElement('img');
-    img.setAttribute('src', e.target.result);
-    img.setAttribute('data-file', file.name);
-    li.appendChild(img);
-
-    return li;
-}
-
-const realUpload = document.querySelector('.content_photo_input');
-const upload = document.querySelector('.content_photo_imgarea');
-
-upload.addEventListener('click', () => realUpload.click());
-
-realUpload.addEventListener('change', getImageFiles);
-
-
-</script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/js/searchAddress.js"></script>
 
 <div class="modal hidden" id="jsModal">
     <div class="bg"></div>
@@ -325,22 +262,6 @@ realUpload.addEventListener('change', getImageFiles);
     </div>
 </div>
 <script>
-$(document).ready(function(){
-        setDateBox();
-    });
-
-    // select box 연도 , 월 표시
-    function setDateBox(){
-        var dt = new Date();
-        var year = "";
-        var com_year = dt.getFullYear();
-        // 발행 뿌려주기
-        // 올해 기준으로 -1년부터 +5년을 보여준다.
-        for(var y = (com_year); y > (com_year-12); y--){
-            $("#year").append("<option value='"+ y +"'>"+ y + "년" +"</option>");
-        }
-    }
-
     const openBtn= document.querySelector(".certificateResident");
         const closeBtn=document.querySelector(".modalCloseBtn");
         const modal = document.querySelector(".modal");
@@ -355,20 +276,15 @@ $(document).ready(function(){
 
         openBtn.addEventListener("click", open);
         closeBtn.addEventListener("click", close);
-
-
-
-
 </script>
-<script>
-    const rating_input = document.querySelector('.rating input');
-const rating_star = document.querySelector('.rating_star');
 
-// 별점 드래그 할 때
-rating_input.addEventListener('input', () => {
-  rating_star.style.width = `${rating_input.value * 10}%`;
-});
 
-</script>
+<script src="/js/form/searchAddress.js"></script>
+<script src="/js/form/starPoint.js"></script>
+<script src="/js/form/processYearSelect.js"></script>
+<script src="/js/form/loadPhotoAndValidate.js"></script>
+<script src="/js/processReviewForm.js"></script>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

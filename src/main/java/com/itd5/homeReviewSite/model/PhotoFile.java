@@ -1,9 +1,6 @@
 package com.itd5.homeReviewSite.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -11,10 +8,16 @@ import lombok.Data;
 public class PhotoFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long fileId;
+    private Long fileId;
+    private String articleType;
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name="review_articleNo")
+    private Long reviewId;
 
-    private String fileName;
-    private String fileOriName;
-    private String fileUrl;
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name="succession_articleNo")
+    private Long successionId;
+    private String saveFileName;
+    private String oriFileName;
 
 }
