@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--<head th:replace="fragments/header :: main-head"></head>-->
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<body>
+<form th:if="${not #maps.isEmpty( params.data )}" id="redirectForm" th:action="${params.redirectUri}" th:method="${params.method}" style="display: none;">
+    <input th:each="key, status : ${params.data.keySet()}" type="hidden" th:name="${key}" th:value="${params.data.get(key)}" />
+</form>
+
+<script th:inline="javascript">
+    /* <![CDATA[ */
+
+        window.onload = () => {
+            const message = [[ ${params.message} ]];
+            const title = [[ ${params.title} ]];
+            if (message) {
+                Swal.fire({
+                      title: title,
+                      text: message,
+                      icon: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#459830',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: '확인'
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        const redirectUri = [[ ${params.redirectUri} ]];
+                        location.href = redirectUri;
+                      }
+                      else {
+                        const cancelUri = [[ ${params.cancelUri} ]];
+                        location.href=cancelUri;
+                      }
+                    })
+            }
+
+            const form = document.getElementById('redirectForm');
+            if (form) {
+                form.submit();
+                return false;
+            }
+        }
+
+    /* ]]> */
+    </script>
+
+
+</body>
+</html>
