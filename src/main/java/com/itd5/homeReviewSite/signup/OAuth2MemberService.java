@@ -58,4 +58,13 @@ public class OAuth2MemberService extends DefaultOAuth2UserService {
         }
         return new PrincipalDetails(member, oAuth2User.getAttributes());
     }
+
+    public boolean verifyEmail(String email) {
+        Optional<SocialAuth> existingMember=memberRepository.findByEmail(email);
+
+        if(existingMember.isPresent()){
+            return false;
+        }
+        return true;
+    }
 }

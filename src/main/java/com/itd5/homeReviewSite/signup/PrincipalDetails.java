@@ -21,8 +21,6 @@ public class PrincipalDetails implements  OAuth2User, UserDetails{
         this.member=member;
         this.attributes=attributes;
     }
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collect = new ArrayList<>();
@@ -70,5 +68,7 @@ public class PrincipalDetails implements  OAuth2User, UserDetails{
     public String getName() {
         return "name";
     }
+
+
 }
 
