@@ -7,18 +7,20 @@ import com.itd5.homeReviewSite.repository.FileRepository;
 import com.itd5.homeReviewSite.repository.KeywordRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
 import com.itd5.homeReviewSite.signup.PrincipalDetails;
-import com.itd5.homeReviewSite.signup.SocialAuth;
 import com.itd5.homeReviewSite.validator.ReviewValidator;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Valid;
-import org.apache.commons.compress.utils.FileNameUtils;
-import org.apache.commons.lang3.RandomStringUtils;
+
+import lombok.RequiredArgsConstructor;
+import org.hibernate.dialect.SybaseASEDialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindException;
+
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,12 +33,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping("review")
+@RequiredArgsConstructor
 public class ReviewController {
 
     @Autowired
     ReviewRepository reviewRepository;
-    @Autowired
-    ReviewValidator reviewValidator;
     @Autowired
     FileRepository fileRepository;
     @Autowired
@@ -44,45 +45,18 @@ public class ReviewController {
 
     @GetMapping("form")
     public String form(Model model) {
-        model.addAttribute("review", new review_article());
+        review_article reviewArticle = new review_article();
+        model.addAttribute("review", reviewArticle);
         model.addAttribute("keyword", new keyword());
+
+        System.out.println(reviewArticle.getDeposit());
         return "review/form";
     }
 
     @PostMapping("form")
-    public String submitReview(HttpServletRequest request, @RequestPart MultipartFile files,
-                               @ModelAttribute @Valid review_article review, @ModelAttribute keyword keyword,
-                               BindingResult bindingResult) throws Exception{
-        // 현재 날짜 설정해주기
-/*        java.util.Date utilDate = new java.util.Date();
-        java.sql.Timestamp sqlDate = new java.sql.Timestamp(utilDate.getTime());
-        review.setRegdate(sqlDate);
-        System.out.println(keyword.getInsect());*/
-
-        if(bindingResult.hasErrors()){
-            System.out.println("error 발생");
-            return "review/form";
-        }
-
-        // 사진 업로드
-        PhotoFile photoFile = new PhotoFile();
-        String sourceFileName = files.getOriginalFilename();
-        String sourcedFileNameExtension = FileNameUtils.getExtension(sourceFileName).toLowerCase();
-        File destinationFile;
-        String destinationFileName;
-
-        String fileUrl = request.getSession().getServletContext().getRealPath("/reviewUploadImg");
-        do{
-            destinationFileName = RandomStringUtils.randomAlphanumeric(32)+"."+ sourcedFileNameExtension;
-            destinationFile = new File(fileUrl+destinationFileName);
-        } while(destinationFile.exists());
-
-        destinationFile.getParentFile().mkdirs();
-        files.transferTo(destinationFile);
-
-        photoFile.setFileName(destinationFileName);
-        photoFile.setFileOriName(sourceFileName);
-        photoFile.setFileUrl(fileUrl);
+    public String submitReview(HttpServletRequest request, @RequestParam(value="files", required = false) List<MultipartFile> uploadFiles,
+                               @Valid review_article review, @ModelAttribute keyword keyword,
+                               BindingResult bindingResult, Errors errors) throws Exception{
 
 
         // 위도와 경도 바꾸기
@@ -100,7 +74,9 @@ public class ReviewController {
 
         // review db save
         reviewRepository.save(review);
-        fileRepository.save(photoFile);
+
+        // 사진 save
+        savePhoto(request, uploadFiles, review.getArticleNo());
 
         // keyword db save
         keyword.setReview_id(review.getArticleNo());
@@ -114,8 +90,10 @@ public class ReviewController {
         Long userId = getLoginUserId();
 
         List<review_article> myReviewList = reviewRepository.findByUserId(userId);
-        //List<Picture> myPictureList = pictureRepository.findAll();
+        //List<PhotoFile> myReviewPreviewList = fileRepository.findPreviewImg(userId);
+
         model.addAttribute("myReviewList", myReviewList);
+        //model.addAttribute("myReviewPreviewList", myReviewPreviewList);
         return "review/myReview";
     }
 
@@ -123,13 +101,15 @@ public class ReviewController {
     public String detail(Model model, @RequestParam(required = false)Long id){
 
         review_article review;
+
         if(id == null){
             review = new review_article();
         }
-        /*Succession succession = successionRepository.findById(id).orElse(null);*/
 
         review= reviewRepository.findById(id).orElse(null);
+        List<PhotoFile> photoFileList = fileRepository.findByReviewIdAndArticleType(id, "review");
         model.addAttribute("review", review);
+        model.addAttribute("photoFileList", photoFileList);
 
         return "review/detail";
     }
@@ -178,6 +158,32 @@ public class ReviewController {
         return coord;
     }
 
+    public void savePhoto(HttpServletRequest request, List<MultipartFile> uploadFiles, Long articleNo){
+
+        for (MultipartFile multipartFile : uploadFiles){
+            PhotoFile photoFile = new PhotoFile();
+            if(!multipartFile.isEmpty()){
+                String fileName = multipartFile.getOriginalFilename();
+                String filePath = request.getSession().getServletContext().getRealPath("/");
+                try {
+                    // file save func
+                    // save path : /src/main/webapp/review 에 img download
+                    multipartFile.transferTo(new File(filePath+"review/" + fileName));
+                    photoFile.setArticleType("review");
+                    photoFile.setReviewId(Long.valueOf(articleNo));
+                    photoFile.setSaveFileName(fileName);
+                    photoFile.setOriFileName(multipartFile.getOriginalFilename());
+                    photoFile.setSuccessionId(null);
+
+                    fileRepository.save(photoFile);
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
     public Long getLoginUserId(){
         Object principal= SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         PrincipalDetails principalDetails = (PrincipalDetails) principal;

@@ -1,10 +1,13 @@
 package com.itd5.homeReviewSite.validator;
 
 import com.itd5.homeReviewSite.model.review_article;
+import jakarta.validation.ConstraintViolation;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import java.util.Set;
 
 @Component
 public class ReviewValidator implements Validator {
@@ -22,4 +25,5 @@ public class ReviewValidator implements Validator {
         }
         ValidationUtils.rejectIfEmpty(errors,"houseType","required");
     }
+
 }
