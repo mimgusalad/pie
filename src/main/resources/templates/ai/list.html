@@ -450,11 +450,14 @@
         }
     </style>
     <style>
+        {% comment %} 가격 drop down css {% endcomment %}
     .price_dropdown_area{
-        width: 482px;
-        height: 297px;
+        width: 375px;
+        height: 245px;
         flex-shrink: 0;
+        display: none;
 
+        border-radius: 4px;
         border: 1px solid #77c662;
         background: #fff;
     }
@@ -462,6 +465,7 @@
         width: 100%;
         height: 40px;
     }
+    {% comment %} 라디오 버튼 css {% endcomment %}
     .content_form_radioBtn{
         float: left; 
         width: 33%;
@@ -510,8 +514,14 @@
     border: 1px solid #77C662;
     display: block;
 }
+.price_text_area{
+    width: 100%;
+    padding : 5px 16px;
+    display: flex;
+    justify-content: space-between;
+}
 
-.text_price_title{
+.text_price_title, .text_price_result{
     color: var(--text-primary, #222);
 
     /* Labe 2/Regular */
@@ -521,6 +531,7 @@
     font-weight: 400;
     line-height: 20px; /* 142.857% */
 }
+
 .content_price_mark{
     width: 400px;
 }
@@ -737,87 +748,85 @@ input[type="range"]::-webkit-slider-thumb {
                     <div class="select-btn" style="width:375px;">
                         <span class="sBtn-text">월세 혹은 전세를 선택해주세요.</span>
                         <i class="bx bx-chevron-down"></i>
-                        <ul class="options">
-
-                        </ul>
+                        <div class="price_dropdown_area">
+                            <div class="option_select_area">
+                                <div class="content_form_radioBtn">
+                                    <input id="price_option_all" type="radio"  name="price_option" value="all"class="price_option_btn">
+                                    <label for="price_option_all" class="price_option_label">전체</label>
+                                </div>
+                                <div class="content_form_radioBtn">
+                                    <input id="price_option_jeonse" type="radio"  name="price_option" value="전세" class="price_option_btn">
+                                    <label for="price_option_jeonse" class="price_option_label" >전세</label>
+                                </div>
+                                <div class="content_form_radioBtn">
+                                    <input id="price_option_monthly" type="radio"  name="price_option" value="월세" class="price_option_btn">
+                                    <label for="price_option_monthly" class="price_option_label" >월세</label>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="price_text_area">
+                                    <p class="text_price_title">보증금</p>
+                                    <p class="text_price_result"></span>
+                                </div>
+                                <div class="slider_box">
+                                    <div class="middle">
+                                        <div class="multi-range-slider">
+                                            <!-- 진짜 슬라이더 -->
+                                            <input type="range" id="input-left" min="0" max="100" value="25" />
+                                            <input type="range" id="input-right" min="0" max="100" value="75" />
+                                            <!-- 커스텀 슬라이더 -->
+                                            <div class="slider">
+                                                <div class="track"></div>
+                                                <div class="range"></div>
+                                                <div class="thumb left"></div>
+                                                <div class="thumb right"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content_price_mark">
+                                    <span class="text_price_mark">최소</span>
+                                    <span class="text_price_mark">5천만</span>
+                                    <span class="text_price_mark">1억</span>
+                                    <span class="text_price_mark">최대</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="price_text_area">
+                                    <p class="text_price_title">월세</p>
+                                    <p class="text_price_result"></span>
+                                </div>
+                                <div class="slider_box">
+                                    <div class="middle">
+                                        <div class="multi-range-slider">
+                                            <!-- 진짜 슬라이더 -->
+                                            <input type="range" id="input-left" min="0" max="100" value="25" />
+                                            <input type="range" id="input-right" min="0" max="100" value="75" />
+                                            <!-- 커스텀 슬라이더 -->
+                                            <div class="slider">
+                                                <div class="track"></div>
+                                                <div class="range"></div>
+                                                <div class="thumb left"></div>
+                                                <div class="thumb right"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content_price_mark">
+                                    <span class="text_price_mark">최소</span>
+                                    <span class="text_price_mark">35만</span>
+                                    <span class="text_price_mark">200만</span>
+                                    <span class="text_price_mark">최대</span>
+                                </div>
+                            </div>
+            
+            
+                        </div>
                     </div>
                 </div>
 
             </div>
-            <div class="price_dropdown_area">
-                <div class="option_select_area">
-                    <div class="content_form_radioBtn">
-                        <input id="price_option_all" type="radio"  name="price_option" value="all"class="price_option_btn">
-                        <label for="price_option_all" class="price_option_label">전체</label>
-                    </div>
-                    <div class="content_form_radioBtn">
-                        <input id="price_option_jeonse" type="radio"  name="price_option" value="전세" class="price_option_btn">
-                        <label for="price_option_jeonse" class="price_option_label" >전세</label>
-                    </div>
-                    <div class="content_form_radioBtn">
-                        <input id="price_option_monthly" type="radio"  name="price_option" value="월세" class="price_option_btn">
-                        <label for="price_option_monthly" class="price_option_label" >월세</label>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <p class="text_price_title">보증금</p>
-                        <span class="text_price_result"></span>
-                    </div>
-                    <div class="slider_box">
-                        <div class="middle">
-                            <div class="multi-range-slider">
-                                <!-- 진짜 슬라이더 -->
-                                <input type="range" id="input-left" min="0" max="100" value="25" />
-                                <input type="range" id="input-right" min="0" max="100" value="75" />
-                                <!-- 커스텀 슬라이더 -->
-                                <div class="slider">
-                                    <div class="track"></div>
-                                    <div class="range"></div>
-                                    <div class="thumb left"></div>
-                                    <div class="thumb right"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content_price_mark">
-                        <span class="text_price_mark">최소</span>
-                        <span class="text_price_mark">5천만</span>
-                        <span class="text_price_mark">1억</span>
-                        <span class="text_price_mark">최대</span>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <p class="text_price_title">월세</p>
-                        <span class="text_price_result"></span>
-                    </div>
-                    <div class="slider_box">
-                        <div class="middle">
-                            <div class="multi-range-slider">
-                                <!-- 진짜 슬라이더 -->
-                                <input type="range" id="fee-input-left" min="0" max="100" value="25" />
-                                <input type="range" id="fee-input-right" min="0" max="100" value="75" />
-                                <!-- 커스텀 슬라이더 -->
-                                <div class="slider">
-                                    <div class="track"></div>
-                                    <div class="range"></div>
-                                    <div class="thumb left"></div>
-                                    <div class="thumb right"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content_price_mark">
-                        <span class="text_price_mark">최소</span>
-                        <span class="text_price_mark">35만</span>
-                        <span class="text_price_mark">200만</span>
-                        <span class="text_price_mark">최대</span>
-                    </div>
-                </div>
 
-
-            </div>
             <div class="content_submit_area">
                 <span class="text_hint">AI로 회원님이 원하시는 조건을 분석하여 추천드립니다.</span>
                 <div>
@@ -1033,42 +1042,40 @@ input[type="range"]::-webkit-slider-thumb {
 </script>
 
 <script>
-const inputLeft = document.getElementById("input-left");
-const inputRight = document.getElementById("input-right");
+    const inputLeftBtn = document.querySelectorAll("#input-left");
+    const inputRightBtn = document.querySelectorAll("#input-right");
 
-const thumbLeft = document.querySelector(".slider > .thumb.left");
-const thumbRight = document.querySelector(".slider > .thumb.right");
-const range = document.querySelector(".slider > .range");
+    const thumbLeft = document.querySelectorAll(".slider > .thumb.left");
+    const thumbRight = document.querySelectorAll(".slider > .thumb.right");
+    const range = document.querySelectorAll(".slider > .range");
+    const textPrice = document.querySelectorAll(".text_price_result");
 
-const setLeftValue = () => {
-  const _this = inputLeft;
-  const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+    for(let i = 0; i < 2; i++){
+        inputLeftBtn[i].addEventListener("input", () => {
+            const selectLeftBtn = inputLeftBtn[i];
+            const [min, max] = [parseInt(selectLeftBtn.min), parseInt(selectLeftBtn.max)];
 
-  // 교차되지 않게, 1을 빼준 건 완전히 겹치기보다는 어느 정도 간격을 남겨두기 위해.
-  _this.value = Math.min(parseInt(_this.value), parseInt(inputRight.value) - 1);
+            selectLeftBtn.value = Math.min(parseInt(selectLeftBtn.value), parseInt(inputRightBtn[i].value)-1);
 
-  // input, thumb 같이 움직이도록
-  const percent = ((_this.value - min) / (max - min)) * 100;
-  thumbLeft.style.left = percent + "%";
-  range.style.left = percent + "%";
-};
+            const percent = ((selectLeftBtn.value-min) / (max-min)) * 100;
+            thumbLeft[i].style.left = percent + "%";
+            range[i].style.left = percent + "%";
+            textPrice[i].innerText = percent + "~" + inputRightBtn[i].value;
 
-const setRightValue = () => {
-  const _this = inputRight;
-  const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+        });
 
-  // 교차되지 않게, 1을 더해준 건 완전히 겹치기보다는 어느 정도 간격을 남겨두기 위해.
-  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeft.value) + 1);
+        inputRightBtn[i].addEventListener("input", () => {
+            const selectRightBtn = inputRightBtn[i];
+            const [min, max] = [parseInt(selectRightBtn.min), parseInt(inputLeftBtn[i].max)];
 
-  // input, thumb 같이 움직이도록
-  const percent = ((_this.value - min) / (max - min)) * 100;
-  thumbRight.style.right = 100 - percent + "%";
-  range.style.right = 100 - percent + "%";
-};
+            selectRightBtn.value = Math.min(parseInt(selectRightBtn.value), parseInt(selectRightBtn.value)-1);
 
-inputLeft.addEventListener("input", setLeftValue);
-inputRight.addEventListener("input", setRightValue);
+            const percent = ((selectRightBtn.value-min) / (max-min)) * 100;
+            thumbRight[i].style.right = 100 - percent + "%";
+            range[i].style.right = 100 - percent + "%";
+            textPrice[i].innerText = inputLeftBtn[i].value + " ~ " + percent;
+        });
+    }
 </script>
-
 </body>
 </html>
