@@ -1,8 +1,12 @@
 package com.itd5.homeReviewSite.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itd5.homeReviewSite.model.Address;
 import com.itd5.homeReviewSite.model.Message;
 import com.itd5.homeReviewSite.model.PhotoFile;
 import com.itd5.homeReviewSite.model.succession_article;
+import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.FileRepository;
 import com.itd5.homeReviewSite.repository.SuccessionRepository;
 import com.itd5.homeReviewSite.signup.PrincipalDetails;
@@ -22,6 +26,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("succession")
@@ -31,6 +36,8 @@ public class SuccessionController {
     SuccessionRepository successionRepository;
     @Autowired
     FileRepository fileRepository;
+    @Autowired
+    AddressRepository addressRepository;
     @GetMapping("form")
     public String form(Model model){
         Long userId = getLoginUserId();
@@ -53,16 +60,22 @@ public class SuccessionController {
     public String submitSuccession(HttpServletRequest request,   @RequestParam(value="files", required = false) List<MultipartFile> uploadFiles,
                                    @ModelAttribute succession_article succession) throws Exception{
 
-
         // 위도 경도 변환
-        Float[] coord = getKakaoApiFromAddress(succession.getAddress());
-        if(coord[0] != null){
-            succession.setLongitude(coord[0]);
-            succession.setLatitude(coord[1]);
+        // 주소 정보 가지고 오기
+        // 도로명, 지번주소, 빌딩 이름, 우편 번호, 위도, 경도
+        Address saveAddress = getKakaoApiFromAddress(succession.getAddress());
+
+        // 동일한 주소에 대한 처리
+        // 동일한 주소가 없는 경우에만 save
+        Address sameAddress = addressRepository.findByLatitudeAndLongitude(saveAddress.getLatitude(), saveAddress.getLongitude());
+        if (sameAddress == null){
+            addressRepository.save(saveAddress);
+            sameAddress = saveAddress;
         }
 
-        // userId set
+        // succession 객체 변수 설정
         succession.setUserId(getLoginUserId());
+        succession.setAddressId(sameAddress.getAddressId());
 
         // succession db save
         successionRepository.save(succession);
@@ -71,6 +84,16 @@ public class SuccessionController {
         savePhoto(request, uploadFiles, succession.getArticleNo());
 
         return "redirect:/succession/detail?id="+succession.getArticleNo();
+    }
+    @GetMapping("delete")
+    public String delete(){
+        Long userId = getLoginUserId();
+        succession_article successionArticle = successionRepository.findByUserId(userId);
+        if (successionArticle != null) {
+            successionRepository.delete(successionArticle);
+        }
+
+        return "account/myPage";
     }
 
     @GetMapping("list")
@@ -100,11 +123,11 @@ public class SuccessionController {
 
         return "succession/detail";
     }
-    public Float[] getKakaoApiFromAddress(String roadFullAddr) {
+    public Address getKakaoApiFromAddress(String roadFullAddr) {
         String apiKey = "04519b1d8946746a4ea4438360fe8418";
         String apiUrl = "https://dapi.kakao.com/v2/local/search/address.json";
         String jsonString = null;
-        Float[] coord = new Float[2];
+        Address address = new Address();
 
         try {
             roadFullAddr = URLEncoder.encode(roadFullAddr, "UTF-8");
@@ -118,19 +141,38 @@ public class SuccessionController {
             BufferedReader rd = null;
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             StringBuffer docJson = new StringBuffer();
-
             String line;
-
-            while ((line=rd.readLine()) != null) {
+            // api json file get
+            while ((line = rd.readLine()) != null) {
                 docJson.append(line);
             }
 
             jsonString = docJson.toString();
-            String tmp = jsonString.substring(jsonString.lastIndexOf("x"), jsonString.lastIndexOf("meta"));
-            // x = long
-            // y = lati
-            coord[0] = Float.parseFloat(tmp.substring(tmp.indexOf("x")+4, tmp.indexOf("y")-4));
-            coord[1] = Float.parseFloat(tmp.substring(tmp.indexOf("y")+4, tmp.indexOf("}")-1));
+
+            /*json Map type 변형
+             * docList key : [address, address_name, address_type, road_address, x,y]
+             * docAddressList : 지번 주소 상세 정보
+             * docRoadList : 도로명 주소 상세 정보
+             * */
+            ObjectMapper mapper = new ObjectMapper();
+            TypeReference<Map<String, Object>> typeReference = new TypeReference<Map<String, Object>>() {
+            };
+            Map<String, Object> jsonMap = mapper.readValue(jsonString, typeReference);
+
+
+            List<Map<String, String>> docList = (List<Map<String, String>>) jsonMap.get("documents");
+            Map<String, String> adList = (Map<String, String>) docList.get(0);
+            Map<String,Object> docAddressList = mapper.convertValue(adList.get("address"), typeReference);
+            Map<String,Object> docRoadList = mapper.convertValue(adList.get("road_address"), typeReference);
+
+            // address 객체 정보 설정
+            address.setLongitude(Double.parseDouble(adList.get("x")));
+            address.setLatitude(Double.parseDouble(adList.get("y")));
+
+            address.setAddress((String) docAddressList.get("address_name"));
+            address.setRoad_address((String) docRoadList.get("address_name"));
+            address.setBuildingName((String) docRoadList.get("building_name"));
+            address.setZone_no(Integer.parseInt((String) docRoadList.get("zone_no")));
 
             rd.close();
 
@@ -141,7 +183,7 @@ public class SuccessionController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return coord;
+        return address;
     }
 
     public Long getLoginUserId(){

@@ -1,0 +1,33 @@
+.infoItemTitle {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.infoText {
+  font-size: 12px;
+}
+
+.infoItem1 {
+  padding: 16px 0;
+  border-bottom: 1px solid lightgray;
+}
+.infoItem2 {
+  padding: 16px 0;
+}
+
+.infoCategory {
+  font-size: 14px;
+  font-weight: 600;
+  border-right: 1px solid lightgray;
+  width: 25%;
+  padding-right: 16px;
+  margin-right: 8px;
+}
+
+.infoAnswer {
+  font-size: 12px;
+}
+
+.feeContainer {
+  display: flex;
+}

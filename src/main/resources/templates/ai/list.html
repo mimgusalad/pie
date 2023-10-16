@@ -5,13 +5,83 @@
     <title>AI Main</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" type="text/css"
           href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css'>
+
     <link href="/css/starter-template.css" rel="stylesheet">
     <link href="/css/footerCss.css" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link href="/css/AI/main.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63796f440d480664df4d24b56dd372a6&libraries=services"></script>
+
+
     <style>
+        #menu_wrap{
+            position:relative;
+        }
+        #menu_wrap .option p{
+            margin: 10px 0;
+        }
+        
+        #menu_wrap .option button{
+            margin-left: 5px;
+        }
+        #result{
+            height: 200px;
+            width:746px;
+            overflow:scroll;
+            background:#fff;
+            position:absolute;
+            left: 26%;
+        }
+        #placesList li {list-style: none;}
+        #placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+        #placesList .item span {display: block;margin-top:4px;}
+        #placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+        #placesList .item .info{padding:10px 0 10px 10px;}
+        #placesList .info .gray {color:#8a8a8a;}
+        #placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+        #placesList .info .tel {color:#009900;}
+        #pagination {margin:10px auto;text-align: center;}
+        #pagination a {display:inline-block;margin-right:10px;}
+        #pagination .on {font-weight: bold; cursor: default;color:#777;}
+        
+        #inputAddressKeyword {
+            padding: 10px;
+            width: 746px;
+            height: 44px;
+            flex-shrink: 0;
+        
+            border:none;
+            border-radius: 8px;
+            background: var(--gray-gray-50, #F7F8F9);
+        
+            color: var(--text-tertiary, #A4A4A4);
+        
+            /* Title 2/Medium */
+            font-family: Pretendard;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px; /* 133.333% */
+        }
+        
+        #addressKeywordArea{
+            padding: 10px;
+            width: 841px;
+            height: 66px;
+            flex-shrink: 0;
+        
+            border-radius: 8px;
+            background: var(--text-white, #FFF);
+        }
+        
+        
         body{
             background-color: #f5f5f5;
         }
@@ -24,7 +94,7 @@
         .content_main img{
             width: 1920px;
             height: 360px;
-
+        
             mix-blend-mode: multiply;
         }
         .content_main_title{
@@ -33,7 +103,7 @@
             top: 32%;
             color: var(--text-white, #FFF);
             text-align: center;
-            
+        
             /* Display/Bold */
             font-family: Pretendard;
             font-size: 38px;
@@ -47,7 +117,7 @@
             top: 62%;
             color: var(--text-white, #FFF);
             text-align: center;
-            
+        
             /* Title 2/Medium */
             font-family: Pretendard;
             font-size: 18px;
@@ -55,28 +125,28 @@
             font-weight: 500;
             line-height: 24px; /* 133.333% */
         }
-
-
+        
+        
         {% comment %} 입력받는 area {% endcomment %}
         .content_input_area{
             width: 841px;
             margin: 12px;
-
+        
             border-radius: 8px;
             background: var(--text-white, #FFF);
         }
-
+        
         .select-menu{
             display:inline-block;
             text-align:center;
             height: 46px;
             margin: 8px;
         }
-
+        
         .content_input_title{
             color: var(--text-primary, #222);
             margin-right: 10px;
-
+        
             /* Title 1/Semibold */
             font-family: Pretendard;
             font-size: 20px;
@@ -84,22 +154,22 @@
             font-weight: 600;
             line-height: 26px; /* 130% */
         }
-
+        
         .select-btn{
             display: flex;
             float:right;
             height: 44px;
             padding: 12px 16px;
-
+        
             cursor: pointer;
             justify-content: space-between;
             box-shadow: 0 0 5px rgba(0,0,0,0.1);
-
+        
             border-radius: 8px;
             background: var(--gray-gray-50, #F7F8F9);
-
-            color: var(--text-tertiary, #A4A4A4);
-
+        
+            color: var(--text-primary, #222);
+        
             /* Body 1/Medium */
             font-family: Pretendard;
             font-size: 16px;
@@ -107,16 +177,16 @@
             font-weight: 500;
             line-height: 20px; /* 125% */
         }
-
+        
         .select-btn i{
             font-size: 25px;
             transition: 0.3s;
         }
-
+        
         .select-menu.active .select-btn i{
             transform: rotate(-180deg);
         }
-
+        
         .select-menu .options{
             position:absolute;
             width: 244px;
@@ -125,7 +195,7 @@
             background: #fff;
             box-shadow: 0 0 3px rgba(0,0,0,0.1);
             display: none;
-
+        
             border-radius: 8px;
             border: 1px solid var(--primary-light, #77C662);
         }
@@ -144,10 +214,10 @@
         .options .option:hover{
             background: var(--gray-gray-50, #F7F8F9);
         }
-
+        
         .option .option-text{
             color: var(--text-primary, #222);
-
+        
             /* Body 1/Medium */
             font-family: Pretendard;
             font-size: 16px;
@@ -155,7 +225,7 @@
             font-weight: 500;
             line-height: 20px; /* 125% */
         }
-
+        
         {% comment %} submit area {% endcomment %}
         .content_submit_area{
             display: flex;
@@ -164,7 +234,7 @@
         }
         .text_hint{
             color: var(--status-caution, #FA9538);
-
+        
             /* Labe 2/Regular */
             font-family: Pretendard;
             font-size: 14px;
@@ -177,14 +247,14 @@
             padding: 4px 18px;
             align-items: flex-start;
             gap: 10px;
-
+        
             border:none;
             border-radius: 8px;
             background: var(--primary-normal, #459830);
-
+        
             color: var(--text-white, #FFF);
             text-align: center;
-
+        
             /* Title 2/SemiBold */
             font-family: Pretendard;
             font-size: 18px;
@@ -197,14 +267,14 @@
             padding: 4px 18px;
             align-items: flex-start;
             gap: 10px;
-
+        
             border:none;
             border-radius: 8px;
             background: var(--black-white-white, #FFF);
-
+        
             color: var(--text-tertiary, #A4A4A4);
             text-align: center;
-
+        
             /* Title 2/Medium */
             font-family: Pretendard;
             font-size: 18px;
@@ -216,7 +286,7 @@
         .content_result_title{
             color: var(--text-primary, #222);
             text-align: center;
-
+        
             /* Head 1/SemiBold */
             font-family: Pretendard;
             font-size: 28px;
@@ -224,43 +294,47 @@
             font-weight: 600;
             line-height: 38px; /* 135.714% */
         }
-
+        
         .content_result_one{
+            position: relative;
             margin: 20px;
-
+        
             width: 400px;
             height: 355px;
             flex-shrink: 0;
-
+        
             border: none;
             border-radius: 4px;
         }
-
+        
         .content_result_one:hover{
             box-shadow: 0 0 5px rgba(0,0,0,0.1);
         }
-
+        .content_result_one:hover ~ .result_address_area { display: block; }
+        
         .result_address_area{
-            display: none;
-
+        
+            position: absolute;
+            top: 280px;
+        
             width: 400px;
             height: 72px;
             flex-shrink: 0;
-
+        
             border-radius: 0px 0px 4px 4px;
             background: #AEAEAE;
             mix-blend-mode: multiply;
         }
-
+        
         .addressPin{
             width: 16px;
             height: 16px;
             flex-shrink: 0;
         }
-
+        
         .result_address{
             color: var(--text-white, #FFF);
-
+        
             /* Title 2/SemiBold */
             font-family: Pretendard;
             font-size: 18px;
@@ -268,7 +342,7 @@
             font-weight: 600;
             line-height: 24px; /* 133.333% */
         }
-
+        
         {% comment %} 추천 리뷰 area {% endcomment %}
         .content_review_area{
             width: 1380px;
@@ -278,7 +352,7 @@
             color: var(--text-primary, #222);
             text-align: center;
             margin: 20px;
-
+        
             /* Head 1/SemiBold */
             font-family: Pretendard;
             font-size: 28px;
@@ -291,12 +365,12 @@
             float: left;
             margin: 20px;
             padding: 26px 20px;
-            
+        
             text-align: left;
             width: 290px;
             height: 220px;
             flex-shrink: 0;
-
+        
             border-radius: 4px;
             border: 1px solid var(--gray-gray-200, #C9CDD2);
             background: var(--text-white, #FFF);
@@ -307,7 +381,7 @@
         }
         .review_address{
             color: var(--text-primary, #222);
-
+        
             /* Body 1/Medium */
             font-family: Pretendard;
             font-size: 16px;
@@ -318,9 +392,9 @@
         .review_content{
             margin-top: 10px;
             height: 110px;
-
+        
             color: var(--text-primary, #222);
-
+        
             /* Labe 2/Regular */
             font-family: Pretendard;
             font-size: 14px;
@@ -331,7 +405,7 @@
         .review_recommend_title{
             margin-right: 8px;
             color: var(--text-primary, #222);
-
+        
             /* Caption 1/Regular */
             font-family: Pretendard;
             font-size: 12px;
@@ -341,7 +415,7 @@
         }
         .review_recommend_cnt{
             color: var(--text-primary, #222);
-
+        
             /* Caption 1/Bold */
             font-family: Pretendard;
             font-size: 12px;
@@ -353,7 +427,7 @@
             float: right;
             color: var(--primary-normal, #459830);
             text-align: center;
-            
+        
             /* Body 2/Medium */
             font-family: Pretendard;
             font-size: 14px;
@@ -364,9 +438,9 @@
         .review_more_link{
             float: right;
             text-decoration-line: none;
-
+        
             color: var(--text-primary, #222);
-
+        
             /* Body 2/Medium */
             font-family: Pretendard;
             font-size: 14px;
@@ -374,9 +448,186 @@
             font-weight: 500;
             line-height: 20px; /* 142.857% */
         }
-
-
     </style>
+    <style>
+    .price_dropdown_area{
+        width: 482px;
+        height: 297px;
+        flex-shrink: 0;
+
+        border: 1px solid #77c662;
+        background: #fff;
+    }
+    .option_select_area{
+        width: 100%;
+        height: 40px;
+    }
+    .content_form_radioBtn{
+        float: left; 
+        width: 33%;
+}
+
+.content_form_radioBtn input[type=radio] {
+    display: none;
+}
+
+.content_form_radioBtn label{
+    cursor: pointer;
+
+    background: #FFF;
+
+    color: #666;
+    text-align: center;
+
+    /* Body 1/Medium */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
+    user-select: none;
+}
+
+.content_form_radioBtn input[type=radio]:checked + label{
+    color: #459830;
+}
+.content_form_radioBtn input[type=radio]:checked + label::after{
+    content:"";
+    width: 123px;
+    margin-top: 8px;
+    border: 1px solid #77C662;
+    display: block;
+}
+
+.content_form_radioBtn label:hover{
+    color: #459830;
+}
+
+.content_form_radioBtn label:hover::after{
+    content:"";
+    width: 123px;
+    margin-top: 8px;
+    border: 1px solid #77C662;
+    display: block;
+}
+
+.text_price_title{
+    color: var(--text-primary, #222);
+
+    /* Labe 2/Regular */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+}
+.content_price_mark{
+    width: 400px;
+}
+.text_price_mark{
+    float: left;
+    width: 25%;
+    color: var(--text-tertiary, #A4A4A4);
+    text-align: center;
+
+    /* Caption 2/Regular */
+    font-family: Pretendard;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px; /* 127.273% */
+}
+
+.slider_box {
+  margin: 0;
+  padding: 0;
+  width: 375px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.middle {
+  position: relative;
+  width: 343px;
+  max-width: 500px;
+}
+
+.slider {
+  position: relative;
+  z-index: 1;
+  height: 10px;
+  margin: 0 15px;
+}
+
+.slider > .track {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: #D9D9D9;
+}
+
+.slider > .range {
+  position: absolute;
+  z-index: 2;
+  left: 25%;
+  right: 25%;
+  top: 0;
+  bottom: 0;
+  border-radius: 4px;
+  background-color: #77C662;
+}
+
+.slider > .thumb {
+  position: absolute;
+  z-index: 3;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border: 1px solid #9EA4AA;
+  border-radius: 50%;
+}
+
+.slider > .thumb.left {
+  left: 25%;
+  transform: translate(-15px, -10px);
+}
+.slider > .thumb.right {
+  right: 25%;
+  transform: translate(15px, -10px);
+}
+
+input[type="range"] {
+  position: absolute;
+  margin-left: -50%;
+  /* opacity로 가린 것을 이벤트도 비활성화하기 위해 */
+  pointer-events: none;
+  -webkit-appearance: none;
+  z-index: 2;
+  height: 10px;
+  width: 100%;
+  opacity:0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  /* 겹쳐진 두 thumb를 모두 활성화 */
+  pointer-events: all;
+  width: 30px;
+  height: 30px;
+  border-radius: 0;
+  border: 0 none;
+  background-color: red;
+  cursor: pointer;
+  /* appearance를 해야 위의 스타일들을 볼 수 있음 */
+  -webkit-appearance: none;
+}
+    </style>
+
 </head>
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
@@ -388,11 +639,24 @@
         <p class="content_main_subTitle">회원님의 활동을 기반으로 분석한 집을 소개해드립니다.</p>
     </div>
     <div>
-        <form method="post">
-            <div class="content_input_area" id="conInputAddress">
-                <span class="content_input_title">주소</span>
+        <div id="menu_wrap" class="bg_white">
+            <div class="option">
+                <div>
+                    <form onsubmit="searchPlaces(); return false;">
+                        <div id="addressKeywordArea">
+                            <span class="content_input_title">주소</span>
+                            <input type="text" id="inputAddressKeyword" name="inputAddressKeyword"
+                                   placeholder="원하시는 지역명을 입력해주세요.">
+                        </div>
+                    </form>
+                </div>
             </div>
-
+            <div id="result" class="invisible">
+                <ul id="placesList"></ul>
+                <div id="pagination"></div>
+            </div>
+        </div>
+        <form method="post" name="roomSearchForm" action="" th:action="@{/ai/list}">
             <div class="content_input_area" id="conInputElse">
                 <div class="select-menu" style="width: 300px;">
                     <span class="content_input_title">목적</span>
@@ -473,8 +737,86 @@
                     <div class="select-btn" style="width:375px;">
                         <span class="sBtn-text">월세 혹은 전세를 선택해주세요.</span>
                         <i class="bx bx-chevron-down"></i>
+                        <ul class="options">
+
+                        </ul>
                     </div>
                 </div>
+
+            </div>
+            <div class="price_dropdown_area">
+                <div class="option_select_area">
+                    <div class="content_form_radioBtn">
+                        <input id="price_option_all" type="radio"  name="price_option" value="all"class="price_option_btn">
+                        <label for="price_option_all" class="price_option_label">전체</label>
+                    </div>
+                    <div class="content_form_radioBtn">
+                        <input id="price_option_jeonse" type="radio"  name="price_option" value="전세" class="price_option_btn">
+                        <label for="price_option_jeonse" class="price_option_label" >전세</label>
+                    </div>
+                    <div class="content_form_radioBtn">
+                        <input id="price_option_monthly" type="radio"  name="price_option" value="월세" class="price_option_btn">
+                        <label for="price_option_monthly" class="price_option_label" >월세</label>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <p class="text_price_title">보증금</p>
+                        <span class="text_price_result"></span>
+                    </div>
+                    <div class="slider_box">
+                        <div class="middle">
+                            <div class="multi-range-slider">
+                                <!-- 진짜 슬라이더 -->
+                                <input type="range" id="input-left" min="0" max="100" value="25" />
+                                <input type="range" id="input-right" min="0" max="100" value="75" />
+                                <!-- 커스텀 슬라이더 -->
+                                <div class="slider">
+                                    <div class="track"></div>
+                                    <div class="range"></div>
+                                    <div class="thumb left"></div>
+                                    <div class="thumb right"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content_price_mark">
+                        <span class="text_price_mark">최소</span>
+                        <span class="text_price_mark">5천만</span>
+                        <span class="text_price_mark">1억</span>
+                        <span class="text_price_mark">최대</span>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <p class="text_price_title">월세</p>
+                        <span class="text_price_result"></span>
+                    </div>
+                    <div class="slider_box">
+                        <div class="middle">
+                            <div class="multi-range-slider">
+                                <!-- 진짜 슬라이더 -->
+                                <input type="range" id="fee-input-left" min="0" max="100" value="25" />
+                                <input type="range" id="fee-input-right" min="0" max="100" value="75" />
+                                <!-- 커스텀 슬라이더 -->
+                                <div class="slider">
+                                    <div class="track"></div>
+                                    <div class="range"></div>
+                                    <div class="thumb left"></div>
+                                    <div class="thumb right"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content_price_mark">
+                        <span class="text_price_mark">최소</span>
+                        <span class="text_price_mark">35만</span>
+                        <span class="text_price_mark">200만</span>
+                        <span class="text_price_mark">최대</span>
+                    </div>
+                </div>
+
+
             </div>
             <div class="content_submit_area">
                 <span class="text_hint">AI로 회원님이 원하시는 조건을 분석하여 추천드립니다.</span>
@@ -485,23 +827,25 @@
             </div>
         </form>
     </div>
-    <div th:if="${not #strings.isEmpty( searchCheck )}">
+    <div th:if="${not #strings.isEmpty(searchCheck)}">
         <div id="conResult">
             <h1 class="content_result_title">이런 집은 어때요?</h1>
-            <div class="content_result_area">
+            <div class="content_result_area" th:each="sucArticle : ${recommendSuccessionList}">
                 <div class="content_result_one">
-                    <img>
+                    <a th:href="@{/ai/homeDetail(addressId=${sucArticle.addressId})}">
+                        <img src="/img/reviewUploadImg/aiReplaceImg.png">
+                    </a>
                     <div class="result_address_area">
-                        <img class="addressPin">
-                        <span class="result_address"></span>
+                        <img class="addressPin" src="/img/locationMark.png">
+                        <span class="result_address" th:text="${sucArticle.address}"></span>
                     </div>
                 </div>
-
             </div>
         </div>
 
         <div id="content_review_area" class="content_review_area">
             <h1 class="content_review_title">회원님에게 유익한<br>리뷰글을 추천드립니다.</h1>
+
             <div style="width: 1380px; height: 230px;">
                 <div class="content_review_each" th:each="recReview : ${recommendReviewPreList}">
                     <img class="review_location_mark" src="/img/locationMark.png">
@@ -520,23 +864,211 @@
 
 <footer th:replace="fragments/common :: bottomBar"></footer>
 
+<script>
+    const selectMenuList = document.querySelectorAll(".select-menu");
+    const selectBtnList = document.querySelectorAll(".select-btn");
+
+    for(let index=0; index < 3; index ++){
+        selectBtnList[index].addEventListener("click", () => {
+            selectMenuList[index].classList.toggle("active");
+            const options = selectMenuList[index].querySelectorAll(".option");
+            const sBtn_text = selectMenuList[index].querySelector(".sBtn-text");
+            options.forEach(option =>{
+                option.addEventListener("click", ()=>{
+                    let selectedOption = option.querySelector(".option-text").innerText;
+                    sBtn_text.innerText = selectedOption;
+                    selectMenuList[index].classList.remove("active");
+                });
+            });
+        });
+    }
+</script>
 
 <script>
-    const optionMenu = document.querySelector(".select-menu"),
-       selectBtn = optionMenu.querySelector(".select-btn"),
-       options = optionMenu.querySelectorAll(".option"),
-       sBtn_text = optionMenu.querySelector(".sBtn-text");
+     // 장소 검색 객체를 생성합니다
+    var ps = new kakao.maps.services.Places();
 
-    selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));       
-    options.forEach(option =>{
-        option.addEventListener("click", ()=>{
-            let selectedOption = option.querySelector(".option-text").innerText;
-            sBtn_text.innerText = selectedOption;
-            optionMenu.classList.remove("active");
-        });
-    });
+    // 키워드로 장소를 검색합니다
+    searchPlaces();
+
+    // 키워드 검색을 요청하는 함수입니다
+    function searchPlaces() {
+
+        var keyword = document.getElementById('inputAddressKeyword').value;
+
+        if (!keyword.replace(/^\s+|\s+$/g, '')) {
+            return false;
+        }
+
+        // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+        ps.keywordSearch( keyword, placesSearchCB);
+    }
+
+    // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
+    function placesSearchCB(data, status, pagination) {
+        const resultBox = document.getElementById("result");
+        if (status === kakao.maps.services.Status.OK) {
+
+            //input창 아래 결과 box show
+            resultBox.classList.remove("invisible");
+
+            // 정상적으로 검색이 완료됐으면
+            // 검색 목록과 마커를 표출합니다
+            displayPlaces(data);
+
+            // 페이지 번호를 표출합니다
+            displayPagination(pagination);
+
+        } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+            resultBox.classList.add('invisible');
+            alert('검색 결과가 존재하지 않습니다.');
+            return;
+        } else if (status === kakao.maps.services.Status.ERROR) {
+            resultBox.classList.add('invisible');
+            alert('검색 결과 중 오류가 발생했습니다.');
+            return;
+        }
+    }
+
+    // 검색 결과 목록과 마커를 표출하는 함수입니다
+    function displayPlaces(places) {
+
+        var listEl = document.getElementById('placesList'),
+        menuEl = document.getElementById('menu_wrap'),
+        fragment = document.createDocumentFragment(),
+        listStr = '';
+
+        // 검색 결과 목록에 추가된 항목들을 제거합니다
+        removeAllChildNods(listEl);
+
+        for ( var i=0; i<places.length; i++ ) {
+            // 마커를 생성하고 지도에 표시합니다
+            var itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+
+            // 검색결과 항목 중 하나를 클릭했을 때
+            // 키워드 검색창에 해당 주소를 입력
+            (function(title) {
+                itemEl.onclick = function(){
+                    displayInfoInput(title);
+                };
+            })(places[i].place_name);
+
+            fragment.appendChild(itemEl);
+        }
+
+        // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
+        listEl.appendChild(fragment);
+        menuEl.scrollTop = 0;
+    }
+
+    // 검색결과 항목을 Element로 반환하는 함수입니다
+    function getListItem(index, places) {
+
+        var el = document.createElement('li'),
+        itemStr = '<div class="info">' +
+                    '   <h5>' + places.place_name + '</h5>';
+
+        if (places.road_address_name) {
+            itemStr += '    <span>' + places.road_address_name + '</span>' +
+                        '   <span class="jibun gray">' +  places.address_name  + '</span>';
+        } else {
+            itemStr += '    <span>' +  places.address_name  + '</span>';
+        }
+
+          itemStr += '</div>';
+
+        el.innerHTML = itemStr;
+        el.className = 'item';
+
+        return el;
+    }
+
+    // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
+    function displayPagination(pagination) {
+        var paginationEl = document.getElementById('pagination'),
+            fragment = document.createDocumentFragment(),
+            i;
+
+        // 기존에 추가된 페이지번호를 삭제합니다
+        while (paginationEl.hasChildNodes()) {
+            paginationEl.removeChild (paginationEl.lastChild);
+        }
+
+        for (i=1; i<=pagination.last; i++) {
+            var el = document.createElement('a');
+            el.href = "#";
+            el.innerHTML = i;
+
+            if (i===pagination.current) {
+                el.className = 'on';
+            } else {
+                el.onclick = (function(i) {
+                    return function() {
+                        pagination.gotoPage(i);
+                    }
+                })(i);
+            }
+
+            fragment.appendChild(el);
+        }
+        paginationEl.appendChild(fragment);
+    }
+
+    // 검색결과 목록을 클릭했을 때 호출되는 함수입니다.
+    // 키워드 input 창에 해당 장소명을 표시
+    function displayInfoInput(title){
+        document.getElementById('inputAddressKeyword').value = title;
+        //document.getElementById('addressKeyword').value = title;
+        document.getElementById("result").classList.add('invisible');
+    }
+
+     // 검색결과 목록의 자식 Element를 제거하는 함수입니다
+    function removeAllChildNods(el) {
+        while (el.hasChildNodes()) {
+            el.removeChild (el.lastChild);
+        }
+    }
 
 
 </script>
+
+<script>
+const inputLeft = document.getElementById("input-left");
+const inputRight = document.getElementById("input-right");
+
+const thumbLeft = document.querySelector(".slider > .thumb.left");
+const thumbRight = document.querySelector(".slider > .thumb.right");
+const range = document.querySelector(".slider > .range");
+
+const setLeftValue = () => {
+  const _this = inputLeft;
+  const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+
+  // 교차되지 않게, 1을 빼준 건 완전히 겹치기보다는 어느 정도 간격을 남겨두기 위해.
+  _this.value = Math.min(parseInt(_this.value), parseInt(inputRight.value) - 1);
+
+  // input, thumb 같이 움직이도록
+  const percent = ((_this.value - min) / (max - min)) * 100;
+  thumbLeft.style.left = percent + "%";
+  range.style.left = percent + "%";
+};
+
+const setRightValue = () => {
+  const _this = inputRight;
+  const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+
+  // 교차되지 않게, 1을 더해준 건 완전히 겹치기보다는 어느 정도 간격을 남겨두기 위해.
+  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeft.value) + 1);
+
+  // input, thumb 같이 움직이도록
+  const percent = ((_this.value - min) / (max - min)) * 100;
+  thumbRight.style.right = 100 - percent + "%";
+  range.style.right = 100 - percent + "%";
+};
+
+inputLeft.addEventListener("input", setLeftValue);
+inputRight.addEventListener("input", setRightValue);
+</script>
+
 </body>
 </html>
