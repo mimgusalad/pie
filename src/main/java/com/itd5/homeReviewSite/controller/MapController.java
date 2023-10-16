@@ -1,6 +1,11 @@
 package com.itd5.homeReviewSite.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.python.antlr.op.Mod;
+import org.python.core.PyFunction;
+import org.python.core.PyInteger;
+import org.python.core.PyObject;
+import org.python.util.PythonInterpreter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +19,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/map")
 public class MapController {
+
     @GetMapping("list")
-    public String list(){
-        return "map/list";
-    }
+    public String list(){return "map/list";}
 
     @GetMapping("match")
     public String match(@RequestParam(value="addressKeyword", required = false) String addressKeyword,

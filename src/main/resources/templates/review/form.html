@@ -43,7 +43,7 @@
                     <li><a class="sidebar_content_title" href="#conPhoto">사진</a></li>
                     <li><input id="sidebar_btn_submit" type="submit" value="제출하기"></li>
                     <li><input id="sidebar_btn_return" type="button" value="뒤로가기"></li>
-                    <li><h2 class="sidebar_btn_certificatation" />입주민 인증하기 ></li>
+                    <li><h2 class="sidebar_btn_certificatation"/>입주민 인증하기 ></li>
                 </ul>
             </div>
         </aside>
@@ -112,11 +112,8 @@
                 <p class="content_form_subtitle">주소와 거주년도를 입력해주세요.</p>
                 <label for="address"></label>
                 <form class="content_form_location" method="post">
-                    <input class="content_form_addressInput" type="text" placeholder="도로명, 건물명 지번 입력" id="address"  th:field="*{address}" required >
+                    <input class="content_form_addressInput" type="text" placeholder="도로명, 건물명 지번 입력" id="address" name="addressName" required >
                     <input class="content_form_location_submit" type="button" value="검색" id="addressSearchBtn" onclick="sample6_execDaumPostcode()">
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
-                        Please provide a valid city.
-                    </div>
                     <form action="">
                         <select name="livingYear" id="year" title="거주년도" class="select_year" required >
                             <option value="">거주년도</option>
@@ -219,9 +216,6 @@
                     ★★★★★
                     <span class="rating_star">★★★★★</span>
                     <input class="rating_input" id="rating" name="rating" th:field="*{rating}" type="range" value="1" step="1" min="0" max="10">
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">
-                        Please provide a valid city.
-                    </div>
                     </span>
                 </div>
             </div>
@@ -245,37 +239,97 @@
 <div class="modal hidden" id="jsModal">
     <div class="bg"></div>
     <div class="modalBox">
-        <h2>입주민 인증</h2>
-        <button class="modalCloseBtn" id="jsCloseBtn">X</button>
-        <h1>계약서 사진을 업로드해주세요.</h1>
-        <p>사진을 드래그 앤 드롭으로 올려주시거나 눌러서 업로드해주세요.</p>
-        <div class="insertContract">
-            <input type="file" class="realUpload" accept="image/*" multiple style="display:none;">
-            <div class="uploadContract">
-                <img src="/img/writeForm/uploadContract.png" alt="사진올리기">
+        <h2 class="text_modal_title">입주민 인증</h2>
+        <button class="modal_closeBtn" id="jsCloseBtn">X</button>
+        <h1 class="text_explain_title">계약서 사진을 업로드해주세요.</h1>
+        <p class="text_explain_sub">사진을 드래그 앤 드롭으로 올려주시거나 눌러서 업로드해주세요.</p>
+        <div class="input_contract_area">
+            <input type="file" name="contract_img" class="input_contract_photo" accept="image/*" multiple="multiple" style="display:none;">
+            <div class="upload_contract_area">
+                <img class="uploadIcon" src="/img/writeForm/uploadContract.png" alt="사진올리기">
             </div>
-            <div>
-                <ul class="contractPreview"></ul>
-            </div>
+            <img class="altImg hidden" src="">
         </div>
-        <button class="modalComplete">확인</button>
+        <button class="modal_complete_btn">확인</button>
     </div>
 </div>
 <script>
-    const openBtn= document.querySelector(".certificateResident");
-        const closeBtn=document.querySelector(".modalCloseBtn");
-        const modal = document.querySelector(".modal");
+    const openBtn= document.querySelector(".sidebar_btn_certificatation");
+    const closeBtn=document.querySelector(".modal_closeBtn");
+    const okBtn= document.querySelector(".modal_complete_btn");
+    const modal = document.querySelector(".modal");
+    const realUpload_photo = document.querySelector('.input_contract_photo');
+    const upload_photo = document.querySelector('.upload_contract_area');
+    const altImg = document.querySelector(".altImg");
+    const uploadIcon = document.querySelector(".uploadIcon");
 
-        const open= () => {
-        modal.classList.remove("hidden");
+    upload_photo.addEventListener('click', () => realUpload_photo.click(),false);
+    realUpload_photo.addEventListener('change', fileSelect,false);
+
+    const open= () => {
+    modal.classList.remove("hidden");
+    }
+
+    const close = () => {
+    modal.classList.add("hidden");
+    altImg.classList.add("hidden");
+    uploadIcon.classList.remove("hidden");
+    altImg.src="";
+    }
+
+    openBtn.addEventListener("click", open);
+    closeBtn.addEventListener("click", close);
+    okBtn.addEventListener("click", close);
+
+    $(document).on('click', '.modal_complete_btn', function(e) {
+          Swal.fire({
+              position: 'top',
+              icon: 'success',
+              title: '입주민 인증이 완료되었습니다.',
+              html:'게시글 작성 완료 후 인증 배지가 부여됩니다.',
+              showConfirmButton: false,
+              timer: 2000
+            })
+    });
+
+
+    function fileSelect() {
+    //Check File API support
+    //PreView Img File
+    if (window.File && window.FileList && window.FileReader) {
+
+        var files = event.target.files; //FileList object
+        var output = document.getElementById("contractPreview");
+
+        if((files.length) > 1){
+            alert("이미지는 한장만 업로드 가능합니다.")
+            return;
         }
 
-        const close = () => {
-        modal.classList.add("hidden");
+        var file = files[0];
+
+        if (!file.type.match('image')){
+            alter("이미지 파일만 업로드 가능합니다.")
+            return;
         }
 
-        openBtn.addEventListener("click", open);
-        closeBtn.addEventListener("click", close);
+        var picReader = new FileReader();
+        picReader.addEventListener("load", function (event) {
+            var picFile = event.target;
+
+            altImg.classList.remove("hidden");
+            uploadIcon.classList.add("hidden");
+            altImg.src=picFile.result;
+            altImg.title = picFile.name;
+        });
+
+        picReader.readAsDataURL(file);
+    }
+    else {
+        console.log("Your browser does not support File API");
+    }
+    }
+
 </script>
 
 

@@ -13,12 +13,16 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long addressId;
     private int generation;
-    private int household;
-    private int floor;
+    private String household;
+    private String floor;
     private int elevator;
-    private String buildDate;
+    private String bubildDate;
     private Double latitude;
     private Double longitude;
     private String address;
+    private String buildingName;
+    private String road_address;
+    private int zone_no;    // 우편번호
 
 }
+

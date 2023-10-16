@@ -31,8 +31,6 @@ public class succession_article {
     @NotNull
     private String address;     // 도로명 주소 및 구 주소
     private String addressDetail;   // 상세주소
-    private float latitude;     //위도 및 경도
-    private float longitude;    // 위도 및 경도
     private int fee;    //월세
     private int payment;        // 관리비
     private double area;    // 승계 건물 면적
@@ -44,4 +42,5 @@ public class succession_article {
     private String moddate;  // 끌올 날짜 저장
     private LocalDateTime regDate = LocalDateTime.now();     // 게시글 작성 날짜 및 수정 날짜 기록
     private int viewCnt;
+    private Long addressId;
 }
