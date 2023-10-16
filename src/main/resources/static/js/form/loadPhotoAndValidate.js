@@ -5,7 +5,7 @@ window.onload = function() {
     const upload = document.querySelector('.content_photo_imgarea');
     document.getElementById("payment").value = null;
     document.getElementById("deposit").value = null;
-    document.getElementById("fee").value = null;
+    document.getElementById("fee").value = 0;
 
     // 뒤로가기 버튼 클릭시
     $(document).on('click', '#sidebar_btn_return', function(e) {
