@@ -1,0 +1,18 @@
+.addressText {
+  font-size: 10px;
+}
+
+.detailText {
+  font-size: 8px;
+  color: gray;
+}
+
+.itemsContainer {
+  display: flex;
+  gap: 8px;
+  overflow-x: scroll;
+}
+
+.itemContainer {
+  margin-bottom: 12px;
+}

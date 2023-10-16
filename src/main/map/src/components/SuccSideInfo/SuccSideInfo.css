@@ -1,0 +1,49 @@
+.infoItemTitle {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.infoText {
+  font-size: 12px;
+}
+
+.infoItem1 {
+  padding: 16px 0;
+  border-bottom: 1px solid lightgray;
+  width: 100%;
+}
+.infoItem2 {
+  padding: 16px 0;
+  width: 100%;
+}
+
+.infoCategory {
+  font-size: 14px;
+  font-weight: 600;
+  width: 60px;
+  padding-right: 16px;
+  margin-right: 8px;
+  font-weight: 700;
+}
+
+.infoAnswer {
+  font-size: 12px;
+}
+
+.feeContainer {
+  display: flex;
+  width: 100%;
+}
+
+.infoGrid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 140px;
+  font-size: 12px;
+  gap: 8px;
+}
+
+.grid-item {
+  width: auto; /* 고정 너비 설정 */
+  word-wrap: break-word;
+}

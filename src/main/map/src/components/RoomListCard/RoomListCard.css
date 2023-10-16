@@ -1,0 +1,33 @@
+.roomListContainer {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  overflow: hidden;
+  padding: 16px 0;
+  transition: transform 0.3s ease-out;
+}
+
+.userImage {
+  width: 20px;
+  height: 20px;
+  border-radius: 12px;
+}
+
+.listUserInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.infoContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+}
+
+.slideContent {
+  display: flex;
+  transition: transform 0.3s ease-out;
+  gap: 16px;
+}

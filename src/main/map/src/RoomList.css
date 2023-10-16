@@ -1,0 +1,67 @@
+.roomContainer {
+  margin-top: 120px;
+  padding: 0 20%;
+}
+
+.roomHeader {
+  display: flex;
+  padding: 0 5%;
+  align-items: center;
+}
+
+.subText {
+  font-size: 12px;
+  color: gray;
+}
+
+.listWithImage__top {
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.listWithImage__category {
+  display: flex;
+  gap: 4px;
+}
+
+.textList {
+  padding: 0 5%;
+}
+
+.itemGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr 1fr 2fr 1fr;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  transition: background-color 0.3s;
+}
+
+.pagination button.active {
+  background-color: green;
+  color: white;
+  border-radius: 50%; /* 원형으로 만들기 위한 스타일 */
+  padding: 5px 10px; /* 버튼의 크기를 조절하기 위한 패딩 값 */
+}
+.pagination button:hover {
+  background-color: green;
+  border-radius: 50%;
+  color: white;
+}
