@@ -7,4 +7,5 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<SocialAuth, Long> {
     public Optional<SocialAuth> findByProviderId(String providerId);
     public Optional<SocialAuth> findByName(String username);
+    public Optional<SocialAuth> findByNickname(String nickname);
 }
