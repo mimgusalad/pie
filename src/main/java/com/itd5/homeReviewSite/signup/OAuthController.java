@@ -14,8 +14,6 @@ public class OAuthController {
     private final BCryptPasswordEncoder encoder;
     private final MemberRepository memberRepository;
 
-    private NicknameGenerator nicknameGenerator;
-
     @GetMapping("/index")
     public String index(){return "index";}
     @GetMapping("/login")
