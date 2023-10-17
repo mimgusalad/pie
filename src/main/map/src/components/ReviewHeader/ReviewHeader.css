@@ -1,0 +1,12 @@
+.reviewOwner {
+  font-size: 16px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+}
+
+.reviewHeader {
+  margin-top: 12px;
+}

@@ -31,16 +31,14 @@ public class review_article {
     @NotNull
     private int deposit;            //보증금
     private int fee;                //월세
-    @NotBlank
-    @NotEmpty
-    private String address;     // 주소
+    private String address;
     private String addressDetail;   // 주소 자세히
-    private float latitude;     // 위도 및 경도
-    private float longitude;    // 위도 및 경도
+
     private int likedCnt;       // 공감 횟수
     private String contentTitle;    // 리뷰 글 제목
     private String contentText;     // 리뷰 글 내용
     private LocalDateTime regdate = LocalDateTime.now();  // 리뷰 작성 날짜
     private int certification;  // 입주민 인증 확인
     private int viewCnt;
+    private Long addressId;
 }
