@@ -9,6 +9,7 @@ import com.itd5.homeReviewSite.model.succession_article;
 import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.FileRepository;
 import com.itd5.homeReviewSite.repository.SuccessionRepository;
+import com.itd5.homeReviewSite.service.S3UploadService;
 import com.itd5.homeReviewSite.signup.PrincipalDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.compress.utils.FileNameUtils;
@@ -25,8 +26,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("succession")
@@ -38,6 +41,8 @@ public class SuccessionController {
     FileRepository fileRepository;
     @Autowired
     AddressRepository addressRepository;
+    @Autowired
+    S3UploadService s3UploadService;
     @GetMapping("form")
     public String form(Model model){
         Long userId = getLoginUserId();
@@ -49,7 +54,7 @@ public class SuccessionController {
             return "succession/form";
         }
         else{
-            Message message = new Message("이미 작성된 승계글이 있습니다." ,"작성된 승계글 페이지로 전환됩니다.", "/succession/detail","/",  RequestMethod.GET, null );
+            Message message = new Message("이미 작성된 승계글이 있습니다." ,"작성된 승계글 페이지로 전환됩니다.", "/succession/detail?articlNo="+successionArticle.getArticleNo(),"/",  RequestMethod.GET, null );
             return showMessageAndRedirect(message, model);
             //return "redirect:/succession/detail?id="+successionArticle.getArticleNo();
         }
@@ -86,14 +91,11 @@ public class SuccessionController {
         return "redirect:/succession/detail?id="+succession.getArticleNo();
     }
     @GetMapping("delete")
-    public String delete(){
-        Long userId = getLoginUserId();
-        succession_article successionArticle = successionRepository.findByUserId(userId);
-        if (successionArticle != null) {
-            successionRepository.delete(successionArticle);
-        }
+    public String delete(@RequestParam(required = false) Long articleNo){
+        succession_article successionArticle = successionRepository.findByArticleNo(articleNo);
+        successionRepository.delete(successionArticle);
 
-        return "account/myPage";
+        return "";
     }
 
     @GetMapping("list")
@@ -106,20 +108,22 @@ public class SuccessionController {
         return "succession/list";
     }
     @GetMapping("detail")
-    public String detail(Model model){
-
+    public String detail(Model model, @RequestParam(required = false) Long articleNo){
+        List<String> imgUrlList = new ArrayList<>();
         succession_article succession;
-        Long userId = getLoginUserId();
 
-        succession= successionRepository.findByUserId(userId);
-
-        if(succession == null){
+        if(articleNo == null){
             succession = new succession_article();
         }
+        succession = successionRepository.findByArticleNo(articleNo);
 
         List<PhotoFile> photoFileList = fileRepository.findBySuccessionIdAndArticleType(succession.getArticleNo(), "succession");
+        for(PhotoFile photoFile : photoFileList){
+            String url = s3UploadService.getImgUrl(photoFile.getSaveFileName());
+            imgUrlList.add(url);
+        }
         model.addAttribute("succession", succession);
-        model.addAttribute("photoFileList", photoFileList);
+        model.addAttribute("imgUrlList", imgUrlList);
 
         return "succession/detail";
     }
@@ -196,22 +200,23 @@ public class SuccessionController {
 
     public void savePhoto(HttpServletRequest request, List<MultipartFile> uploadFiles, Long articleNo){
 
-        for (MultipartFile multipartFile : uploadFiles){
+        for (MultipartFile imgFile : uploadFiles){
             PhotoFile photoFile = new PhotoFile();
-            if(!multipartFile.isEmpty()){
-                String fileName = multipartFile.getOriginalFilename();
-                String filePath = request.getSession().getServletContext().getRealPath("/");
+            if(!imgFile.isEmpty()){
+                String originalFilename = imgFile.getOriginalFilename();
+                String saveFilename = UUID.randomUUID() + "." + extractExt(originalFilename);
                 try {
                     // file save func
-                    // save path : /src/main/webapp/succession 에 img download
-                    multipartFile.transferTo(new File(filePath+"succession/" + fileName));
+                    // file db save
                     photoFile.setArticleType("succession");
                     photoFile.setSuccessionId(Long.valueOf(articleNo));
-                    photoFile.setSaveFileName(fileName);
-                    photoFile.setOriFileName(multipartFile.getOriginalFilename());
+                    photoFile.setSaveFileName(saveFilename);
+                    photoFile.setOriFileName(originalFilename);
                     photoFile.setReviewId(null);
 
                     fileRepository.save(photoFile);
+                    // aws save
+                    s3UploadService.saveFile(imgFile, saveFilename);
                 } catch (IllegalStateException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -225,5 +230,10 @@ public class SuccessionController {
     private String showMessageAndRedirect(final Message params, Model model) {
         model.addAttribute("params", params);
         return "messageRedirect";
+    }
+    // 이미지 확장자 출력
+    private String extractExt(String originalFilename) {
+        int pos = originalFilename.lastIndexOf(".");
+        return originalFilename.substring(pos + 1);
     }
 }
