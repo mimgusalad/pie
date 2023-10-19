@@ -11,6 +11,7 @@ import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.FileRepository;
 import com.itd5.homeReviewSite.repository.KeywordRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
+import com.itd5.homeReviewSite.service.S3UploadService;
 import com.itd5.homeReviewSite.signup.PrincipalDetails;
 import com.itd5.homeReviewSite.validator.ReviewValidator;
 import com.nimbusds.jose.shaded.gson.JsonObject;
@@ -37,10 +38,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("review")
@@ -55,6 +53,8 @@ public class ReviewController {
     FileRepository fileRepository;
     @Autowired
     KeywordRepository keywordRepository;
+    @Autowired
+    S3UploadService s3UploadService;
 
     @GetMapping("form")
     public String form(Model model) {
@@ -85,12 +85,12 @@ public class ReviewController {
 
         // 입주민 인증에 대한 처리
         // 입주민 인증을 위해 이미지 파일을 업로드 한 경우
-        if (!contractImg.isEmpty()){
+/*        if (!contractImg.isEmpty()){
 
-        }
+        }*/
 
         // rating  set
-        review.setRating(review.getRating() / 2);
+        review.setRating(review.getRating());
 
         // review 객체 변수 설정
         review.setUserId(getLoginUserId());
@@ -100,8 +100,9 @@ public class ReviewController {
         // review db save
         reviewRepository.save(review);
 
+        System.out.println(uploadFiles.size());
         // 리뷰 사진 save
-        saveReviewPhoto(request, uploadFiles, review.getArticleNo());
+        saveReviewPhoto(uploadFiles, review.getArticleNo());
 
         // keyword db save
         keyword.setReview_id(review.getArticleNo());
@@ -122,20 +123,32 @@ public class ReviewController {
     }
 
     @GetMapping("detail")
-    public String detail(Model model, @RequestParam(required = false) Long id) {
-
+    public String detail(Model model, @RequestParam(required = false) Long articleNo) {
+        List<String> imgUrlList = new ArrayList<>();
         review_article review;
 
-        if (id == null) {
+        if (articleNo == null) {
             review = new review_article();
         }
-
-        review = reviewRepository.findById(id).orElse(null);
-        List<PhotoFile> photoFileList = fileRepository.findByReviewIdAndArticleType(id, "review");
+        review = reviewRepository.findById(articleNo).orElse(null);
+        List<PhotoFile> photoFileList = fileRepository.findByReviewIdAndArticleType(articleNo, "review");
+        // aws img url get
+        for(PhotoFile photoFile : photoFileList){
+            String url = s3UploadService.getImgUrl(photoFile.getSaveFileName());
+            imgUrlList.add(url);
+        }
         model.addAttribute("review", review);
-        model.addAttribute("photoFileList", photoFileList);
+        model.addAttribute("imgUrlList", imgUrlList);
 
         return "review/detail";
+    }
+
+    @GetMapping("delete")
+    public String deleteReview(@RequestParam(required = false) Long articleNo){
+        review_article reviewArticle = reviewRepository.findByArticleNo(articleNo);
+        reviewRepository.delete(reviewArticle);
+
+        return "";
     }
 
     public Address getKakaoApiFromAddress(String roadFullAddr) {
@@ -201,24 +214,25 @@ public class ReviewController {
         return address;
     }
 
-    public void saveReviewPhoto(HttpServletRequest request, List<MultipartFile> uploadFiles, Long articleNo) {
+    public void saveReviewPhoto(List<MultipartFile> uploadFiles, Long articleNo) {
 
-        for (MultipartFile multipartFile : uploadFiles) {
+        for (MultipartFile imgFile : uploadFiles) {
             PhotoFile photoFile = new PhotoFile();
-            if (!multipartFile.isEmpty()) {
-                String fileName = multipartFile.getOriginalFilename();
-                String filePath = request.getSession().getServletContext().getRealPath("/");
+            if (!imgFile.isEmpty()) {
+                String originalFilename = imgFile.getOriginalFilename();
+                String saveFilename = UUID.randomUUID() + "." + extractExt(originalFilename);
                 try {
                     // file save func
-                    // save path : /src/main/webapp/review 에 img download
-                    multipartFile.transferTo(new File(filePath + "review/" + fileName));
+                    // file DB save
                     photoFile.setArticleType("review");
                     photoFile.setReviewId(Long.valueOf(articleNo));
-                    photoFile.setSaveFileName(fileName);
-                    photoFile.setOriFileName(multipartFile.getOriginalFilename());
+                    photoFile.setSaveFileName(saveFilename);
+                    photoFile.setOriFileName(originalFilename);
                     photoFile.setSuccessionId(null);
 
                     fileRepository.save(photoFile);
+                    //aws 서비스 등록
+                    s3UploadService.saveFile(imgFile, saveFilename);
                 } catch (IllegalStateException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -234,5 +248,10 @@ public class ReviewController {
         Long userId = principalDetails.getMember().getId();
 
         return userId;
+    }
+    // 확장자 추출
+    private String extractExt(String originalFilename) {
+        int pos = originalFilename.lastIndexOf(".");
+        return originalFilename.substring(pos + 1);
     }
 }

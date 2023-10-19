@@ -1,4 +1,4 @@
-package com.itd5.homeReviewSite;
+package com.itd5.homeReviewSite.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -20,17 +20,25 @@ public class S3UploadService {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
-    public String saveFile(MultipartFile multipartFile) throws IOException {
-        String originalFilename = multipartFile.getOriginalFilename();
-
+    // 파일 저장 함수
+    public void saveFile(MultipartFile multipartFile, String saveFilename) throws IOException {
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(multipartFile.getSize());
         metadata.setContentType(multipartFile.getContentType());
 
-        amazonS3.putObject(bucket, originalFilename, multipartFile.getInputStream(), metadata);
-        return amazonS3.getUrl(bucket, originalFilename).toString();
+        amazonS3.putObject(bucket, saveFilename, multipartFile.getInputStream(), metadata);
+
+    }
+    // 이미지 url 가져오기
+    public String getImgUrl(String filename){
+        return amazonS3.getUrl(bucket, filename).toString();
+    }
+    // 이미지 삭제
+    public void deleteImage(String saveFilename){
+        amazonS3.deleteObject(bucket, saveFilename);
     }
 
+    // 이미지 다운로드 함수
     public ResponseEntity<UrlResource> downloadImage(String originalFilename) {
         UrlResource urlResource = new UrlResource(amazonS3.getUrl(bucket, originalFilename));
 
@@ -42,4 +50,5 @@ public class S3UploadService {
                 .body(urlResource);
 
     }
+
 }

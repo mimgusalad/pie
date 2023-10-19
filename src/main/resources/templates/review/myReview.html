@@ -96,9 +96,6 @@
         font-weight: 400;
         line-height: 20px; /* 125% */
     }
-
-
-
     </style>
 
 </head>
@@ -114,7 +111,7 @@
 
 <div class="container">
     <div class="content_review_area">
-        <div th:each="myReview : ${myReviewList}" class="content_each_review" th:onclick="|location.href='@{/review/detail(id=${myReview.articleNo})}'|">
+        <div th:each="myReview : ${myReviewList}" class="content_each_review" th:onclick="|location.href='@{/review/detail(articleNo=${myReview.articleNo})}'|">
             <img class="img_reviewPreview" >
             <h1 class="text_address" th:text="${myReview.address}">경북 경산시 대학로 280</h1>
             <div class="bottom_info">
@@ -122,7 +119,7 @@
                     <span class="rating">
                     ★★★★★
                     <span class="rating_star">★★★★★</span>
-                    <input class="rating_input" id="rating" name="rating" th:value="${myReview.rating}"  type="range" value="1" step="1" min="0" max="10">
+                    <input class="rating_input" id="rating" name="rating" th:value="${myReview.rating}"  type="range" value="5" step="1" min="0" max="10">
                     </span>
                 </div>
                 <h1 class="text_regdate" th:text="${myReview.regdate}">2023. 05. 21</h1>
@@ -133,14 +130,14 @@
 </div>
 
 <script>
-
-
 // 별점 드래그 할 때
 window.onload = function (){
-    const rating_input = document.querySelector('.rating_input');
-    const rating_star = document.querySelector('.rating_star');
-
-    rating_star.style.width = `${rating_input.value * 20}%`;
+    const rating_input = document.querySelectorAll('.rating_input');
+    const rating_star = document.querySelectorAll('.rating_star');
+    for(let i=0; i<rating_input.length; i++){
+        const widthValue = rating_input[i].value * 10;
+        rating_star[i].style.width = widthValue + "%";
+    }
 }
 </script>
 </body>

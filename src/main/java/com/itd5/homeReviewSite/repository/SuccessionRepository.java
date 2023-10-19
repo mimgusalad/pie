@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SuccessionRepository extends JpaRepository<succession_article,Long> {
     succession_article findByUserId(Long userId);
+    succession_article findByArticleNo(Long articleNo);
 }
