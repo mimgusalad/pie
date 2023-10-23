@@ -73,9 +73,9 @@
         </div>
 
         <div class="content_home_review">
-            <div>
+            <div class="home_review_top">
                 <h1 class="text_home_title">거주민 리뷰 </h1>
-                <a > 더보기</a>
+                <a class="href_more_review" > 더보기</a>
             </div>
 
             <div class="home_review_area" th:each="home_review: ${home_review_list}">
@@ -86,12 +86,7 @@
                         </div>
                         <span class="writer_nickname">닉네임</span>
                         <span class="review_livingYear">2023년 까지 거주</span>
-                        <img src="/img/disadvantageMark/redMark.png">
-                        <span class="text_disadvantage">심각</span>
-                        <img src="/img/disadvantageMark/orangeMark.png">
-                        <span class="text_disadvantage" >경계</span>
-                        <img src="/img/disadvantageMark/yellowMark.png">
-                        <span class="text_disadvantage" >주의</span>
+                        <span class="rating_star">★</span>
                         <span th:text="${home_review.rating}"> </span>
                     </div>
                     <div class="review_content_area">

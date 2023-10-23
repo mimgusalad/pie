@@ -4,8 +4,10 @@ import com.itd5.homeReviewSite.model.PhotoFile;
 import com.itd5.homeReviewSite.model.review_article;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ReviewRepository extends JpaRepository<review_article, Long> {
     List<review_article> findByUserId(Long userId);

@@ -1,7 +1,6 @@
 package com.itd5.homeReviewSite.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itd5.homeReviewSite.model.Address;
 import com.itd5.homeReviewSite.model.PhotoFile;
@@ -13,15 +12,10 @@ import com.itd5.homeReviewSite.repository.KeywordRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
 import com.itd5.homeReviewSite.service.S3UploadService;
 import com.itd5.homeReviewSite.signup.PrincipalDetails;
-import com.itd5.homeReviewSite.validator.ReviewValidator;
-import com.nimbusds.jose.shaded.gson.JsonObject;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
-import net.minidev.json.parser.JSONParser;
-import org.hibernate.dialect.SybaseASEDialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -33,7 +27,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -44,7 +37,6 @@ import java.util.*;
 @RequestMapping("review")
 @RequiredArgsConstructor
 public class ReviewController {
-
     @Autowired
     ReviewRepository reviewRepository;
     @Autowired
@@ -85,7 +77,7 @@ public class ReviewController {
 
         // 입주민 인증에 대한 처리
         // 입주민 인증을 위해 이미지 파일을 업로드 한 경우
-/*        if (!contractImg.isEmpty()){
+/*        if (contractImg != null){
 
         }*/
 
@@ -116,8 +108,22 @@ public class ReviewController {
         Long userId = getLoginUserId();
 
         List<review_article> myReviewList = reviewRepository.findByUserId(userId);
+        List<PhotoFile> previewImgList = fileRepository.findPhotoFile(userId);
+        List<String> previewImgUrlList = new ArrayList<>();
 
+        /*
+        * 이미지 Preview code
+        * review에 첨부된 사진이 있다면 upload한 사진 중 하나를 get
+        * 아니면 대체 이미지를 get(/img/reviewUploadImg/altRoomPicture.png)
+        * */
+        for(PhotoFile photoFile: previewImgList){
+            if (photoFile != null)
+                previewImgUrlList.add(s3UploadService.getImgUrl(photoFile.getSaveFileName()));
+            else
+                previewImgUrlList.add("/img/reviewUploadImg/altRoomPicture.png");
+        }
         model.addAttribute("myReviewList", myReviewList);
+        model.addAttribute("previewImgUrlList",previewImgUrlList);
 
         return "review/myReview";
     }
