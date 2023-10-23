@@ -10,9 +10,6 @@ import {
   Outlet,
   BrowserRouter,
 } from "react-router-dom";
-import Detail from "./NaviBar/Detail";
-import MapPage from "./NaviBar/MapPage";
-import MapPrac from "./NaviBar/MapPrac";
 import RoomList from "./RoomList";
 import SuccDetail from "./succDetail";
 import ReviewDetail from "./ReviewDetail";
@@ -27,6 +24,7 @@ export default function TempPage() {
   // })
 
   return (
+  <BrowserRouter>
     <Routes>
       {/* NavUnder, NavUnderSide 바꿀때 MapPage수정 */}
       <Route path="/" element={<NavUnder />} />
@@ -39,6 +37,7 @@ export default function TempPage() {
         path="detail/:roomId/review/:reviewId"
         element={<ReviewDetail />}
       />
-    </Routes>
+     </Routes>
+    </BrowserRouter>
   );
 }
