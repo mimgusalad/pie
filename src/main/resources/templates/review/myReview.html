@@ -5,6 +5,7 @@
     <title>myReview</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css'>
     <link href="/css/starter-template.css" rel="stylesheet">
     <link href="/css/form/formNavbar.css" rel="stylesheet">
     <style>
@@ -12,122 +13,133 @@
     width: 1400px;
     }
 
-    .reviewArea{
-    float:left;
-    flex-wrap:wrap;
+    .content_review_area{
+        width: 1400px;
+        height: 950px;
+    }
+    .content_each_review{
+        width: 295px;
+        margin: 20px;
 
-    position : relative;
+        float: left;
+        flex-wrap: wrap;
+        position: relative;
+        
+    }
+    .img_reviewPreview{
+        margin-bottom: 4px;
 
-    background-image : url(/img/reviewUploadImg/altRoomPicture.png);
-    background-size: 290px 320px;
-    background-repeat: no-repeat;
+        width: 290px;
+        height: 320px;
+        
+        border-radius: 8px;
+        background: lightgray 50% / cover no-repeat;
+    }
+    .text_address{
+        margin: 8px 0px;
+        color: var(--text-primary, #222);
 
-    width: 290px;
-    height: 400px;
-    margin: 20px;
+        /* Title 2/SemiBold */
+        font-family: Pretendard;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 24px; /* 133.333% */
     }
 
-    .reviewArea img{
-    width: 290px;
-    height: 320px;
-    margin-bottom: 12px;
-    border-radius: 8px;
+    .bottom_info{
+        width: 100%;
+        height: 20px;
+        display: flex;
+        float: right;
+        justify-content: space-between;
     }
-
-    #mrAddress{
-    position: absolute;
-    top: 83%;
-
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 24px;
-
-    color: #222222;
+    .content_rating_area{
+        display: flex;
+        justify-content:left;
     }
-
-    .reviewArea #writeDate{
-    position: absolute;
-    top: 91%;
-    left: 44%;
-
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color : #666666;
-    margin-left: 12px;
-    }
-
-    #mrStarPoint{
-    position: absolute;
-    top: 91%;
-
-    font-weight: 600;
-    font-size: 16px;
-    color: #222222;
-    }
-
-    .rating_box{
-    position: absolute;
-    display: flex;
-
-    top: 89%;
-    }
-
+      
     .rating {
-      position: absolute;
-      color: #ddd;
-      font-size: 20px;
-      top:91%;
+    position: relative;
+    color: #ddd;
+    font-size: 20px;
+    text-align: center;
     }
-
+    
+    .rating input {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    }
+    
     .rating_star {
-      width: auto;
-      color: #ffc107;
-      position: absolute;
-
-      top:91%;
-      font-size:20px;
-
-      overflow: hidden;
-      pointer-events: none;
+    width: 0;
+    color: #ffc107;
+    position: absolute;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    pointer-events: none;
     }
+    .text_regdate{
+        padding: 6px;
+        color: var(--text-secondary, #666);
 
-
+        /* Body 1/Regular */
+        font-family: Pretendard;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px; /* 125% */
+    }
     </style>
 
 </head>
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
 </nav>
-<nav class="writeNav">
+<nav class="formNav">
     <ul>
-        <li><a href="" th:href="@{/review/form}">리뷰쓰기</a></li>
-        <li><a href="" th:href="@{/review/myReview}">내가 작성한 리뷰</a></li>
+        <li><a class="formNav_link" href="" th:href="@{/review/form}">리뷰쓰기</a></li>
+        <li><a class="formNav_link" href="" th:href="@{/review/myReview}">내가 작성한 리뷰</a></li>
     </ul>
 </nav>
+
 <div class="container">
-    <div th:each="myReview : ${myReviewList}" class="reviewArea" th:onclick="|location.href='@{/review/detail(id=${myReview.articleNo})}'|">
-        <span th:each="myPicture : ${myPictureList}" >
-        <img th:if="${myReview.picture == myPicture.pictureId}" th:src="${myPicture.fileUrl}+${myPicture.fileName}"
-              alt="reviewImg">
-        <img th:unless="${myReview.picture == myPicture.pictureId}" th:src="${myPicture.fileUrl}+${myPicture.fileName}"
-             alt="reviewImg">
-        </span>
-
-        <h1 id="mrAddress" th:text="${myReview.address}">주소</h1>
-        <!--<div class="rating_box" >
-            <span class="rating">★★★★★</span>
-            <span class="rating_star" th:width="${myReview.rating}/10">★★★★★</span>
-        </div>-->
-        <h1 id="mrStarPoint" th:text="${myReview.rating}" type="hidden">별점</h1>
-
-            <!--<input th:value="${myReview.starpoint}" type="range" oninput="drawStar(this)" value="1" step="1" min="0"
-                   max="10">-->
-            <!--<script src="/js/starPoint.js"></script>-->
-
-        <span th:text="${myReview.regdate}" id="writeDate">작성 날짜</span>
+    <div class="content_review_area">
+        <div th:each="myReview : ${myReviewList}" class="content_each_review" th:onclick="|location.href='@{/review/detail(articleNo=${myReview.articleNo})}'|">
+            <img class="img_reviewPreview" >
+            <h1 class="text_address" th:text="${myReview.address}">경북 경산시 대학로 280</h1>
+            <div class="bottom_info">
+                <div class="content_rating_area">
+                    <span class="rating">
+                    ★★★★★
+                    <span class="rating_star">★★★★★</span>
+                    <input class="rating_input" id="rating" name="rating" th:value="${myReview.rating}"  type="range" value="5" step="1" min="0" max="10">
+                    </span>
+                </div>
+                <h1 class="text_regdate" th:text="${myReview.regdate}">2023. 05. 21</h1>
+            </div>
+        </div>
     </div>
+    <div id="pagination"></div>
 </div>
 
+<script>
+// 별점 드래그 할 때
+window.onload = function (){
+    const rating_input = document.querySelectorAll('.rating_input');
+    const rating_star = document.querySelectorAll('.rating_star');
+    for(let i=0; i<rating_input.length; i++){
+        const widthValue = rating_input[i].value * 10;
+        rating_star[i].style.width = widthValue + "%";
+    }
+}
+</script>
 </body>
+
 </html>

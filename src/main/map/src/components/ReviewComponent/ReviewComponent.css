@@ -1,0 +1,55 @@
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.userID {
+  display: flex;
+  align-items: center;
+}
+
+.reviewContent {
+  display: flex;
+  column-gap: 12px;
+}
+
+.reviewBox {
+  margin-bottom: 12px;
+}
+
+.grayText {
+  font-size: 4px;
+  color: gray;
+}
+
+.reviewBox {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+}
+
+.reviewOwner {
+  color: black;
+  padding-left: 8px;
+  font-size: 12px;
+}
+
+.reviewTitle {
+  font-size: 12px;
+  font-weight: bold;
+  color: black;
+}
+
+.detailContainer {
+  width: 85%;
+  margin-top: 4px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.detailText {
+  font-size: 4px;
+  color: black;
+}

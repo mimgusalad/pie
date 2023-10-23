@@ -5,11 +5,18 @@
     <title>Map</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link href="/css/starter-template.css"  rel="stylesheet">
+    <link href="/css/starter-template.css" rel="stylesheet">
+
 </head>
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
 </nav>
-<p>지도 기본 화면입니다.</p>
+<p>지도화면입니다.</p>
+
+<p value="${addressKeyword}" th:text="${addressKeyword}"></p>
+<p value="${addressKeyword}" th:text="${firstKeyword}"></p>
+<p value="${addressKeyword}" th:text="${secondKeyword}"></p>
+<p value="${addressKeyword}" th:text="${thirdKeyword}"></p>
+
 </body>
 </html>

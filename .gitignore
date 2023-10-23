@@ -32,3 +32,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### my ignore ###
+config/application-aws.properties
+
+### node_modules ###
+/src/main/chat-app2/node_modules
+
+### env ###
+src/main/chat-app2/.env

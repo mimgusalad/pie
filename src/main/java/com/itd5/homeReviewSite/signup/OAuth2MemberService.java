@@ -1,7 +1,10 @@
 package com.itd5.homeReviewSite.signup;
 
 
+import com.itd5.homeReviewSite.model.Nickname;
+import com.itd5.homeReviewSite.repository.NicknameRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -9,7 +12,6 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class OAuth2MemberService extends DefaultOAuth2UserService {
     private final BCryptPasswordEncoder encoder;
     private final MemberRepository memberRepository;
+    private final NicknameRepository nicknameRepository;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -40,6 +43,7 @@ public class OAuth2MemberService extends DefaultOAuth2UserService {
         String username = memberInfo.getName();
         String email = memberInfo.getEmail();
         String role = "ROLE_USER"; //일반 유저
+        String nickname = nicknameRepository.getRandomNickname().getNickname();
         System.out.println(oAuth2User.getAttributes());
         Optional<SocialAuth> findMember = memberRepository.findByProviderId(providerId);
         SocialAuth member=null;
@@ -50,8 +54,10 @@ public class OAuth2MemberService extends DefaultOAuth2UserService {
                     .password(encoder.encode("password"))
                     .role(role)
                     .provider(provider)
-                    .providerId(providerId).build();
+                    .providerId(providerId)
+                    .nickname(nickname).build();
             memberRepository.save(member);
+            nicknameRepository.setNicknameTaken(nickname);
         }
         else{
             member=findMember.get();

@@ -21,7 +21,6 @@
     padding: 15px;
     border-radius: 20px;
 }
-
 .modalBox .modalCloseBtn{
     position: absolute;
     top: 24px;
@@ -33,17 +32,18 @@
     border: 0px solid;
 }
 
-.modalBox h2{
-    position: absolute;
-    top: 25px;
-    left: 264px;
+.text_modal_title{
+    width: 540px;
+    color: var(--text-primary, #1B1D1F);
 
-    font-weight: 700;
+    /* Title 1/Bold */
+    font-family: Pretendard;
     font-size: 20px;
-    color: #1b1d1f;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 26px; /* 130% */
 }
-
-.modalBox h2:after{
+.text_modal_title::after{
     content: "";
     display: block;
     width: 100%;
@@ -51,29 +51,30 @@
     margin: 16px auto;
 }
 
-.modalBox h1{
-    position: absolute;
-    left: 40px;
-    top: 88px;
+.text_explain_title{
+    color: var(--text-primary, #222);
 
-    font-weight: 600;
+    /* Head 1/SemiBold */
+    font-family: Pretendard;
     font-size: 28px;
-    line-height: 38px;
-    color: #222222;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px; /* 135.714% */
 }
+.text_explain_sub{
+    color: var(--text-secondary, #666);
 
-.modalBox p{
-    position: absolute;
-    left: 40px;
-    top: 134px;
-
-    font-weight: 500;
+    /* Body 1/Medium */
+    font-family: Pretendard;
     font-size: 16px;
-    line-height: 20px;
-    color: #666666;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
 }
 
-.insertContract{
+
+.input_contract_area{
+    overflow: hidden;
     position: absolute;
     width: 540px;
     height: 276px;
@@ -84,7 +85,7 @@
     border-radius: 4px;
 }
 
-.modalComplete{
+.modal_complete_btn{
     position: absolute;
     width: 82px;
     height: 34px;
@@ -98,7 +99,7 @@
     color: white;
 }
 
-.uploadContract{
+.upload_contract_area{
     position: absolute;
     top: 98px;
     left: 172px;
@@ -106,7 +107,11 @@
     width:196px;
     height: 80px;
 }
-
+.input_contract_area img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
 .hidden{
     display: none;
 }
