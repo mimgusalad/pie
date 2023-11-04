@@ -38,7 +38,24 @@ li {
 }
 
 .sidebar_content li{
+    margin-bottom: 3px;
+}
+.text_select_result{
+    height: 15px;
     margin-bottom: 12px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    color: var(--text-secondary, #666);
+
+    /* Body 2/Regular */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
 }
 
 .sidebar_title{

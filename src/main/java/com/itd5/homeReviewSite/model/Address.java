@@ -16,7 +16,7 @@ public class Address {
     private String household;
     private String floor;
     private int elevator;
-    private String bubildDate;
+    private String buildDate;
     private Double latitude;
     private Double longitude;
     private String address;

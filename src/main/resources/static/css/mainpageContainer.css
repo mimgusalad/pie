@@ -207,7 +207,9 @@
 .keywordList label .imgBox {
     position: relative;
     display: flex;
-    
+    border-radius: 10px;
+    box-shadow: none;
+
     transition: 0.5s;
 }
 
@@ -218,9 +220,15 @@
     filter : grayscale(100%);
 }
 
+.imgBox:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.imgBox:hover img{
+    filter : grayscale(0%);
+}
 
 
-.btnArea .btn{
+/*.btnArea .btn{
     width: 130px; height: 40px;
     position: absolute;
     left: 550px;
@@ -228,7 +236,7 @@
     border: 0;
     outline: none;
     transition: 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06);
-}
+}*/
 
 .invisible{
     display:none;

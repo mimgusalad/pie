@@ -54,7 +54,7 @@ public class SuccessionController {
             return "succession/form";
         }
         else{
-            Message message = new Message("이미 작성된 승계글이 있습니다." ,"작성된 승계글 페이지로 전환됩니다.", "/succession/detail?articlNo="+successionArticle.getArticleNo(),"/",  RequestMethod.GET, null );
+            Message message = new Message("이미 작성된 승계글이 있습니다." ,"작성된 승계글 페이지로 전환됩니다.", "/succession/detail?articleNo="+successionArticle.getArticleNo(),"/",  RequestMethod.GET, null );
             return showMessageAndRedirect(message, model);
             //return "redirect:/succession/detail?id="+successionArticle.getArticleNo();
         }
@@ -88,7 +88,7 @@ public class SuccessionController {
         // 사진 save
         savePhoto(request, uploadFiles, succession.getArticleNo());
 
-        return "redirect:/succession/detail?id="+succession.getArticleNo();
+        return "redirect:/succession/detail?articleNo="+succession.getArticleNo();
     }
     @GetMapping("delete")
     public String delete(@RequestParam(required = false) Long articleNo){

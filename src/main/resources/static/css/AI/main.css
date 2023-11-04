@@ -1,3 +1,37 @@
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    background: #8E8E8E;
+    mix-blend-mode: multiply;
+}
+
+.mySlides {
+    display: none;
+    background: #8E8E8E;
+    animation: fade 4s linear infinite; /* Adjust the duration as needed */
+}
+
+.mySlides img {
+    width: 100%;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0.5;
+    }
+    25% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+
 #menu_wrap{
     position:relative;
 }
@@ -67,16 +101,19 @@ body{
     position: relative;
     height: 360px;
     margin-bottom: 80px;
+    background: #8E8E8E;
+    mix-blend-mode: multiply;
+}
+.content_main li{
+    position: absolute;
 }
 .content_main img{
-    width: 1920px;
+    width: 100%;
     height: 360px;
-
-    mix-blend-mode: multiply;
 }
 .content_main_title{
     position: absolute;
-    left: 38%;
+    left: 42%;
     top: 32%;
     color: var(--text-white, #FFF);
     text-align: center;
@@ -90,7 +127,7 @@ body{
 }
 .content_main_subTitle{
     position: absolute;
-    left: 38%;
+    left: 42%;
     top: 62%;
     color: var(--text-white, #FFF);
     text-align: center;
@@ -290,10 +327,11 @@ body{
 .content_result_one:hover{
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
-.content_result_one:hover ~ .result_address_area { display: block; }
+.content_result_one:hover .result_address_area { display: block; }
+.content_result_one:hover .result_address_text { display: block; }
 
 .result_address_area{
-
+    display: none;
     position: absolute;
     top: 280px;
 
@@ -304,6 +342,12 @@ body{
     border-radius: 0px 0px 4px 4px;
     background: #AEAEAE;
     mix-blend-mode: multiply;
+}
+.result_address_text{
+    display:none;
+    position: absolute;
+    top : 305px;
+    left: 20px;
 }
 
 .addressPin{
@@ -371,10 +415,10 @@ body{
 }
 .review_content{
     margin-top: 10px;
-    height: 110px;
+    height: 100px;
 
     color: var(--text-primary, #222);
-
+    overflow:hidden;
     /* Labe 2/Regular */
     font-family: Pretendard;
     font-size: 14px;

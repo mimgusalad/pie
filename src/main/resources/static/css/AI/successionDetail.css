@@ -11,6 +11,10 @@ body{
     font-weight: 500;
     line-height: 20px; /* 142.857% */
 }
+.home_review_top{
+    display: flex;
+    justify-content:space-between;
+}
 .text_home_title{
     margin-bottom: 20px;
     color: var(--text-primary, #222);
@@ -21,6 +25,16 @@ body{
     font-style: normal;
     font-weight: 600;
     line-height: 38px; /* 135.714% */
+}
+.href_more_review{
+    color: var(--text-tertiary, #A4A4A4);
+
+    /* Title 2/Medium */
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 133.333% */
 }
 
 .content_first_info_area{
@@ -215,9 +229,12 @@ body{
     width: 300px;
     position: relative;
 }
+.rating_star{
+    font-size: 22px;
+    color: #ffc107;
+}
 .content_title{
     position: absolute;
-    top: 20%;
     color: var(--text-primary, #222);
 
     /* Title 2/Medium */
@@ -229,7 +246,7 @@ body{
 }
 .content_detail{
     position: absolute;
-    top: 35%;
+    top: 20%;
     color: var(--text-primary, #222);
 
     /* Body 1/Regular */
