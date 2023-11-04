@@ -18,41 +18,7 @@
             crossorigin="anonymous"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63796f440d480664df4d24b56dd372a6&libraries=services"></script>
-<style>
-.slideshow-container {
-    position: relative;
-    width: 100%;
-    margin: auto;
-    background: #8E8E8E;
-    mix-blend-mode: multiply;
-}
 
-.mySlides {
-    display: none;
-    background: #8E8E8E;
-    mix-blend-mode: multiply;
-    animation: fade 4s linear infinite; /* Adjust the duration as needed */
-}
-
-img {
-    width: 100%;
-}
-
-@keyframes fade {
-    0% {
-        opacity: 0.5;
-    }
-    25% {
-        opacity: 1;
-    }
-    75% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.5;
-    }
-}
-</style>
 </head>
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
@@ -278,7 +244,12 @@ img {
                         <img src="/img/reviewUploadImg/aiReplaceImg.png">
                     </a>
                     <div class="result_address_area">
-                        <img class="addressPin" src="/img/locationMark.png">
+                    </div>
+                    <div class="result_address_text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M13 6.90909C13 10.7273 8 14 8 14C8 14 3 10.7273 3 6.90909C3 5.60712 3.52678 4.35847 4.46447 3.43784C5.40215 2.51721 6.67392 2 8 2C9.32608 2 10.5979 2.51721 11.5355 3.43784C12.4732 4.35847 13 5.60712 13 6.90909Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8.00163 8.54568C8.9221 8.54568 9.66829 7.81305 9.66829 6.90931C9.66829 6.00557 8.9221 5.27295 8.00163 5.27295C7.08115 5.27295 6.33496 6.00557 6.33496 6.90931C6.33496 7.81305 7.08115 8.54568 8.00163 8.54568Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                         <span class="result_address" th:text="${sucArticle.address}"></span>
                     </div>
                 </div>
@@ -290,7 +261,7 @@ img {
 
             <div style="width: 1380px; height: 230px;">
                 <div class="content_review_each" th:each="recReview : ${recommendReviewPreList}">
-                    <img class="review_location_mark" src="/img/locationMark.png">
+                    <img class="review_location_mark" src="/img/btnImg/locationMark.png">
                     <span class="review_address" th:text="${recReview.address}">주소</span>
                     <p class="review_content" th:text="${recReview.contentText}">리뷰글</p>
                     <span class="review_recommend_title">추천</span>
@@ -304,26 +275,13 @@ img {
     </div>
 </div>
 <script>
-    let slideIndex = 0;
-showSlides();
 
-function showSlides() {
-    const slides = document.querySelectorAll('.mySlides');
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = 'none';
-    }
-    slideIndex++;
-    if (slideIndex > slides.length) {
-        slideIndex = 1;
-    }
-    slides[slideIndex - 1].style.display = 'block';
-    setTimeout(showSlides, 4000); // Change image every 2 seconds (adjust as needed)
-}
 </script>
 <footer th:replace="fragments/common :: bottomBar"></footer>
 
 <script src="/js/AI/processDropdown.js"></script>
 <script src="/js/AI/processSliderbar.js"></script>
 <script src="/js/AI/searchLocation.js"></script>
+<script src="/js/AI/imgSlider.js"></script>
 </body>
 </html>

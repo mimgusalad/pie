@@ -22,6 +22,7 @@ function getCheckboxValue() {
     selectedCB.forEach((el) => {
         elementCB.push(el.value);
         const nextElement = el.nextElementSibling;
+        nextElement.style.boxShadow = "0 0 10px rgba(0,0,0,0.5)";
         const imgElement = nextElement.firstElementChild;
         imgElement.style.filter="grayscale(0%)";
     });
@@ -59,6 +60,7 @@ function getCheckboxValue() {
         /*삭제된 키워드의 버튼색을 gray로 변환*/
         const el = document.getElementById(elementP[0]);
         const nextElement = el.nextElementSibling;
+        nextElement.style.boxShadow = "none";
         const imgElement = nextElement.firstElementChild;
         imgElement.style.filter="grayscale(100%)";
     }
