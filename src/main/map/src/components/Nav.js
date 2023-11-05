@@ -50,7 +50,7 @@ export default function Nav({ room }) {
           />
         </button>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          {/* <img
+          <img
             src={shareIcon}
             alt="shareIcon"
             style={{
@@ -68,7 +68,7 @@ export default function Nav({ room }) {
               height: "16px",
               strokeWidth: "10px",
             }}
-          /> */}
+          />
         </div>
       </div>
       <div className="side-nav__items-wrapper">
@@ -139,10 +139,10 @@ export default function Nav({ room }) {
             <div className="warningSign">
               <img src={warningSign1} alt="level1" className="warningIcon" />
               <span className="levelText"> 심각 </span>
-              {room.condition_1.map((item, index) => {
+              {room.tags.map((item, index) => {
                 return (
                   <span className="tag" key={index}>
-                    {item.tag}
+                    {item.label}
                   </span>
                 );
               })}
@@ -150,10 +150,10 @@ export default function Nav({ room }) {
             <div className="warningSign">
               <img src={warningSign2} alt="level1" className="warningIcon" />
               <span className="levelText"> 경계 </span>
-              {room.condition_2.map((item, index) => {
+              {room.tags.map((item, index) => {
                 return (
                   <span className="tag" key={index}>
-                    {item.tag}
+                    {item.label}
                   </span>
                 );
               })}
@@ -161,10 +161,10 @@ export default function Nav({ room }) {
             <div className="warningSign">
               <img src={warningSign3} alt="level1" className="warningIcon" />
               <span className="levelText"> 주의 </span>
-              {room.condition_3.map((item, index) => {
+              {room.tags.map((item, index) => {
                 return (
                   <span className="tag" key={index}>
-                    {item.tag}
+                    {item.label}
                   </span>
                 );
               })}
@@ -172,10 +172,10 @@ export default function Nav({ room }) {
             <div className="warningSign">
               <img src={warningSign4} alt="level1" className="warningIcon" />
               <span className="levelText"> 문제없음 </span>
-              {room.condition_4.map((item, index) => {
+              {room.tags.map((item, index) => {
                 return (
                   <span className="tag" key={index}>
-                    {item.tag}
+                    {item.label}
                   </span>
                 );
               })}
