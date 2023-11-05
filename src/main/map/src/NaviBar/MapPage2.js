@@ -39,10 +39,10 @@ const leftSubMenus = [
     label: "방 찾기",
     path: "",
   },
-  // {
-  //   label: "즐겨찾기",
-  //   path: "",
-  // },
+  {
+    label: "즐겨찾기",
+    path: "",
+  },
 ];
 
 const sideFilters = [
@@ -84,17 +84,9 @@ const sideFilters = [
 
 function MapPage2({ id }) {
   const location = useLocation();
-  const getlat = location.state.lat; // 클릭한 값 위도
-  const getlng = location.state.lng; // 클릭한 값 경도
-  const [toggle, setToggle] = useState("map")
-  const placePosition = {
-    lat : getlat,
-    lng : getlng,
-  }
+  const getlat = location.state.lat;
+  const getlng = location.state.lng;
   let [state, setState] = useState({
-    center: { lat: getlat, lng: getlng },
-  });
-  let [rvmarker, setrvMarker] = useState({
     center: { lat: getlat, lng: getlng },
   });
   let { roomId } = useParams();
@@ -173,7 +165,6 @@ function MapPage2({ id }) {
   };
 
   let copyData = JSON.parse(JSON.stringify(Data));
-
 
   //sidebar
   let [worse, setWorse] = useState("");
@@ -302,18 +293,11 @@ function MapPage2({ id }) {
 
     let imageSrc = importmarker;
     let imageSize = new kakao.maps.Size(24, 39);
-    let bigimageSize = new kakao.maps.Size(29, 44);
     let imageOption = { offset: new kakao.maps.Point(27, 69) };
 
     let reviewMarker = new kakao.maps.MarkerImage(
       imageSrc,
       imageSize,
-      imageOption
-    );
-
-    let bigreviewMarker = new kakao.maps.MarkerImage(
-      imageSrc,
-      bigimageSize,
       imageOption
     );
 
@@ -424,18 +408,11 @@ function MapPage2({ id }) {
 
     let imageSrc = importmarker;
     let imageSize = new kakao.maps.Size(24, 39);
-    let bigimageSize = new kakao.maps.Size(29, 44);
     let imageOption = { offset: new kakao.maps.Point(27, 69) };
 
     let reviewMarker = new kakao.maps.MarkerImage(
       imageSrc,
       imageSize,
-      imageOption
-    );
-
-    let bigreviewMarker = new kakao.maps.MarkerImage(
-      imageSrc,
-      bigimageSize,
       imageOption
     );
 
@@ -457,10 +434,7 @@ function MapPage2({ id }) {
           });
           kakao.maps.event.addListener(marker, "click", function () {
             // navigate(`/detail/${el.id}`)
-             markerPost(el)
-             setrvMarker({
-              center: { lat: el.lat, lng: el.lng },
-            });
+        markerPost(el)
           });
         }
       });
@@ -478,10 +452,7 @@ function MapPage2({ id }) {
           });
           kakao.maps.event.addListener(marker, "click", function () {
             // navigate(`/detail/${el.id}`)
-              markerPost(el)
-              setrvMarker({
-                center: { lat: el.lat, lng: el.lng },
-              });
+        markerPost(el)
           });
         }
       });
@@ -503,10 +474,7 @@ function MapPage2({ id }) {
           });
           kakao.maps.event.addListener(marker, "click", function () {
            // navigate(`/detail/${el.id}`)
-              markerPost(el)
-              setrvMarker({
-                center: { lat: el.lat, lng: el.lng },
-              });
+        markerPost(el)
           });
         }
       });
@@ -528,10 +496,7 @@ function MapPage2({ id }) {
           });
           kakao.maps.event.addListener(marker, "click", function () {
             // navigate(`/detail/${el.id}`)
-              markerPost(el)
-              setrvMarker({
-                center: { lat: el.lat, lng: el.lng },
-              });
+        markerPost(el)
           });
         }
       });
@@ -549,10 +514,7 @@ function MapPage2({ id }) {
           });
           kakao.maps.event.addListener(marker, "click", function () {
             // navigate(`/detail/${el.id}`)
-              markerPost(el)
-              setrvMarker({
-                center: { lat: el.lat, lng: el.lng },
-              });
+        markerPost(el)
           });
         }
       });
@@ -570,10 +532,7 @@ function MapPage2({ id }) {
           });
           kakao.maps.event.addListener(marker, "click", function () {
             // navigate(`/detail/${el.id}`)
-              markerPost(el)
-              setrvMarker({
-                center: { lat: el.lat, lng: el.lng },
-              });
+        markerPost(el)
           });
         }
       });
@@ -591,10 +550,7 @@ function MapPage2({ id }) {
           });
           kakao.maps.event.addListener(marker, "click", function () {
             // navigate(`/detail/${el.id}`)
-             markerPost(el)
-             setrvMarker({
-              center: { lat: el.lat, lng: el.lng },
-            });
+        markerPost(el)
           });
         }
       });
@@ -611,10 +567,7 @@ function MapPage2({ id }) {
         });
         kakao.maps.event.addListener(marker, "click", function () {
           // navigate(`/detail/${el.id}`)
-              markerPost(el)
-              setrvMarker({
-                center: { lat: el.lat, lng: el.lng },
-              });
+        markerPost(el)
         });
       });
     }
@@ -636,30 +589,6 @@ function MapPage2({ id }) {
     });
     console.log(detailAddress);
   }, [reviewData]);
-
-
-  //로드뷰
-  // useEffect(()=>{
-  //   const roadviewContainer = document.getElementById('roadview');
-  //   const roadview = new kakao.maps.Roadview(roadviewContainer);
-  //   const roadviewClient = new kakao.maps.RoadviewClient();
-  //   const position = new kakao.maps.LatLng(getlat, getlng);
-
-  //   roadviewClient.getNearestPanoId(position, 50, function (panoId) {
-  //     roadview.setPanoId(panoId, position);
-  //   });
-  // },[])
-
-  useEffect(()=>{
-    const roadviewContainer = document.getElementById('roadview');
-    const roadview = new kakao.maps.Roadview(roadviewContainer);
-    const roadviewClient = new kakao.maps.RoadviewClient();
-    const position = new kakao.maps.LatLng(rvmarker.center.lat, rvmarker.center.lng);
-
-    roadviewClient.getNearestPanoId(position, 50, function (panoId) {
-      roadview.setPanoId(panoId, position);
-    });
-  },[rvmarker])
 
   return (
     <div className="layout_root">
@@ -837,66 +766,17 @@ function MapPage2({ id }) {
       </div>
     </div>
         <div className="content">
+          {/* side-nav 부분이 상세페이지로 변경 */}
+          {/* {!clickedReview ? <Nav room={Data[roomId]} /> : detailHtml()} */}
           {<Nav room={Data[roomId]} />}
-          {/*  */}
-          <div style={{position: "relative"}}>
+          {/* ------ 삼항 연산자 부분 ------ */}
           <div
-            id = "map"
+            id="map"
             style={{
-              display: toggle === "map" ? "block" : "none",
-              // width: "1490px",
-              // height: "768px",
-              width: "100%",
-              height: "100%",
-            }}
-          >
-          {toggle === "map" && (
-          <input
-            style={{
-              position: "absolute",
-              top: "5px",
-              left: "5px",
-              zIndex: 10,
-            }}
-            type="button"
-            title="로드뷰 보기"
-            value="로드뷰"
-            onClick={() => setToggle("roadview")}
-          />
-        )}
-          </div>
-          {/* 지도 */}
-          {/*  */}
-          <div
-            id= "roadview"
-            style={{
-              display: toggle === "roadview" ? "block" : "none",
-              // width: "1490px",
-              // height: "768px",
-              width: "100%",
+              width: "1490px",
               height: "768px",
-              // position: "absolute",
-              // zIndex: 2,
             }}
-          >
-          {toggle === "roadview" && (
-          <input
-            style={{
-              position: "absolute",
-              top: "5px",
-              left: "5px",
-              zIndex: 10,
-            }}
-            type="button"
-            // onClick={() => setToggle("map")}
-            title="지도 보기"
-            value="지도"
-            onClick={() => setToggle("map")}
-          />
-          )}
-          </div>
-          </div>
-          {/* 로드뷰 */}
+          ></div>
         </div>
       </div>
     </div>
