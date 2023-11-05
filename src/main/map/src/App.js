@@ -17,12 +17,20 @@ import NavUnder from "./NaviBar/NavUnder";
 import MapPage2 from "./NaviBar/MapPage2";
 
 export default function TempPage() {
+  // useEffect(()=>{
+  //   axios.get('/api/review')
+  //     .then(res => console.log(res))
+  //     .catch()
+  // })
 
   return (
   <BrowserRouter>
     <Routes>
+      {/* NavUnder, NavUnderSide 바꿀때 MapPage수정 */}
       <Route path="/" element={<NavUnder />} />
       <Route path="/detail/:roomId" element={<MapPage2 />} />
+      {/* <Route path="/" element={<NavUnderSide />} /> */}
+      {/* <Route path="/detail/:roomId" element={<MapPage />} /> */}
       <Route path="/succDetail/:succId" element={<SuccDetail />} />
       <Route path="/승계방" element={<RoomList />} />
       <Route
