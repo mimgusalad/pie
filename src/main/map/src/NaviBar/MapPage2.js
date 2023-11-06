@@ -34,16 +34,16 @@ const mainMenus = [
   },
 ];
 
-// const leftSubMenus = [
-  // {
-  //   label: "방 찾기",
-  //   path: "",
-  // },
+const leftSubMenus = [
+  {
+    label: "방 찾기",
+    path: "",
+  },
   // {
   //   label: "즐겨찾기",
   //   path: "",
   // },
-// ];
+];
 
 const sideFilters = [
   {
@@ -711,16 +711,16 @@ function MapPage2({ id }) {
       <div className="sub-menus">
       <div className="sub-menus__wrapper">
         <div className="left_sub_menu_button">
-          {/* {leftSubMenus.map((leftSubMenu, index) => {
+          {leftSubMenus.map((leftSubMenu, index) => {
             return (
               <div className="left_sub_menu__item" key={index}>
                 <button className="left_sub_menu__item">
                   {leftSubMenu.label}
-                </button> */}
+                </button>
                 {/* {leftSubMenu.label} */}
-              {/* </div>
+              </div>
             );
-          })} */}
+          })}
         </div>
         <div
           style={{
