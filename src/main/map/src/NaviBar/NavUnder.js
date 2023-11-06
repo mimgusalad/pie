@@ -28,6 +28,17 @@ const mainMenus = [
   },
 ];
 
+// const leftSubMenus = [
+  // {
+  //   label: "방 찾기",
+  //   path: "",
+  // },
+  // {
+  //   label: "즐겨찾기",
+  //   path: "",
+  // },
+// ];
+
 const sideFilters = [
   {
     label: "소음",
