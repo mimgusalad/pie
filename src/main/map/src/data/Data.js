@@ -1,6 +1,7 @@
-import sampleImage1 from "../image/sample1.png";
-import sampleImage2 from "../image/sample2.png";
-import sampleImage3 from "../image/sample3.png";
+import kakaoimg_1 from "../image/kakaoimg_1.png";
+import kakaoimg_2 from "../image/kakaoimg_2.png";
+import kakaoimg_3 from "../image/kakaoimg_3.png";
+import kakaoimg_4 from "../image/kakaoimg_4.png";
 import userImage from "../image/userImageSample.jpg";
 import succ_1 from "../image/succ_1.png";
 import succ_2 from "../image/succ_2.png";
@@ -51,53 +52,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -138,23 +139,23 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "소음",
       },
       {
-        tag: "소음",
+        tag: "쓰레기처리",
       },
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "냄새",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "편의시설",
       },
       {
         tag: "벌레",
@@ -165,7 +166,7 @@ export const Data = [
         tag: "방음",
       },
       {
-        tag: "편의시설",
+        tag: "일조량",
       },
     ],
     // 여기까지
@@ -207,53 +208,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -294,23 +295,23 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "소음",
       },
       {
-        tag: "소음",
+        tag: "쓰레기처리",
       },
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "냄새",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "편의시설",
       },
       {
         tag: "벌레",
@@ -318,10 +319,10 @@ export const Data = [
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
-        tag: "편의시설",
+        tag: "일조량",
       },
     ],
     // 여기까지
@@ -363,53 +364,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
     ],
@@ -458,15 +459,15 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "치안",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "일조량",
       },
       {
         tag: "벌레",
@@ -474,7 +475,7 @@ export const Data = [
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -519,53 +520,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -606,7 +607,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "옵션상태",
       },
       {
         tag: "소음",
@@ -614,23 +615,23 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "쓰레기처리",
       },
       {
-        tag: "통풍",
+        tag: "냄새",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "벌레",
       },
       {
-        tag: "벌레",
+        tag: "일조량",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -674,53 +675,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -761,7 +762,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "옵션상태",
       },
       {
         tag: "소음",
@@ -769,23 +770,23 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "쓰레기처리",
       },
       {
-        tag: "통풍",
+        tag: "냄새",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "벌레",
       },
       {
-        tag: "벌레",
+        tag: "일조량",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -828,53 +829,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -915,23 +916,23 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "치안",
       },
       {
-        tag: "소음",
+        tag: "냄새",
       },
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "소음",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "편의시설",
       },
       {
         tag: "벌레",
@@ -939,7 +940,7 @@ export const Data = [
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "쓰레기처리",
       },
       {
         tag: "편의시설",
@@ -982,53 +983,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -1069,7 +1070,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "편의시설",
       },
       {
         tag: "소음",
@@ -1077,23 +1078,23 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "쓰레기처리",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "벌레",
       },
       {
-        tag: "벌레",
+        tag: "냄새",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -1136,53 +1137,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -1223,23 +1224,23 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "일조량",
       },
       {
-        tag: "소음",
+        tag: "쓰레기처리",
       },
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "냄새",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "소음",
       },
       {
         tag: "벌레",
@@ -1247,7 +1248,7 @@ export const Data = [
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -1290,53 +1291,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -1377,7 +1378,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "쓰레기처리",
       },
       {
         tag: "소음",
@@ -1385,15 +1386,15 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "치안",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "편의시설",
       },
       {
         tag: "벌레",
@@ -1401,7 +1402,7 @@ export const Data = [
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "일조량",
       },
       {
         tag: "편의시설",
@@ -1446,53 +1447,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -1533,31 +1534,31 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "소음",
       },
       {
-        tag: "소음",
+        tag: "냄새",
       },
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "편의시설",
       },
       {
-        tag: "통풍",
+        tag: "쓰레기처리",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "벌레",
       },
       {
-        tag: "벌레",
+        tag: "옵션상태",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -1600,53 +1601,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -1687,7 +1688,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "옵션상태",
       },
       {
         tag: "소음",
@@ -1695,15 +1696,15 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "치안",
       },
       {
-        tag: "통풍",
+        tag: "쓰레기처리",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "일조량",
       },
       {
         tag: "벌레",
@@ -1711,7 +1712,7 @@ export const Data = [
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "냄새",
       },
       {
         tag: "편의시설",
@@ -1754,53 +1755,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -1841,7 +1842,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "벌레",
       },
       {
         tag: "소음",
@@ -1849,23 +1850,23 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "옵션상태",
       },
       {
-        tag: "통풍",
+        tag: "치안",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "냄새",
       },
       {
-        tag: "벌레",
+        tag: "일조량",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "쓰레기처리",
       },
       {
         tag: "편의시설",
@@ -1908,53 +1909,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -1995,10 +1996,10 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "편의시설",
       },
       {
-        tag: "소음",
+        tag: "쓰레기처리",
       },
     ],
     condition_2: [
@@ -2006,17 +2007,20 @@ export const Data = [
         tag: "일조량",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "소음",
+      },
+      {
+        tag: "치안",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "냄새",
       },
       {
         tag: "편의시설",
@@ -2059,53 +2063,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -2146,28 +2150,31 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "소음",
       },
       {
-        tag: "소음",
+        tag: "치안",
       },
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "냄새",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
       {
         tag: "쓰레기처리",
       },
+      {
+        tag: "일조량",
+      },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "벌레",
       },
       {
         tag: "편의시설",
@@ -2210,53 +2217,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -2297,7 +2304,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "치안",
       },
       {
         tag: "소음",
@@ -2305,23 +2312,26 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "냄새",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "편의시설",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "벌레",
       },
       {
-        tag: "편의시설",
+        tag: "일조량",
       },
     ],
   },
@@ -2361,53 +2371,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -2448,7 +2458,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "쓰레기처리",
       },
       {
         tag: "소음",
@@ -2456,20 +2466,23 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "치안",
       },
       {
-        tag: "통풍",
+        tag: "냄새",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "옵션상태",
+      },
+      {
+        tag: "벌레",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "일조량",
       },
       {
         tag: "편의시설",
@@ -2512,53 +2525,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -2599,7 +2612,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "일조량",
       },
       {
         tag: "소음",
@@ -2607,20 +2620,23 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "냄새",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "벌레",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -2663,53 +2679,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -2758,20 +2774,23 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "편의시설",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "치안",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "일조량",
       },
       {
         tag: "편의시설",
@@ -2814,53 +2833,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -2901,7 +2920,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "치안",
       },
       {
         tag: "소음",
@@ -2909,23 +2928,26 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "냄새",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "편의시설",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "벌레",
       },
       {
-        tag: "편의시설",
+        tag: "일조량",
       },
     ],
   },
@@ -2965,53 +2987,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -3052,28 +3074,31 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "소음",
       },
       {
-        tag: "소음",
+        tag: "벌레",
       },
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "냄새",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "일조량",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -3116,53 +3141,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -3203,7 +3228,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "옵션상태",
       },
       {
         tag: "소음",
@@ -3214,17 +3239,20 @@ export const Data = [
         tag: "일조량",
       },
       {
-        tag: "통풍",
+        tag: "벌레",
       },
     ],
     condition_3: [
+      {
+        tag: "냄새",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -3267,53 +3295,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -3354,28 +3382,31 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "일조량",
       },
       {
-        tag: "소음",
+        tag: "벌레",
       },
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "소음",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "냄새",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -3418,53 +3449,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -3505,7 +3536,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "치안",
       },
       {
         tag: "소음",
@@ -3513,23 +3544,26 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "벌레",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "편의시설",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "냄새",
       },
       {
-        tag: "편의시설",
+        tag: "일조량",
       },
     ],
   },
@@ -3569,53 +3603,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -3656,31 +3690,34 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "쓰레기처리",
       },
       {
-        tag: "소음",
+        tag: "냄새",
       },
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "편의시설",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "소음",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
-        tag: "편의시설",
+        tag: "일조량",
       },
     ],
   },
@@ -3720,53 +3757,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -3807,7 +3844,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "벌레",
       },
       {
         tag: "소음",
@@ -3815,20 +3852,23 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "치안",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "일조량",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "냄새",
       },
       {
         tag: "편의시설",
@@ -3871,53 +3911,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -3969,17 +4009,20 @@ export const Data = [
         tag: "일조량",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "벌레",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -4022,53 +4065,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -4109,7 +4152,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "편의시설",
       },
       {
         tag: "소음",
@@ -4117,20 +4160,23 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "쓰레기처리",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "냄새",
+      },
+      {
+        tag: "일조량",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -4173,53 +4219,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -4260,28 +4306,31 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "소음",
       },
       {
-        tag: "소음",
+        tag: "냄새",
       },
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "옵션상태",
       },
       {
-        tag: "통풍",
+        tag: "벌레",
       },
     ],
     condition_3: [
+      {
+        tag: "치안",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "일조량",
       },
       {
         tag: "편의시설",
@@ -4324,53 +4373,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -4411,7 +4460,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "옵션상태",
       },
       {
         tag: "소음",
@@ -4422,20 +4471,23 @@ export const Data = [
         tag: "일조량",
       },
       {
-        tag: "통풍",
+        tag: "냄새",
       },
     ],
     condition_3: [
+      {
+        tag: "편의시설",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "벌레",
       },
       {
-        tag: "편의시설",
+        tag: "치안",
       },
     ],
   },
@@ -4475,53 +4527,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -4562,7 +4614,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "치안",
       },
       {
         tag: "소음",
@@ -4570,20 +4622,23 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "벌레",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "냄새",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "일조량",
       },
       {
         tag: "편의시설",
@@ -4626,53 +4681,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -4713,7 +4768,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "일조량",
       },
       {
         tag: "소음",
@@ -4721,23 +4776,26 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "벌레",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "편의시설",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "냄새",
       },
       {
-        tag: "편의시설",
+        tag: "치안",
       },
     ],
   },
@@ -4777,53 +4835,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -4864,28 +4922,31 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "벌레",
       },
       {
-        tag: "소음",
+        tag: "일조량",
       },
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "냄새",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "소음",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -4928,53 +4989,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -5026,17 +5087,20 @@ export const Data = [
         tag: "일조량",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "치안",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "벌레",
       },
       {
         tag: "편의시설",
@@ -5079,53 +5143,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -5166,7 +5230,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "편의시설",
       },
       {
         tag: "소음",
@@ -5177,20 +5241,23 @@ export const Data = [
         tag: "일조량",
       },
       {
-        tag: "통풍",
+        tag: "벌레",
       },
     ],
     condition_3: [
+      {
+        tag: "옵션상태",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
-        tag: "편의시설",
+        tag: "냄새",
       },
     ],
   },
@@ -5230,53 +5297,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -5317,28 +5384,31 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "소음",
       },
       {
-        tag: "소음",
+        tag: "냄새",
       },
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "치안",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "벌레",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "일조량",
       },
       {
         tag: "편의시설",
@@ -5381,53 +5451,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -5468,7 +5538,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "옵션상태",
       },
       {
         tag: "소음",
@@ -5479,17 +5549,20 @@ export const Data = [
         tag: "일조량",
       },
       {
-        tag: "통풍",
+        tag: "벌레",
       },
     ],
     condition_3: [
       {
         tag: "쓰레기처리",
       },
+      {
+        tag: "냄새",
+      },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -5532,53 +5605,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -5619,7 +5692,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "일조량",
       },
       {
         tag: "소음",
@@ -5627,20 +5700,23 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "냄새",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "치안",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "벌레",
       },
       {
         tag: "편의시설",
@@ -5683,53 +5759,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -5770,7 +5846,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "쓰레기처리",
       },
       {
         tag: "소음",
@@ -5778,20 +5854,23 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "벌레",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "냄새",
+      },
+      {
+        tag: "치안",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "일조량",
       },
       {
         tag: "편의시설",
@@ -5834,53 +5913,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -5921,7 +6000,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "벌레",
       },
       {
         tag: "소음",
@@ -5932,20 +6011,23 @@ export const Data = [
         tag: "일조량",
       },
       {
-        tag: "통풍",
+        tag: "옵션상태",
       },
     ],
     condition_3: [
+      {
+        tag: "편의시설",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "냄새",
       },
       {
-        tag: "편의시설",
+        tag: "치안",
       },
     ],
   },
@@ -5985,53 +6067,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -6075,25 +6157,28 @@ export const Data = [
         tag: "냄새",
       },
       {
-        tag: "소음",
+        tag: "일조량",
       },
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "소음",
       },
       {
-        tag: "통풍",
+        tag: "벌레",
       },
     ],
     condition_3: [
+      {
+        tag: "옵션상태",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
@@ -6136,53 +6221,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -6223,7 +6308,7 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "편의시설",
       },
       {
         tag: "소음",
@@ -6231,23 +6316,26 @@ export const Data = [
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "쓰레기처리",
       },
       {
-        tag: "통풍",
+        tag: "치안",
       },
     ],
     condition_3: [
       {
-        tag: "쓰레기처리",
+        tag: "냄새",
+      },
+      {
+        tag: "옵션상태",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "벌레",
       },
       {
-        tag: "편의시설",
+        tag: "일조량",
       },
     ],
   },
@@ -6281,53 +6369,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -6368,28 +6456,31 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "소음",
       },
       {
-        tag: "소음",
+        tag: "냄새",
       },
     ],
     condition_2: [
       {
-        tag: "일조량",
+        tag: "벌레",
       },
       {
-        tag: "통풍",
+        tag: "일조량",
       },
     ],
     condition_3: [
+      {
+        tag: "치안",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "일조량",
       },
       {
         tag: "편의시설",
@@ -6432,53 +6523,53 @@ export const Data = [
       {
         id: 0,
         owner: "조영동 주민",
-        userImage: userImage,
+        userImage: kakaoimg_3,
         grade: 4.1,
         reviewComment:
           "방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
       {
         id: 1,
         owner: "빈빈",
-        userImage: userImage,
+        userImage: kakaoimg_1,
         grade: 4.2,
         reviewComment:
           "지하철역이 가깝고 조용해서 좋습니다~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 편의점이 가깝고 지하철역이 가까워서 좋아요~",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_3,
         view: 10,
       },
       {
         id: 2,
         owner: "영남대 학생",
-        userImage: userImage,
+        userImage: kakaoimg_2,
         grade: 3.8,
         reviewComment:
           "근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다. 편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다!",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_2,
         view: 10,
       },
       {
         id: 3,
         owner: "취준생",
-        userImage: userImage,
+        userImage: kakaoimg_4,
         grade: 3.9,
         reviewComment:
           "편의점이 가깝고 지하철역이 가까워서 좋아요~ 방이 깨끗하고 주변에 편의시설이 많아서 좋습니다! 지하철역이 가깝고 조용해서 좋습니다~ 근처에 공원이 있어서 산책하기 좋습니다. 주변에 쓰레기가 조금 있습니다.",
         livingTime: "2023년까지 거주",
         createdAt: "2일전",
         updatedAt: "2023.05.29. 11:50",
-        objectImage: userImage,
+        objectImage: roomdetail_1,
         view: 10,
       },
     ],
@@ -6519,10 +6610,10 @@ export const Data = [
     ],
     condition_1: [
       {
-        tag: "냄새",
+        tag: "소음",
       },
       {
-        tag: "소음",
+        tag: "옵션상태",
       },
     ],
     condition_2: [
@@ -6530,17 +6621,20 @@ export const Data = [
         tag: "일조량",
       },
       {
-        tag: "통풍",
+        tag: "벌레",
       },
     ],
     condition_3: [
+      {
+        tag: "냄새",
+      },
       {
         tag: "쓰레기처리",
       },
     ],
     condition_4: [
       {
-        tag: "방음",
+        tag: "치안",
       },
       {
         tag: "편의시설",
