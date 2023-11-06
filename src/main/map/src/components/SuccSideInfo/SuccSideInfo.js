@@ -42,8 +42,7 @@ export default function SuccSideInfo({ item }) {
         </div>
         <Separator height={"12px"} />
         <div className="feeContainer">
-          {/* <div className="infoCategory">옵션 항목</div> */}
-          <div className="infoCategory">옵션<br/>항목</div>
+          <div className="infoCategory">옵션 항목</div>
           <div className="infoGrid">
             {item.options.map((item, index) => {
               return (
@@ -56,8 +55,7 @@ export default function SuccSideInfo({ item }) {
         </div>
         <Separator height={"12px"} />
         <div className="feeContainer">
-          {/* <div className="infoCategory">승계 물품</div> */}
-          <div className="infoCategory">승계<br/>물품</div>
+          <div className="infoCategory">승계 물품</div>
           <div className="infoGrid">
             {item.sucProduct.map((item, index) => {
               return (

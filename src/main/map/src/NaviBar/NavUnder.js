@@ -28,16 +28,16 @@ const mainMenus = [
   },
 ];
 
-// const leftSubMenus = [
-  // {
-  //   label: "방 찾기",
-  //   path: "",
-  // },
+const leftSubMenus = [
+  {
+    label: "방 찾기",
+    path: "",
+  },
   // {
   //   label: "즐겨찾기",
   //   path: "",
   // },
-// ];
+];
 
 const sideFilters = [
   {
@@ -45,7 +45,7 @@ const sideFilters = [
     key: "sound",
   },
   {
-    label: "옵션상태",
+    label: "옵션 상태",
     key: "options",
   },
   {
@@ -57,7 +57,7 @@ const sideFilters = [
     key: "light_insulation",
   },
   {
-    label: "쓰레기처리",
+    label: "쓰레기 처리",
     key: "garbage",
   },
   {
@@ -99,7 +99,6 @@ function NavUnder() {
 
   let [inputText, setInputText] = useState("");
   let [place, setPlace] = useState("");
-  // 지도 초기값
   let [state, setState] = useState({
     center: { lat: 37.49676871972202, lng: 127.02474726969814 },
   });
@@ -120,9 +119,6 @@ function NavUnder() {
 
   let copyData = JSON.parse(JSON.stringify(Data));
   const navigate = useNavigate();
-
-  //리뷰순, 가격순, 별점순
-  const [myToggle, setMyToggle] = useState("리뷰순");
 
   const onChange = (e) => {
     setInputText(e.target.value);
@@ -317,6 +313,13 @@ function NavUnder() {
         position: new kakao.maps.LatLng(el.lat, el.lng),
       });
       kakao.maps.event.addListener(marker, "click", function () {
+        // navigate(`/detail/${el.id}`)
+        // navigate(`/detail/${el.id}`,{
+        //   state: {
+        //     lat: `${el.lat}`,
+        //     lng: `${el.lng}`
+        //   }
+        // })
         markerPost(el);
       });
     });
@@ -406,6 +409,7 @@ function NavUnder() {
     };
   }, []);
 
+  const [myToggle, setMyToggle] = useState("리뷰순");
 
   useEffect(() => {
     if (price != 0 && worse != "" && houseType != "") {
@@ -738,16 +742,16 @@ function NavUnder() {
         <div className="sub-menus">
       <div className="sub-menus__wrapper">
         <div className="left_sub_menu_button">
-          {/* {leftSubMenus.map((leftSubMenu, index) => {
+          {leftSubMenus.map((leftSubMenu, index) => {
             return (
               <div className="left_sub_menu__item" key={index}>
                 <button className="left_sub_menu__item">
                   {leftSubMenu.label}
-                </button> */}
+                </button>
                 {/* {leftSubMenu.label} */}
-              {/* </div>
+              </div>
             );
-          })} */}
+          })}
         </div>
         <div
           style={{
@@ -869,9 +873,9 @@ function NavUnder() {
             <div className="side-nav__filter-container">
               <div className="filter-container__title-wrapper">
                 <div className="title-wrapper__title">
-                  피하고 싶은 단점
+                  피하고 싶은
                   <br />
-                  키워드를 선택해보세요.
+                  단점 키워드를 선택해보세요.
                 </div>
                 <div className="title-wrapper__filter-toggle">
                   <div className="toggle-wrapper">
