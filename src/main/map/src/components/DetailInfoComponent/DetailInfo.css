@@ -1,0 +1,8 @@
+.detailGrid {
+  display: grid;
+  width: 160px;
+  grid-template-columns: 1fr 2fr;
+  row-gap: 8px;
+  column-gap: 12px;
+  font-size: 12px;
+}

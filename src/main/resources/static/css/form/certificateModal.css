@@ -1,0 +1,117 @@
+.modal{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal .bg{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modalBox{
+    position: absolute;
+    background-color: #fff;
+    width: 620px;
+    height:588px;
+    padding: 15px;
+    border-radius: 20px;
+}
+.modalBox .modalCloseBtn{
+    position: absolute;
+    top: 24px;
+    left: 552px;
+
+    width:28px;
+    height: 28px;
+    background-color: white;
+    border: 0px solid;
+}
+
+.text_modal_title{
+    width: 540px;
+    color: var(--text-primary, #1B1D1F);
+
+    /* Title 1/Bold */
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 26px; /* 130% */
+}
+.text_modal_title::after{
+    content: "";
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #d9d9d9;
+    margin: 16px auto;
+}
+
+.text_explain_title{
+    color: var(--text-primary, #222);
+
+    /* Head 1/SemiBold */
+    font-family: Pretendard;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px; /* 135.714% */
+}
+.text_explain_sub{
+    color: var(--text-secondary, #666);
+
+    /* Body 1/Medium */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
+}
+
+
+.input_contract_area{
+    overflow: hidden;
+    position: absolute;
+    width: 540px;
+    height: 276px;
+
+    top: 194px;
+    left: 40px;
+    border: 1px dashed #c9cdd2;
+    border-radius: 4px;
+}
+
+.modal_complete_btn{
+    position: absolute;
+    width: 82px;
+    height: 34px;
+
+    left: 500px;
+    top: 530px;
+
+    background: #459830;
+    border: 0px;
+    border-radius: 10px;
+    color: white;
+}
+
+.upload_contract_area{
+    position: absolute;
+    top: 98px;
+    left: 172px;
+
+    width:196px;
+    height: 80px;
+}
+.input_contract_area img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
+.hidden{
+    display: none;
+}

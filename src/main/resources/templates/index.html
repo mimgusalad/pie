@@ -6,59 +6,278 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="/css/starter-template.css" rel="stylesheet">
-    <link href="/css/mainSlide.css" rel="stylesheet">
+    <link href="/css/mainpageContainer.css" rel="stylesheet">
+    <link href="/css/loginModal.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+          href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css'>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="/js/mainpage/processRoomSearch.js"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63796f440d480664df4d24b56dd372a6&libraries=services"></script>
 
 </head>
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
 </nav>
-<div align="center">
-    <form method="post" name="">
-        <div id="inputAddress">
-            <input type="text" placeholder="원하시는 지역명을 입력해주세요.">
+<div class="container">
+    <div id="textArea">
+        <div style="position:relative;">
+            <img src='/img/mainRectLong.png' style="position: absolute;top:84%; left:30px;">
+            <img src='/img/mainRectShort.png' style="position: absolute; top: 84%; left: 370px;">
+            <p class="mainText">단점을 피해 추천받고 선택하는</p>
+            <p class="mainText">당신만의 집</p>
         </div>
-        <div class="slide">
-            <div class="slideItem">
-                <input id="siNoise" type="checkbox" name="optionItem" value="siNoise">
-                <label for="siNoise">소음</label>
-            </div>
-            <div class="slideItem">
-                <input id="siOptionStatus" type="checkbox" name="optionItem" value="siOptionStatus">
-                <label for="siOptionStatus">옵션 상태</label>
-            </div>
-            <div class="slideItem">
-                <input id="siSecurity" type="checkbox" name="optionItem" value="siSecurity">
-                <label for="siSecurity">치안</label>
-            </div>
-            <div class="slideItem">
-                <input id="siLighting" type="checkbox" name="optionItem" value="siLighting">
-                <label for="siLighting">채광/단열</label>
-            </div>
-            <div class="slideItem">
-                <input id="siGarbage" type="checkbox" name="optionItem" value="siGarbage">
-                <label for="siGarbage">쓰레기 처리</label>
-            </div>
-            <div class="slideItem">
-                <input id="siWorm" type="checkbox" name="optionItem" value="siWorm">
-                <label for="siWorm">벌레</label>
-            </div>
-            <div class="slideItem">
-                <input id="siSmell" type="checkbox" name="optionItem" value="siSmell">
-                <label for="siSmell">냄새</label>
-            </div>
-            <div class="slideItem">
-                <input id="siAmenity" type="checkbox" name="optionItem" value="siAmenity">
-                <label for="siAmenity">편의시설</label>
-            </div>
+        <p class="subText">가장 피하고 싶은 키워드를 선택하여<br>내 맘에 쏙 드는 맞춤형 집을 골라보세요.</p>
 
+        <div id="menu_wrap" class="bg_white">
+            <div class="option">
+                <div>
+                    <form onsubmit="searchPlaces(); return false;">
+                        <div id="addressKeywordArea">
+                            <img src="/img/btnImg/searchIcon.png">
+                            <input type="text" id="inputAddressKeyword" name="inputAddressKeyword"
+                                   placeholder="원하시는 지역명을 입력해주세요.">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="result" class="invisible">
+                <ul id="placesList"></ul>
+                <div id="pagination"></div>
+            </div>
+        </div>
 
+        <form name="roomSearchForm" action="/map/match" method="get" onsubmit="return validationKeyword()">
+            <input type="hidden" id="addressKeyword" name="addressKeyword">
+            <div class="selectedKeyword">
+                <img src="/img/disadvantageMark/mainPageMark.png">
+                <div class="keywordTextArea" style="border-right: 2px solid #e8ebed;">
+                    <h4>1선택</h4>
+                    <input type="hidden" name="firstKeyword">
+                    <p class="keywordText" name="firstKeyword" id="firstKeyword"></p>
+                </div>
+                <div class="keywordTextArea" style="border-right: 2px solid #e8ebed;">
+                    <h4>2선택</h4>
+                    <input type="hidden" name="secondKeyword">
+                    <p class="keywordText" name="secondKeyword" id="secondKeyword"></p>
+                </div>
+                <div class="keywordTextArea">
+                    <h4>3선택</h4>
+                    <input type="hidden" name="thirdKeyword">
+                    <p class="keywordText" name="thirdKeyword" id="thirdKeyword"></p>
+                </div>
+                <input type="submit" value="방찾기">
+            </div>
+        </form>
+    </div>
+
+    <div id="btnArea">
+        <div class="keywordList">
+            <p>발생</p>
+            <label>
+                <input id="벌레" type="checkbox" value="벌레" name="keyword" onclick='getCheckboxValue()'/>
+                <div class="imgBox">
+                    <img src="/img/keywordImg/insectImg.png" alt="벌레"/>
+                </div>
+            </label>
+            <label>
+                <input id="냄새" type="checkbox" value="냄새" name="keyword" onclick='getCheckboxValue()'/>
+                <div class="imgBox">
+                    <img src="/img/keywordImg/smellImg.png" alt="냄새"/>
+                </div>
+            </label>
+            <label>
+                <input id="소음" type="checkbox" value="소음" name="keyword" onclick='getCheckboxValue()'/>
+                <div class="imgBox">
+                    <img src="/img/keywordImg/noiseImg.png" alt="소음"/>
+                </div>
+            </label>
         </div>
-        <div>
-            <p style="font-size:24px;">피하고 싶은 단점 키워드</p>
-            <p style="font-size:16px; color:#a4a4a4;">최대 3개까지 선택이 가능합니다.</p>
+        <div class="keywordList">
+            <p>열악</p>
+            <label>
+                <input id="쓰레기 처리" type="checkbox" value="쓰레기 처리" name="keyword" onclick='getCheckboxValue()'/>
+                <div class="imgBox">
+                    <img src="/img/keywordImg/trashImg.png" alt="쓰레기 처리"/>
+                </div>
+            </label>
+            <label>
+                <input id="옵션상태" type="checkbox" value="옵션상태" name="keyword" onclick='getCheckboxValue()'/>
+                <div class="imgBox">
+                    <img src="/img/keywordImg/optionQualityImg.png" alt="옵션상태"/>
+                </div>
+            </label>
+            <label>
+                <input id="치안" type="checkbox" value="치안" name="keyword" onclick='getCheckboxValue()'/>
+                <div class="imgBox">
+                    <img src="/img/keywordImg/safetyImg.png" alt="치안"/>
+                </div>
+            </label>
         </div>
-        <input type="submit" value="방찾기" style="font-size:28px; background:#459830; color:#ffffff; border:none;">
-    </form>
+        <div class="keywordList">
+            <p>부족</p>
+            <label>
+                <input id="일조량" type="checkbox" value="일조량" name="keyword" onclick='getCheckboxValue()'/>
+                <div class="imgBox">
+                    <img src="/img/keywordImg/sunlightImg.png" alt="일조량"/>
+                </div>
+            </label>
+            <label>
+                <input id="편의시설" type="checkbox" value="편의시설" name="keyword" onclick='getCheckboxValue()'/>
+                <div class="imgBox">
+                    <img src="/img/keywordImg/convenienceImg.png" alt="편의시설"/>
+                </div>
+            </label>
+        </div>
+    </div>
 </div>
+
+<script>
+     // 장소 검색 객체를 생성합니다
+    var ps = new kakao.maps.services.Places();
+
+    // 키워드로 장소를 검색합니다
+    searchPlaces();
+
+    // 키워드 검색을 요청하는 함수입니다
+    function searchPlaces() {
+
+        var keyword = document.getElementById('inputAddressKeyword').value;
+
+        if (!keyword.replace(/^\s+|\s+$/g, '')) {
+            return false;
+        }
+
+        // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+        ps.keywordSearch( keyword, placesSearchCB);
+    }
+
+    // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
+    function placesSearchCB(data, status, pagination) {
+        const resultBox = document.getElementById("result");
+        if (status === kakao.maps.services.Status.OK) {
+
+            //input창 아래 결과 box show
+            resultBox.classList.remove("invisible");
+
+            // 정상적으로 검색이 완료됐으면
+            // 검색 목록과 마커를 표출합니다
+            displayPlaces(data);
+
+            // 페이지 번호를 표출합니다
+            displayPagination(pagination);
+
+        } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+            resultBox.classList.add('invisible');
+            alert('검색 결과가 존재하지 않습니다.');
+            return;
+        } else if (status === kakao.maps.services.Status.ERROR) {
+            resultBox.classList.add('invisible');
+            alert('검색 결과 중 오류가 발생했습니다.');
+            return;
+        }
+    }
+
+    // 검색 결과 목록과 마커를 표출하는 함수입니다
+    function displayPlaces(places) {
+
+        var listEl = document.getElementById('placesList'),
+        menuEl = document.getElementById('menu_wrap'),
+        fragment = document.createDocumentFragment(),
+        listStr = '';
+
+        // 검색 결과 목록에 추가된 항목들을 제거합니다
+        removeAllChildNods(listEl);
+
+        for ( var i=0; i<places.length; i++ ) {
+            // 마커를 생성하고 지도에 표시합니다
+            var itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+
+            // 검색결과 항목 중 하나를 클릭했을 때
+            // 키워드 검색창에 해당 주소를 입력
+            (function(title) {
+                itemEl.onclick = function(){
+                    displayInfoInput(title);
+                };
+            })(places[i].place_name);
+
+            fragment.appendChild(itemEl);
+        }
+
+        // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
+        listEl.appendChild(fragment);
+        menuEl.scrollTop = 0;
+    }
+
+    // 검색결과 항목을 Element로 반환하는 함수입니다
+    function getListItem(index, places) {
+
+        var el = document.createElement('li'),
+        itemStr = '<div class="info">' +
+                    '   <h5>' + places.place_name + '</h5>';
+
+        if (places.road_address_name) {
+            itemStr += '    <span>' + places.road_address_name + '</span>' +
+                        '   <span class="jibun gray">' +  places.address_name  + '</span>';
+        } else {
+            itemStr += '    <span>' +  places.address_name  + '</span>';
+        }
+
+          itemStr += '</div>';
+
+        el.innerHTML = itemStr;
+        el.className = 'item';
+
+        return el;
+    }
+
+    // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
+    function displayPagination(pagination) {
+        var paginationEl = document.getElementById('pagination'),
+            fragment = document.createDocumentFragment(),
+            i;
+
+        // 기존에 추가된 페이지번호를 삭제합니다
+        while (paginationEl.hasChildNodes()) {
+            paginationEl.removeChild (paginationEl.lastChild);
+        }
+
+        for (i=1; i<=pagination.last; i++) {
+            var el = document.createElement('a');
+            el.href = "#";
+            el.innerHTML = i;
+
+            if (i===pagination.current) {
+                el.className = 'on';
+            } else {
+                el.onclick = (function(i) {
+                    return function() {
+                        pagination.gotoPage(i);
+                    }
+                })(i);
+            }
+
+            fragment.appendChild(el);
+        }
+        paginationEl.appendChild(fragment);
+    }
+
+    // 검색결과 목록을 클릭했을 때 호출되는 함수입니다.
+    // 키워드 input 창에 해당 장소명을 표시
+    function displayInfoInput(title){
+        document.getElementById('inputAddressKeyword').value = title;
+        document.getElementById('addressKeyword').value = title;
+        document.getElementById("result").classList.add('invisible');
+    }
+
+     // 검색결과 목록의 자식 Element를 제거하는 함수입니다
+    function removeAllChildNods(el) {
+        while (el.hasChildNodes()) {
+            el.removeChild (el.lastChild);
+        }
+    }
+
+</script>
 </body>
 </html>

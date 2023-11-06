@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Review Detail</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="/css/starter-template.css"  rel="stylesheet">
+
+  <style>
+        #container{
+        align: center;
+        padding-left: 300px;
+        }
+        .siteRoute{
+        font-weight:500;
+        font-size: 14px;
+
+        color: #a4a4a4;
+        }
+
+        #imgAndContent{
+        width: 950px;
+        margin-right: 40px;
+
+        float: left;
+        }
+
+        #addressAndElse{
+        width: 290px;
+        float: left;
+        }
+
+        <!--왼쪽 파트 css-->
+        #imgInfo{
+        width: 950px;
+        height: 480px;
+        }
+
+        #imgInfo img{
+        width: 950px;
+        height: 480px;
+
+        border-radius: 8px;
+        border: 1px solid;
+        }
+
+        #writerImg{
+        width: 48px;
+        height: 48px;
+
+        border-radius: 50%;
+        }
+
+        #writerNickname{
+        margin-left: 21px;
+
+        font-weight: 600;
+        font-size: 20px;
+
+        color: #222222;
+        }
+
+        .starPoint{
+        float: right;
+        display: inline;
+
+        font-weight: 600;
+        font-size: 18px;
+
+        color: #666666;
+        }
+
+        .starImg{
+        float: right;
+        display: inline;
+
+        width: 20px;
+        height: 20px;
+
+        color: #ffca10;
+        }
+
+        #seContent:before{
+        content: "";
+        display: block;
+
+        border: 1px solid #222222;
+        margin: 20px auto;
+        }
+
+
+        #seContent{
+        font-weight: 500;
+        font-size: 18px;
+
+        color: #222222;
+        }
+
+        #addContent{
+        position: absolute;
+        top: 714px;
+        left: 804px;
+        }
+
+        #addContent span{
+        font-weight: 500;
+        font-size: 14px;
+
+        color: #a4a4a4;
+        }
+
+
+
+        #addContent img{
+        width: 24px;
+        height: 24px;
+        }
+
+
+        #addressAndElse span{
+        margin-bottom: 8px;
+
+        font-weight: 600;
+        font-size: 24px;
+
+        color: #222222;
+        }
+
+        #addressAndElse p{
+        font-weight: 500;
+        font-size: 18px;
+
+        color: #666666;
+        }
+
+        #upperInfo p:after{
+        content: "";
+        display: block;
+
+        border: 1px solid #c9cdd2;
+        margin: 16px auto;
+        }
+
+        #buildingInfo h4{
+        display: inline;
+
+        font-weight: 500;
+        font-size: 20px;
+
+        color: #222222;
+        }
+
+        #buildingInfo h4:after{
+        content:"";
+
+        border-right: 1px solid #c9cdd2;
+        margin-right: 12px;
+        margin-left: 8px;
+        }
+
+        #buildingInfo p{
+        display:inline;
+        width: 170px;
+
+        word-break: keep-all;
+        word-wrap: break-word;
+
+        line-height: 40px;
+        }
+
+        #buildingInfo img{
+        width: 24px;
+        height: 22px;
+
+        margin-right: 12px;
+        }
+
+        #buildingInfo h5{
+        display: inline;
+
+        font-weight: 500;
+        font-size: 16px;
+
+        color: #222222;
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+<nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
+</nav>
+<div id="container">
+  <h3 class="siteRoute">방정보 > 거주민 리뷰</h3>
+  <div id="imgAndContent">
+    <div id="imgInfo">
+      <img>
+    </div>
+    <div id="contentInfo">
+      <div id="sucContent">
+        <img id="writerImg">
+        <span id="writerNickname">닉네임</span>
+        <span class="starPoint" th:text="${review.rating}">점수</span>
+        <span class="starImg">★</span>
+        <span id="seContent" th:text="${review.contentText}">내용</span>
+      </div>
+      <div id="addContent">
+        <span th:text="${review.regdate}">작성날짜</span>
+        <span th:text="'조회 '+ ${review.likedCnt}">원래 조회수인데 지금은 pullupcnt</span>
+        <img src="/img/shareIcon.png" alt="공유 버튼">
+
+      </div>
+    </div>
+  </div>
+
+  <div id="addressAndElse">
+    <div id="upperInfo">
+      <span>주소</span>
+      <p th:text="${review.address} + ' ' + ${review.addressDetail} ">주소</p>
+      <!--<p th:text="${succession.periodYear}+'년 ' + ${succession.periodMonth} + '월 ' + ${succession.periodDay}  + '일'">계약기간</p>-->
+      <span>방구조</span>
+      <p th:text="${review.houseType}">방구조</p>
+    </div>
+    <span>건물 정보</span>
+    <div id="buildingInfo">
+      <h4>관리비</h4>
+      <p th:text="${review.payment}">관리비</p>
+      <br>
+      <h4>금액</h4>
+      <p th:text="${review.deposit} +' / ' + ${review.fee}">보증금/월세</p>
+      <br>
+      <img src="/img/disadvantageMark/redMark.png">
+      <h5>심각</h5>
+      <br>
+      <img src="/img/disadvantageMark/orangeMark.png">
+      <h5>경계</h5>
+      <br>
+      <img src="/img/disadvantageMark/yellowMark.png">
+      <h5>주의</h5>
+      <br>
+      <img src="/img/disadvantageMark/noneMark.png">
+      <h5>문제없음</h5>
+    </div>
+  </div>
+</div>
+</body>
+</html>

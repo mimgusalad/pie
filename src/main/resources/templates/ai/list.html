@@ -5,79 +5,283 @@
     <title>AI Main</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css"
+          href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css'>
+
     <link href="/css/starter-template.css" rel="stylesheet">
-    <style>
-        div.conExplain{
-            background-image: url();
-        }
-    </style>
+    <link href="/css/footerCss.css" rel="stylesheet">
+    <link href="/css/AI/main.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63796f440d480664df4d24b56dd372a6&libraries=services"></script>
+
 </head>
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
 </nav>
-<div align="center">
-    <div id="conExplain" class="conExplain">
-        <p style="font-size:38px;">AI가 추천드리는<br>최적의 집과 마음에 드는 집</p>
-        <p style="font-size:18px;">회원님의 활동을 기반으로 분석한 집을 소개해드립니다.</p>
+<div id="container" align="center">
+    <div class="content_main" id="conExplain">
+
+        <div class="slideshow-container">
+            <div class="mySlides fade"><img src="/img/aiMainImg/1.png"></div>
+            <div class="mySlides fade"><img src="/img/aiMainImg/2.jpg"></div>
+            <div class="mySlides fade"><img src="/img/aiMainImg/3.jpg"></div>
+            <div class="mySlides fade"><img src="/img/aiMainImg/4.jpg"></div>
+        </div>
+
+        <h3 class="content_main_title">AI가 추천드리는<br>최적의 집과 마음에 드는 집</h3>
+        <p class="content_main_subTitle">회원님의 활동을 기반으로 분석한 집을 소개해드립니다.</p>
     </div>
-    <div id="conInput" style="font-size:20px;">
-        <form method="post">
-            <span>주소</span>
-            <select id="city">
-                <option value="seoul">서울특별시</option>
-                <option value="incheon">인천광역시</option>
-                <option value="daejeon">대전광역시</option>
-                <option value="daegu">대구광역시</option>
-                <option value="ulsan">울산광역시</option>
-                <option value="busan">부산광역시</option>
-                <option value="gwangju">광주광역시</option>
-                <option value="sejong">세종특별자치시</option>
-                <option value="gyeonggi-do">경기도</option>
-                <option value="gangwon-don">강원도</option>
-                <option value="chungnam">충청남도</option>
-                <option value="chungbuk">충청북도</option>
-                <option value="jeolbuk">전라북도</option>
-                <option value="jeolnam">전라남도</option>
-                <option value="gyeongbuk">경상북도</option>
-                <option value="gyeongnam">경상남도</option>
-                <option value="jeju">제주특별자치도</option>
-            </select>
-            <select id="region">
-
-            </select>
-            <select id="town">
-
-            </select>
-            <br>
-            <div >
-                <span>목적</span>
-                <select text="목적" >
-                    <option value="" disabled selected>신규/승계 선택해주세요.</option>
-                </select>
-                <span>단점 키워드</span>
-                <select>
-                    <option value="" disabled selected>단점 키워드를 선택해주세요.</option>
-                </select>
-                <br>
-                <span>구조</span>
-                <select>
-                    <option value="" disabled selected>구조를 선택해주세요.</option>
-                </select>
-                <span>가격</span>
-                <select>
-                    <option value="" disabled selected>보증금과 월세 혹은 전세를 선택해주세요.</option>
-                </select>
+    <div>
+        <div id="menu_wrap" class="bg_white">
+            <div class="option">
+                <div>
+                    <form onsubmit="searchPlaces(); return false;">
+                        <div id="addressKeywordArea">
+                            <span class="content_input_title">주소</span>
+                            <input type="text" id="inputAddressKeyword" name="inputAddressKeyword"
+                                   placeholder="원하시는 지역명을 입력해주세요.">
+                        </div>
+                    </form>
+                </div>
             </div>
-            <br>
-            <span style="font-size:14px; color:#fa9538;">AI로 회원님이 원하시는 조건을 분석하여 추천드립니다.</span>
-            <input type="reset" value="초기화" style="font-size:18px; background:#ffffff; color:#a4a4a4; border:none;">
-            <input type="submit" value="검색" style="font-size:18px; background:#459830; color:#ffffff; border:none;">
+            <div id="result" class="invisible">
+                <ul id="placesList"></ul>
+                <div id="pagination"></div>
+            </div>
+        </div>
+        <form method="post" name="roomSearchForm" action="" th:action="@{/ai/list}">
+            <div class="content_input_area" id="conInputElse">
+                <div class="select-menu" style="width: 300px;">
+                    <span class="content_input_title">목적</span>
+                    <div class="select-btn" style="width:244px;">
+                        <span class="sBtn-text">신규/승계 선택해주세요.</span>
+                        <i class="bx bx-chevron-down"></i>
+                    </div>
+                    <ul class="options" style="margin-left: 55px;">
+                        <li class="option">
+                            <span class="option-text">신규</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">승계</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="select-menu" style="width: 485px;">
+                    <span class="content_input_title">단점 키워드</span>
+                    <div class="select-btn" style="width:375px;">
+                        <span class="sBtn-text">단점 키워드를 선택해주세요.</span>
+                        <i class="bx bx-chevron-down"></i>
+                    </div>
+                    <ul class="options" style="margin-left: 110px; width: 375px;">
+                        <li class="option">
+                            <span class="option-text">소음</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">옵션 상태</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">치안</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">일조량</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">쓰레기 처리</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">벌레</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">냄새</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">편의시설</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="select-menu" style="width: 300px;">
+                    <span class="content_input_title">구조</span>
+                    <div class="select-btn" style="width:244px;">
+                        <span class="sBtn-text">구조를 선택해주세요.</span>
+                        <i class="bx bx-chevron-down"></i>
+                    </div>
+                    <ul class="options" style="margin-left : 55px;">
+                        <li class="option">
+                            <span class="option-text">원룸</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">투룸</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">쓰리룸</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">오피스텔</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">아파트</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="select-menu" style="width: 485px;">
+                    <span class="content_input_title">가격</span>
+                    <div class="price-select-btn" style="width:375px;">
+                        <span class="price-text">월세 혹은 전세를 선택해주세요.</span>
+                        <i class="bx bx-chevron-down"></i>
+                    </div>
+                    <div class="price_dropdown_area">
+                        <div class="option_select_area">
+                            <div class="content_form_radioBtn">
+                                <input id="price_option_all" type="radio" name="price_option" value="all"
+                                       class="price_option_btn">
+                                <label for="price_option_all" class="price_option_label">전체</label>
+                            </div>
+                            <div class="content_form_radioBtn">
+                                <input id="price_option_jeonse" type="radio" name="price_option" value="전세"
+                                       class="price_option_btn">
+                                <label for="price_option_jeonse" class="price_option_label">전세</label>
+                            </div>
+                            <div class="content_form_radioBtn">
+                                <input id="price_option_monthly" type="radio" name="price_option" value="월세"
+                                       class="price_option_btn">
+                                <label for="price_option_monthly" class="price_option_label">월세</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price_text_area">
+                                <p class="text_price_title">보증금</p>
+                                <span class="text_price_result"></span>
+                            </div>
+                            <div class="slider_box">
+                                <div class="middle">
+                                    <div class="multi-range-slider">
+                                        <!-- 진짜 슬라이더 -->
+                                        <input type="range" class="input-left" min="0" max="100" value="25"/>
+                                        <input type="range" class="input-right" min="0" max="100" value="75"/>
+                                        <!-- 커스텀 슬라이더 -->
+                                        <div class="slider">
+                                            <div class="track"></div>
+                                            <div class="range"></div>
+                                            <div class="thumb left"></div>
+                                            <div class="thumb right"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content_price_mark">
+                                <span class="text_price_mark">최소</span>
+                                <span class="text_price_mark">5천만</span>
+                                <span class="text_price_mark">1억</span>
+                                <span class="text_price_mark">최대</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price_text_area">
+                                <p class="text_price_title">월세</p>
+                                <span class="text_price_result"></span>
+                            </div>
+                            <div class="slider_box">
+                                <div class="middle">
+                                    <div class="multi-range-slider">
+                                        <!-- 진짜 슬라이더 -->
+                                        <input type="range" class="input-left" min="0" max="100" value="25"/>
+                                        <input type="range" class="input-right" min="0" max="100" value="75"/>
+                                        <!-- 커스텀 슬라이더 -->
+                                        <div class="slider">
+                                            <div class="track"></div>
+                                            <div class="range"></div>
+                                            <div class="thumb left"></div>
+                                            <div class="thumb right"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content_price_mark">
+                                <span class="text_price_mark">최소</span>
+                                <span class="text_price_mark">35만</span>
+                                <span class="text_price_mark">200만</span>
+                                <span class="text_price_mark">최대</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content_submit_area">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                        <path d="M11 21C16.5228 21 21 16.5228 21 11C21 5.47715 16.5228 1 11 1C5.47715 1 1 5.47715 1 11C1 16.5228 5.47715 21 11 21Z"
+                              stroke="#FA9538" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8.08984 8.00008C8.32495 7.33175 8.789 6.76819 9.3998 6.40921C10.0106 6.05024 10.7287 5.91902 11.427 6.03879C12.1253 6.15857 12.7587 6.52161 13.2149 7.06361C13.6712 7.60561 13.9209 8.2916 13.9198 9.00008C13.9198 11.0001 10.9198 12.0001 10.9198 12.0001"
+                              stroke="#FA9538" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M11 16H11.01" stroke="#FA9538" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                    <span class="text_hint">AI로 회원님이 원하시는 조건을 분석하여 추천드립니다.</span>
+                </div>
+
+                <div>
+                    <input class="resetBtn" type="reset" value="초기화">
+                    <input class="submitBtn" type="submit" value="검색">
+                </div>
+            </div>
         </form>
     </div>
-    <div id="conResult">
-        <p style="font-size:28px;">이런 집은 어때요?</p>
+    <div th:if="${not #strings.isEmpty(searchCheck)}">
+        <div id="conResult">
+            <h1 class="content_result_title">이런 집은 어때요?</h1>
+            <div class="content_result_area" th:each="sucArticle : ${recommendSuccessionList}">
+                <div class="content_result_one">
+                    <a th:href="@{/ai/homeDetail(addressId=${sucArticle.addressId})}">
+                        <img src="/img/reviewUploadImg/aiReplaceImg.png">
+                    </a>
+                    <div class="result_address_area">
+                    </div>
+                    <div class="result_address_text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M13 6.90909C13 10.7273 8 14 8 14C8 14 3 10.7273 3 6.90909C3 5.60712 3.52678 4.35847 4.46447 3.43784C5.40215 2.51721 6.67392 2 8 2C9.32608 2 10.5979 2.51721 11.5355 3.43784C12.4732 4.35847 13 5.60712 13 6.90909Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8.00163 8.54568C8.9221 8.54568 9.66829 7.81305 9.66829 6.90931C9.66829 6.00557 8.9221 5.27295 8.00163 5.27295C7.08115 5.27295 6.33496 6.00557 6.33496 6.90931C6.33496 7.81305 7.08115 8.54568 8.00163 8.54568Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="result_address" th:text="${sucArticle.address}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content_review_area" class="content_review_area">
+            <h1 class="content_review_title">회원님에게 유익한<br>리뷰글을 추천드립니다.</h1>
+
+            <div style="width: 1380px; height: 230px;">
+                <div class="content_review_each" th:each="recReview : ${recommendReviewPreList}">
+                    <img class="review_location_mark" src="/img/btnImg/locationMark.png">
+                    <span class="review_address" th:text="${recReview.address}">주소</span>
+                    <p class="review_content" th:text="${recReview.contentText}">리뷰글</p>
+                    <span class="review_recommend_title">추천</span>
+                    <span class="review_recommend_cnt" th:text="${recReview.likedCnt}"></span>
+                    <span class="review_detail_link"><a
+                            th:href="@{/review/detail(articleNo=${recReview.articleNo})}">보러가기 ></a></span>
+                </div>
+            </div>
+            <a class="review_more_link" th:href="@{/ai/reviewMore}">더보기</a>
+        </div>
     </div>
 </div>
+<script>
 
+</script>
+<footer th:replace="fragments/common :: bottomBar"></footer>
+
+<script src="/js/AI/processDropdown.js"></script>
+<script src="/js/AI/processSliderbar.js"></script>
+<script src="/js/AI/searchLocation.js"></script>
+<script src="/js/AI/imgSlider.js"></script>
 </body>
 </html>

@@ -6,10 +6,153 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="/css/starter-template.css"  rel="stylesheet">
+
 </head>
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
 </nav>
-<p>마이페이지 입니다.</p>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="/css/starter-template.css"  rel="stylesheet">
+</head>
+<body>
+<nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
+</nav>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">사용자 정보</h2>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="javascript:void(0);" onclick="loadSavedAddress()">저장한 주소</a></li>
+                        <li class="list-group-item"><a href="javascript:void(0);" onclick="loadMyReview()">내가 쓴리뷰</a></li>
+                        <li class="list-group-item"><a href="javascript:void(0);" onclick="loadMySuccession()">내가 쓴 승계글</a></li>
+                        <li class="list-group-item"><a href="javascript:void(0);" onclick="loadMyFavorites()">즐겨찾기</a></li>
+                        <li class="list-group-item"><a href="javascript:void(0);" onclick="loadAccountSettings()">계정설정</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body" id="centerContent">
+                    <h2 class="card-title">내가 작성한 리뷰</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">즐겨찾기</h2>
+                    <p class="card-text">즐겨찾기 목록</p>
+                    <button class="btn btn-primary" onclick="showRightContent('details')">상세보기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function loadContent(url) {
+        $.get(url, function(data) {
+            $('#centerContent').html(data);
+        });
+    }
+    function loadAccountSettings() {
+        var content = `
+            <h2 class="card-title">계정설정</h2>
+            <form id="accountForm">
+                <div class="form-group">
+                    <label for="username">닉네임</label>
+                    <input type="text" class="form-control" id="username" value="바꿀 닉네임을 적어주세요.">
+                </div>
+                <div class="form-group">
+                    <label for="userInfo">관심지역</label>
+                    <textarea class="form-control" id="userInfo">관심지역을 입력해주세요.</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="userImage">프로필 이미지 업로드</label> <br>
+                    <input type="file" class="form-control-file" id="userImage" accept="image/*">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="saveAccountSettings()">수정</button>
+                <button type="button" class="btn btn-secondary" onclick="loadContent('/myAccount')">취소</button>
+            </form>
+        `;
+        $('#centerContent').html(content);
+    }
+
+    function saveAccountSettings() {
+        var username = $('#username').val();
+        var userInfo = $('#userInfo').val();
+
+        // DB로 내용 전송 코드 작성예정
+
+        // 완료후 다시 계정설정으로 돌아감
+        loadAccountSettings();
+    }
+
+    function loadSavedAddress(){
+    var content = `
+        <h2 class="card-title">찜한 주소</h2>
+        <p>찜한 주소가 없습니다.</p>
+    `;
+    $('#centerContent').html(content);
+    }
+    function loadMyReview(){
+    var content = `
+        <h2 class="card-title">내가 쓴 리뷰</h2>
+        <p>아직 내가 쓴 리뷰가 없습니다.</p>
+    `;
+    $('#centerContent').html(content);
+    }
+    function loadMySuccession(){
+    var content = `
+        <h2 class="card-title">내가 쓴 승계글</h2>
+        <p>아직 내가 쓴 승계글이 없습니다.</p>
+    `;
+    $('#centerContent').html(content);
+    }
+    function loadMyFavorites(){
+    var content = `
+        <h2 class="card-title">즐겨찾기</h2>
+        <p>아직 즐겨찾기가 없습니다.</p>
+    `;
+    $('#centerContent').html(content);
+    }
+    function showUserInfo(contentId) {
+        hideAllContent();
+        document.getElementById(contentId).style.display = "block";
+    }
+
+    function showCenterContent(contentId) {
+        hideAllContent();
+        document.getElementById(contentId).style.display = "block";
+    }
+
+    function showRightContent(contentId) {
+        hideAllContent();
+        document.getElementById(contentId).style.display = "block";
+    }
+
+    function hideAllContent() {
+        var contentIds = ["savedAddress", "reviews", "achievements", "favorites", "details"];
+        for (var i = 0; i < contentIds.length; i++) {
+            document.getElementById(contentIds[i]).style.display = "none";
+        }
+    }
+</script>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" class="btn btn-danger" value="로그아웃" />
+</form>
 </body>
 </html>
+

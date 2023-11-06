@@ -1,0 +1,94 @@
+.member_login{
+    margin: 0 auto;
+    position: relative;
+    padding: 0 20px 32px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.member_login_input{
+    margin-top: 30px;
+    border-radius: 2px;
+    width: 100%;
+    height: 40px;
+
+    border: 1px solid #e5e5e5;
+    padding: 9px 12px;
+    outline: none;
+    box-sizing: border-box;
+}
+.member_login_input input{
+    border: none;
+}
+.member_login_input input::placeholder{
+    color: #999999;
+}
+
+.loginMid{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.autoLogin{
+    font-size: 12px;
+    color : #8d8d8d;
+    line-height: 3;
+}
+
+.find_password{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+
+    font-size: 12px;
+    color: #8d8d8d;
+    line-height: 3;
+}
+
+.member_login_btn{
+    height: 40px;
+    width: 100%;
+    font-size: 14px;
+    padding: 13px 30px;
+    cursor: pointer;
+
+    background-color: black;
+    color: white;
+    line-height: 1px;
+    margin: 20px 0;
+    border-radius: 3px;
+    border-style: none;
+}
+
+.login_api{
+    margin-bottom: 30px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.login_api img{
+    width: 100%;
+    height: 45px;
+}
+
+.joinLine{
+    color: #bcbcbc;
+    font-size: 11px;
+    margin-bottom: 30px;
+    margin-top: 5px;
+}
+.member_join_btn{
+    font-size: 11px;
+
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+}

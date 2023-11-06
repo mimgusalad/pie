@@ -1,3 +1,4 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 :root {
   --accent-color: #0000;
   --text-color: #0;
@@ -13,28 +14,48 @@ a {
 
 .navbar {
   display: flex;
+  height: 80px;
   justify-content: space-between;
   align-items: center;
   background-color: var(--background-color);
-  padding: 8px 12px;}
+  padding: 8px 100px;}
 
-.nav_logo {
-  font-size: 24px;
-  color: var(--text-color);}
-
-.nav_logo i {
-  color: var(--accent-color);}
-
-.nav_logo span {
-  color: var(--accent-color);}
+.siteLogo{
+  width: 101px;
+  height: 37px;
+  }
 
 .nav_menu {
   display: flex;
   list-style: none;
-  padding-left: 0;}
+  padding-left: 0;
+}
+
+.nav_menu a{
+  display: flex;
+  width: 64px;
+  height: 31px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+
+  color: var(--text-primary, #222);
+  text-align: center;
+
+  /* Title 1/Medium */
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px; /* 130% */
+}
 
 .nav_menu li {
-  padding: 8px 12px;}
+  padding: 8px 12px;
+  align-items:center;
+}
 
 .nav_menu li:hover {
   color: #459830;
@@ -44,22 +65,40 @@ a {
 .nav_menu li a:hover {
   color: #459830;}
 
+.nav_menu a:hover:after{
+  content:"";
+  width: 64px;
+  display:block;
+  position: absolute;
+  margin-top: 25px;
+  border-bottom: 2px solid #459830;
+}
+
+
 .nav_icons {
   display: flex;
-  color: #0;
   list-style: none;
-  padding-left: 0;}
+  padding-left: 0;
+}
+
+.nav_icons a{
+  color: var(--text-primary, #222);
+  text-align: center;
+
+  /* Body 1/Medium */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 125% */
+}
 
 .nav_icons li {
   padding: 8px 5px;}
 
-.nav_icons li:hover {
-  color: #459830;
-  background-color: var(--accent-color);
-  border-radius: 4px;}
-
 .nav_icons li a:hover {
-  color: #459830;}
+  color: #459830;
+}
 
 
 .navbar_toggleBtn {
@@ -70,28 +109,77 @@ a {
   font-size: 24px;}
 
 .dropBtn{
-    background-color: #459830;
-    width:80px;
-    cursor:pointer;
-    font-size:12px;
-    color: #ffffff;
+  width: 98px;
+  height: 44px;
+  flex-shrink: 0;
+
+  border-radius: 8px;
+  border: none;
+  background: var(--primary-normal, #459830);
+
+  color: var(--text-white, #FFF);
+  text-align: center;
+
+  /* Body 1/Medium */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 125% */
 }
 
-    .dropDownContent{
-    display: none;
-    position : absolute;
-    background-color: #f9f9f9;
-    min-width: 200px;
- }
- .dropDownContent a{
-     display: block;
-     text-decoration: none;
-     padding: 12px 20px;
-     font-size:12px;
- }
- .dropDownContent a:hover{
-     background-color: #ececec;
- }
+.dropDownContent{
+  width: 240px;
+  height: 128px;
+  flex-shrink: 0;
+
+  display: none;
+  position : absolute;
+  border-radius: 4px;
+  background: var(--black-white-white, #FFF);
+  
+  /* hover 1 */
+  box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.40);
+}
+
  .dropdown:hover .dropDownContent{
     display: block;
  }
+
+ .writeLink {
+  width: 240px;
+  height: 64px;
+  flex-shrink: 0;
+
+  padding: 12px 20px;
+
+  border-radius: 4px;
+  background: var(--black-white-white, #FFF);
+ }
+
+ .writeLink:hover{
+  border-radius: 4px;
+  background: var(--gray-gray-50, #F7F8F9);
+ }
+
+ .writeLink h4{
+  color: var(--text-primary, #222);
+
+  /* Body 1/Medium */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 125% */
+ }
+
+ .writeLink p{
+  color: var(--text-secondary, #666);
+
+  /* Caption 1/Regular */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+  }

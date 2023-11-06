@@ -18,6 +18,7 @@ target/
 *.iws
 *.iml
 *.ipr
+application.properties
 
 ### NetBeans ###
 /nbproject/private/
@@ -31,3 +32,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### my ignore ###
+src/main/java/config/application-aws.properties
+
+### node_modules ###
+/src/main/chat-app2/node_modules
+
+### env ###
+src/main/chat-app2/.env

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>myReview</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css'>
+    <link href="/css/starter-template.css" rel="stylesheet">
+    <link href="/css/form/formNavbar.css" rel="stylesheet">
+    <link href="/css/review/myReviewList.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
+</nav>
+<nav class="formNav">
+    <ul>
+        <li><a class="formNav_link" href="" th:href="@{/review/form}">리뷰쓰기</a></li>
+        <li><a class="formNav_link" href="" th:href="@{/review/myReview}">내가 작성한 리뷰</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <div class="content_review_area">
+        <div th:each="myReview, reviewState : ${myReviewList}" class="content_each_review" th:onclick="|location.href='@{/review/detail(articleNo=${myReview.articleNo})}'|">
+            <img class="img_reviewPreview" th:src="${previewImgUrlList[reviewState.index]}">
+            <h1 class="text_address" th:text="${myReview.address}">경북 경산시 대학로 280</h1>
+            <div class="bottom_info">
+                <div class="content_rating_area">
+                    <span class="rating">
+                    ★★★★★
+                    <span class="rating_star">★★★★★</span>
+                    <input class="rating_input" id="rating" name="rating" th:value="${myReview.rating}"  type="range" value="5" step="1" min="0" max="10">
+                    </span>
+                </div>
+                <h1 class="text_regdate" th:text="${myReview.regdate}">2023. 05. 21</h1>
+            </div>
+        </div>
+    </div>
+    <div id="pagination"></div>
+</div>
+
+<script>
+// 별점 드래그 할 때
+window.onload = function (){
+    const rating_input = document.querySelectorAll('.rating_input');
+    const rating_star = document.querySelectorAll('.rating_star');
+    for(let i=0; i<rating_input.length; i++){
+        const widthValue = rating_input[i].value * 10;
+        rating_star[i].style.width = widthValue + "%";
+    }
+}
+</script>
+</body>
+
+</html>

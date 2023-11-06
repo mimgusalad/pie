@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css'>
+
+    <link href="/css/starter-template.css" rel="stylesheet">
+    <link href="/css/footerCss.css" rel="stylesheet">
+    <link href="/css/AI/successionDetail.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu"></nav>
+    <div class="container" id="container">
+        <div class="content_subTop">
+            <a href="/ai/list">< </a>
+            <span class="text_site_route">AI 추천 > 추천 집 상세보기</span>
+            <button type="button">
+                <img src="/img/shareIcon.png" alt="공유">
+            </button>
+            <button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <rect width="40" height="40" rx="20" fill="white"/>
+                    <path d="M27 29L20 24L13 29V13C13 12.4696 13.2107 11.9609 13.5858 11.5858C13.9609 11.2107 14.4696 11 15 11H25C25.5304 11 26.0391 11.2107 26.4142 11.5858C26.7893 11.9609 27 12.4696 27 13V29Z" stroke="#26282B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="content_home_picture">
+            
+        </div>
+        <div class="content_first_info_area">
+            <div class="content_home_address">
+                <h1 class="text_home_title"/>건물 주소
+                <h4 class="text_home_address" th:text="${homeInfo.road_address}" > 경기 성남시 분당구 대왕판교로 660 유스페이스 B동 8층 801호 </h4>
+                <span class="text_home_stNum_title" >지번 </span>
+                <span class="text_home_stNum" th:text="${homeInfo.address}"> 삼평동 670</span>
+                <div class="content_map_area" id="map">
+                </div>
+            </div>
+
+            <div class="content_home_disInfo">
+                <h1 class="text_home_title">건물 정보</h1>
+                <div class="home_disInfo_area">
+                    <div class="home_eachDis_area">
+                        <img src="/img/disadvantageMark/redMark.png">
+                        <span class="text_dis_title">심각 </span>
+                        <div class="home_disInfo_text_area">
+                        </div>
+                    </div>
+                    <div class="home_eachDis_area">
+                        <img src="/img/disadvantageMark/orangeMark.png">
+                        <span class="text_dis_title">주의</span>
+                        <div class="home_disInfo_text_area">
+                        </div>
+                    </div>
+                    <div class="home_eachDis_area">
+                        <img src="/img/disadvantageMark/yellowMark.png">
+                        <span class="text_dis_title">경계 </span>
+                        <div class="home_disInfo_text_area">
+                        </div>
+                    </div>
+                    <div class="home_eachDis_area">
+                        <img src="/img/disadvantageMark/noneMark.png">
+                        <span class="text_dis_title">문제없음 </span>
+                        <div class="home_disInfo_text_area">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="content_home_review">
+            <div class="home_review_top">
+                <h1 class="text_home_title">거주민 리뷰 </h1>
+                <a class="href_more_review" > 더보기</a>
+            </div>
+
+            <div class="home_review_area" th:each="home_review: ${home_review_list}">
+                <div class="home_eachReivew_area" >
+                    <div class="review_top_area">
+                        <div class="writer_profile_area">
+                            <img class="writer_profile">
+                        </div>
+                        <span class="writer_nickname">닉네임</span>
+                        <span class="review_livingYear">2023년 까지 거주</span>
+                        <span class="rating_star">★</span>
+                        <span th:text="${home_review.rating}"> </span>
+                    </div>
+                    <div class="review_content_area">
+                        <img>
+                        <div>
+                            <span class="content_title">상세 리뷰</span>
+                            <p class="content_detail" th:text="${home_review.contentText}">리뷰 내용</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content_home_detail_info">
+            <h1 class="text_home_title">건물 상세 정보 </h1>
+            <div>
+                <table>
+                    <tr>
+                        <th class="table_column_title">빌딩 이름</th>
+                        <td class="table_content" th:text="${homeInfo.buildingName}">빌라 이름</td>
+                    </tr>
+                    <tr>
+                        <th class="table_column_title">우편 번호</th>
+                        <td class="table_content" th:text="${homeInfo.zone_no}">우편 번호</td>
+                    </tr>
+                    <tr>
+                        <th class="table_column_title">건물 용도</th>
+                        <td class="table_content" th:text="${homeInfo.household}">공동 주텍</td>
+                    </tr>
+                    <tr>
+                        <th class="table_column_title">건물 구조</th>
+                        <td class="table_content">원룸</td>
+                    </tr>
+                    <tr>
+                        <th class="table_column_title">주차 대수</th>
+                        <td class="table_content">총 4대</td>
+                    </tr>
+                    <tr>
+                        <th class="table_column_title">세대 수</th>
+                        <td class="table_content" th:text="${homeInfo.household}">다중 주택</td>
+                    </tr>
+                    <tr>
+                        <th class="table_column_title">방향</th>
+                        <td class="table_content">동향</td>
+                    </tr>
+                    <tr>
+                        <th class="table_column_title">공급면적</th>
+                        <td class="table_content">10평</td>
+                    </tr>
+                    <tr>
+                        <th class="table_column_title">층 수</th>
+                        <td class="table_content">4층</td>
+                    </tr>
+                    
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+    <footer th:replace="fragments/common :: bottomBar"></footer>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63796f440d480664df4d24b56dd372a6&libraries=services"></script>
+    <script th:inline="javascript">
+        const latitude = /*[[${homeInfo.latitude}]]*/;
+        const longitude = /*[[${homeInfo.longitude}]]*/;
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+            mapOption = { 
+                center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+        
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+        
+        // 마커가 표시될 위치입니다 
+        var markerPosition  = new kakao.maps.LatLng(latitude, longitude); 
+        
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+        
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
+        
+        // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+        // marker.setMap(null);    
+        </script>
+
+</body>
+</html>

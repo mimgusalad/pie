@@ -1,0 +1,278 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 400;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 500;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 700;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format('opentype');}
+
+
+.body {
+    margin:0;
+    height:100%; width: 100%;
+    overflow:hidden;
+}
+/*메인화면 스크롤 없애는 코드인데 작동을 하지 않음css*/
+.container::-webkit-scrollbar{
+    display:none;
+}
+.container{
+    margin: 0;
+    padding: 0;
+
+    height: 100%; width: 100%;
+    min-height: 100vh; min-width: 100vw;
+
+    display : grid;
+    gird-auto-flow: column;
+    grid-template-columns: 5fr 3fr;
+    background-color: rgba(69, 152, 48, 0.03);
+}
+
+#textArea {
+    margin-right: 9.25rem;
+    margin-left: 6.88rem;
+    margin-top: 13rem;
+}
+
+.mainText {
+    position: relative;
+    z-index: 3;
+
+    color: #000;
+    font-family: Noto Sans KR;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100px; /* 156.25% */
+}
+
+.subText {
+    margin-top : 1.875rem;
+    margin-bottom: 10.9375rem;
+
+    color: #484848;
+    font-family: Noto Sans KR;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px; /* 166.667% */ 
+}
+
+#addressKeywordArea{
+    width: 448px;  height: 48px;
+    flex-shrink: 0;
+
+    padding: 14px 16px;
+    border-radius: 8px;
+    background: var(--text-white, #FFF);
+}
+
+#addressKeywordArea img{
+    margin-right: 20px;
+    width: 20.001px;  height: 20px;
+    flex-shrink: 0;
+}
+
+#inputAddressKeyword {
+    width: 350px;
+    color: var(--text-secondary, #666);
+    border:none;
+
+    /* Title 2/Medium */
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 133.333% */
+}
+
+.selectedKeyword {
+    margin-top: 2.5rem;
+    
+    width: 907px;  height: 60px;
+    flex-shrink: 0;
+
+    border-radius: 8px;
+    background: var(--text-white, #FFF);
+}
+
+.selectedKeyword img {
+    float: left;
+    margin: 20px 24px 20px 16px;
+
+    width: 22px; height: 20px;
+    flex-shrink: 0;
+}
+
+.keywordTextArea {
+    padding: 0.875rem;
+    float:left;
+    
+    width: 207px; height: 48px;
+    margin-top: 4px;
+}
+
+
+.keywordTextArea h4 {
+    color: var(--text-secondary, #666);
+    display : inline;
+
+    /* Body 1/Medium */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
+}
+
+.keywordText {
+    width: 132px;
+    color: #000;
+    display: inline;
+    margin-left: 30px;
+
+    /* Title 2/Medium */
+    font-family: Pretendard;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem; /* 133.333% */
+}
+
+.selectedKeyword input[type="submit"] {
+    margin-left:2.75rem;
+
+    width: 180px; height: 60px;
+    flex-shrink: 0;
+    
+    border : none;
+    border-radius: 10px;
+    background: var(--primary-normal, #459830);
+
+    color: var(--text-white, #FFF);
+    text-align: center;
+
+    /* Head 1/Medium */
+    font-family: Pretendard;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 38px; /* 135.714% */
+}
+
+
+#btnArea {
+    margin-top: 3rem;
+    margin-right:170px;
+
+    display : grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+.keywordList{
+    margin-right: 1.87rem;
+}
+
+.keywordList p {
+    width: 175px; height: 40px;
+    flex-shrink: 0;
+    padding: 5px;
+
+    border-radius: 8px;
+    border: 1px solid #000;
+    background: #FFF;
+
+    color: #191919;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    
+}
+
+.keywordList label{
+    padding: 20px 0px;
+    cursor: pointer;
+    display: flex;
+}
+
+.keywordList label input[type="checkbox"]{
+    display: none;
+}
+
+.keywordList label .imgBox {
+    position: relative;
+    display: flex;
+    border-radius: 10px;
+    box-shadow: none;
+
+    transition: 0.5s;
+}
+
+.keywordList label img{
+    width: 175px; height: 218px;
+    flex-shrink: 0;
+
+    filter : grayscale(100%);
+}
+
+.imgBox:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.imgBox:hover img{
+    filter : grayscale(0%);
+}
+
+
+/*.btnArea .btn{
+    width: 130px; height: 40px;
+    position: absolute;
+    left: 550px;
+    font-size: 16px;
+    border: 0;
+    outline: none;
+    transition: 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+}*/
+
+.invisible{
+    display:none;
+}
+
+#menu_wrap{
+    position:relative;
+}
+#menu_wrap .option p{
+    margin: 10px 0;
+}
+
+#menu_wrap .option button{
+    margin-left: 5px;
+}
+
+#result{
+    height: 200px;
+    width:448px;
+    overflow:scroll;
+    background:#fff;
+    position:absolute;
+}
+/*주소 키워드 list 스크롤바 없애는 css*/
+#result::-webkit-scrollbar{
+    display:none;
+}
+
+#placesList li {list-style: none;}
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList .item span {display: block;margin-top:4px;}
+#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+#placesList .item .info{padding:10px 0 10px 10px;}
+#placesList .info .gray {color:#8a8a8a;}
+#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+#placesList .info .tel {color:#009900;}
+#pagination {margin:10px auto;text-align: center;}
+#pagination a {display:inline-block;margin-right:10px;}
+#pagination .on {font-weight: bold; cursor: default;color:#777;}
