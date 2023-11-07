@@ -103,13 +103,15 @@ public class OAuthController {
         return "adminPage";
     }
 
-    @GetMapping("/login-success")
-    public String loginSuccess(HttpSession session) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        sessionService.setAttribute("userDetails", userDetails);
-        logger.info("세션 연결 확인용");
-// OO님 환영합니다! 라는 모달창 띄우기?
-        return "redirect:/";
-    }
+//    @GetMapping("/login-success")
+//    public String loginSuccess(HttpSession session) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//        sessionService.setAttribute("userDetails", userDetails);
+//        logger.info("세션 연결 확인용");
+//// OO님 환영합니다! 라는 모달창 띄우기?
+////        model.addAttribute("username", userDetails.getUsername());
+////        return "welcome-modal";
+//        return "redirect:/";
+//    }
 }

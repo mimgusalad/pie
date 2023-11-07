@@ -58,6 +58,11 @@ public class JwtUtils {
                 .getSubject();
     }
 
+    /**
+     * 토큰 검증
+     * @param token
+     * @return
+     */
     public boolean validateToken(String token) {
         try {
             Jwts.parser().setSigningKey(secret).parseClaimsJws(token);

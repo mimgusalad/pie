@@ -15,7 +15,6 @@ public class TokenProvider {
     public TokenProvider() {
         // 기본 생성자
     }
-
     public String getSecret() {
         return secret;
     }
