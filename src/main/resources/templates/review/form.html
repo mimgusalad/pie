@@ -35,9 +35,14 @@
                 <p class="sidebar_title" >리뷰 항목</p>
                 <ul>
                     <li><a class="sidebar_content_title" href="#conHouseType">방구조</a></li>
+                    <li><p class="text_select_result"></p></li>
                     <li><a class="sidebar_content_title" href="#conPayType">거래 정보</a></li>
+                    <li><p class="text_select_result"></p></li>
                     <li><a class="sidebar_content_title" href="#conBasicInfo">기본정보</a></li>
+                    <li><p class="text_select_result"></p></li>
                     <li><a class="sidebar_content_title" href="#conLocationInfo">위치정보</a></li>
+                    <li><p class="text_select_result"></p></li>
+                    <li><p class="text_select_result"></p></li>
                     <li><a class="sidebar_content_title" href="#conWeakKeyword">단점 키워드</a></li>
                     <li><a class="sidebar_content_title" href="#conText">내용 / 별점</a></li>
                     <li><a class="sidebar_content_title" href="#conPhoto">사진</a></li>
@@ -55,23 +60,23 @@
                 <h3 class="content_form_title">방구조</h3>
                 <p class="content_form_subtitle">리뷰를 작성할 집의 구조 형태를 선택해주세요.</p>
                 <div class="content_form_radioBtn">
-                    <input id="oneRoom" type="radio" name="houseType" value="원룸" th:field="*{houseType}">
+                    <input id="oneRoom" type="radio" name="houseType" value="원룸" th:field="*{houseType}" onclick="inputSelectTextR(this)">
                     <label for="oneRoom">원룸</label>
                 </div>
                 <div class="content_form_radioBtn">
-                    <input id="twoRoom" type="radio" name="houseType" value="투룸" th:field="*{houseType}">
+                    <input id="twoRoom" type="radio" name="houseType" value="투룸" th:field="*{houseType}"  onclick="inputSelectTextR(this)">
                     <label for="twoRoom">투룸</label>
                 </div>
                 <div class="content_form_radioBtn">
-                    <input id="threeRoom" type="radio" name="houseType" value="쓰리룸"  th:field="*{houseType}">
+                    <input id="threeRoom" type="radio" name="houseType" value="쓰리룸"  th:field="*{houseType}" onclick="inputSelectTextR(this)">
                     <label for="threeRoom">쓰리룸</label>
                 </div>
                 <div class="content_form_radioBtn">
-                    <input id="officeTels" type="radio" name="houseType" value="오피스텔"  th:field="*{houseType}">
+                    <input id="officeTels" type="radio" name="houseType" value="오피스텔"  th:field="*{houseType}" onclick="inputSelectTextR(this)">
                     <label for="officeTels">오피스텔</label>
                 </div>
                 <div class="content_form_radioBtn">
-                    <input id="apartment" type="radio" name="houseType" value="아파트" th:field="*{houseType}">
+                    <input id="apartment" type="radio" name="houseType" value="아파트" th:field="*{houseType}" onclick="inputSelectTextR(this)">
                     <label for="apartment">아파트</label>
                 </div>
                 <span class="invalid-feedback" th:if="${#fields.hasErrors('houseType')}" th:errors="*{houseType}"> 입력해주세요</span>
@@ -82,11 +87,11 @@
                 <h3 class="content_form_title">거래 정보</h3>
                 <p class="content_form_subtitle">리뷰를 작성할 집의 정보를 선택해주세요</p>
                 <div class="content_form_radioBtn">
-                    <input id="monthlyRent" type="radio" name="payType" value="월세">
+                    <input id="monthlyRent" type="radio" name="payType" value="월세" onclick="inputSelectTextR(this)">
                     <label for="monthlyRent">월세</label>
                 </div>
                 <div class="content_form_radioBtn">
-                    <input id="jeonse" type="radio" name="payType" value="전세">
+                    <input id="jeonse" type="radio" name="payType" value="전세" onclick="inputSelectTextR(this)">
                     <label for="jeonse">전세</label>
                 </div>
             </div>
@@ -96,7 +101,7 @@
                 <p class="content_form_subtitle">리뷰를 작성할 집의 정보를 선택해주세요.</p>
                 <div class="content_input_fee">
                     <label class="content_input_fee_title" for="payment">관리비</label>
-                    <input type="text" id="payment" th:field="*{payment}" placeholder="예)5만원" required>
+                    <input type="text" name="payment" id="payment" th:field="*{payment}" placeholder="예)5만원" required oninput="inputSelectTextR(this)">
                 </div>
                 <div class="content_input_fee">
                     <label class="content_input_fee_title">금액</label>
@@ -112,7 +117,7 @@
                 <p class="content_form_subtitle">주소와 거주년도를 입력해주세요.</p>
                 <label for="address"></label>
                 <form class="content_form_location" method="post">
-                    <input class="content_form_addressInput" type="text" placeholder="도로명, 건물명 지번 입력" id="address" name="addressName" required >
+                    <input class="content_form_addressInput" type="text" placeholder="도로명, 건물명 지번 입력" id="address" name="addressName" required oninput="inputSelectTextR(this)">
                     <input class="content_form_location_submit" type="button" value="검색" id="addressSearchBtn" onclick="sample6_execDaumPostcode()">
                     <form action="">
                         <select name="livingYear" id="year" title="거주년도" class="select_year" required >
@@ -125,7 +130,7 @@
                     </form>
                 </form>
                 <br>
-                <input class="content_form_addressInput" type="text" placeholder="상세 주소를 입력해주세요." id="addressDetail"  th:field="*{addressDetail}" required>
+                <input class="content_form_addressInput" type="text" placeholder="상세 주소를 입력해주세요." id="addressDetail"  th:field="*{addressDetail}" required oninput="inputSelectTextR(this)">
             </div>
 
             <div class="content_form" id="conWeakKeyword" data-ke-size="size26" style="height:619px;">
@@ -220,7 +225,7 @@
                 </div>
             </div>
 
-            <div class="content_form" id="conPhoto" data-ke-size="size26" style="height:311px;">
+            <div class="content_form" id="conPhoto" data-ke-size="size26" style="height:311px; margin-bottom: 200px;">
                 <h3 class="content_form_title">사진 첨부하기</h3>
                 <p class="content_form_subtitle">방 리뷰할 사진을 등록해주세요.</p>
                 <div class="content_photo">
@@ -332,12 +337,13 @@
 
 </script>
 
-
 <script src="/js/form/searchAddress.js"></script>
 <script src="/js/form/starPoint.js"></script>
 <script src="/js/form/processYearSelect.js"></script>
 <script src="/js/form/loadPhotoAndValidate.js"></script>
+<script src="/js/form/inputValueSidebar.js"></script>
 <script src="/js/processReviewForm.js"></script>
+
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>

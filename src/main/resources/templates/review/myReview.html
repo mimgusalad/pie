@@ -8,96 +8,7 @@
     <link rel="stylesheet" type="text/css" href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css'>
     <link href="/css/starter-template.css" rel="stylesheet">
     <link href="/css/form/formNavbar.css" rel="stylesheet">
-    <style>
-    .container{
-    width: 1400px;
-    }
-
-    .content_review_area{
-        width: 1400px;
-        height: 950px;
-    }
-    .content_each_review{
-        width: 295px;
-        margin: 20px;
-
-        float: left;
-        flex-wrap: wrap;
-        position: relative;
-        
-    }
-    .img_reviewPreview{
-        margin-bottom: 4px;
-
-        width: 290px;
-        height: 320px;
-        
-        border-radius: 8px;
-        background: lightgray 50% / cover no-repeat;
-    }
-    .text_address{
-        margin: 8px 0px;
-        color: var(--text-primary, #222);
-
-        /* Title 2/SemiBold */
-        font-family: Pretendard;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 24px; /* 133.333% */
-    }
-
-    .bottom_info{
-        width: 100%;
-        height: 20px;
-        display: flex;
-        float: right;
-        justify-content: space-between;
-    }
-    .content_rating_area{
-        display: flex;
-        justify-content:left;
-    }
-      
-    .rating {
-    position: relative;
-    color: #ddd;
-    font-size: 20px;
-    text-align: center;
-    }
-    
-    .rating input {
-    position: absolute;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-    }
-    
-    .rating_star {
-    width: 0;
-    color: #ffc107;
-    position: absolute;
-    left: 0;
-    right: 0;
-    overflow: hidden;
-    pointer-events: none;
-    }
-    .text_regdate{
-        padding: 6px;
-        color: var(--text-secondary, #666);
-
-        /* Body 1/Regular */
-        font-family: Pretendard;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 20px; /* 125% */
-    }
-    </style>
-
+    <link href="/css/review/myReviewList.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
@@ -111,8 +22,8 @@
 
 <div class="container">
     <div class="content_review_area">
-        <div th:each="myReview : ${myReviewList}" class="content_each_review" th:onclick="|location.href='@{/review/detail(articleNo=${myReview.articleNo})}'|">
-            <img class="img_reviewPreview" >
+        <div th:each="myReview, reviewState : ${myReviewList}" class="content_each_review" th:onclick="|location.href='@{/review/detail(articleNo=${myReview.articleNo})}'|">
+            <img class="img_reviewPreview" th:src="${previewImgUrlList[reviewState.index]}">
             <h1 class="text_address" th:text="${myReview.address}">경북 경산시 대학로 280</h1>
             <div class="bottom_info">
                 <div class="content_rating_area">

@@ -5,6 +5,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import ToggleBtn from "../components/ToggleBtnFilled/ToggleBtn";
 import SubMenu from "./SubMenu";
 import Nav from "../components/Nav";
+import axios from "axios";
 
 const { kakao } = window;
 
@@ -27,16 +28,16 @@ const mainMenus = [
   },
 ];
 
-const leftSubMenus = [
-  {
-    label: "방 찾기",
-    path: "",
-  },
-  {
-    label: "즐겨찾기",
-    path: "",
-  },
-];
+// const leftSubMenus = [
+  // {
+  //   label: "방 찾기",
+  //   path: "",
+  // },
+  // {
+  //   label: "즐겨찾기",
+  //   path: "",
+  // },
+// ];
 
 const sideFilters = [
   {
@@ -44,7 +45,7 @@ const sideFilters = [
     key: "sound",
   },
   {
-    label: "옵션 상태",
+    label: "옵션상태",
     key: "options",
   },
   {
@@ -56,7 +57,7 @@ const sideFilters = [
     key: "light_insulation",
   },
   {
-    label: "쓰레기 처리",
+    label: "쓰레기처리",
     key: "garbage",
   },
   {
@@ -74,8 +75,31 @@ const sideFilters = [
 ];
 
 function NavUnder() {
+  const [newData, setNewData] = useState([]);
+
+  // useEffect(()=>{
+    // const res = axios.get("http://localhost:3001/get")
+      // .then(res => console.log(res))
+      // .catch()
+      // setNewData(res);
+  //     const fetchData = async () => {
+  //       try {
+  //         const result = await axios.get("http://localhost:3001/get");
+  //         setNewData(result.data)
+  //       }catch(error){
+  //         console.log(error);
+  //       }
+  //     };
+  //     fetchData();
+  // },[])
+
+  console.log(newData)
+  // newData로 건들여보기
+
+
   let [inputText, setInputText] = useState("");
   let [place, setPlace] = useState("");
+  // 지도 초기값
   let [state, setState] = useState({
     center: { lat: 37.49676871972202, lng: 127.02474726969814 },
   });
@@ -96,6 +120,9 @@ function NavUnder() {
 
   let copyData = JSON.parse(JSON.stringify(Data));
   const navigate = useNavigate();
+
+  //리뷰순, 가격순, 별점순
+  const [myToggle, setMyToggle] = useState("리뷰순");
 
   const onChange = (e) => {
     setInputText(e.target.value);
@@ -234,7 +261,7 @@ function NavUnder() {
     navigate(`/detail/${sideItem.id}`,{
       state: {
         lat: `${sideItem.lat}`,
-        lng: `${sideItem.lng}`
+        lng: `${sideItem.lng}`,
       }
     })
   }
@@ -290,13 +317,6 @@ function NavUnder() {
         position: new kakao.maps.LatLng(el.lat, el.lng),
       });
       kakao.maps.event.addListener(marker, "click", function () {
-        // navigate(`/detail/${el.id}`)
-        // navigate(`/detail/${el.id}`,{
-        //   state: {
-        //     lat: `${el.lat}`,
-        //     lng: `${el.lng}`
-        //   }
-        // })
         markerPost(el);
       });
     });
@@ -386,23 +406,6 @@ function NavUnder() {
     };
   }, []);
 
-  // 바로 반영안댐
-  const [myToggle, setMyToggle] = useState("리뷰순");
-  useEffect(() => {
-    if(myToggle == "리뷰순"){
-      const filterData = Data.sort((a, b) => b.reviewCount - a.reviewCount);
-      setListData(filterData);
-    }
-    if(myToggle == "가격순"){
-      const filterData = Data.sort((a, b) => b.price - a.price);
-      setListData(filterData);
-    }
-    if(myToggle == "별점순"){
-      const filterData = Data.sort((a, b) => b.rating - a.rating);
-      setListData(filterData);
-    }
-  },[myToggle])
-  // End
 
   useEffect(() => {
     if (price != 0 && worse != "" && houseType != "") {
@@ -735,16 +738,16 @@ function NavUnder() {
         <div className="sub-menus">
       <div className="sub-menus__wrapper">
         <div className="left_sub_menu_button">
-          {leftSubMenus.map((leftSubMenu, index) => {
+          {/* {leftSubMenus.map((leftSubMenu, index) => {
             return (
               <div className="left_sub_menu__item" key={index}>
                 <button className="left_sub_menu__item">
                   {leftSubMenu.label}
-                </button>
+                </button> */}
                 {/* {leftSubMenu.label} */}
-              </div>
+              {/* </div>
             );
-          })}
+          })} */}
         </div>
         <div
           style={{
@@ -866,9 +869,9 @@ function NavUnder() {
             <div className="side-nav__filter-container">
               <div className="filter-container__title-wrapper">
                 <div className="title-wrapper__title">
-                  피하고 싶은
+                  피하고 싶은 단점
                   <br />
-                  단점 키워드를 선택해보세요.
+                  키워드를 선택해보세요.
                 </div>
                 <div className="title-wrapper__filter-toggle">
                   <div className="toggle-wrapper">
@@ -1014,6 +1017,8 @@ function NavUnder() {
                       onClick={(event) => {
                         setMyToggle("리뷰순");
                         setSubToggle(false);
+                        const filterData = Data.sort((a, b) => b.reviewCount - a.reviewCount);
+                        setListData(filterData);
                       }}
                     >
                       리뷰순
@@ -1023,6 +1028,8 @@ function NavUnder() {
                       onClick={(event) => {
                         setMyToggle("가격순");
                         setSubToggle(false);
+                        const filterData = Data.sort((a, b) => b.price - a.price);
+                        setListData(filterData);
                       }}
                     >
                       가격순
@@ -1032,6 +1039,8 @@ function NavUnder() {
                       onClick={(event) => {
                         setMyToggle("별점순");
                         setSubToggle(false);
+                        const filterData = Data.sort((a, b) => b.rating - a.rating);
+                        setListData(filterData);
                       }}
                     >
                       별점순
@@ -1044,7 +1053,8 @@ function NavUnder() {
                 {listData.map((sideItem, index) => {
                   return (
                       <div onClick={() => detailPost(sideItem)} key={index} className="side-nav__item">
-                        <div className="item-thumbnail"></div>
+                        <div className="item-thumbnail"><img src={sideItem.mainimg} style={{ width: "120px", height: "120px" }} /></div>
+                        {/* thumbnail에 원룸 메인 사진 들어감 */}
                         <div className="item-details">
                           <div className="item__title">{sideItem.address}</div>
                           <div className="item__content">
