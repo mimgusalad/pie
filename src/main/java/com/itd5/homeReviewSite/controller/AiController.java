@@ -6,6 +6,7 @@ import com.itd5.homeReviewSite.model.review_article;
 import com.itd5.homeReviewSite.model.succession_article;
 import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
+import com.itd5.homeReviewSite.repository.RoomRepository;
 import com.itd5.homeReviewSite.repository.SuccessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,10 +27,11 @@ public class AiController {
     SuccessionRepository successionRepository;
     @Autowired
     AddressRepository addressRepository;
-
+    @Autowired
+    RoomRepository roomRepository;
+    List<Long> list;
     @GetMapping("list")
     public String list(Model model) {
-
         model.addAttribute("searchCheck", null);
         return "ai/list";
     }
@@ -37,10 +39,11 @@ public class AiController {
     @PostMapping("list")
     //ai 화면에서 검색을 했을 시 처리하는 함수
     public String processSearch(Model model){
-        List<review_article> recommendReviewPreList = reviewRepository.findTop4ByOrderByArticleNo();
-        List<succession_article> recommendSuccessionList = successionRepository.findTop6ByOrderByArticleNo();
+        list = roomRepository.getAllRooms(model);
+        List<review_article> recommendReviewList = reviewRepository.getAllByAddressIdIn(list);
+        List<succession_article> recommendSuccessionList = successionRepository.getAllByAddressIdIn(list);
 
-        model.addAttribute("recommendReviewPreList",recommendReviewPreList);
+        model.addAttribute("recommendReviewPreList",recommendReviewList);
         model.addAttribute("searchCheck", "check");
         model.addAttribute("recommendSuccessionList", recommendSuccessionList);
 
@@ -57,10 +60,9 @@ public class AiController {
         return "ai/recommendHomeDetail";
     }
 
-
     @GetMapping("reviewMore")
     public String moreReview(Model model){
-        List<review_article> reviewList = reviewRepository.findAll();
+        List<review_article> reviewList = reviewRepository.getAllByAddressIdIn(list);
         model.addAttribute("reviewList", reviewList);
         return "ai/recommendReviewMore";
     }

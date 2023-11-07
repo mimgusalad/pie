@@ -4,6 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+/node_modules
+
 ### STS ###
 .apt_generated
 .classpath
@@ -34,7 +36,7 @@ build/
 .vscode/
 
 ### my ignore ###
-config/application-aws.properties
+src/main/java/config/application-aws.properties
 
 ### node_modules ###
 /src/main/chat-app2/node_modules
