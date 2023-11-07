@@ -38,7 +38,7 @@ public class AiController {
     //ai 화면에서 검색을 했을 시 처리하는 함수
     public String processSearch(Model model){
         List<review_article> recommendReviewPreList = reviewRepository.findTop4ByOrderByArticleNo();
-        List<succession_article> recommendSuccessionList = successionRepository.findAll();
+        List<succession_article> recommendSuccessionList = successionRepository.findTop6ByOrderByArticleNo();
 
         model.addAttribute("recommendReviewPreList",recommendReviewPreList);
         model.addAttribute("searchCheck", "check");
