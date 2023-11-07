@@ -26,7 +26,7 @@ public class OAuthController {
 
     private final BCryptPasswordEncoder encoder;
     private final MemberRepository memberRepository;
-    private final SessionService sessionService;
+//    private final SessionService sessionService;
     @GetMapping("/index")
     public String index(){return "index";}
     @GetMapping("/login")
