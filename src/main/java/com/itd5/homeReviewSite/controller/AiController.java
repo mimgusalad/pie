@@ -6,10 +6,10 @@ import com.itd5.homeReviewSite.repository.ReviewRepository;
 import com.itd5.homeReviewSite.repository.RoomRepository;
 import com.itd5.homeReviewSite.repository.SuccessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -26,24 +26,50 @@ public class AiController {
     RoomRepository roomRepository;
     List<Long> list;
     @GetMapping("list")
-    public String list(Model model) {
+    public String list(Model model, RoomServiceCriteria roomInput){
         model.addAttribute("searchCheck", null);
-        model.addAttribute("roomInput", new RoomServiceCriteria());
+        model.addAttribute("roomInput", roomInput);
         return "ai/list";
     }
-
     @PostMapping("list")
     //ai 화면에서 검색을 했을 시 처리하는 함수
-    public String processSearch(Model model, @ModelAttribute RoomServiceCriteria roomInput){
+    public String processSearch(Model model, RoomServiceCriteria roomInput){
         System.out.println(model);
         System.out.println(roomInput);
-        list = roomRepository.getAllRooms(model);
+        String keyword = roomInput.getKeyword();
+        if (keyword.equals("소음")) roomInput.setKeyword("k.noise");
+        if (keyword.equals("옵션 상태")) roomInput.setKeyword("k.optionQuality");
+        if (keyword.equals("치안")) roomInput.setKeyword("k.safety");
+        if (keyword.equals("일조량")) roomInput.setKeyword("k.sunlight");
+        if (keyword.equals("벌레")) roomInput.setKeyword("k.insect");
+        if (keyword.equals("냄새")) roomInput.setKeyword("k.smell");
+        if (keyword.equals("쓰레기 처리")) roomInput.setKeyword("k.trash");
+        if (keyword.equals("편의시설")) roomInput.setKeyword("k.convenience");
+        roomInput.setAddress("대구");
+        String priceOption = roomInput.getPriceOption();
+        String modifiedPriceOption = priceOption.trim().replace(",", "");
+        roomInput.setPriceOption(modifiedPriceOption);
+        roomInput.setMaxDeposit(5000);
+        roomInput.setMaxMonthlyRent(5000);
+
+        list = roomRepository.getAllRooms(
+                roomInput.getMinDeposit(),
+                roomInput.getMaxDeposit(),
+                roomInput.getMinMonthlyRent(),
+                roomInput.getMaxMonthlyRent(),
+                roomInput.getStructure(),
+                roomInput.getAddress(),
+                roomInput.getKeyword()
+        );
+
+        System.out.println(list);
         List<review_article> recommendReviewList = reviewRepository.getAllByAddressIdIn(list);
         List<succession_article> recommendSuccessionList = successionRepository.getAllByAddressIdIn(list);
 
         model.addAttribute("recommendReviewPreList",recommendReviewList);
         model.addAttribute("searchCheck", "check");
         model.addAttribute("recommendSuccessionList", recommendSuccessionList);
+        model.addAttribute("roomInput", roomInput);
 
         return "ai/list";
     }

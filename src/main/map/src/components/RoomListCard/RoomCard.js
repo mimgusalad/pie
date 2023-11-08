@@ -46,7 +46,7 @@ function RoomImage({ item, icon }) {
         <div style={{ paddingLeft: "12px" }}>{item.address}</div>
       </div>
       <div style={{ position: "absolute", top: "10px", right: "10px" }}>
-        {/* <img src={icon} alt="icon" style={{ width: "16px" }} /> */}
+        <img src={icon} alt="icon" style={{ width: "16px" }} />
       </div>
     </div>
   );
@@ -79,7 +79,7 @@ export default function RoomCard({ item }) {
       <div className="infoContainer">
         <div className="listUserInfo">
           <img src={item.userImage} alt="userImage" className="userImage" />
-          <div>{item.owner}</div>
+          <div>{item.id}</div>
         </div>
         <div style={{ fontSize: "12px" }}>{item.price}</div>
       </div>

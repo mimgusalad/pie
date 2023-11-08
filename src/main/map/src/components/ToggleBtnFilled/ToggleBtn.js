@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./ToggleBtn.css";
 
-export default function ToggleBtn({ items, width, filled, selectFilter, setSelectFilter}) {
+export default function ToggleBtn({ items, width, filled }) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentData, setCurrentData] = useState(items[0]);
   const toggleContainer = useRef(null);
@@ -43,7 +43,6 @@ export default function ToggleBtn({ items, width, filled, selectFilter, setSelec
                 event.preventDefault(); // a 태그의 기본 이벤트를 방지합니다.
                 event.stopPropagation(); // 이벤트 버블링을 중단합니다.
                 setCurrentData(item);
-                setSelectFilter(item);
                 setIsOpen(false);
               }}
               key={item}
