@@ -4,8 +4,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-/node_modules
-
 ### STS ###
 .apt_generated
 .classpath
@@ -39,7 +37,8 @@ build/
 src/main/java/config/application-aws.properties
 
 ### node_modules ###
-/src/main/chat-app2/node_modules
+/src/main/map/node_modules
 
 ### env ###
-src/main/chat-app2/.env
+src/main/map/.env
+/src/main/map/node_modules/

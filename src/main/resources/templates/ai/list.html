@@ -19,6 +19,15 @@
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63796f440d480664df4d24b56dd372a6&libraries=services"></script>
 
+    <style>
+        .objectInput{
+        display: none;
+        }
+
+        .addressInputObject{
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
@@ -54,11 +63,13 @@
                 <div id="pagination"></div>
             </div>
         </div>
-        <form method="post" name="roomSearchForm" action="" th:action="@{/ai/list}">
+        <form method="post" name="roomSearchForm" action="" th:action="@{/ai/list}" th:object="${roomInput}">
+            <input type="text" class="addressInputObject" id="addressInput" th:field="*{address}">
             <div class="content_input_area" id="conInputElse">
                 <div class="select-menu" style="width: 300px;">
                     <span class="content_input_title">목적</span>
                     <div class="select-btn" style="width:244px;">
+                        <input class="objectInput" type="text" th:field="*{purpose}">
                         <span class="sBtn-text">신규/승계 선택해주세요.</span>
                         <i class="bx bx-chevron-down"></i>
                     </div>
@@ -74,7 +85,8 @@
                 <div class="select-menu" style="width: 485px;">
                     <span class="content_input_title">단점 키워드</span>
                     <div class="select-btn" style="width:375px;">
-                        <span class="sBtn-text">단점 키워드를 선택해주세요.</span>
+                        <input class="objectInput" type="text" th:field="*{keyword}">
+                        <span class="sBtn-text" th:feild="*{keyword}">단점 키워드를 선택해주세요.</span>
                         <i class="bx bx-chevron-down"></i>
                     </div>
                     <ul class="options" style="margin-left: 110px; width: 375px;">
@@ -108,6 +120,7 @@
                 <div class="select-menu" style="width: 300px;">
                     <span class="content_input_title">구조</span>
                     <div class="select-btn" style="width:244px;">
+                        <input class="objectInput" type="text" th:field="*{structure}">
                         <span class="sBtn-text">구조를 선택해주세요.</span>
                         <i class="bx bx-chevron-down"></i>
                     </div>
@@ -133,24 +146,25 @@
                 <div class="select-menu" style="width: 485px;">
                     <span class="content_input_title">가격</span>
                     <div class="price-select-btn" style="width:375px;">
+                        <input class="objectInput" type="text" th:field="*{priceOption}">
                         <span class="price-text">월세 혹은 전세를 선택해주세요.</span>
                         <i class="bx bx-chevron-down"></i>
                     </div>
                     <div class="price_dropdown_area">
                         <div class="option_select_area">
                             <div class="content_form_radioBtn">
-                                <input id="price_option_all" type="radio" name="price_option" value="all"
-                                       class="price_option_btn">
+                                <input id="price_option_all" type="radio" name="priceOption" value="all"
+                                       class="price_option_btn" th:field="*{priceOption}" >
                                 <label for="price_option_all" class="price_option_label">전체</label>
                             </div>
                             <div class="content_form_radioBtn">
-                                <input id="price_option_jeonse" type="radio" name="price_option" value="전세"
-                                       class="price_option_btn">
+                                <input id="price_option_jeonse" type="radio" name="priceOption" value="전세"
+                                       class="price_option_btn" th:field="*{priceOption}">
                                 <label for="price_option_jeonse" class="price_option_label">전세</label>
                             </div>
                             <div class="content_form_radioBtn">
-                                <input id="price_option_monthly" type="radio" name="price_option" value="월세"
-                                       class="price_option_btn">
+                                <input id="price_option_monthly" type="radio" name="priceOption" value="월세"
+                                       class="price_option_btn" th:field="*{priceOption}">
                                 <label for="price_option_monthly" class="price_option_label">월세</label>
                             </div>
                         </div>
@@ -163,8 +177,8 @@
                                 <div class="middle">
                                     <div class="multi-range-slider">
                                         <!-- 진짜 슬라이더 -->
-                                        <input type="range" class="input-left" min="0" max="100" value="25"/>
-                                        <input type="range" class="input-right" min="0" max="100" value="75"/>
+                                        <input type="range"  name="minDeposit" class="input-left" min="0" max="100" value="25"/>
+                                        <input type="range"  name="maxDeposit" class="input-right" min="0" max="100" value="75"/>
                                         <!-- 커스텀 슬라이더 -->
                                         <div class="slider">
                                             <div class="track"></div>
@@ -191,8 +205,8 @@
                                 <div class="middle">
                                     <div class="multi-range-slider">
                                         <!-- 진짜 슬라이더 -->
-                                        <input type="range" class="input-left" min="0" max="100" value="25"/>
-                                        <input type="range" class="input-right" min="0" max="100" value="75"/>
+                                        <input type="range" name="minMonthlyRent" class="input-left" min="0" max="100" value="25"/>
+                                        <input type="range" name="maxMonthlyRent" class="input-right" min="0" max="100" value="75"/>
                                         <!-- 커스텀 슬라이더 -->
                                         <div class="slider">
                                             <div class="track"></div>
@@ -238,8 +252,8 @@
     <div th:if="${not #strings.isEmpty(searchCheck)}">
         <div id="conResult">
             <h1 class="content_result_title">이런 집은 어때요?</h1>
-            <div class="content_result_area" th:each="sucArticle : ${recommendSuccessionList}">
-                <div class="content_result_one">
+            <div class="content_result_area" style="width: 1380px; height: 850px;">
+                <div class="content_result_one" th:each="sucArticle : ${recommendSuccessionList}">
                     <a th:href="@{/ai/homeDetail(addressId=${sucArticle.addressId})}">
                         <img src="/img/reviewUploadImg/aiReplaceImg.png">
                     </a>
@@ -274,9 +288,6 @@
         </div>
     </div>
 </div>
-<script>
-
-</script>
 <footer th:replace="fragments/common :: bottomBar"></footer>
 
 <script src="/js/AI/processDropdown.js"></script>

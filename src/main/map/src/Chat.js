@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import SBProvider from "@sendbird/uikit-react/SendbirdProvider";
-import MessageContent from "@sendbird/uikit-react/ui/MessageContent";
 import MobileView from "./MobileView";
 import DesktopView from "./DesktopView";
 import "./chatStyle.css";
 import "./App.css";
 import "@sendbird/uikit-react/dist/index.css";
 import kr from "date-fns/locale/ko";
+import SendbirdUser from "./RegisterUser";
 
 const createChannel = async (thisUser, otherUser) => {
   try {
@@ -36,9 +36,9 @@ const createChannel = async (thisUser, otherUser) => {
   }
 }
 function Chat() {
-  const USER_ID = "test_id1"; // 로그인 유저
-  const NICKNAME = "test_nickname2";
-
+  const data = JSON.parse(sessionStorage.getItem("user"));
+  const USER_ID = data.email;
+  const NICKNAME = data.nickname;
   const OTHER_USER = "test_id2";
   createChannel(USER_ID, OTHER_USER);
 
