@@ -1,10 +1,15 @@
 package com.itd5.homeReviewSite.controller;
 
+import com.itd5.homeReviewSite.service.S3UploadService;
 import net.minidev.json.JSONObject;
+import org.imgscalr.Scalr;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -14,7 +19,8 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/CONT")
 public class ApiController {
-
+    @Autowired
+    S3UploadService s3UploadService;
     @Value("${uploadFilePath}")
     public String SAVE_PATH;
 
@@ -26,7 +32,7 @@ public class ApiController {
 
     @PostMapping(value = "/upload")
     @ResponseBody
-    public Map<String, String> imgUpload(@RequestParam("dataFile") MultipartFile file) {
+    public Map<String, String> imgUpload(@RequestParam("dataFile") MultipartFile file) throws IOException {
         //Log.TraceLog("imgUpload IN");
 
         //코드 실행 전에 시간 받아오기
@@ -35,32 +41,22 @@ public class ApiController {
         Map<String, String> resultMap = new HashMap<String, String>();
 
         if (file.isEmpty()) {
+            System.out.println("파일 없음");
           //  Log.TraceLog("파일 없음");
         }
         String originName = file.getOriginalFilename();
+        String saveFilename = originName;
 
-        // 이미지 폴더 경로
-        String path = SAVE_PATH;
+        //aws 서비스 등록
+        s3UploadService.saveFile(file, saveFilename);
+        //aws 이미지 경로 get
+        String url = s3UploadService.getImgUrl(saveFilename);
 
-        try {
-            File newFile = new File(path);
-            // 저장할 위치의 디렉토리가 존지하지 않을 경우
-            if (!newFile.exists()) {
-                newFile.mkdirs();
-            }
-
-            byte[] fileData = file.getBytes();
-            OutputStream os = new FileOutputStream(path + "/" + originName);
-            os.write(fileData);
-            os.close();
-
-        } catch (IOException e) {
-            throw new RuntimeException("Fileupload error" + e);
-        }
 
         JSONObject dbSrvJson = new JSONObject();
         dbSrvJson.put("fileName", originName);
-        dbSrvJson.put("filePath", path + "/" + originName);
+        //dbSrvJson.put("filePath", path + "/" + originName);
+        dbSrvJson.put("filePath", url);
         dbSrvJson.put("debug", debugMode);
 
 
@@ -80,6 +76,9 @@ public class ApiController {
         resultMap.put("result", result.get("data").toString());
         resultMap.put("time", time);
         //Log.TraceLog("imgUpload OUT");
+
+        //aws 이미지 삭제
+        s3UploadService.deleteImage(saveFilename);
 
         return resultMap;
     }
@@ -151,6 +150,10 @@ public class ApiController {
             responseJson.put("result", "EXCEPTION");
             return responseJson;
         }
+    }
+    private String extractExt(String originalFilename) {
+        int pos = originalFilename.lastIndexOf(".");
+        return originalFilename.substring(pos + 1);
     }
 
 }

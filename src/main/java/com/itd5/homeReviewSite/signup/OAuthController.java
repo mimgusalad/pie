@@ -74,7 +74,8 @@ public class OAuthController {
     @GetMapping("/myPage")
     public String myPage(Model model) {
         // 세션에서 받아온 유저정보 검색
-        UserDetails userDetails = (UserDetails) sessionService.getAttribute("userDetails");
+        //UserDetails userDetails = (UserDetails) sessionService.getAttribute("userDetails");
+        UserDetails userDetails = null;
         model.addAttribute("userDetails", userDetails);
         return "myPage";
     }
