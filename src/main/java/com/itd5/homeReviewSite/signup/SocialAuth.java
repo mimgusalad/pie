@@ -35,4 +35,7 @@ public class SocialAuth {
         this.providerId = providerId;
         this.nickname = nickname;
     }
+    public void setUserInfo(String userinfo) {
+        this.userinfo = userinfo;
+    }
 }

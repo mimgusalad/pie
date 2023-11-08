@@ -7,7 +7,38 @@
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="/css/starter-template.css"  rel="stylesheet">
     <link href="/css/review/myReviewList.css" rel="stylesheet">
+    <style>
+        /* 모달 스타일 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
 
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 10px;
+        max-width: 400px;
+            border: 1px solid #ccc;
+        }
+
+        .close {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="fragments/common :: menu">
@@ -21,12 +52,16 @@
                 <div class="card-body">
                     <h2 class="card-title">사용자 정보</h2>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a href="javascript:void(0);" onclick="loadSavedAddress()">저장한 주소</a></li>
+<!--                        <li class="list-group-item"><a href="javascript:void(0);" onclick="loadSavedAddress()">저장한 주소</a></li>-->
                         <li class="list-group-item"><a href="javascript:void(0);" onclick="redirectToMyReview()">내가 쓴 리뷰</a></li>
                         <li class="list-group-item"><a href="javascript:void(0);" onclick="loadMySuccession()">내가 쓴 승계글</a></li>
-                        <li class="list-group-item"><a href="javascript:void(0);" onclick="loadMyFavorites()">즐겨찾기</a></li>
+<!--                        <li class="list-group-item"><a href="javascript:void(0);" onclick="loadMyFavorites()">즐겨찾기</a></li>-->
                         <li class="list-group-item"><a href="javascript:void(0);" onclick="loadAccountSettings()">계정설정</a></li>
-
+                        <li class="list-group-item">
+                            <form th:action="@{/logout}" method="post">
+                                <input type="submit" class="btn btn-danger" value="로그아웃" />
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -42,13 +77,13 @@
                             <h1 class="text_address" th:text="${myReview.address}">경북 경산시 대학로 280</h1>
                             <div class="bottom_info">
                                 <!-- 별점 표시 -->
-                                <div class="content_rating_area">
-                                    <span class="rating">
-                                    ★★★★★
-                                    <span class="rating_star">★★★★★</span>
-                                    <input class="rating_input" id="rating" name="rating" th:value="${myReview.rating}" type="range" value="5" step="1" min="0" max="10">
-                                    </span>
-                                </div>
+<!--                                <div class="content_rating_area">-->
+<!--                                    <span class="rating">-->
+<!--                                    ★★★★★-->
+<!--                                    <span class="rating_star">★★★★★</span>-->
+<!--                                    <input class="rating_input" id="rating" name="rating" th:value="${myReview.rating}" type="range" value="5" step="1" min="0" max="10">-->
+<!--                                    </span>-->
+<!--                                </div>-->
                                 <!-- 리뷰 작성 날짜 표시 -->
                                 <h1 class="text_regdate" th:text="${myReview.regdate}">2023. 05. 21</h1>
                             </div>
@@ -73,7 +108,7 @@
             <h2 class="card-title">계정설정</h2>
             <form id="accountForm">
                 <div class="form-group">
-                    <label for="username">닉네임</label>
+                    <label for="nickname">닉네임</label>
                     <input type="text" class="form-control" id="nickname" placeholder="바꿀 닉네임을 적어주세요.">
                 </div>
                 <div class="form-group">
@@ -84,7 +119,7 @@
 <!--                    <label for="userImage">프로필 이미지 업로드</label> <br>-->
 <!--                    <input type="file" class="form-control-file" id="userImage" accept="image/*">-->
 <!--                </div>-->
-                <button type="button" class="btn btn-primary" onclick="saveAccountSettings()">수정</button>
+                <button type="button" class="btn btn-primary" onclick="showSuccessModal()">수정</button>
                 <button type="button" class="btn btn-secondary" onclick="loadContent('/myAccount')">취소</button>
             </form>
         `;
@@ -94,6 +129,10 @@
     function saveAccountSettings() {
         var nickname = $('#nickname').val();
         var userInfo = $('#userInfo').val();
+        if (nickname.trim() === '') {
+            alert("닉네임은 비워둘 수 없습니다.");
+            return; // 닉네임이 비어있으면 수정 프로세스를 중단합니다.
+        }
         var userUpdateData = {
         nickname: nickname,
         userInfo: userInfo
@@ -106,6 +145,7 @@
         success: function(response) {
             if (response.success) {
                 // 업데이트가 성공한 경우
+                showModal();
                 loadAccountSettings();
             } else {
                 // 업데이트가 실패한 경우
@@ -113,9 +153,6 @@
             }
         }
     });
-        // DB로 내용 전송 코드 작성예정
-
-        // 완료후 다시 계정설정으로 돌아감
         loadAccountSettings();
     }
 
@@ -138,11 +175,8 @@
     $('#centerContent').html(content);
     }
     function loadMySuccession(){
-    var content = `
-        <h2 class="card-title">내가 쓴 승계글</h2>
-        <p>아직 내가 쓴 승계글이 없습니다.</p>
-    `;
-    $('#centerContent').html(content);
+    window.location.href = '/account/myPage/mySuccession';
+
     }
     function loadMyFavorites(){
     var content = `
@@ -172,10 +206,30 @@
             document.getElementById(contentIds[i]).style.display = "none";
         }
     }
+    function showModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+    }
+
+// 모달 닫기 함수
+function closeModal() {
+  var modal = document.getElementById("myModal");
+  modal.style.display = "none";
+}
+
+// '수정' 버튼 클릭 시 모달 표시
+function showSuccessModal() {
+  saveAccountSettings();
+}
 </script>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" class="btn btn-danger" value="로그아웃" />
-</form>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>수정 완료</h2>
+        <p>수정이 완료되었습니다.</p>
+    </div>
+</div>
 </body>
 </html>
 
