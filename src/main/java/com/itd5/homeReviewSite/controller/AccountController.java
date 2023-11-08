@@ -1,7 +1,6 @@
 package com.itd5.homeReviewSite.controller;
 
-import com.itd5.homeReviewSite.model.review_article;
-import com.itd5.homeReviewSite.model.succession_article;
+import com.itd5.homeReviewSite.model.*;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
 import com.itd5.homeReviewSite.repository.SuccessionRepository;
 import com.itd5.homeReviewSite.model.succession_article;
@@ -9,10 +8,13 @@ import com.itd5.homeReviewSite.signup.MemberRepository;
 import com.itd5.homeReviewSite.signup.PrincipalDetails;
 import com.itd5.homeReviewSite.signup.SocialAuth;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
