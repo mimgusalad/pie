@@ -25,11 +25,11 @@ public class OAuth2MemberService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
         OAuth2MemberInfo memberInfo = null;
-        System.out.println(oAuth2User.getAttributes());
-        System.out.println(userRequest.getClientRegistration().getRegistrationId());
+        //System.out.println(oAuth2User.getAttributes());
+        //System.out.println(userRequest.getClientRegistration().getRegistrationId());
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
-        System.out.println("registrationId = " + registrationId);
+        //System.out.println("registrationId = " + registrationId);
         if (registrationId.equals("google")) {
             memberInfo = new GoogleMemberInfo(oAuth2User.getAttributes());
         } else if (registrationId.equals("kakao")) {
@@ -44,7 +44,7 @@ public class OAuth2MemberService extends DefaultOAuth2UserService {
         String email = memberInfo.getEmail();
         String role = "ROLE_USER"; //일반 유저
         String nickname = nicknameRepository.getRandomNickname().getNickname();
-        System.out.println(oAuth2User.getAttributes());
+        //System.out.println(oAuth2User.getAttributes());
         Optional<SocialAuth> findMember = memberRepository.findByProviderId(providerId);
         SocialAuth member=null;
         if (findMember.isEmpty()) { //찾지 못했다면
