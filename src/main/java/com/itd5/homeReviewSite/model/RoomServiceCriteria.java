@@ -7,11 +7,11 @@ import lombok.Data;
 @Data
 @Entity
 public class RoomServiceCriteria {
+    private String address;
     private String purpose;
     private String keyword;
     private String structure;
     private String priceOption;
-    private String address;
     private int minDeposit;
     private int maxDeposit;
     private int minMonthlyRent;

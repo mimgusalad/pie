@@ -10,4 +10,6 @@ public interface SuccessionRepository extends JpaRepository<succession_article,L
     List<succession_article> getAllByAddressIdIn(List<Long> list);
 
     succession_article findByArticleNo(Long articleNo);
+
+    List<succession_article> findTop4ByAddressId(Long addressId);
 }
