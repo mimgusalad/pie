@@ -50,8 +50,7 @@
                     <li><a class="sidebar_content_title" href="#conBasicInfo">기본 정보</a></li>
                     <li><a class="sidebar_content_title" href="#conText">추가 내용</a></li>
                     <li><a class="sidebar_content_title" href="#conPhoto">사진</a></li>
-                    <li><input class="sidebar_btn_certificatation" type="button" value="계약서 인증"></li>
-                    <li><input id="sidebar_btn_submit" type="submit" value="작성하기"></li>
+                    <li><input id="sidebar_btn_submit" type="submit" value="계약서 인증"></li>
                     <li><input id="sidebar_btn_return" type="button" value="뒤로가기" onclick="history.back()"></li>
                 </ul>
             </div>
@@ -91,24 +90,18 @@
                 <label for="address"></label>
                 <form class="content_form_location" method="post">
                     <input class="content_form_addressInput" type="text" placeholder="도로명, 건물명 지번 입력" id="address" name="addressName"
-                           size="60%" th:field="*{address}" required oninput="inputSelectTextS(this)">
+                           size="60%" th:field="*{address}" required oninput="inputSelectTextS(this)" readonly>
                     <input class="content_form_location_submit" type="button" value="검색" id="addressSearchBtn"
                            onclick="sample6_execDaumPostcode()">
                 </form>
 
                 <input class="content_form_addressInput" type="text" placeholder="상세 주소를 입력해주세요." id="addressDetail" name="addressDetail"
-                       size="80%" th:field="*{addressDetail}" required oninput="inputSelectTextS(this)"><br>
+                       size="80%" th:field="*{addressDetail}" required oninput="inputSelectTextS(this)" readonly><br>
                 <div class="content_term">
                     <span class="content_term_title">계약기간</span>
-                    <select name="periodYear" id="periodYear" title="거주년도" class="content_term_select" required>
-                        <option value="">거주년도</option>
-                    </select>
-                    <select name="periodMonth" id="periodMonth" title="월" class="content_term_select" required>
-                        <option value="">월</option>
-                    </select>
-                    <select name="periodDay" id="periodDay" title="일" class="content_term_select" required>
-                        <option value="">일</option>
-                    </select>
+                        <input class="content_term_select" type="text" placeholder="거주년도" id="periodYear" name="periodYear" required readonly>
+                        <input class="content_term_select" type="text" placeholder="월" id="periodMonth" name="periodMonth" required readonly>
+                        <input class="content_term_select" type="text" placeholder="일" id="periodDay" name="periodDay" required readonly>
                 </div>
             </div>
 
@@ -249,104 +242,41 @@
 <div class="modal hidden" id="jsModal">
     <div class="bg"></div>
     <div class="modalBox">
-        <h2 class="text_modal_title">계약서 인증</h2>
         <button class="modal_closeBtn" id="jsCloseBtn">X</button>
+        <h2 class="text_modal_title">계약서 인증</h2>
         <h1 class="text_explain_title">계약서 사진을 업로드해주세요.</h1>
         <p class="text_explain_sub">사진을 드래그 앤 드롭으로 올려주시거나 눌러서 업로드해주세요.</p>
         <div class="input_contract_area">
-            <input type="file" name="contract_img" class="input_contract_photo" accept="image/*" multiple="multiple"
+            <input  id="fileInput" type="file" name="contract_img" class="input_contract_photo" accept="image/*" multiple="multiple"
                    style="display:none;">
             <div class="upload_contract_area">
                 <img class="uploadIcon" src="/img/writeForm/uploadContract.png" alt="사진올리기">
             </div>
-            <img class="altImg hidden" src="">
+            <img id="altImg" class="altImg hidden" src="">
+            <div id="crop-container"></div>
         </div>
-        <button class="modal_complete_btn">확인</button>
+        <button class="modal_complete_btn" id="insert" onclick="imgUpload()">확인</button>
     </div>
 </div>
 <script>
-    const openBtn= document.querySelector(".sidebar_btn_certificatation");
-    const closeBtn=document.querySelector(".modal_closeBtn");
-    const okBtn= document.querySelector(".modal_complete_btn");
-    const modal = document.querySelector(".modal");
-    const realUpload_photo = document.querySelector('.input_contract_photo');
-    const upload_photo = document.querySelector('.upload_contract_area');
-    const altImg = document.querySelector(".altImg");
-    const uploadIcon = document.querySelector(".uploadIcon");
 
-    upload_photo.addEventListener('click', () => realUpload_photo.click(),false);
-    realUpload_photo.addEventListener('change', fileSelect,false);
 
-    const open= () => {
-    modal.classList.remove("hidden");
-    }
+</script>
 
-    const close = () => {
-    modal.classList.add("hidden");
-    altImg.classList.add("hidden");
-    uploadIcon.classList.remove("hidden");
-    altImg.src="";
-    }
+<script>
 
-    openBtn.addEventListener("click", open);
-    closeBtn.addEventListener("click", close);
-    okBtn.addEventListener("click", close);
-
-    $(document).on('click', '.modal_complete_btn', function(e) {
-          Swal.fire({
-              position: 'top',
-              icon: 'success',
-              title: '계약서 인증이 완료되었습니다.',
-              showConfirmButton: false,
-              timer: 2000
-            })
-    });
-
-    //PreView Img File
-    function fileSelect() {
-        //Check File API support
-        if (window.File && window.FileList && window.FileReader) {
-
-            var files = event.target.files; //FileList object
-            var output = document.getElementById("contractPreview");
-
-            if((files.length) > 1){
-                alert("이미지는 한장만 업로드 가능합니다.")
-                return;
-            }
-
-            var file = files[0];
-
-            if (!file.type.match('image')){
-                alter("이미지 파일만 업로드 가능합니다.")
-                return;
-            }
-
-            var picReader = new FileReader();
-            picReader.addEventListener("load", function (event) {
-                var picFile = event.target;
-
-                altImg.classList.remove("hidden");
-                uploadIcon.classList.add("hidden");
-                altImg.src=picFile.result;
-                altImg.title = picFile.name;
-            });
-
-            picReader.readAsDataURL(file);
-        }
-        else {
-            console.log("Your browser does not support File API");
-        }
-    }
 
 </script>
 <script src="/js/processSuccessionForm.js"></script>
-<script src="/js/form/processDateSelect.js"></script>
+<!--<script src="/js/form/processDateSelect.js"></script>-->
 <script src="/js/form/searchAddress.js"></script>
 <script src="/js/form/loadPhotoAndValidate.js"></script>
 <script src="/js/form/inputValueSidebar.js"></script>
+<script src="/js/form/imgToText.js"></script>
+<script src="/js/form/openModal.js"></script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+<link rel="stylesheet" href="https://unpkg.com/jcrop/dist/jcrop.css">
+<script src="https://unpkg.com/jcrop"></script>
 </body>
 </html>

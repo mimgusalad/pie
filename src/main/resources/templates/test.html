@@ -1,55 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
 </head>
-<body>
-<h1>
-    S3 이미지 업로더
-</h1>
-<div class="col-md-12">
-    <div class="col-md-2">
-        <form>
-            <div class="form-group">
-                <label for="img">파일 업로드</label>
-                <input type="file" id="img">
-            </div>
-            <button type="button" class="btn btn-primary" id="btn-save">저장</button>
-        </form>
-    </div>
-    <div class="col-md-10">
-        <p><strong>결과 이미지입니다.</strong></p>
-        <img src="" id="result-image">
-    </div>
-</div>
 <script>
-    $('#btn-save').on('click', uploadImage);
 
-    function uploadImage() {
-        var file = $('#img')[0].files[0];
-        var formData = new FormData();
-        formData.append('data', file);
+function imgUpload(){
+	console.log('imgUpload');
+	const FileElement = document.querySelector('#fileInput');
+	console.log('FileElement : ', FileElement);
+	console.log(FileElement.files[0]);
 
-        $.ajax({
-            type: 'POST',
-            url: '/upload',
-            data: formData,
-            processData: false,
-            contentType: false
-        }).done(function (data) {
-            $('#result-image').attr("src", data);
-        }).fail(function (error) {
-            alert(error);
-        })
-    }
+	var formData = new FormData();
+	formData.append("dataFile",FileElement.files[0]);
+
+	fetch('/CONT/upload', {
+	    method: 'POST',
+	    cache: 'no-cache',
+	    body: formData
+	})
+	.then((response) => response.json())
+	.then((data) => {
+	    var list = "";
+	    for(var i=0; i<JSON.parse(data.result).txts.length; i++){
+	    	list += "<div><span>" + JSON.parse(data.result).txts[i] + "</div>";
+	    }
+	    document.getElementById("ocr_result_time").innerHTML = data.time;
+	    document.getElementById("ocr_result").innerHTML = list;
+	});
+}
 </script>
+
+<body>
+<input id="fileInput" type="file" name="uploadfile" multiple="multiple" />
+<button type="button" id="insert" onclick=imgUpload()>결과 확인</button>
+<br/>
+<br/>
+<span style="font-size: 24px;">처리 시간 : </span><span id="ocr_result_time" style="font-size: 24px;"></span>
+<br/>
+<br/>
+<span style="font-size: 24px;">처리 결과 : </span>
+<div id="ocr_result"></div>
 </body>
 </html>

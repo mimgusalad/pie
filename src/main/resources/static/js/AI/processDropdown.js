@@ -2,6 +2,7 @@ const selectMenuList = document.querySelectorAll(".select-menu");
 const selectBtnList = document.querySelectorAll(".select-btn");
 const priceSelectMenu = document.querySelector(".price_dropdown_area");
 const priceSelectBtn = document.querySelector(".price-select-btn");
+const inputClass = document.querySelectorAll(".objectInput");
 
 priceSelectBtn.addEventListener("click", () => {
     priceSelectMenu.classList.toggle("active");
@@ -14,10 +15,12 @@ for(let index=0; index < 3; index ++){
         selectMenuList[index].classList.toggle("active");
         const options = selectMenuList[index].querySelectorAll(".option");
         const sBtn_text = selectMenuList[index].querySelector(".sBtn-text");
+
         options.forEach(option =>{
             option.addEventListener("click", ()=>{
                 let selectedOption = option.querySelector(".option-text").innerText;
                 sBtn_text.innerText = selectedOption;
+                inputClass[index].value = selectedOption;
                 selectMenuList[index].classList.remove("active");
             });
         });

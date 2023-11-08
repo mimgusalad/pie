@@ -131,6 +131,7 @@ function displayPagination(pagination) {
 // 키워드 input 창에 해당 장소명을 표시
 function displayInfoInput(title){
     document.getElementById('inputAddressKeyword').value = title;
+    document.getElementById("addressInput").value = title;
     //document.getElementById('addressKeyword').value = title;
     document.getElementById("result").classList.add('invisible');
 }

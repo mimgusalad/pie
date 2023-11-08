@@ -1,13 +1,30 @@
-function contractDataExtract(input){
-    var file = input.files[0];  // 선택된 이미지 파일 가져오기
-    // 이미지 파일 이름으로 아래에 python 파일 함수 실행
-    // 실행하고 난 다음 succession form에 있는 주소/보증금 등등에 값 input
-    // input code는 아래와 같다
-    // document.getElementById("{input id}").innerText = value
-}
+function imgUpload(){
+	console.log('imgUpload');
+	const FileElement = document.querySelector('#fileInput');
+	console.log('FileElement : ', FileElement);
+	console.log(FileElement.files[0]);
 
-function addAndLoadPicture(input){
-    var file = input.files[0]
+	var formData = new FormData();
+	formData.append("dataFile",FileElement.files[0]);
+    Swal.fire({
+        title:'계약서 인증 중입니다",
+        showLoaderOnConfirm: true,  //데이터 결과를 받을 때까지 로딩바
+        preConfirm: () => { // 자동 실행 되는 함수
+            return fetch('/CONT/upload', {
+                method: 'POST',
+                cache: 'no-cache',
+                body: formData
+            })
+            .then((response) => response.json())
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+        }).then((data) => {
+            var list = "";
+            for(var i=0; i<JSON.parse(data.result).txts.length; i++){
+                list += "<div><span>" + JSON.parse(data.result).txts[i] + "</div>";
+            }
+            document.getElementById("ocr_result_time").innerHTML = data.time;
+            document.getElementById("ocr_result").innerHTML = list;
+        })
 }
-
 
