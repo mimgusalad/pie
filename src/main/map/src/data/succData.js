@@ -1181,6 +1181,6 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: kakaoimg_3,
+    userImage: kakaoimg_4,
   },
 ];
