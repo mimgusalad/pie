@@ -79,7 +79,7 @@ export default function RoomCard({ item }) {
       <div className="infoContainer">
         <div className="listUserInfo">
           <img src={item.userImage} alt="userImage" className="userImage" />
-          <div>{item.id}</div>
+          <div>{item.owner}</div>
         </div>
         <div style={{ fontSize: "12px" }}>{item.price}</div>
       </div>

@@ -1,4 +1,5 @@
 import "./style.css";
+import "./nav.css";
 import React, {useEffect} from "react";
 import {Link, Route, Routes, useNavigate} from "react-router-dom";
 import RoomList from "./RoomList";
@@ -7,7 +8,6 @@ import ReviewDetail from "./ReviewDetail";
 import NavUnder from "./NaviBar/NavUnder";
 import MapPage2 from "./NaviBar/MapPage2";
 import Chat from "./Chat";
-import Temp from "./Temp";
 import Logo from "./img/siteLogo.png";
 import KakaoLogin from "./img/kakao_login_small.png";
 import axios from "axios";
@@ -97,26 +97,51 @@ export default function TempPage() {
 
     return (
       <div>
-        <nav className="navigation">
-          <div className="navigation__navitems">
-            <Link to="http://localhost:8080/" className="navitem__logo">
-              <img alt="못난집" src={Logo}/>
-            </Link>
-            <div className="navitem__main-menus">
-              <a onClick={()=> navigate('/map')} className="main-menus__item">지도</a>
-              <Link to="http://localhost:8080/ai/list" className="main-menus__item">AI추천</Link>
-              <a onClick={()=> navigate('/successionBoard')} className="main-menus__item">승계방</a>
-              <Link to="http://localhost:8080/benefit/list" className="main-menus__item">혜택</Link>
-            </div>
-            <div className="navitem__user_menus">
-              <div className="user_menus__item user_profile">
-                <div className="user_profile__user_name">
-                    {user === null || user === undefined || user.name === "anonymous"? <Button /> : <User user = {user}/>}
-                </div>
+          <nav className="navbar">
+              <div className="nav_logo">
+                  <a href="http://localhost:8080/">
+                      <img className="siteLogo" alt="siteLogo" src={Logo}/>
+                  </a>
+
               </div>
-            </div>
-          </div>
-        </nav>
+              <li className="nav_menu">
+                  <li><a onClick={()=> navigate('/map')} className="main-menus__item">지도</a></li>
+                  <li><Link to="http://localhost:8080/ai/list" className="main-menus__item">AI추천</Link></li>
+                  <li><a onClick={()=> navigate('/successionBoard')} className="main-menus__item">승계방</a></li>
+                  <li><Link to="http://localhost:8080/benefit/list" className="main-menus__item">혜택</Link></li>
+              </li>
+              <ul className="nav_icons">
+                  { user === null || user === undefined || user.name === "anonymous" ?
+                      (
+                          <li>
+                              <div>
+                                  <Button/>
+                              </div>
+                          </li>
+                      ):(
+                          <>
+                              <li><a className="fa-brands fa-twitter" href="http://localhost:3000/chat">메시지</a></li>
+                              <li><a className="fa-brands fa-facebook" href="">{user.name}</a></li>
+                              <li className="dropdown">
+                                  <button className="dropBtn">
+                                      글쓰기
+                                  </button>
+                              </li>
+                          </>)}
+                  <div className="dropDownContent">
+                      <Link className="writeLink" style={{cursor: "pointer"}}
+                            to="http://localhost:8080/review/form">
+                          <h4>리뷰 작성하기</h4>
+                          <p>솔직 담백하게 리뷰를 작성해주세요.</p>
+                      </Link>
+                      <Link className="writeLink" style={{cursor: "pointer"}}
+                            to="http://localhost:8080/succession/form">
+                          <h4>승계글 작성하기</h4>
+                          <p>원룸 승계글을 작성해주세요.</p>
+                      </Link>
+                  </div>
+              </ul>
+          </nav>
     <Routes>
       <Route path="/" element={<div>home</div>}/>
       <Route path="/home" element={<div>home</div>}/>
@@ -130,8 +155,6 @@ export default function TempPage() {
       />
       <Route path="/chat" element={<Chat/>}/>
 
-      /* 리액트-스프링부트 연결 확인용*/
-      <Route path="/chacha" element={<Temp/>}/>
      </Routes>
       </div>
   )
