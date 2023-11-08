@@ -37,4 +37,7 @@ public class SocialAuth {
         this.nickname = nickname;
         this.userinfo = userinfo;
     }
+    public void setUserInfo(String userinfo) {
+        this.userinfo = userinfo;
+    }
 }
