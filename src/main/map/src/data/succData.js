@@ -1,6 +1,7 @@
-import sampleImage1 from "../image/sample1.png";
-import sampleImage2 from "../image/sample2.png";
-import sampleImage3 from "../image/sample3.png";
+import kakaoimg_1 from "../image/kakaoimg_1.png";
+import kakaoimg_2 from "../image/kakaoimg_2.png";
+import kakaoimg_3 from "../image/kakaoimg_3.png";
+import kakaoimg_4 from "../image/kakaoimg_4.png";
 import userImage from "../image/userImageSample.jpg";
 
 // 승계방 페이지 빨간줄에 해당하는 드롭다운에 들어갈 항목
@@ -62,7 +63,7 @@ export const succData = [
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
     //필요
-    userImage: userImage,
+    userImage: kakaoimg_1,
   },
   {
     id: 1,
@@ -110,7 +111,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_2,
   },
   {
     id: 2,
@@ -158,7 +159,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_3,
   },
   {
     id: 3,
@@ -206,7 +207,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_4,
   },
   {
     id: 4,
@@ -254,7 +255,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_1,
   },
   {
     id: 5,
@@ -302,7 +303,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_2,
   },
   {
     id: 6,
@@ -350,7 +351,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_3,
   },
   {
     id: 7,
@@ -398,7 +399,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_4,
   },
   {
     id: 8,
@@ -446,7 +447,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_1,
   },
   {
     id: 9,
@@ -494,7 +495,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_2,
   },
   {
     id: 10,
@@ -542,7 +543,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_3,
   },
   {
     id: 11,
@@ -590,7 +591,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_4,
   },
   {
     id: 12,
@@ -638,7 +639,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     rating: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_1,
   },
   {
     id: 13,
@@ -686,7 +687,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_2,
   },
   {
     id: 14,
@@ -734,7 +735,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_3,
   },
   {
     id: 15,
@@ -782,7 +783,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_4,
   },
   {
     id: 16,
@@ -830,7 +831,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_1,
   },
   {
     id: 17,
@@ -878,7 +879,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_2,
   },
   {
     id: 18,
@@ -926,7 +927,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_3,
   },
   {
     id: 19,
@@ -974,7 +975,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_4,
   },
   {
     id: 20,
@@ -1022,7 +1023,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_1,
   },
   {
     id: 21,
@@ -1070,7 +1071,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_2,
   },
   {
     id: 22,
@@ -1118,7 +1119,7 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_3,
   },
   {
     id: 23,
@@ -1166,6 +1167,6 @@ export const succData = [
     ],
     sucProduct: ["책상", "의자", "전신거울", "탁자", "행거", "매트리스"],
     grade: 3.7,
-    userImage: userImage,
+    userImage: kakaoimg_4,
   },
 ];
