@@ -71,26 +71,26 @@ public class OAuthController {
     }
     @GetMapping("/logout")
     public String logout(){return "login";}
-    @GetMapping("/myPage")
-    public String myPage(Model model) {
-        // 세션에서 받아온 유저정보 검색
-        UserDetails userDetails = (UserDetails) sessionService.getAttribute("userDetails");
-        model.addAttribute("userDetails", userDetails);
-        return "myPage";
-    }
+//    @GetMapping("/myPage")
+//    public String myPage(Model model) {
+//        // 세션에서 받아온 유저정보 검색
+////        UserDetails userDetails = (UserDetails) sessionService.getAttribute("userDetails");
+////        model.addAttribute("userDetails", userDetails);
+//        return "myPage";
+//    }
 
-    @PostMapping("/myPage")
-    public String updateMember(@ModelAttribute SocialAuth updatedMember) {
-        Optional<SocialAuth> existingMemberOptional = memberRepository.findByProviderId(updatedMember.getProviderId());
-
-        if (existingMemberOptional.isPresent()) {
-            SocialAuth existingMember = existingMemberOptional.get();
-            existingMember.setName(updatedMember.getName());
-            memberRepository.save(existingMember);
-        }
-
-        return "redirect:/index";
-    }
+//    @PostMapping("/myPage")
+//    public String updateMember(@ModelAttribute SocialAuth updatedMember) {
+//        Optional<SocialAuth> existingMemberOptional = memberRepository.findByProviderId(updatedMember.getProviderId());
+//
+//        if (existingMemberOptional.isPresent()) {
+//            SocialAuth existingMember = existingMemberOptional.get();
+//            existingMember.setName(updatedMember.getName());
+//            memberRepository.save(existingMember);
+//        }
+//
+//        return "redirect:/index";
+//    }
 
 
 
