@@ -1,7 +1,6 @@
 package com.itd5.homeReviewSite.signup;
 
 
-import ch.qos.logback.classic.Logger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import jakarta.servlet.http.HttpSession;
-import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,11 +20,9 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 public class OAuthController {
-    private static final Logger logger = (Logger) LoggerFactory.getLogger(OAuthController.class);
-
     private final BCryptPasswordEncoder encoder;
     private final MemberRepository memberRepository;
-//    private final SessionService sessionService;
+    private final SessionService sessionService;
     @GetMapping("/index")
     public String index(){return "index";}
     @GetMapping("/login")
@@ -71,26 +67,26 @@ public class OAuthController {
     }
     @GetMapping("/logout")
     public String logout(){return "login";}
-//    @GetMapping("/myPage")
-//    public String myPage(Model model) {
-//        // 세션에서 받아온 유저정보 검색
-////        UserDetails userDetails = (UserDetails) sessionService.getAttribute("userDetails");
-////        model.addAttribute("userDetails", userDetails);
-//        return "myPage";
-//    }
+    @GetMapping("/myPage")
+    public String myPage(Model model) {
+        // 세션에서 받아온 유저정보 검색
+        UserDetails userDetails = (UserDetails) sessionService.getAttribute("userDetails");
+        model.addAttribute("userDetails", userDetails);
+        return "myPage";
+    }
 
-//    @PostMapping("/myPage")
-//    public String updateMember(@ModelAttribute SocialAuth updatedMember) {
-//        Optional<SocialAuth> existingMemberOptional = memberRepository.findByProviderId(updatedMember.getProviderId());
-//
-//        if (existingMemberOptional.isPresent()) {
-//            SocialAuth existingMember = existingMemberOptional.get();
-//            existingMember.setName(updatedMember.getName());
-//            memberRepository.save(existingMember);
-//        }
-//
-//        return "redirect:/index";
-//    }
+    @PostMapping("/myPage")
+    public String updateMember(@ModelAttribute SocialAuth updatedMember) {
+        Optional<SocialAuth> existingMemberOptional = memberRepository.findByProviderId(updatedMember.getProviderId());
+
+        if (existingMemberOptional.isPresent()) {
+            SocialAuth existingMember = existingMemberOptional.get();
+            existingMember.setName(updatedMember.getName());
+            memberRepository.save(existingMember);
+        }
+
+        return "redirect:/index";
+    }
 
 
 
@@ -103,15 +99,12 @@ public class OAuthController {
         return "adminPage";
     }
 
-//    @GetMapping("/login-success")
-//    public String loginSuccess(HttpSession session) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//        sessionService.setAttribute("userDetails", userDetails);
-//        logger.info("세션 연결 확인용");
-//// OO님 환영합니다! 라는 모달창 띄우기?
-////        model.addAttribute("username", userDetails.getUsername());
-////        return "welcome-modal";
-//        return "redirect:/";
-//    }
+    @GetMapping("/login-success")
+    public String loginSuccess(HttpSession session) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        sessionService.setAttribute("userDetails", userDetails);
+
+        return "redirect:/myPage";
+    }
 }

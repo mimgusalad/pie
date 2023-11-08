@@ -44,7 +44,6 @@ public class OAuth2MemberService extends DefaultOAuth2UserService {
         String email = memberInfo.getEmail();
         String role = "ROLE_USER"; //일반 유저
         String nickname = nicknameRepository.getRandomNickname().getNickname();
-//        String userinfo=memberInfo.getUserinfo();
         System.out.println(oAuth2User.getAttributes());
         Optional<SocialAuth> findMember = memberRepository.findByProviderId(providerId);
         SocialAuth member=null;

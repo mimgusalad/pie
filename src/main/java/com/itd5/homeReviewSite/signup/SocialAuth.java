@@ -25,9 +25,8 @@ public class SocialAuth {
     private String provider; //공급자 (google, facebook ...)
     private String providerId; //공급 아이디
     private String nickname;
-    private String userinfo;
     @Builder
-    public SocialAuth(String name, String password, String email, String role, String provider, String providerId, String nickname, String userinfo) {
+    public SocialAuth(String name, String password, String email, String role, String provider, String providerId, String nickname) {
         this.name = name;
         this.password = password;
         this.email = email;
@@ -35,6 +34,5 @@ public class SocialAuth {
         this.provider = provider;
         this.providerId = providerId;
         this.nickname = nickname;
-        this.userinfo = userinfo;
     }
 }
