@@ -1,7 +1,10 @@
 package com.itd5.homeReviewSite.controller;
 
 import com.itd5.homeReviewSite.model.review_article;
+import com.itd5.homeReviewSite.model.succession_article;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
+import com.itd5.homeReviewSite.repository.SuccessionRepository;
+import com.itd5.homeReviewSite.model.succession_article;
 import com.itd5.homeReviewSite.signup.MemberRepository;
 import com.itd5.homeReviewSite.signup.PrincipalDetails;
 import com.itd5.homeReviewSite.signup.SocialAuth;
@@ -26,6 +29,8 @@ public class AccountController {
     ReviewRepository reviewRepository;
     @Autowired
     MemberRepository memberRepository;
+    @Autowired
+    SuccessionRepository successionRepository;
     @GetMapping("login")
     public String login(){
         return "account/login";
@@ -44,6 +49,14 @@ public class AccountController {
         model.addAttribute("myReviewList", myReviewList);
 
         return "account/myPage";
+    }
+    @GetMapping("myPage/mySuccession")
+    public String mySuccession(Model model) {
+
+        Long userId = getLoginUserId();
+        succession_article successionArticle = successionRepository.findByUserId(userId);
+        model.addAttribute("successionArticle", successionArticle);
+        return "redirect:/succession/detail?articleNo="+successionArticle.getArticleNo();
     }
     public Long getLoginUserId() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -87,8 +100,7 @@ public class AccountController {
             SocialAuth member = memberRepository.findById(userId).orElse(null);
             if (member != null) {
                 member.setNickname(userUpdateData.get("nickname"));
-                // 사용자 정보 업데이트 시 userInfo도 업데이트해야 한다면 여기서 수행
-                //member.setUserInfo(userUpdateData.get("userInfo"));
+                member.setUserInfo(userUpdateData.get("userInfo"));
                 memberRepository.save(member);
                 response.put("success", true);
             } else {

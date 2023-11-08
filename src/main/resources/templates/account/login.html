@@ -7,56 +7,33 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="/css/loginModal.css" rel="stylesheet">
-
 </head>
 <th:block th:fragment="login">
     <body>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title" align="center"/>로그인
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title" align="center">SNS 계정 로그인</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="member_login">
+                <form th:action="@{/login}" th:method="POST">
+                    <!-- 카카오 로그인 아이콘 -->
+                    <div class="login_api">
+                        <a href="/oauth2/authorization/kakao">
+                            <img src="/img/kakaologin.png" alt="KAKAO LOGIN">
+                        </a>
+                    </div>
+                    <!-- 구글 로그인 아이콘 -->
+                    <div class="login_api">
+                        <a href="/oauth2/authorization/google">
+                            <img src="/img/googlelogin.png" alt="GOOGLE LOGIN">
+                        </a>
+                    </div>
+                </form>
             </div>
-            <div class="modal-body">
-                <div class="member_login">
-                    <form th:action="@{/login}" th:method="POST">
-                        <div class="member_login_input">
-                            <input type="text" name="name" placeholder="아이디">
-                        </div>
-
-                        <div class="member_login_input">
-                            <input type="password" name="password" placeholder="비밀번호">
-                        </div>
-
-                        <div class="loginMid">
-                            <label class="autoLogin" for="hint">
-                                <input type="checkbox" id="hint"/>로그인 유지하기
-                            </label>
-                            <div class="autoLogin">
-                                <a href="/forgot-password">아이디/비밀번호 찾기</a>
-                            </div>
-                        </div>
-
-                        <input class="member_login_btn" type="submit" id="btn-login" value="로그인">
-
-                        <div class="login_api">
-                            <a href="/oauth2/authorization/kakao">
-                                <img src="/img.google/kakao_login_medium_wide.png" alt="KAKAO LOGIN">
-                            </a>
-                        </div>
-
-                        <div class="login_api">
-                            <a href="/oauth2/authorization/google">
-                                <img src="/img.google/googlelogin.png" alt="GOOGLE LOGIN">
-                            </a>
-                        </div>
-                        <div class="joinLine">
-                            회원이 아니신가요?
-                            <a class="member_join_btn" value="회원가입" onclick="location.href='/account/joinMembership'">회원가입</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        </div>
+    </div>
     </body>
 </th:block>
-
 </html>
