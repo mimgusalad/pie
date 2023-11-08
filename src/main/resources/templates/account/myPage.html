@@ -22,7 +22,7 @@
                     <h2 class="card-title">사용자 정보</h2>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><a href="javascript:void(0);" onclick="loadSavedAddress()">저장한 주소</a></li>
-                        <li class="list-group-item"><a href="javascript:void(0);" onclick="loadMyReview()">내가 쓴 리뷰</a></li>
+                        <li class="list-group-item"><a href="javascript:void(0);" onclick="redirectToMyReview()">내가 쓴 리뷰</a></li>
                         <li class="list-group-item"><a href="javascript:void(0);" onclick="loadMySuccession()">내가 쓴 승계글</a></li>
                         <li class="list-group-item"><a href="javascript:void(0);" onclick="loadMyFavorites()">즐겨찾기</a></li>
                         <li class="list-group-item"><a href="javascript:void(0);" onclick="loadAccountSettings()">계정설정</a></li>
@@ -36,7 +36,7 @@
                 <div class="card-body" id="centerContent">
                     <!-- 여기에 리뷰 목록을 표시합니다 -->
                     <div th:fragment="myReviewList">
-                        <h2 class="card-title">내가 작성한 리뷰</h2>
+                        <h2 class="card-title">마이페이지</h2>
                         <div th:each="myReview : ${myReviewList}" class="content_each_review" th:onclick="|location.href='@{/review/detail(articleNo=${myReview.articleNo})}'|">
                             <!-- 리뷰 내용 표시 -->
                             <h1 class="text_address" th:text="${myReview.address}">경북 경산시 대학로 280</h1>
@@ -74,16 +74,16 @@
             <form id="accountForm">
                 <div class="form-group">
                     <label for="username">닉네임</label>
-                    <input type="text" class="form-control" id="username" value="바꿀 닉네임을 적어주세요.">
+                    <input type="text" class="form-control" id="nickname" placeholder="바꿀 닉네임을 적어주세요.">
                 </div>
                 <div class="form-group">
                     <label for="userInfo">관심지역</label>
-                    <textarea class="form-control" id="userInfo">관심지역을 입력해주세요.</textarea>
+                    <input type="text" class="form-control" id="userInfo" placeholder="관심지역을 입력해주세요.">
                 </div>
-                <div class="form-group">
-                    <label for="userImage">프로필 이미지 업로드</label> <br>
-                    <input type="file" class="form-control-file" id="userImage" accept="image/*">
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="userImage">프로필 이미지 업로드</label> <br>-->
+<!--                    <input type="file" class="form-control-file" id="userImage" accept="image/*">-->
+<!--                </div>-->
                 <button type="button" class="btn btn-primary" onclick="saveAccountSettings()">수정</button>
                 <button type="button" class="btn btn-secondary" onclick="loadContent('/myAccount')">취소</button>
             </form>
@@ -92,9 +92,27 @@
     }
 
     function saveAccountSettings() {
-        var username = $('#username').val();
+        var nickname = $('#nickname').val();
         var userInfo = $('#userInfo').val();
-
+        var userUpdateData = {
+        nickname: nickname,
+        userInfo: userInfo
+    };
+     $.ajax({
+        type: "POST",
+        url: "/account/myPage/updateUserInfo", // 사용자 정보 업데이트를 처리하는 컨트롤러 엔드포인트
+        data: JSON.stringify(userUpdateData),
+        contentType: "application/json",
+        success: function(response) {
+            if (response.success) {
+                // 업데이트가 성공한 경우
+                loadAccountSettings();
+            } else {
+                // 업데이트가 실패한 경우
+                alert("사용자 정보 업데이트에 실패했습니다.");
+            }
+        }
+    });
         // DB로 내용 전송 코드 작성예정
 
         // 완료후 다시 계정설정으로 돌아감
@@ -108,6 +126,10 @@
     `;
     $('#centerContent').html(content);
     }
+    function redirectToMyReview() {
+    window.location.href = '/account/myPage/myReview';
+    }
+
     function loadMyReview(){
     var content = `
         <h2 class="card-title">내가 쓴 리뷰</h2>
