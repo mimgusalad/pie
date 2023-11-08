@@ -3,7 +3,7 @@ import warningSign1 from "../../image/warning_1.png";
 import warningSign2 from "../../image/warning_2.png";
 import warningSign3 from "../../image/warning_3.png";
 import warningSign4 from "../../image/warning_4.png";
-import "./SideInfo.css";
+import "./SuccSideInfo.css";
 import Separator from "../Separator";
 
 export default function SideInfo({ item }) {

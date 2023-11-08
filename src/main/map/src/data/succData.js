@@ -2,7 +2,9 @@ import kakaoimg_1 from "../image/kakaoimg_1.png";
 import kakaoimg_2 from "../image/kakaoimg_2.png";
 import kakaoimg_3 from "../image/kakaoimg_3.png";
 import kakaoimg_4 from "../image/kakaoimg_4.png";
-import userImage from "../image/userImageSample.jpg";
+import sampleImage1 from "../image/sample1.png";
+import sampleImage2 from "../image/sample2.png";
+import sampleImage3 from "../image/sample3.png";
 
 // 승계방 페이지 빨간줄에 해당하는 드롭다운에 들어갈 항목
 // 시/도 : 서울, 경기, 경북
