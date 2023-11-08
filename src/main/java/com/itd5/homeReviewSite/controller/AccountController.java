@@ -55,17 +55,34 @@ public class AccountController {
 
         List<review_article> myReviewList = reviewRepository.findByUserId(userId);
         model.addAttribute("myReviewList", myReviewList);
-
+        if (myReviewList.isEmpty()) {
+            var content = """
+            <h2 class="card-title">내가 쓴 리뷰</h2>
+            <p>아직 내가 쓴 리뷰가 없습니다.</p>
+        """;
+            model.addAttribute("noReview", content);
+        }
         return "account/myPage";
     }
     @GetMapping("myPage/mySuccession")
     public String mySuccession(Model model) {
-
         Long userId = getLoginUserId();
         succession_article successionArticle = successionRepository.findByUserId(userId);
-        model.addAttribute("successionArticle", successionArticle);
-        return "redirect:/succession/detail?articleNo="+successionArticle.getArticleNo();
+
+        if (successionArticle != null) {
+            model.addAttribute("successionArticle", successionArticle);
+            return "redirect:/succession/detail?articleNo=" + successionArticle.getArticleNo();
+        } else {
+            var content = """
+            <h2 class="card-title">내가 쓴 승계글</h2>
+            <p>아직 내가 쓴 승계글이 없습니다.</p>
+        """;
+            model.addAttribute("noSuccession", content);
+            return "account/myPage";
+        }
     }
+
+
     public Long getLoginUserId() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         PrincipalDetails principalDetails = (PrincipalDetails) principal;
