@@ -70,25 +70,18 @@
             <div class="card">
                 <div class="card-body" id="centerContent">
                     <!-- 여기에 리뷰 목록을 표시합니다 -->
-                    <div th:fragment="myReviewList">
-                        <h2 class="card-title">마이페이지</h2>
+                    <div th:if="${myReviewList}">
+                        <h2 class="card-title"> </h2>
                         <div th:each="myReview : ${myReviewList}" class="content_each_review" th:onclick="|location.href='@{/review/detail(articleNo=${myReview.articleNo})}'|">
                             <!-- 리뷰 내용 표시 -->
                             <h1 class="text_address" th:text="${myReview.address}">경북 경산시 대학로 280</h1>
                             <div class="bottom_info">
-                                <!-- 별점 표시 -->
-<!--                                <div class="content_rating_area">-->
-<!--                                    <span class="rating">-->
-<!--                                    ★★★★★-->
-<!--                                    <span class="rating_star">★★★★★</span>-->
-<!--                                    <input class="rating_input" id="rating" name="rating" th:value="${myReview.rating}" type="range" value="5" step="1" min="0" max="10">-->
-<!--                                    </span>-->
-<!--                                </div>-->
-                                <!-- 리뷰 작성 날짜 표시 -->
                                 <h1 class="text_regdate" th:text="${myReview.regdate}">2023. 05. 21</h1>
                             </div>
                         </div>
                     </div>
+                    <div th:if="${noReview}" th:utext="${noReview}"></div>
+                    <div th:if="${noSuccession}" th:utext="${noSuccession}"></div>
                 </div>
             </div>
         </div>
@@ -174,10 +167,9 @@
     `;
     $('#centerContent').html(content);
     }
-    function loadMySuccession(){
-    window.location.href = '/account/myPage/mySuccession';
 
-    }
+    function loadMySuccession(){
+     window.location.href = '/account/myPage/mySuccession';    }
     function loadMyFavorites(){
     var content = `
         <h2 class="card-title">즐겨찾기</h2>
