@@ -1,20 +1,15 @@
 package com.itd5.homeReviewSite.controller;
 
-import com.itd5.homeReviewSite.model.Address;
-import com.itd5.homeReviewSite.model.Message;
-import com.itd5.homeReviewSite.model.review_article;
-import com.itd5.homeReviewSite.model.succession_article;
+import com.itd5.homeReviewSite.model.*;
 import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
 import com.itd5.homeReviewSite.repository.RoomRepository;
 import com.itd5.homeReviewSite.repository.SuccessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,8 +33,16 @@ public class AiController {
 
     @PostMapping("list")
     //ai 화면에서 검색을 했을 시 처리하는 함수
-    public String processSearch(Model model){
-        list = roomRepository.getAllRooms(model);
+    public String processSearch(Model model, @ModelAttribute("roomSearchForm") RoomServiceCriteria room){
+        System.out.printf("room = %s\n", room.toString());
+        list = roomRepository.getAllRooms(
+                room.getMinDeposit(),
+                room.getMaxDeposit(),
+                room.getMinMonthlyRent(),
+                room.getMaxMonthlyRent(),
+                room.getStructure(),
+                room.getAddress()
+        );
         List<review_article> recommendReviewList = reviewRepository.getAllByAddressIdIn(list);
         List<succession_article> recommendSuccessionList = successionRepository.getAllByAddressIdIn(list);
 
