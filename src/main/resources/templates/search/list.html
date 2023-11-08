@@ -7,6 +7,13 @@
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="/css/starter-template.css" rel="stylesheet">
 
+    <!-- jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--sockJs-->
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <!--stomp-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
 </head>
 <body>
 <nav class="navbar bg-body-tertiary" th:replace="~{fragments/common :: menu}">
@@ -17,32 +24,7 @@
 <p value="${addressKeyword}" th:text="${firstKeyword}"></p>
 <p value="${addressKeyword}" th:text="${secondKeyword}"></p>
 <p value="${addressKeyword}" th:text="${thirdKeyword}"></p>
-<h1>Python Script Executor</h1>
-<textarea id="pythonCode" placeholder="Enter Python code here"></textarea>
-<br>
-<button onclick="runPythonCode()">Run Python</button>
-<div id="output"></div>
 
-<script>
-        function runPythonCode() {
-            const pythonCode = document.getElementById('pythonCode').value;
-
-            fetch('/map/execute-python', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(pythonCode),
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('output').innerText = data;
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        }
-    </script>
 </body>
 
 </html>

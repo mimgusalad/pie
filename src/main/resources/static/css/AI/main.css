@@ -313,6 +313,7 @@ body{
 }
 
 .content_result_one{
+    float: left;
     position: relative;
     margin: 20px;
 
