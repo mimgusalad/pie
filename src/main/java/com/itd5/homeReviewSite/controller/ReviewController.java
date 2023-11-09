@@ -97,7 +97,7 @@ public class ReviewController {
         saveReviewPhoto(uploadFiles, review.getArticleNo());
 
         // keyword db save
-        keyword.setReview_id(review.getArticleNo());
+        keyword.setReviewId(review.getArticleNo());
         keywordRepository.save(keyword);
 
         return "redirect:/review/myReview";
@@ -139,12 +139,47 @@ public class ReviewController {
         review = reviewRepository.findById(articleNo).orElse(null);
         List<PhotoFile> photoFileList = fileRepository.findByReviewIdAndArticleType(articleNo, "review");
         // aws img url get
-        for(PhotoFile photoFile : photoFileList){
-            String url = s3UploadService.getImgUrl(photoFile.getSaveFileName());
-            imgUrlList.add(url);
+        if (!photoFileList.isEmpty()) {
+            for (PhotoFile photoFile : photoFileList) {
+                String url = s3UploadService.getImgUrl(photoFile.getSaveFileName());
+                imgUrlList.add(url);
+            }
         }
+        else{
+            imgUrlList.add("/img/reviewUploadImg/reviewDetailExample.png");
+        }
+        // 키워드 전처리
+        keyword keyword = keywordRepository.findByReviewId(articleNo);
+        List<String> keywordList  = Arrays.asList("", "", "", "","");
+        System.out.println(keywordList);
+        String inputValue = keywordList.get((int) keyword.getNoise()) + "소음  ";
+        keywordList.set((int) keyword.getNoise(),inputValue);
+
+        inputValue = keywordList.get((int) keyword.getSmell()) + "냄새  ";
+        keywordList.set((int) keyword.getSmell(),inputValue);
+
+        inputValue = keywordList.get((int) keyword.getSafety()) + "치안  ";
+        keywordList.set((int) keyword.getSafety(),inputValue);
+
+        inputValue = keywordList.get((int) keyword.getConvenience()) + "편의시설  ";
+        keywordList.set((int) keyword.getConvenience(),inputValue);
+
+        inputValue = keywordList.get((int) keyword.getInsect()) + "벌레  ";
+        keywordList.set((int) keyword.getInsect(),inputValue);
+
+        inputValue = keywordList.get((int) keyword.getOptionQuality()) + "옵션 상태  ";
+        keywordList.set((int) keyword.getOptionQuality(),inputValue);
+
+        inputValue = keywordList.get((int) keyword.getTrash()) + "쓰레기 처리  ";
+        keywordList.set((int) keyword.getTrash(),inputValue);
+
+        inputValue = keywordList.get((int) keyword.getSunlight()) + "일조량  ";
+        keywordList.set((int) keyword.getSunlight(),inputValue);
+
+        System.out.println(keywordList);
         model.addAttribute("review", review);
         model.addAttribute("imgUrlList", imgUrlList);
+        model.addAttribute("keywordList", keywordList);
 
         return "review/detail";
     }
