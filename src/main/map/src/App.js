@@ -121,24 +121,24 @@ export default function TempPage() {
                       ):(
                           <>
                               <li><a className="fa-brands fa-twitter" href="http://localhost:3000/chat">메시지</a></li>
-                              <li><a className="fa-brands fa-facebook" href="">{user.name}</a></li>
-                              <li className="dropdown">
-                                  <button className="dropBtn">
-                                      글쓰기
-                                  </button>
-                              </li>
-                          </>)}
+                              <li><a className="fa-brands fa-facebook" href="http://localhost:8080/account/myPage">{user.name}</a></li>
+                              </>)}
+                  <li className="dropdown">
+                      <button className="dropBtn">
+                          글쓰기
+                      </button>
+                      </li>
                   <div className="dropDownContent">
-                      <Link className="writeLink" style={{cursor: "pointer"}}
-                            to="http://localhost:8080/review/form">
+                      <a className="writeLink" style={{cursor: "pointer"}}
+                            href="http://localhost:8080/review/form">
                           <h4>리뷰 작성하기</h4>
                           <p>솔직 담백하게 리뷰를 작성해주세요.</p>
-                      </Link>
-                      <Link className="writeLink" style={{cursor: "pointer"}}
-                            to="http://localhost:8080/succession/form">
+                      </a>
+                      <a className="writeLink" style={{cursor: "pointer"}}
+                            href="http://localhost:8080/succession/form">
                           <h4>승계글 작성하기</h4>
                           <p>원룸 승계글을 작성해주세요.</p>
-                      </Link>
+                      </a>
                   </div>
               </ul>
           </nav>

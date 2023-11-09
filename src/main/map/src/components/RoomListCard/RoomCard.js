@@ -23,8 +23,6 @@ function RoomImage({ item, icon }) {
         backgroundImage: `url(${item.images[0].image})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        width: "100%",
-        height: "240px",
         position: "relative",
         width: `${(windowWidth * 0.51 - 16) / 4}px`,
         height: "240px",
