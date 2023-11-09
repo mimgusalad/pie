@@ -41,7 +41,8 @@ a {
   gap: 3px;
   flex-shrink: 0;
 
-  color: var(--text-primary, #222);
+  /*color: var(--text-primary, #222);*/
+    color: #222;
   text-align: center;
 
   /* Title 1/Medium */
@@ -79,10 +80,12 @@ a {
   display: flex;
   list-style: none;
   padding-left: 0;
+    z-index: 1;
 }
 
 .nav_icons a{
-  color: var(--text-primary, #222);
+  /*color: var(--text-primary, #222);*/
+    color: #222;
   text-align: center;
 
   /* Body 1/Medium */
@@ -115,9 +118,11 @@ a {
 
   border-radius: 8px;
   border: none;
-  background: var(--primary-normal, #459830);
+  /*background: var(--primary-normal, #459830);*/
+    background: #459830;
 
-  color: var(--text-white, #FFF);
+  /*color: var(--text-white, #FFF);*/
+    color: #FFF;
   text-align: center;
 
   /* Body 1/Medium */
@@ -136,7 +141,8 @@ a {
   display: none;
   position : absolute;
   border-radius: 4px;
-  background: var(--black-white-white, #FFF);
+  /*background: var(--black-white-white, #FFF);*/
+    background: #FFF;
   
   /* hover 1 */
   box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.40);
@@ -154,16 +160,19 @@ a {
   padding: 12px 20px;
 
   border-radius: 4px;
-  background: var(--black-white-white, #FFF);
+  /*background: var(--black-white-white, #FFF);*/
+     background: #FFF;
  }
 
  .writeLink:hover{
   border-radius: 4px;
-  background: var(--gray-gray-50, #F7F8F9);
+  /*background: var(--gray-gray-50, #F7F8F9);*/
+     background: #F7F8F9;
  }
 
  .writeLink h4{
-  color: var(--text-primary, #222);
+  /*color: var(--text-primary, #222);*/
+     color: #222;
 
   /* Body 1/Medium */
   font-family: Pretendard;
@@ -174,7 +183,8 @@ a {
  }
 
  .writeLink p{
-  color: var(--text-secondary, #666);
+  /*color: var(--text-secondary, #666);*/
+     color: #666;
 
   /* Caption 1/Regular */
   font-family: Pretendard;

@@ -143,8 +143,8 @@ export default function TempPage() {
               </ul>
           </nav>
     <Routes>
-      <Route path="/" element={<div>home</div>}/>
-      <Route path="/home" element={<div>home</div>}/>
+      <Route path="/" element={<NavUnder/>}/>
+      <Route path="/home" element={<NavUnder/>}/>
       <Route path="/map" element={<NavUnder />} />
       <Route path="/detail/:roomId" element={<MapPage2 />} />
       <Route path="/succDetail/:succId" element={<SuccDetail />} />

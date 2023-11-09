@@ -37,8 +37,7 @@ build/
 src/main/java/config/application-aws.properties
 
 ### node_modules ###
-/src/main/map/node_modules
+/src/main/chat-app2/node_modules
 
 ### env ###
-src/main/map/.env
-/src/main/map/node_modules/
+src/main/chat-app2/.env
