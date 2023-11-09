@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const createSendbirdUser = async (userId, nickname, profileUrl = '') => {
+export const createSendbirdUser = async (userId, nickname, profileUrl = '') => {
   const url = `https://api-${process.env.REACT_APP_APP_ID}.sendbird.com/v3/users`;
   const apiHeaders = {
     'Api-Token': process.env.REACT_APP_API_TOKEN,
@@ -37,4 +37,4 @@ const SendbirdUser = () => {
   return;
 };
 
-export default SendbirdUser;
+//export default { SendbirdUser, createSendbirdUser};

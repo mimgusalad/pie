@@ -4,7 +4,7 @@
 }
 .sendbird-app__wrap {
   position: relative;
-  top: 80px; /* 네비게이션 바의 높이에 따라 조절하십시오. */
+  /*top: 80px; !* 네비게이션 바의 높이에 따라 조절하십시오. *!*/
   justify-content: center;
 }
 
