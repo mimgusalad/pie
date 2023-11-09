@@ -252,10 +252,10 @@ a:visited {
   box-sizing: border-box;
 }
 
-.content {
+#root .layout_root .content {
   display: grid;
   grid-template-columns: 400px 1fr;
-  padding-top: 50px;
+  margin-top: 50px !important;
   min-height: 100vh;
   box-sizing: border-box;
 }
