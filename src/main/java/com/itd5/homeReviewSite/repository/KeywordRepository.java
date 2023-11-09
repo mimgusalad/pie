@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface KeywordRepository extends JpaRepository<keyword, Long> {
-    @Query("SELECT k, ra.userId FROM keyword k JOIN review_article ra ON k.review_id = ra.articleNo")
+    @Query("SELECT k, ra.userId FROM keyword k JOIN review_article ra ON k.reviewId = ra.articleNo")
     List<Object[]> findKeywordAndUserId();
+
+    keyword findByReviewId(Long review_id);
 }

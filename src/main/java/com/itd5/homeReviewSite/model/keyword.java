@@ -8,7 +8,7 @@ import lombok.Data;
 @Entity
 public class keyword {
     @Id
-    private Long review_id;
+    private Long reviewId;
     private double noise;
     private double smell;
     private double safety;
