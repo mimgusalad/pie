@@ -31,7 +31,9 @@
         <ul class="nav_icons">
             <li>
                 <div sec:authorize="!isAuthenticated()">
-                    <a class="fa-brands fa-facebook" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a>
+                    <a class="fa-brands fa-facebook" href="http://localhost:8080/oauth2/authorization/kakao">
+                        <img alt="로그인" src="/img/kakao_login_small.png"/>
+                    </a>
                     <div class="modal fade" id="loginModal" tabindex="-1"aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" style="width:480px; height:600px;">
                             <th:block th:replace="~{/account/login :: login}"></th:block>
