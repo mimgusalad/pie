@@ -255,7 +255,6 @@ a:visited {
 #root .layout_root .content {
   display: grid;
   grid-template-columns: 400px 1fr;
-  margin-top: 50px !important;
   min-height: 100vh;
   box-sizing: border-box;
 }
