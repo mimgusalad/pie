@@ -4,13 +4,11 @@ import com.itd5.homeReviewSite.model.UserInfo;
 import com.itd5.homeReviewSite.signup.PrincipalDetails;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -41,7 +39,6 @@ public class UserInfoController {
             user = new UserInfo("anonymous", "anonymous", "anonymous");
         }
         System.out.println("user name: " +user.getName());
-
 
         return user;
     }
