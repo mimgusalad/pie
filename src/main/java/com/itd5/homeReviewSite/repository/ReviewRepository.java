@@ -14,4 +14,6 @@ public interface ReviewRepository extends JpaRepository<review_article, Long> {
     List<review_article> getAllByAddressIdIn(List<Long> list);
 
     review_article findByArticleNo(Long articleNo);
+
+    List<review_article> findByAddressId(Long addressId);
 }
