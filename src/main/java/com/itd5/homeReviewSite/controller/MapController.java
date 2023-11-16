@@ -1,9 +1,13 @@
 package com.itd5.homeReviewSite.controller;
 
+import com.itd5.homeReviewSite.model.Address;
+import com.itd5.homeReviewSite.repository.AddressRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.python.antlr.op.Mod;
 import org.python.core.*;
 import org.python.util.PythonInterpreter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +22,15 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/map")
+@RequiredArgsConstructor
 public class MapController {
+    @Autowired
+    AddressRepository addressRepository;
 
-    private static PythonInterpreter intPre;
-
+    @ResponseBody
     @GetMapping("list")
-    public String list() throws IOException, InterruptedException {
-
-        return "map/list";
+    public List<Address> list() throws IOException, InterruptedException {
+        return addressRepository.findAll();
     }
 
     @GetMapping("match")
