@@ -33,6 +33,12 @@ public class MapController {
         return addressRepository.findAll();
     }
 
+    @ResponseBody
+    @GetMapping("list/{addressId}")
+    public Address list(@PathVariable Long addressId) throws IOException, InterruptedException {
+        return addressRepository.findByAddressId(addressId);
+    }
+
     @GetMapping("match")
     public String match(@RequestParam(value = "addressKeyword", required = false) String addressKeyword,
                         @RequestParam(value = "firstKeyword", required = false) String firstKeyword,
