@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class ArticleService {
+public class ReviewService {
     @Autowired
     ReviewRepository reviewRepository;
     @Autowired
@@ -23,7 +23,7 @@ public class ArticleService {
     @Autowired
     S3UploadService s3UploadService;
     @Autowired
-    public ArticleService(
+    public ReviewService(
             ReviewRepository reviewRepository,
             FileRepository fileRepository,
             S3UploadService s3UploadService) {
@@ -80,6 +80,10 @@ public class ArticleService {
     public void updateArticle(Long articleNo, Review review) {
         review_article review_article = reviewRepository.findByArticleNo(articleNo);
 
+    }
+
+    public List<review_article> getArticleByUserId(long userId) {
+        return reviewRepository.findByUserIdOrderByRegdateDesc(userId);
     }
 }
 

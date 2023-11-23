@@ -42,10 +42,12 @@ public class ReviewController {
     @Autowired
     AddressRepository addressRepository;
     @Autowired
+    static
     FileRepository fileRepository;
     @Autowired
     KeywordRepository keywordRepository;
     @Autowired
+    static
     S3UploadService s3UploadService;
 
     @GetMapping("form")
@@ -255,7 +257,7 @@ public class ReviewController {
         return address;
     }
 
-    public void saveReviewPhoto(List<MultipartFile> uploadFiles, Long articleNo) {
+    public static void saveReviewPhoto(List<MultipartFile> uploadFiles, Long articleNo) {
 
         for (MultipartFile imgFile : uploadFiles) {
             PhotoFile photoFile = new PhotoFile();
@@ -291,7 +293,7 @@ public class ReviewController {
         return userId;
     }
     // 확장자 추출
-    private String extractExt(String originalFilename) {
+    private static String extractExt(String originalFilename) {
         int pos = originalFilename.lastIndexOf(".");
         return originalFilename.substring(pos + 1);
     }
