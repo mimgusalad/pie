@@ -80,7 +80,8 @@ public class SuccessionController {
 
         // succession 객체 변수 설정
         succession.setUserId(getLoginUserId());
-        succession.setAddressId(sameAddress.getAddressId());
+        // 여기 원래 됐었는데 db 수정하면서 속성이 없어짐
+        //succession.setAddressId(sameAddress.getAddressId());
 
         // succession db save
         successionRepository.save(succession);

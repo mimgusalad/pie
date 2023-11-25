@@ -38,8 +38,9 @@ const createChannel = async (thisUser, otherUser) => {
 }
 function Chat() {
   const data = JSON.parse(sessionStorage.getItem("user"));
-  const USER_ID = data.email;
-  const NICKNAME = data.nickname;
+  // const USER_ID = data.email;
+  const USER_ID = "dakjijisalad@gmail.com";
+  const NICKNAME = "너른토마토";
   const OTHER_USER = "test_id2";
   createChannel(USER_ID, OTHER_USER);
   console.log(USER_ID);

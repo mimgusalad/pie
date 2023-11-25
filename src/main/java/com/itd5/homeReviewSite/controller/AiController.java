@@ -64,11 +64,13 @@ public class AiController {
 
         System.out.println(list);
         List<review_article> recommendReviewList = reviewRepository.getAllByAddressIdIn(list);
-        List<succession_article> recommendSuccessionList = successionRepository.getAllByAddressIdIn(list);
+        // 클남 이거 이제 안댐
+        //List<succession_article> recommendSuccessionList = successionRepository.getAllByAddressIdIn(list);
 
         model.addAttribute("recommendReviewPreList",recommendReviewList);
         model.addAttribute("searchCheck", "check");
-        model.addAttribute("recommendSuccessionList", recommendSuccessionList);
+        // 클남 이거 이제 안댐
+        //model.addAttribute("recommendSuccessionList", recommendSuccessionList);
         model.addAttribute("roomInput", roomInput);
 
         return "ai/list";

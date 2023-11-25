@@ -42,5 +42,4 @@ public class succession_article {
     private String moddate;  // 끌올 날짜 저장
     private LocalDateTime regDate = LocalDateTime.now();     // 게시글 작성 날짜 및 수정 날짜 기록
     private int viewCnt;
-    private Long addressId;
 }

@@ -73,6 +73,7 @@ public class MainController {
 
     // 여기서부턴 승계글 관련 api
 
+    // 전체 승계글 최신순으로 가져오기
     @ResponseBody
     @GetMapping("articles")
     public List<succession_article> getAllSuccArticle(){
