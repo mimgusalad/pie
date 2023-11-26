@@ -9,6 +9,7 @@ import com.itd5.homeReviewSite.model.succession_article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -28,10 +29,22 @@ public class MainController {
     }
 
     // 이미지, 리뷰글 저장 테스트용 api
+    // postman에서 테스트햇음
     @ResponseBody
     @PostMapping("checkpost")
     public List<review_article> checkPost(@ModelAttribute Review review){
         reviewService.saveArticle(review);
+        return reviewService.getAllReviewArticle();
+    }
+
+    // flutter에서 테스트했음
+    // 이미지만 받아옴
+    @ResponseBody
+    @PostMapping("checkpost2")
+    public List<review_article> checkPost2(@RequestParam("images") List<MultipartFile> review){
+        review.forEach(
+                img -> System.out.println(img.getOriginalFilename())
+        );
         return reviewService.getAllReviewArticle();
     }
 
