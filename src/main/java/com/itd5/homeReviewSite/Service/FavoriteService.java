@@ -1,8 +1,6 @@
 package com.itd5.homeReviewSite.Service;
-
 import com.itd5.homeReviewSite.model.Favorite;
-import com.itd5.homeReviewSite.model.FavoriteId;
-import com.itd5.homeReviewSite.model.review_article;
+import com.itd5.homeReviewSite.model.FavoritePK;
 import com.itd5.homeReviewSite.repository.FavoriteRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,26 +21,27 @@ public class FavoriteService {
         this.reviewRepository = reviewRepository;
     }
 
-    public List<Favorite> favoriteHandler(int userId, int articleNo) {
+    public List<Favorite> favoriteHandler(FavoritePK key) {
         // Check if the Favorite with the given composite key exists
-        Favorite userFavorite = favoriteRepository.findByUserIdAndArticleNo(userId, articleNo);
+        FavoritePK pk = new FavoritePK(key.getUserId(), key.getArticleNo());
+        Favorite userKey = favoriteRepository.findById(key).orElse(null);
 
-        if (userFavorite == null) {
+        if (userKey == null) {
             // If it doesn't exist, create a new Favorite
-            userFavorite = new Favorite();
-            userFavorite.setUserId(userId);  // Set the composite key
-            userFavorite.setArticleNo(articleNo);
-            userFavorite.setFavDate(LocalDateTime.now());
+            Favorite userFavorite = new Favorite();
+            userFavorite.setUserId(key.getUserId());  // Set the composite key
+            userFavorite.setArticleNo(key.getArticleNo());
+            userFavorite.setFavdate(LocalDateTime.now());
             favoriteRepository.save(userFavorite);
         } else {
             // If it exists, delete it
-            favoriteRepository.delete(userFavorite);
+            System.out.println("userKey = " + userKey);
+            favoriteRepository.delete(userKey);
         }
         return favoriteRepository.findAll();
     }
 
-    public List<review_article> getFavorite(long userId) {
-        List<Integer> articleNoList = favoriteRepository.findByUserIdOrderByFavDateDesc(userId);
-        return reviewRepository.findByArticleNoIn(articleNoList);
+    public List<FavoriteRepository.review_article> getFavorites(int userId) {
+        return favoriteRepository.getMyFavorites(userId);
     }
 }

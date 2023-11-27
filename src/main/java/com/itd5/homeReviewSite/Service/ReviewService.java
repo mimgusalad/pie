@@ -2,10 +2,7 @@ package com.itd5.homeReviewSite.Service;
 
 import com.itd5.homeReviewSite.model.PhotoFile;
 import com.itd5.homeReviewSite.model.Review;
-import com.itd5.homeReviewSite.model.Favorite;
 import com.itd5.homeReviewSite.model.review_article;
-import com.itd5.homeReviewSite.repository.FavoriteRepository;
-import com.itd5.homeReviewSite.service.S3UploadService;
 
 import com.itd5.homeReviewSite.repository.FileRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
@@ -13,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 

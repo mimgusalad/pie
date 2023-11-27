@@ -1,24 +1,29 @@
 package com.itd5.homeReviewSite.model;
-
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "favorite")
-@IdClass(FavoriteId.class)
+@IdClass(FavoritePK.class)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Favorite implements Serializable {
+public class Favorite {
     @Id
     @Column(name = "user_id")
     int userId;
     @Id
     @Column(name = "article_no")
     int articleNo;
-    @Column(name = "favdate")
-    LocalDateTime favDate;
+    LocalDateTime favdate;
+
+    @Override
+    public String toString() {
+        return "Favorite{" +
+                "userId=" + userId +
+                ", articleNo=" + articleNo +
+                ", favDate=" + favdate +
+                '}';
+    }
 }

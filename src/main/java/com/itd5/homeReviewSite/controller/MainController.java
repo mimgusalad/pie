@@ -4,6 +4,7 @@ import com.itd5.homeReviewSite.Service.ReviewService;
 import com.itd5.homeReviewSite.Service.SuccBoardService;
 import com.itd5.homeReviewSite.model.*;
 
+import com.itd5.homeReviewSite.repository.FavoriteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -102,15 +103,16 @@ public class MainController {
     // 즐겨찾기 핸들러
     @ResponseBody
     @PostMapping("favorite")
-    public List<Favorite> favoriteHandler(@ModelAttribute Favorite favorite){
-        return favoriteService.favoriteHandler(favorite.getUserId(), favorite.getArticleNo());
+    public List<Favorite> favoriteHandler(@RequestBody FavoritePK favoritePK){
+        System.out.println("favoritePK = " + favoritePK);
+        return favoriteService.favoriteHandler(favoritePK);
     }
 
     // 즐겨찾기 날짜순으로 가져오기
     @ResponseBody
     @GetMapping("favorite")
-    public List<review_article> getFavorite(@RequestParam("userId") long userId){
-        return favoriteService.getFavorite(userId);
+    public List<FavoriteRepository.review_article> getFavorite(@RequestParam("userId") int userId){
+        return favoriteService.getFavorites(userId);
     }
 
 }
