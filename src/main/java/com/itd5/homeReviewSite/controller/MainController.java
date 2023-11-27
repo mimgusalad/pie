@@ -71,7 +71,7 @@ public class MainController {
     // 내가 쓴 리뷰글 최신순으로 가져오기
     @ResponseBody
     @GetMapping("reviews/my")
-    public List<review_article> getMyArticle(@RequestParam("userId") long userId){
+    public List<ReviewAndImgOut> getMyArticle(@RequestParam("userId") long userId){
        return reviewService.getArticleByUserId(userId);
     }
 
