@@ -8,7 +8,6 @@ import com.itd5.homeReviewSite.repository.FavoriteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -29,37 +28,29 @@ public class MainController {
         this.favoriteService = favoriteService;
     }
 
-    // 이미지, 리뷰글 저장 테스트용 api
-    // postman에서 테스트햇음
-    @ResponseBody
-    @PostMapping("checkpost")
-    public List<review_article> checkPost(@ModelAttribute ReviewAndImgIn reviewAndImgIn){
-        reviewService.saveArticle(reviewAndImgIn);
-        return reviewService.getAllReviewArticle();
-    }
 
-    // flutter에서 테스트했음
-    // 이미지만 받아옴
-    @ResponseBody
-    @PostMapping("checkpost2")
-    public List<review_article> checkPost2(@RequestParam("images") List<MultipartFile> review){
-        review.forEach(
-                img -> System.out.println(img.getOriginalFilename())
-        );
-        return reviewService.getAllReviewArticle();
-    }
+//    // flutter에서 테스트했음
+//    // 이미지만 받아옴
+//    @ResponseBody
+//    @PostMapping("checkpost2")
+//    public List<review_article> checkPost2(@RequestParam("images") List<MultipartFile> review){
+//        review.forEach(
+//                img -> System.out.println(img.getOriginalFilename())
+//        );
+//        return reviewService.getAllReviewArticle();
+//    }
 
     // 전체 리뷰글 최신순으로 가져오기
     @ResponseBody
     @GetMapping("reviews")
-    public List<review_article> getAllReviewArticle(){
+    public List<ReviewAndImgOut> getAllReviewArticle(){
         return reviewService.getAllReviewArticle();
     }
 
     // 리뷰글 삭제하기
     @ResponseBody
     @DeleteMapping("reviews/{articleNo}")
-    public List<review_article> deleteArticle(@PathVariable Long articleNo){
+    public List<ReviewAndImgOut> deleteArticle(@PathVariable Long articleNo){
         reviewService.deleteArticle(articleNo);
         return reviewService.getAllReviewArticle();
     }

@@ -1,6 +1,7 @@
 package com.itd5.homeReviewSite.Service;
 
 import com.itd5.homeReviewSite.model.PhotoFile;
+import com.itd5.homeReviewSite.model.ReviewAndImgOut;
 import com.itd5.homeReviewSite.model.SuccArticle;
 import com.itd5.homeReviewSite.model.succession_article;
 import com.itd5.homeReviewSite.repository.FileRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -53,6 +55,7 @@ public class SuccBoardService {
             }
             allSuccArticle.add(succArticle);
         });
+        allSuccArticle.sort(new _SuccComparator().reversed());
         return allSuccArticle;
     }
 
@@ -77,4 +80,11 @@ public class SuccBoardService {
         return succArticle;
     }
 
+}
+
+class _SuccComparator implements Comparator<SuccArticle> {
+    @Override
+    public int compare(SuccArticle o1, SuccArticle o2) {
+        return o1.getSuccession_article().getRegDate().compareTo(o2.getSuccession_article().getRegDate());
+    }
 }

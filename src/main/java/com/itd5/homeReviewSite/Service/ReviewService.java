@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class ReviewService {
@@ -62,8 +60,25 @@ public class ReviewService {
     }
 
     // 전체 리뷰글 조회하기
-    public List<review_article> getAllReviewArticle(){
-        return reviewRepository.findAllByOrderByRegdateDesc();
+    public List<ReviewAndImgOut> getAllReviewArticle(){
+        List<ReviewAndImgOut> allReviewArticle = new ArrayList<>();
+        List<review_article> allReview_article = reviewRepository.findAllByOrderByRegdateDesc();
+        allReview_article.forEach(review_article -> {
+            Long articleNo = review_article.getArticleNo();
+            List<PhotoFile> photoFiles = fileRepository.findByReviewIdAndArticleType(articleNo,"review");
+            List<String> img_list = new ArrayList<>();
+            photoFiles.forEach(photoFile -> {
+                img_list.add(s3UploadService.getImgUrl(photoFile.getSaveFileName()));
+            });
+            ReviewAndImgOut reviewAndImgOut = new ReviewAndImgOut();
+            reviewAndImgOut.setReview_article(review_article);
+            reviewAndImgOut.setImg_url(img_list);
+            allReviewArticle.add(reviewAndImgOut);
+        });
+
+        // 최신순으로 정렬
+        allReviewArticle.sort(new __ReviewComparator().reversed());
+        return allReviewArticle;
     }
 
     // 리뷰글 삭제하기
@@ -102,3 +117,9 @@ public class ReviewService {
     }
 }
 
+class __ReviewComparator implements Comparator<ReviewAndImgOut> {
+    @Override
+    public int compare(ReviewAndImgOut o1, ReviewAndImgOut o2) {
+        return o1.getReview_article().getRegdate().compareTo(o2.getReview_article().getRegdate());
+    }
+}
