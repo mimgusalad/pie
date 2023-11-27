@@ -1,11 +1,9 @@
 package com.itd5.homeReviewSite.controller;
+import com.itd5.homeReviewSite.Service.FavoriteService;
 import com.itd5.homeReviewSite.Service.ReviewService;
 import com.itd5.homeReviewSite.Service.SuccBoardService;
-import com.itd5.homeReviewSite.model.SuccArticle;
-import com.itd5.homeReviewSite.model.review_article;
+import com.itd5.homeReviewSite.model.*;
 
-import com.itd5.homeReviewSite.model.Review;
-import com.itd5.homeReviewSite.model.succession_article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +20,12 @@ public class MainController {
 
     private final ReviewService reviewService;
     private final SuccBoardService succBoardService;
+    private final FavoriteService favoriteService;
     @Autowired
-    public MainController(ReviewService reviewService, SuccBoardService succBoardService) {
+    public MainController(ReviewService reviewService, SuccBoardService succBoardService, FavoriteService favoriteService) {
         this.reviewService = reviewService;
         this.succBoardService = succBoardService;
+        this.favoriteService = favoriteService;
     }
 
     // 이미지, 리뷰글 저장 테스트용 api
@@ -97,6 +97,20 @@ public class MainController {
     @GetMapping("articles/{articleNo}")
     public SuccArticle getSuccArticle(@PathVariable Long articleNo){
         return succBoardService.getSuccArticleAndWriter(articleNo);
+    }
+
+    // 즐겨찾기 핸들러
+    @ResponseBody
+    @PostMapping("favorite")
+    public List<Favorite> favoriteHandler(@ModelAttribute Favorite favorite){
+        return favoriteService.favoriteHandler(favorite.getUserId(), favorite.getArticleNo());
+    }
+
+    // 즐겨찾기 날짜순으로 가져오기
+    @ResponseBody
+    @GetMapping("favorite")
+    public List<review_article> getFavorite(@RequestParam("userId") long userId){
+        return favoriteService.getFavorite(userId);
     }
 
 }
