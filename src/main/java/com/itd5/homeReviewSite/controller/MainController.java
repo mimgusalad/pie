@@ -33,8 +33,8 @@ public class MainController {
     // postman에서 테스트햇음
     @ResponseBody
     @PostMapping("checkpost")
-    public List<review_article> checkPost(@ModelAttribute Review review){
-        reviewService.saveArticle(review);
+    public List<review_article> checkPost(@ModelAttribute ReviewAndImgIn reviewAndImgIn){
+        reviewService.saveArticle(reviewAndImgIn);
         return reviewService.getAllReviewArticle();
     }
 
@@ -67,15 +67,15 @@ public class MainController {
     // 리뷰글 1개 조회하기
     @ResponseBody
     @GetMapping("reviews/{articleNo}")
-    public review_article getArticle(@PathVariable Long articleNo){
-        return reviewService.getArticle(articleNo);
+    public ReviewAndImgOut getOneArticle(@PathVariable Long articleNo){
+        return reviewService.getOneArticle(articleNo);
     }
 
     // 리뷰글 수정하기
     @ResponseBody
     @PutMapping("reviews/{articleNo}")
-    public void updateArticle(@PathVariable Long articleNo, @ModelAttribute Review review){
-        reviewService.updateArticle(articleNo, review);
+    public void updateArticle(@PathVariable Long articleNo, @ModelAttribute ReviewAndImgIn reviewAndImgIn){
+        reviewService.updateArticle(articleNo, reviewAndImgIn);
     }
 
     // 내가 쓴 리뷰글 최신순으로 가져오기
@@ -90,10 +90,11 @@ public class MainController {
     // 전체 승계글 최신순으로 가져오기
     @ResponseBody
     @GetMapping("articles")
-    public List<succession_article> getAllSuccArticle(){
+    public List<SuccArticle> getAllSuccArticle(){
         return succBoardService.getAllSuccArticle();
     }
 
+    // 승계글 1개 조회하기
     @ResponseBody
     @GetMapping("articles/{articleNo}")
     public SuccArticle getSuccArticle(@PathVariable Long articleNo){

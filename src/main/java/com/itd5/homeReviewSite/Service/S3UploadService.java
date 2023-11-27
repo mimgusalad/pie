@@ -1,4 +1,4 @@
-package com.itd5.homeReviewSite.service;
+package com.itd5.homeReviewSite.Service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
