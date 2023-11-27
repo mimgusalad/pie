@@ -1,7 +1,8 @@
 package com.itd5.homeReviewSite.Service;
 
 import com.itd5.homeReviewSite.model.PhotoFile;
-import com.itd5.homeReviewSite.model.Review;
+import com.itd5.homeReviewSite.model.ReviewAndImgIn;
+import com.itd5.homeReviewSite.model.ReviewAndImgOut;
 import com.itd5.homeReviewSite.model.review_article;
 
 import com.itd5.homeReviewSite.repository.FileRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,10 +35,10 @@ public class ReviewService {
 
     // 리뷰글 업로드
     // this method must be divided into two methods, which will be saveArticle and saveArticleImages
-    public void saveArticle(Review review){
+    public void saveArticle(ReviewAndImgIn reviewAndImgIn){
         System.out.println("Service/ArticleService/saveArticle called");
-        long id = reviewRepository.save(review.getReview_article()).getArticleNo();
-        review.getImg_list().forEach(multipartFile -> {
+        long id = reviewRepository.save(reviewAndImgIn.getReview_article()).getArticleNo();
+        reviewAndImgIn.getImg_list().forEach(multipartFile -> {
             System.out.println(multipartFile.getOriginalFilename());
             PhotoFile photoFile = new PhotoFile();
             String originalFileName = multipartFile.getOriginalFilename();
@@ -70,19 +72,33 @@ public class ReviewService {
     }
 
     // 리뷰글 1개 조회하기
-    public review_article getArticle(Long articleNo) {
-        return reviewRepository.findByArticleNo(articleNo);
+    public ReviewAndImgOut getOneArticle(Long articleNo) {
+        review_article review_article = reviewRepository.findByArticleNo(articleNo);
+        List<PhotoFile> photoFiles = fileRepository.findByReviewIdAndArticleType(articleNo, "review");
+        List<String> img_url = new ArrayList<>();
+        for (PhotoFile photoFile : photoFiles) {
+            img_url.add(s3UploadService.getImgUrl(photoFile.getSaveFileName()));
+        }
+        ReviewAndImgOut reviewAndImgOut = new ReviewAndImgOut();
+        reviewAndImgOut.setReview_article(review_article);
+        reviewAndImgOut.setImg_url(img_url);
+        return reviewAndImgOut;
     }
 
     // 리뷰글 수정할때 수정한 날짜 필요하고 (moddate) and originally uploaded pictures must be deleted on the aws server as well
     // delete the pictures then upload the new ones.
-    public void updateArticle(Long articleNo, Review review) {
+    public void updateArticle(Long articleNo, ReviewAndImgIn reviewAndImgIn) {
         review_article review_article = reviewRepository.findByArticleNo(articleNo);
 
     }
 
+    // 내가 쓴 리뷰글 최신순으로 조회하기
     public List<review_article> getArticleByUserId(long userId) {
         return reviewRepository.findByUserIdOrderByRegdateDesc(userId);
+    }
+
+    public review_article getArticle(Long articleNo) {
+        return reviewRepository.findByArticleNo(articleNo);
     }
 }
 
