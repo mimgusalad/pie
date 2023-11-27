@@ -3,7 +3,6 @@ package com.itd5.homeReviewSite.Service;
 import com.itd5.homeReviewSite.model.PhotoFile;
 import com.itd5.homeReviewSite.model.Review;
 import com.itd5.homeReviewSite.model.review_article;
-import com.itd5.homeReviewSite.service.S3UploadService;
 
 import com.itd5.homeReviewSite.repository.FileRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
