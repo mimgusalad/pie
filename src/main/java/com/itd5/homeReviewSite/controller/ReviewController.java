@@ -10,7 +10,7 @@ import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.FileRepository;
 import com.itd5.homeReviewSite.repository.KeywordRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
-import com.itd5.homeReviewSite.service.S3UploadService;
+import com.itd5.homeReviewSite.Service.S3UploadService;
 import com.itd5.homeReviewSite.signup.PrincipalDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;

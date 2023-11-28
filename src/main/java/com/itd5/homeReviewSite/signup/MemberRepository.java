@@ -1,6 +1,5 @@
 package com.itd5.homeReviewSite.signup;
 
-import com.itd5.homeReviewSite.model.User;
 import com.itd5.homeReviewSite.model.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

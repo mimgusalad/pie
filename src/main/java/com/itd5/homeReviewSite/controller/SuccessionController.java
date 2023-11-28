@@ -9,7 +9,7 @@ import com.itd5.homeReviewSite.model.succession_article;
 import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.FileRepository;
 import com.itd5.homeReviewSite.repository.SuccessionRepository;
-import com.itd5.homeReviewSite.service.S3UploadService;
+import com.itd5.homeReviewSite.Service.S3UploadService;
 import com.itd5.homeReviewSite.signup.PrincipalDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.compress.utils.FileNameUtils;
