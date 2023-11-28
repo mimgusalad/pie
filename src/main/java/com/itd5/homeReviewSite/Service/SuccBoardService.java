@@ -47,7 +47,7 @@ public class SuccBoardService {
             });
             SuccArticle succArticle = new SuccArticle();
             succArticle.setSuccession_article(succession_article);
-            succArticle.setImg_list(img_list);
+            succArticle.setImg_url(img_list);
             succArticle.setUserInfo(memberRepository.findWriter(succession_article.getUserId()));
             // 닉네임이 없으면 이름으로 대체
             if(succArticle.getUserInfo().getNickname() == null){
@@ -70,7 +70,7 @@ public class SuccBoardService {
         photoFiles.forEach(photoFile -> {
             img_list.add(s3UploadService.getImgUrl(photoFile.getSaveFileName()));
         });
-        succArticle.setImg_list(img_list);
+        succArticle.setImg_url(img_list);
         // 작성자 정보 가져오기
         succArticle.setUserInfo(memberRepository.findWriter(succArticle.getSuccession_article().getUserId()));
         // 닉네임이 없으면 이름으로 대체

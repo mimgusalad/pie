@@ -11,6 +11,6 @@ import java.util.List;
 @Data
 public class SuccArticle {
     private succession_article succession_article;
-    private List<String> img_list;
+    private List<String> img_url;
     private UserInfo userInfo;
 }
