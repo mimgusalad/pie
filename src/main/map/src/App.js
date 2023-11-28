@@ -12,6 +12,10 @@ import Logo from "./img/siteLogo.png";
 import KakaoLogin from "./img/kakao_login_small.png";
 import axios from "axios";
 import {Cookies, useCookies} from "react-cookie";
+import MyReviewList from "./MyReviewList";
+import MySuccession from "./MySuccession";
+import SavedAddress from "./SavedAddress";
+import MyPage from './MyPage';  // MyPage 컴포넌트의 파일 경로에 따라 수정
 
 const cookies = new Cookies();
 axios.defaults.withCredentials = true;
@@ -149,10 +153,11 @@ export default function TempPage() {
       <Route path="/detail/:roomId" element={<MapPage2 />} />
       <Route path="/succDetail/:succId" element={<SuccDetail />} />
       <Route path="/successionBoard" element={<RoomList />} />
-      <Route
-        path="detail/:roomId/review/:reviewId"
-        element={<ReviewDetail />}
-      />
+      <Route path="/myPage" element={<MyPage />} />
+      <Route path="/myPage/myReview" element={<MyReviewList />} />
+      <Route path="/myPage/mySuccession" element={<MySuccession />} />
+      <Route path="/myPage/favorites" element={<SavedAddress />} />
+      <Route path="detail/:roomId/review/:reviewId" element={<ReviewDetail />}/>
       <Route path="/chat" element={<Chat/>}/>
 
      </Routes>
