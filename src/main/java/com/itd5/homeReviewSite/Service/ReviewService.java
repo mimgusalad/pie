@@ -108,8 +108,25 @@ public class ReviewService {
     }
 
     // 내가 쓴 리뷰글 최신순으로 조회하기
-    public List<review_article> getArticleByUserId(long userId) {
-        return reviewRepository.findByUserIdOrderByRegdateDesc(userId);
+    public List<ReviewAndImgOut> getArticleByUserId(long userId) {
+        List<ReviewAndImgOut> myReviewArticle = new ArrayList<>();
+        List<review_article> myReview_article = reviewRepository.findByUserIdOrderByRegdateDesc(userId);
+        myReview_article.forEach(review_article -> {
+            Long articleNo = review_article.getArticleNo();
+            List<PhotoFile> photoFiles = fileRepository.findByReviewIdAndArticleType(articleNo,"review");
+            List<String> img_list = new ArrayList<>();
+            photoFiles.forEach(photoFile -> {
+                img_list.add(s3UploadService.getImgUrl(photoFile.getSaveFileName()));
+            });
+            ReviewAndImgOut reviewAndImgOut = new ReviewAndImgOut();
+            reviewAndImgOut.setReview_article(review_article);
+            reviewAndImgOut.setImg_url(img_list);
+            myReviewArticle.add(reviewAndImgOut);
+        });
+
+        // 최신순으로 정렬
+        myReviewArticle.sort(new __ReviewComparator().reversed());
+        return myReviewArticle;
     }
 
     public review_article getArticle(Long articleNo) {
