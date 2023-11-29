@@ -20,6 +20,12 @@ import WritableReview from "./pages/WritableReview";
 import SuccessionDetial from "./pages/SuccessionDetail";
 import ReviewDetailPage from "./pages/ReviewDetailPage";
 
+import MyReviewList from "./MyReviewList";
+import MySuccession from "./MySuccession";
+import MyPage from './MyPage';
+import Setting from './Setting';
+import Favorite from './Favorite';
+
 import Logo from "./img/siteLogo.png";
 import KakaoLogin from "./img/kakao_login_small.png";
 import axios from "axios";
@@ -167,6 +173,11 @@ export default function TempPage() {
       <Route path="/succession/form" element={<SuccessionForm />} />
       <Route path="/review/detail/:reviewId" element={<ReviewDetailPage />}></Route>
       <Route path="/succession/detail/:successionId" element = {<SuccessionDetial/>}></Route>
+      <Route path="/myPage" element={<MyPage />} />
+      <Route path="/myPage/favorites" element={<Favorite />}/>
+      <Route path="/myPage/myReviewList" element={<MyReviewList />} />
+      <Route path="/myPage/mySuccession" element={<MySuccession />} />
+      <Route path="/myPage/setting" element={<Setting />} />
       <Route
         path="detail/:roomId/review/:reviewId"
         element={<ReviewDetail />}

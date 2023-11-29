@@ -7,7 +7,6 @@ import {BrowserRouter} from "react-router-dom";
 import {CookiesProvider} from "react-cookie";
 import MyReviewComponent from "./MyReviewList";
 import MySuccessionComponent from "./MySuccession";
-import FavoritesComponent from "./SavedAddress";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

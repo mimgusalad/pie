@@ -1,0 +1,40 @@
+/* Favorite.css */
+.favorite-list {
+  max-width: 600px;
+  margin: auto;
+}
+
+.favorite-item {
+  border-bottom: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.favorite-item .address {
+  font-weight: bold;
+  color: #5a5a5a;
+  margin-bottom: 5px;
+}
+
+.favorite-item .content-title {
+  font-size: 1.2rem;
+  color: #000;
+  margin-bottom: 5px;
+}
+
+.favorite-item .content-text {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* 보증금/월세 정보 스타일링 */
+.favorite-item p {
+  margin-bottom: 5px;
+}
+
+/* 작성일 스타일링 */
+.favorite-item .regdate {
+  color: #666;
+  font-size: 0.8rem;
+}
