@@ -139,57 +139,9 @@ public class ReviewService {
     }
 
     // 게시글 사진, 위도경도, 키워드 (한글로 처리), 리뷰개수(address table) 리뷰 정보
-    public List<Map> getReviewsWithDetailedInformation(){
-        List<Map> items = new ArrayList<>();
-        List<review_article> review_articleList = reviewRepository.findAll();
-        review_articleList.forEach( review ->{
-            // 각 게시글 사진 가져오기
-            Long articleNo = review.getArticleNo();
-            List<PhotoFile> photoFiles = fileRepository.findByReviewIdAndArticleType(articleNo,"review");
-            List<String> img_list = new ArrayList<>();
-            photoFiles.forEach(photoFile -> {
-                img_list.add(s3UploadService.getImgUrl(photoFile.getSaveFileName()));
-            });
-            // 각 게시글 위도경도 가져오기
-            Long addressId = review.getAddressId();
-            Address address = addressRepository.findByAddressId(addressId);
 
-            Map item = new Map();
-            item.setImg_url(img_list);
-            item.setReview_article(review);
-            if(address == null){
-                item.setLatitude(0);
-                item.setLongitude(0);
-                item.setReviewCount(0);
-                item.setKeyword(new KeywordsToString());
-                items.add(item);
-                return;
-            }
 
-            // 각 게시글 키워드 가져오기
-            Keyword keywords = keywordRepository.findByReviewId(articleNo);
-            KeywordsToString keyToString = new KeywordsToString();
-
-            // 키워드 한글로 처리
-            keyToString.setConvenience(processKeyword(keywords.getConvenience()));
-            keyToString.setSafety(processKeyword(keywords.getSafety()));
-            keyToString.setSmell(processKeyword(keywords.getSmell()));
-            keyToString.setInsect(processKeyword(keywords.getInsect()));
-            keyToString.setNoise(processKeyword(keywords.getNoise()));
-            keyToString.setTrash(processKeyword(keywords.getTrash()));
-            keyToString.setOptionQuality(processKeyword(keywords.getOptionQuality()));
-            keyToString.setSunlight(processKeyword(keywords.getSunlight()));
-
-            item.setLatitude(address.getLatitude());
-            item.setLongitude(address.getLongitude());
-            item.setReviewCount(address.getReviewCount());
-            item.setKeyword(keyToString);
-            items.add(item);
-        });
-        return items;
-    }
-
-    private String processKeyword(double keyword){
+    public String processKeyword(double keyword){
         if(keyword <= 2){
             return "문제 없음";
         }else if(keyword > 2 && keyword <= 5){
