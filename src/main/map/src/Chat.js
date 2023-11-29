@@ -6,7 +6,7 @@ import "./chatStyle.css";
 import "./App.css";
 import "@sendbird/uikit-react/dist/index.css";
 import kr from "date-fns/locale/ko";
-import SendbirdUser from "./RegisterUser";
+import {createSendbirdUser} from "./RegisterUser";
 
 const createChannel = async (thisUser, otherUser) => {
   try {
@@ -26,7 +26,8 @@ const createChannel = async (thisUser, otherUser) => {
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to create channel: ${response.status} - ${response.statusText}`);
+      createSendbirdUser(otherUser, otherUser, "");
+      // throw new Error(`Failed to create channel: ${response.status} - ${response.statusText}`);
     }
 
     const data = await response.json();
@@ -37,10 +38,12 @@ const createChannel = async (thisUser, otherUser) => {
 }
 function Chat() {
   const data = JSON.parse(sessionStorage.getItem("user"));
-  const USER_ID = data.email;
-  const NICKNAME = data.nickname;
+  // const USER_ID = data.email;
+  const USER_ID = "dakjijisalad@gmail.com";
+  const NICKNAME = "너른토마토";
   const OTHER_USER = "test_id2";
   createChannel(USER_ID, OTHER_USER);
+  console.log(USER_ID);
 
   const APP_ID = process.env.REACT_APP_APP_ID;
   const PROFILE_URL = process.env.REACT_APP_PROFILE_URL;

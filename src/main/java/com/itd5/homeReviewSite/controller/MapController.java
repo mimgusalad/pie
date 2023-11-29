@@ -1,31 +1,69 @@
 package com.itd5.homeReviewSite.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
-import org.python.antlr.op.Mod;
-import org.python.core.*;
-import org.python.util.PythonInterpreter;
+import com.itd5.homeReviewSite.Service.MapService;
+import com.itd5.homeReviewSite.model.Address;
+import com.itd5.homeReviewSite.model.Map;
+import com.itd5.homeReviewSite.model.review_article;
+import com.itd5.homeReviewSite.repository.AddressRepository;
+import com.itd5.homeReviewSite.repository.ReviewRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.net.http.HttpResponse;
 import java.util.List;
 
 @Controller
 @RequestMapping("/map")
+@RequiredArgsConstructor
 public class MapController {
+    @Autowired
+    AddressRepository addressRepository;
+    @Autowired
+    ReviewRepository reviewRepository;
+    @Autowired
+    MapService mapService;
+    @Autowired
+    public MapController(
+            AddressRepository addressRepository,
+            ReviewRepository reviewRepository,
+            MapService mapService) {
+        this.addressRepository = addressRepository;
+        this.reviewRepository = reviewRepository;
+        this.mapService = mapService;
+    }
 
-    private static PythonInterpreter intPre;
+    @ResponseBody
+    @GetMapping("")
+    public List<Map> getAllMap(){
+        return mapService.getReviewsWithDetailedInformation();
+    }
 
+    @ResponseBody
+    @GetMapping("distinct")
+    public List<Map> getDistinctMap(){
+        return mapService.getDistinctAddressReviews();
+    }
+
+    @ResponseBody
+    @GetMapping("{addressId}")
+    public List<Map> getMapByAddressId(@PathVariable Long addressId){
+        return mapService.getDetailedReviewByAddressId(addressId);
+    }
+
+    @ResponseBody
     @GetMapping("list")
-    public String list() throws IOException, InterruptedException {
+    public List<Address> list() throws IOException, InterruptedException {
+        return addressRepository.findAll();
+    }
 
-        return "map/list";
+    @ResponseBody
+    @GetMapping("detail/{addressId}")
+    public List<review_article> getReviewArticle(@PathVariable Long addressId) throws IOException, InterruptedException {
+        return reviewRepository.findByAddressId(addressId);
     }
 
     @GetMapping("match")

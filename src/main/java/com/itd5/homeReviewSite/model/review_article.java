@@ -21,6 +21,7 @@ public class review_article {
     private String houseType;   // 원룸, 투룸 등 정보
     @NotBlank
     private String payment;     // 전세 혹은 월세
+    private String utility;     // 관리비
     @NotBlank(message = "livingYear is not empty")
     private String livingYear;     //거주년도
     @NotNull
