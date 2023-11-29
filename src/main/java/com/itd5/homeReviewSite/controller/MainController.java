@@ -99,14 +99,4 @@ public class MainController {
         return favoriteService.checkFavorite(new FavoritePK(userId, articleNo));
     }
 
-    @GetMapping("map")
-    public List<Map> getAllMap(){
-        return mapService.getReviewsWithDetailedInformation();
-    }
-
-    @GetMapping("map-distinct")
-    public List<Map> getDistinctMap(){
-        return mapService.getDistinctAddressReviews();
-    }
-
 }

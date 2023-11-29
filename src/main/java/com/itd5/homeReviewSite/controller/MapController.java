@@ -1,6 +1,8 @@
 package com.itd5.homeReviewSite.controller;
 
+import com.itd5.homeReviewSite.Service.MapService;
 import com.itd5.homeReviewSite.model.Address;
+import com.itd5.homeReviewSite.model.Map;
 import com.itd5.homeReviewSite.model.review_article;
 import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
@@ -22,6 +24,35 @@ public class MapController {
     AddressRepository addressRepository;
     @Autowired
     ReviewRepository reviewRepository;
+    @Autowired
+    MapService mapService;
+    @Autowired
+    public MapController(
+            AddressRepository addressRepository,
+            ReviewRepository reviewRepository,
+            MapService mapService) {
+        this.addressRepository = addressRepository;
+        this.reviewRepository = reviewRepository;
+        this.mapService = mapService;
+    }
+
+    @ResponseBody
+    @GetMapping("")
+    public List<Map> getAllMap(){
+        return mapService.getReviewsWithDetailedInformation();
+    }
+
+    @ResponseBody
+    @GetMapping("distinct")
+    public List<Map> getDistinctMap(){
+        return mapService.getDistinctAddressReviews();
+    }
+
+    @ResponseBody
+    @GetMapping("{addressId}")
+    public List<Map> getMapByAddressId(@PathVariable Long addressId){
+        return mapService.getDetailedReviewByAddressId(addressId);
+    }
 
     @ResponseBody
     @GetMapping("list")
