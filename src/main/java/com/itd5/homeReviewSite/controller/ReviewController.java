@@ -7,7 +7,7 @@ import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.FileRepository;
 import com.itd5.homeReviewSite.repository.KeywordRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
-import com.itd5.homeReviewSite.service.S3UploadService;
+import com.itd5.homeReviewSite.Service.S3UploadService;
 import com.itd5.homeReviewSite.signup.PrincipalDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -30,6 +30,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.*;
+import java.util.Map;
 
 @Controller
 @RequestMapping("review")
@@ -80,7 +81,7 @@ public class ReviewController {
         reviewRepository.save(review);
 
         // 키워드 저장
-        keyword keyword = new keyword(reviewForm.getNoise(), reviewForm.getSmell(), reviewForm.getSafety(),
+        Keyword keyword = new Keyword(reviewForm.getNoise(), reviewForm.getSmell(), reviewForm.getSafety(),
                 reviewForm.getConvenience(), reviewForm.getInsect(), reviewForm.getOptionQuality(),
                 reviewForm.getTrash(), reviewForm.getSunlight());
 
@@ -148,7 +149,7 @@ public class ReviewController {
             imgUrlList.add("/img/reviewUploadImg/reviewDetailExample.png");
         }
         // 키워드 전처리
-        keyword keyword = keywordRepository.findByReviewId(articleNo);
+        Keyword keyword = keywordRepository.findByReviewId(articleNo);
         List<String> keywordList  = Arrays.asList("", "", "", "","");
         System.out.println(keywordList);
         String inputValue = keywordList.get((int) keyword.getNoise()) + "소음  ";

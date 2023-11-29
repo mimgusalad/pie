@@ -20,8 +20,8 @@ public class Keyword {
     private double trash;
     private double sunlight;
 
-    public keyword(){}
-    public keyword(String noise, String smell, String safety, String convenience, String insect,
+    public Keyword(){}
+    public Keyword(String noise, String smell, String safety, String convenience, String insect,
                    String optionQuality, String trash, String sunlight){
         this.noise = Double.parseDouble(noise);
         this.smell = Double.parseDouble(smell);
