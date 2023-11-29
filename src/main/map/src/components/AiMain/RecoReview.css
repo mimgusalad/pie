@@ -1,0 +1,104 @@
+.content_review_area{
+    width: 1380px;
+    height: 350px;
+}
+.content_review_title{
+    color: var(--text-primary, #222);
+    text-align: center;
+    margin: 20px;
+
+    /* Head 1/SemiBold */
+    font-family: Pretendard;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px; /* 135.714% */
+}
+.content_review_each{
+    position: relative;
+    float: left;
+    margin: 20px;
+    padding: 26px 20px;
+
+    text-align: left;
+    width: 290px;
+    height: 220px;
+    flex-shrink: 0;
+
+    border-radius: 4px;
+    border: 1px solid var(--gray-gray-200, #C9CDD2);
+    background: var(--text-white, #FFF);
+}
+.review_location_mark{
+    width: 16px;
+    height: 16px;
+}
+.review_address{
+    color: var(--text-primary, #222);
+
+    /* Body 1/Medium */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
+}
+.review_content{
+    margin-top: 10px;
+    height: 100px;
+
+    color: var(--text-primary, #222);
+    overflow:hidden;
+    /* Labe 2/Regular */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+}
+.review_recommend_title{
+    margin-right: 8px;
+    color: var(--text-primary, #222);
+
+    /* Caption 1/Regular */
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 133.333% */
+}
+.review_recommend_cnt{
+    color: var(--text-primary, #222);
+
+    /* Caption 1/Bold */
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px; /* 133.333% */
+}
+.review_detail_link{
+    float: right;
+    color: var(--primary-normal, #459830);
+    text-align: center;
+
+    /* Body 2/Medium */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+}
+.review_more_link{
+    float: right;
+    text-decoration-line: none;
+
+    color: var(--text-primary, #222);
+
+    /* Body 2/Medium */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+}

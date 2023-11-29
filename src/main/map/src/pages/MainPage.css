@@ -1,0 +1,226 @@
+
+/* main page 글씨 area */
+
+#textArea {
+    margin-right: 9.25rem;
+    margin-left: 6.88rem;
+    margin-top: 6rem;
+}
+
+.mainText {
+    width: 820px;
+    position: relative;
+    z-index: 3;
+
+    color: #000;
+    font-family: Noto Sans KR;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100px; /* 156.25% */
+}
+
+.subText {
+    margin-top : 1.875rem;
+    margin-bottom: 8rem;
+
+    color: #484848;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px; /* 166.667% */ 
+}
+
+.invisible{
+    display:none;
+}
+
+#menu_wrap{
+    position:relative;
+}
+#menu_wrap .option p{
+    margin: 10px 0;
+}
+
+#menu_wrap .option button{
+    margin-left: 5px;
+}
+
+#addressKeywordArea{
+    width: 448px;  height: 48px;
+    flex-shrink: 0;
+
+    padding: 14px 16px;
+    border-radius: 8px;
+    background: var(--text-white, #FFF);
+}
+
+#addressKeywordArea img{
+    margin-right: 20px;
+    width: 20.001px;  height: 20px;
+    flex-shrink: 0;
+}
+
+#inputAddressKeyword {
+    width: 350px;
+    color: var(--text-secondary, #666);
+    border:none;
+
+    /* Title 2/Medium */
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 133.333% */
+}
+
+
+#result{
+    height: 200px;
+    width:448px;
+    overflow:scroll;
+    background:#fff;
+    position:absolute;
+}
+
+/* 키워드 선택 결과 area css */
+.selectedKeyword {
+    margin-top: 2.5rem;
+    
+    width: 820px;  height: 60px;
+    flex-shrink: 0;
+
+    border-radius: 8px;
+    background: var(--text-white, #FFF);
+}
+
+.selectedKeyword img {
+    float: left;
+    margin: 20px 24px 20px 16px;
+
+    width: 22px; height: 20px;
+    flex-shrink: 0;
+}
+
+.keywordTextArea {
+    padding: 0.875rem;
+    float:left;
+    
+    width: 150px; height: 48px;
+    margin-top: 4px;
+}
+
+
+.keywordTextArea h4 {
+    color: var(--text-secondary, #666);
+    display : inline;
+
+    /* Body 1/Medium */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
+}
+
+.keywordText {
+    width: 132px;
+    color: #000;
+    display: inline;
+    margin-left: 30px;
+
+    /* Title 2/Medium */
+    font-family: Pretendard;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem; /* 133.333% */
+}
+
+
+/* 키워드 선택 area css */
+#btnArea {
+    margin-top: 3rem;
+    margin-right:170px;
+
+    display : grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* 키워드 이미지 세로 한 줄 css */
+.keywordList{
+    margin-right: 1.87rem;
+}
+
+.keywordList p {
+    width: 175px;
+    flex-shrink: 0;
+    padding: 5px;
+
+    border-radius: 8px;
+    border: 1px solid #000;
+    background: #FFF;
+
+    color: #191919;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+/* 키워드 이미지 버튼 css */
+.keywordList label{
+    padding: 20px 0px;
+    cursor: pointer;
+    display: flex;
+}
+
+.keywordList label input[type="checkbox"]{
+    display: none;
+}
+
+.keywordList label .imgBox {
+    position: relative;
+    display: flex;
+    border-radius: 10px;
+    box-shadow: none;
+
+    transition: 0.5s;
+}
+
+.keywordList label img{
+    width: 175px; height: 210px;
+    flex-shrink: 0;
+
+    filter : grayscale(100%);
+}
+
+.imgBox:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.imgBox:hover img{
+    filter : grayscale(0%);
+}
+
+.selectedKeyword input[type="submit"] {
+    margin-left:2.75rem;
+
+    width: 180px; height: 60px;
+    flex-shrink: 0;
+    
+    border : none;
+    border-radius: 10px;
+    background: var(--primary-normal, #459830);
+
+    color: var(--text-white, #FFF);
+    text-align: center;
+
+    /* Head 1/Medium */
+    font-family: Pretendard;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 38px; /* 135.714% */
+}
