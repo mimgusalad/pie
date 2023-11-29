@@ -3,12 +3,9 @@ package com.itd5.homeReviewSite.model;
 import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
@@ -31,6 +28,7 @@ public class review_article {
     @NotNull
     private int deposit;            //보증금
     private int fee;                //월세
+    private int managementFee;      //관리비
     private String address;
     private String addressDetail;   // 주소 자세히
 
@@ -41,4 +39,21 @@ public class review_article {
     private int certification;  // 입주민 인증 확인
     private int viewCnt;
     private Long addressId;
+
+    public review_article(){}
+    public review_article(String houseType, String payment, String livingYear, String rating, String deposit,
+                              String fee, String managementFee, String contentTitle, String contentText, String certification) {
+        this.houseType = houseType;
+        this.payment = payment;
+        this.livingYear = livingYear;
+        this.contentTitle = contentTitle;
+        this.contentText = contentText;
+
+        this.rating = (rating == "" ? 0 : Double.parseDouble(rating));
+        this.deposit = (deposit == "" ? 0 : Integer.parseInt(deposit));
+        this.fee = (fee == "" ? 0 : Integer.parseInt(fee));
+        this.managementFee = (managementFee == "" ? 0 : Integer.parseInt(managementFee));
+        this.certification = (certification == "" ? 0 : Integer.parseInt(certification));
+
+    }
 }

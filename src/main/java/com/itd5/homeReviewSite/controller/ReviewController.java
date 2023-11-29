@@ -2,10 +2,7 @@ package com.itd5.homeReviewSite.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.itd5.homeReviewSite.model.Address;
-import com.itd5.homeReviewSite.model.PhotoFile;
-import com.itd5.homeReviewSite.model.keyword;
-import com.itd5.homeReviewSite.model.review_article;
+import com.itd5.homeReviewSite.model.*;
 import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.FileRepository;
 import com.itd5.homeReviewSite.repository.KeywordRepository;
@@ -17,6 +14,7 @@ import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +34,8 @@ import java.util.*;
 @Controller
 @RequestMapping("review")
 @RequiredArgsConstructor
+@EnableCaching
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class ReviewController {
     @Autowired
     ReviewRepository reviewRepository;
@@ -48,63 +48,60 @@ public class ReviewController {
     @Autowired
     S3UploadService s3UploadService;
 
-    @GetMapping("form")
-    public String form(Model model) {
-        model.addAttribute("review", new review_article());
-        model.addAttribute("keyword", new keyword());
-        return "review/form";
-    }
-
     @PostMapping("form")
-    public String submitReview(HttpServletRequest request, @RequestParam(value = "files", required = false) List<MultipartFile> uploadFiles,
-                               @RequestParam(value="contract_img", required = false) MultipartFile contractImg,
-                               @RequestParam(value="addressName") String addressName,
-                               @Valid review_article review, @ModelAttribute keyword keyword,
-                               BindingResult bindingResult, Errors errors) throws Exception {
+    @ResponseBody
+    public Map<String, Object> submitReview(@RequestBody reviewForm reviewForm){
 
+        review_article review = new review_article(
+                reviewForm.getHouseType(), reviewForm.getPayment(),
+                reviewForm.getLivingYear(), reviewForm.getRating(),
+                reviewForm.getDeposit(), reviewForm.getFee(),
+                reviewForm.getManagementFee(),
+                reviewForm.getContentTitle(), reviewForm.getContentText(),
+                reviewForm.getCertification()
+        );
 
-        // 주소 정보 가지고 오기
-        // 도로명, 지번주소, 빌딩 이름, 우편 번호, 위도, 경도
-        Address saveAddress = getKakaoApiFromAddress(addressName);
+        //주소 정보 가지고 오기
+        Address saveAddress = getKakaoApiFromAddress(reviewForm.getAddressName());
 
         // 동일한 주소에 대한 처리
-        // 동일한 주소가 없는 경우에만 save
         Address sameAddress = addressRepository.findByLatitudeAndLongitude(saveAddress.getLatitude(), saveAddress.getLongitude());
         if (sameAddress == null){
             addressRepository.save(saveAddress);
             sameAddress = saveAddress;
         }
 
-        // 입주민 인증에 대한 처리
-        // 입주민 인증을 위해 이미지 파일을 업로드 한 경우
-/*        if (contractImg != null){
-
-        }*/
-
-        // rating  set
-        review.setRating(review.getRating());
-
-        // review 객체 변수 설정
+        // 리뷰 객체 생성
         review.setUserId(getLoginUserId());
         review.setAddressId(sameAddress.getAddressId());
         review.setAddress(sameAddress.getAddress());
 
-        // review db save
+        System.out.println("save review");
         reviewRepository.save(review);
 
-        System.out.println(uploadFiles.size());
-        // 리뷰 사진 save
-        saveReviewPhoto(uploadFiles, review.getArticleNo());
+        // 키워드 저장
+        keyword keyword = new keyword(reviewForm.getNoise(), reviewForm.getSmell(), reviewForm.getSafety(),
+                reviewForm.getConvenience(), reviewForm.getInsect(), reviewForm.getOptionQuality(),
+                reviewForm.getTrash(), reviewForm.getSunlight());
 
-        // keyword db save
         keyword.setReviewId(review.getArticleNo());
         keywordRepository.save(keyword);
+        System.out.println("save keyword");
 
-        return "redirect:/review/myReview";
+        // 리뷰 사진 save
+//        saveReviewPhoto(uploadFiles, review.getArticleNo());
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("reviewId",String.valueOf(review.getArticleNo()));
+        resultMap.put("reviewForm", reviewForm);
+
+        return resultMap;
     }
 
     @GetMapping("myReview")
-    public String myReview(Model model) {
+    @ResponseBody
+    public Map<String,Object> myReview() {
+        Map<String, Object> result = new HashMap<>();
+
         Long userId = getLoginUserId();
 
         List<review_article> myReviewList = reviewRepository.findByUserId(userId);
@@ -122,10 +119,12 @@ public class ReviewController {
             else
                 previewImgUrlList.add("/img/reviewUploadImg/altRoomPicture.png");
         }
-        model.addAttribute("myReviewList", myReviewList);
-        model.addAttribute("previewImgUrlList",previewImgUrlList);
+//        model.addAttribute("myReviewList", myReviewList);
+//        model.addAttribute("previewImgUrlList",previewImgUrlList);
+        result.put("myReviewList", myReviewList);
+        result.put("previewImgUrlList", previewImgUrlList);
 
-        return "review/myReview";
+        return result;
     }
 
     @GetMapping("detail")

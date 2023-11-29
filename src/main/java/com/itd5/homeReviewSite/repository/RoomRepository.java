@@ -20,7 +20,7 @@ public interface RoomRepository extends JpaRepository<RoomServiceCriteria, Long>
 //            "AND r.address LIKE CONCAT('%', '대구', '%')", nativeQuery = true)
     @Query(value = "SELECT r.addressId " +
             "FROM review_article r, keyword k " +
-            "WHERE r.articleNo = k.review_id " +
+            "WHERE r.articleNo = k.reviewId " +
             "AND r.deposit >= :minDeposit and r.deposit <= :maxDeposit " +
             "AND r.fee >= :minMonthlyRent and r.fee <= :maxMonthlyRent " +
             "AND r.houseType = :structure " +

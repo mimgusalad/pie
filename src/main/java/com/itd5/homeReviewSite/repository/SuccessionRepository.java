@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface SuccessionRepository extends JpaRepository<succession_article,Long> {
     succession_article findByUserId(Long userId);
-    List<succession_article> getAllByAddressIdIn(List<Long> list);
+    //List<succession_article> getAllByAddressIdIn(List<Long> list);
 
     succession_article findByArticleNo(Long articleNo);
 
-    List<succession_article> findTop4ByAddressId(Long addressId);
+    //List<succession_article> findTop4ByAddressId(Long addressId);
 }
