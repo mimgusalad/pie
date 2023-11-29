@@ -2,19 +2,16 @@ package com.itd5.homeReviewSite.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.itd5.homeReviewSite.model.Address;
-import com.itd5.homeReviewSite.model.Message;
-import com.itd5.homeReviewSite.model.PhotoFile;
-import com.itd5.homeReviewSite.model.succession_article;
+import com.itd5.homeReviewSite.model.*;
 import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.FileRepository;
 import com.itd5.homeReviewSite.repository.SuccessionRepository;
-import com.itd5.homeReviewSite.service.S3UploadService;
+import com.itd5.homeReviewSite.Service.S3UploadService;
 import com.itd5.homeReviewSite.signup.PrincipalDetails;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.commons.compress.utils.FileNameUtils;
-import org.apache.commons.lang3.RandomStringUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +23,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.Map;
-import java.util.UUID;
 
-@Controller
+@RestController
 @RequestMapping("succession")
+@RequiredArgsConstructor
+@EnableCaching
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class SuccessionController {
 
     @Autowired
@@ -44,26 +42,31 @@ public class SuccessionController {
     @Autowired
     S3UploadService s3UploadService;
     @GetMapping("form")
-    public String form(Model model){
+    public String form(){
         Long userId = getLoginUserId();
         succession_article successionArticle = successionRepository.findByUserId(userId);
         if(successionArticle == null){
             successionArticle = new succession_article();
-            model.addAttribute("succession", successionArticle);
-
-            return "succession/form";
         }
         else{
             Message message = new Message("이미 작성된 승계글이 있습니다." ,"작성된 승계글 페이지로 전환됩니다.", "/succession/detail?articleNo="+successionArticle.getArticleNo(),"/",  RequestMethod.GET, null );
-            return showMessageAndRedirect(message, model);
-            //return "redirect:/succession/detail?id="+successionArticle.getArticleNo();
+            return "succession/form";
         }
-
+        return "succession/form";
     }
 
     @PostMapping("form")
-    public String submitSuccession(HttpServletRequest request,   @RequestParam(value="files", required = false) List<MultipartFile> uploadFiles,
-                                   @ModelAttribute succession_article succession) throws Exception{
+    @ResponseBody
+    public Map<String, Object> submitSuccession(@RequestBody successionForm successionForm){
+
+        System.out.println(successionForm);
+        succession_article succession = new succession_article(
+                successionForm.getHouseType(), successionForm.getAddressName(), successionForm.getAddressDetail(),
+                successionForm.getPeriodYear(), successionForm.getPeriodMonth(), successionForm.getPeriodDay(),
+                successionForm.getPayType(), successionForm.getPayment(), successionForm.getDeposit(),
+                successionForm.getFee(), successionForm.getContentTitle(), successionForm.getContentText(),
+                successionForm.getOptionQuality(), successionForm.getSuccessionQuality()
+        );
 
         // 위도 경도 변환
         // 주소 정보 가지고 오기
@@ -80,15 +83,19 @@ public class SuccessionController {
 
         // succession 객체 변수 설정
         succession.setUserId(getLoginUserId());
-        succession.setAddressId(sameAddress.getAddressId());
+        //succession.setAddressId(sameAddress.getAddressId());
 
         // succession db save
         successionRepository.save(succession);
 
         // 사진 save
-        savePhoto(request, uploadFiles, succession.getArticleNo());
+        //savePhoto(request, uploadFiles, succession.getArticleNo());
 
-        return "redirect:/succession/detail?articleNo="+succession.getArticleNo();
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("successionId",String.valueOf(succession.getArticleNo()));
+        resultMap.put("successionForm", successionForm);
+
+        return resultMap;
     }
     @GetMapping("delete")
     public String delete(@RequestParam(required = false) Long articleNo){

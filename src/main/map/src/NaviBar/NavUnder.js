@@ -1,11 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import MapContainer from "./Components/MapContainer";
 import { Data } from "../data/Data";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import ToggleBtn from "../components/ToggleBtnFilled/ToggleBtn";
-import SubMenu from "./SubMenu";
-import Nav from "../components/Nav";
-import axios from "axios";
+import {useNavigate } from "react-router-dom";
+import "../style.css";
 
 const { kakao } = window;
 
@@ -670,21 +666,9 @@ function NavUnder() {
 
   return (
     <div className="layout_root">
-      <div>
-        {/* <SubMenu /> */}
         <div className="sub-menus">
       <div className="sub-menus__wrapper">
         <div className="left_sub_menu_button">
-          {/* {leftSubMenus.map((leftSubMenu, index) => {
-            return (
-              <div className="left_sub_menu__item" key={index}>
-                <button className="left_sub_menu__item">
-                  {leftSubMenu.label}
-                </button> */}
-                {/* {leftSubMenu.label} */}
-              {/* </div>
-            );
-          })} */}
         </div>
         <div
           style={{
@@ -1050,7 +1034,6 @@ function NavUnder() {
             }}
           ></div>
         </div>
-      </div>
     </div>
   );
 }

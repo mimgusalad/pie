@@ -7,6 +7,7 @@ import lombok.Data;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Data
 @Entity
@@ -42,5 +43,34 @@ public class succession_article {
     private String moddate;  // 끌올 날짜 저장
     private LocalDateTime regDate = LocalDateTime.now();     // 게시글 작성 날짜 및 수정 날짜 기록
     private int viewCnt;
-    private Long addressId;
+    //private Long addressId;
+
+    public succession_article(){};
+    public succession_article(String houseType, String address, String addressDetail,
+                              String periodYear, String periodMonth, String periodDay, String payType,
+                              String payment, String deposit, String fee, String contentTitle, String contentText,
+                              ArrayList optionQuality, ArrayList successionQuality){
+        this.houseType = houseType;
+        this.address = address;
+        this.addressDetail = addressDetail;
+        this.periodYear = (periodYear == "" ? 0 : Integer.parseInt(periodYear));
+        this.periodMonth = (periodMonth == "" ? 0 :Integer.parseInt(periodMonth));
+        this.periodDay = (periodDay == "" ? 0 : Integer.parseInt(periodDay));
+        this.payType = payType;
+        this.payment = (payment == "" ? 0 :Integer.parseInt(payment));
+        this.deposit = (deposit == "" ? 0 :Integer.parseInt(deposit));
+        this.fee =  (fee == "" ? 0 :Integer.parseInt(fee));
+        this.contentTitle = contentTitle;
+        this.contentText = contentText;
+
+        this.optionQuality = ArrayListToString(optionQuality);
+        this.successionQuality = ArrayListToString(successionQuality);
+    }
+    public String ArrayListToString(ArrayList list){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Object tmp : list){
+            stringBuilder.append(tmp+",");
+        }
+        return stringBuilder.toString();
+    }
 }
