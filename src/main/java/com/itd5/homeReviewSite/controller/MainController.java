@@ -1,5 +1,6 @@
 package com.itd5.homeReviewSite.controller;
 import com.itd5.homeReviewSite.Service.FavoriteService;
+import com.itd5.homeReviewSite.Service.MapService;
 import com.itd5.homeReviewSite.Service.ReviewService;
 import com.itd5.homeReviewSite.Service.SuccBoardService;
 import com.itd5.homeReviewSite.model.*;
@@ -7,7 +8,6 @@ import com.itd5.homeReviewSite.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -22,11 +22,17 @@ public class MainController {
     private final ReviewService reviewService;
     private final SuccBoardService succBoardService;
     private final FavoriteService favoriteService;
+    private final MapService mapService;
     @Autowired
-    public MainController(ReviewService reviewService, SuccBoardService succBoardService, FavoriteService favoriteService) {
+    public MainController(
+            ReviewService reviewService,
+            SuccBoardService succBoardService,
+            FavoriteService favoriteService,
+            MapService mapService) {
         this.reviewService = reviewService;
         this.succBoardService = succBoardService;
         this.favoriteService = favoriteService;
+        this.mapService = mapService;
     }
 
 
@@ -95,7 +101,12 @@ public class MainController {
 
     @GetMapping("map")
     public List<Map> getAllMap(){
-        return reviewService.getReviewsWithDetailedInformation();
+        return mapService.getReviewsWithDetailedInformation();
+    }
+
+    @GetMapping("map-distinct")
+    public List<Map> getDistinctMap(){
+        return mapService.getDistinctAddressReviews();
     }
 
 }
