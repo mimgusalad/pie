@@ -21,9 +21,10 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().and()
                 .authorizeRequests()
-                .requestMatchers("/private/**", "/succession/**", "/review/**").authenticated() //private로 시작하는 uri는 로그인 필수
-                .requestMatchers("/admin/**").access("hasRole('ROLE_ADMIN')") //admin으로 시작하는 uri는 관릴자 계정만 접근 가능
-                .anyRequest().permitAll() //나머지 uri는 모든 접근 허용
+                .requestMatchers("/api/getCurrentUserId").authenticated() // 현재 로그인한 사용자의 ID를 요청하는 API에 대한 인증 필요
+                .requestMatchers("/private/**", "/succession/**", "/review/**").authenticated()
+                .requestMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .anyRequest().permitAll()
                 .and()
                 .formLogin() // form login 관련 설정
                 .loginPage("/account/login")
