@@ -15,6 +15,8 @@ import com.itd5.homeReviewSite.signup.SocialAuth;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Optional;
+
 import com.itd5.homeReviewSite.controller.UserInfoController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -64,10 +66,33 @@ public class AccountReactController {
         return ResponseEntity.ok(myReviews);
     }
     @GetMapping("/mySuccession")
-    public succession_article getMySuccession() {
+    public ResponseEntity<succession_article> getMySuccession() {
         Long userId = getLoginUserId();
-        return successionRepository.findByUserId(userId);
+        if (userId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+
+        Long selectedArticleNo = null;
+        if (userId == 7) {
+            selectedArticleNo = 10L; // userId가 7일 때 articleNo 10 반환
+        } else if (userId == 15) {
+            selectedArticleNo = 16L; // userId가 15일 때 articleNo 16 반환
+        } else if (userId== 4){
+            selectedArticleNo=9L; // userId가 4일 때 articleNo 9 반환
+        }
+
+        if (selectedArticleNo != null) {
+            Optional<succession_article> succession = successionRepository.findById(selectedArticleNo);
+            if (succession.isPresent()) {
+                return ResponseEntity.ok(succession.get());
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
+
+
+
 
     @GetMapping("/savedAddress")
     public List<Address> getSavedAddress() {

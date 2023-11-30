@@ -18,13 +18,15 @@ body {
 }
 
 .card-title {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 15px; /* 여백 추가 */
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #0056b3;
+  margin-bottom: 15px;
 }
 
 .list-group-item {
   cursor: pointer;
+  border-bottom: 1px solid #eee;
   transition: background-color 0.3s; /* 부드러운 배경색 변경 효과 */
 }
 
@@ -35,6 +37,8 @@ body {
 /* 내가 쓴 리뷰/승계글 목록 스타일 */
 .card-body {
   padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .content_each_review {
@@ -74,8 +78,11 @@ p {
   margin-top: 10px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 600px) {
   /* 반응형 디자인: 화면이 768px 이하일 때 */
+  .card-title {
+      font-size: 1.5rem; /* 모바일에서 글꼴 크기 조정 */
+    }
   .btn-danger {
     width: auto; /* 모바일 환경에서 버튼 너비 조정 */
   }

@@ -6,6 +6,7 @@ function MyPage() {
   const [myReviewList, setMyReviewList] = useState([]);
   const [noReview, setNoReview] = useState(false);
   const [noSuccession, setNoSuccession] = useState(false);
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
   const navigate = useNavigate();
 
    // '내가 쓴 리뷰' 링크 클릭 핸들러
@@ -29,14 +30,17 @@ function MyPage() {
   }, []);
 
   const handleLogout = () => {
-    axios.post('http://localhost:8080/api/logout')
-      .then(response => {
-        window.location.href = '/login';
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
+      axios.post('http://localhost:8080/logout')
+        .then(response => {
+          setIsLoggedOut(true); // 로그아웃 상태를 true로 설정
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 2000); // 2초 후에 로그인 페이지로 리다이렉트
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    };
 
   return (
     <div className="container mt-4">
