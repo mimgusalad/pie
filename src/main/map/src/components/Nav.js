@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import closeIcon from "../image/close.png";
 import shareIcon from "../image/share.png";
 import tagIcon from "../image/tag.png";
+import aftertagIcon from "../image/tag_after.png";
 import warningSign1 from "../image/warning_1.png";
 import warningSign2 from "../image/warning_2.png";
 import warningSign3 from "../image/warning_3.png";
@@ -11,13 +12,30 @@ import StarRating from "../components/StarRating";
 import ReviewComponent from "../components/ReviewComponent/ReviewComponent";
 import DetailInfo from "../components/DetailInfoComponent/DetailInfo";
 import SimilarItem from "../components/SimilarItemComponent/SimilarItemComponent";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 export default function Nav({ room }) {
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1);
   };
+
+    // 북마크 기능
+  const [imageSrc, setImageSrc] = useState(tagIcon)
+  const [isClicked, setIsClicked] = useState(false); // 클릭 여부
+
+  const handleClick = () => {
+    if (isClicked) {
+      setImageSrc(tagIcon);
+        setIsClicked(false); // 초기 상태 false 일 땐 초기 상태 이미지 src
+        // 북마크 해제하면 db에서도 삭제
+      } else {
+        setImageSrc(aftertagIcon);
+        setIsClicked(true); // true일 땐 변경될 이미지 src
+        // 북마크 클릭했으니까 addressId를 db에 업데이트
+      }
+  };
+
 
   return (
     <div
@@ -61,13 +79,14 @@ export default function Nav({ room }) {
             }}
           />
           <img
-            src={tagIcon}
+            src={imageSrc}
             alt="tagIcon"
             style={{
               width: "16px",
               height: "16px",
               strokeWidth: "10px",
             }}
+            onClick={handleClick}
           />
         </div>
       </div>

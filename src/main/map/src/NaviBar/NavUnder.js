@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Data } from "../data/Data";
 import {useNavigate } from "react-router-dom";
 import "../style.css";
+import axios from 'axios';
 
 const { kakao } = window;
 
@@ -73,21 +74,14 @@ const sideFilters = [
 function NavUnder() {
   const [newData, setNewData] = useState([]);
 
-  // useEffect(()=>{
-    // const res = axios.get("http://localhost:3001/get")
-      // .then(res => console.log(res))
-      // .catch()
-      // setNewData(res);
-  //     const fetchData = async () => {
-  //       try {
-  //         const result = await axios.get("http://localhost:3001/get");
-  //         setNewData(result.data)
-  //       }catch(error){
-  //         console.log(error);
-  //       }
-  //     };
-  //     fetchData();
-  // },[])
+   useEffect(()=>{
+		const fetchData = async() => {
+          const res = await axios.get("http://localhost:8080/map");
+          return res.data;
+        }
+
+        fetchData().then(res => setNewData(res));
+   },[])
 
   console.log(newData)
   // newData로 건들여보기

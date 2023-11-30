@@ -14,7 +14,7 @@ export default function ImageCard({ imageItem, height, width }) {
   };
 
   const handleNext = () => {
-    if (currentIndex < imageItem.images.length - 1) {
+    if (currentIndex < imageItem.img_url.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
       setCurrentIndex(0);
@@ -79,7 +79,7 @@ export default function ImageCard({ imageItem, height, width }) {
         />
       </button>
       <div style={sliderStyle}>
-        {imageItem.images.map((item, index) => (
+        {imageItem.img_url.map((item, index) => (
           <div
             key={index}
             style={{
@@ -89,7 +89,7 @@ export default function ImageCard({ imageItem, height, width }) {
             }}
           >
             <img
-              src={item.image}
+              src={item}
               alt="sample"
               style={{ width: "100%", height: "100%" }}
             />

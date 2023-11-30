@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Data } from "../data/Data";
 import "./sub.css";
 import "../style.css";
+import axios from 'axios';
 
 import sampleImage1 from "../image/sample1.png";
 import sampleImage2 from "../image/sample2.png";
@@ -83,6 +84,7 @@ const sideFilters = [
 
 
 function MapPage2({ id }) {
+
   const location = useLocation();
   const getlat = location.state.lat; // 클릭한 값 위도
   const getlng = location.state.lng; // 클릭한 값 경도

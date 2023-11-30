@@ -3,7 +3,9 @@ import "./nav.css";
 import React, {useEffect} from "react";
 import {Link, Route, Routes, useNavigate} from "react-router-dom";
 import RoomList from "./RoomList";
+import RoomListPrc from "./RoomListPrc";
 import SuccDetail from "./succDetail";
+import SuccDetailPrc from "./succDetailPrc";
 import ReviewDetail from "./ReviewDetail";
 import NavUnder from "./NaviBar/NavUnder";
 import MapPage2 from "./NaviBar/MapPage2";
@@ -147,8 +149,8 @@ export default function TempPage() {
       <Route path="/home" element={<NavUnder/>}/>
       <Route path="/map" element={<NavUnder />} />
       <Route path="/detail/:roomId" element={<MapPage2 />} />
-      <Route path="/succDetail/:succId" element={<SuccDetail />} />
-      <Route path="/successionBoard" element={<RoomList />} />
+      <Route path="/succDetail/:succId" element={<SuccDetailPrc />} />
+      <Route path="/successionBoard" element={<RoomListPrc />} />
       <Route
         path="detail/:roomId/review/:reviewId"
         element={<ReviewDetail />}
