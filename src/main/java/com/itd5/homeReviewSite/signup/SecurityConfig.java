@@ -22,7 +22,7 @@ public class SecurityConfig {
                 .cors().and()
                 .authorizeRequests()
                 .requestMatchers("/api/getCurrentUserId").authenticated() // 현재 로그인한 사용자의 ID를 요청하는 API에 대한 인증 필요
-                .requestMatchers("/private/**", "/succession/**", "/review/**").authenticated()
+                .requestMatchers("/private/**", "/succession/**", "/review/**","http://localhost:3000/myPage").authenticated()
                 .requestMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().permitAll()
                 .and()
