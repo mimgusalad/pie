@@ -1,0 +1,82 @@
+/* MyPage.css */
+
+/* 전체 페이지 스타일 */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+/* 사용자 정보 카드 스타일 */
+.card {
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 그림자 추가 */
+  border-radius: 8px; /* 둥근 모서리 */
+}
+
+.card-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px; /* 여백 추가 */
+}
+
+.list-group-item {
+  cursor: pointer;
+  transition: background-color 0.3s; /* 부드러운 배경색 변경 효과 */
+}
+
+.list-group-item:hover {
+  background-color: #f2f2f2; /* 호버 시 배경색 변경 */
+}
+
+/* 내가 쓴 리뷰/승계글 목록 스타일 */
+.card-body {
+  padding: 20px;
+}
+
+.content_each_review {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  transition: background-color 0.3s; /* 부드러운 배경색 변경 효과 */
+}
+
+.content_each_review:hover {
+  background-color: #f9f9f9; /* 호버 시 배경색 변경 */
+}
+
+.text_address {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.text_regdate {
+  color: #777;
+}
+
+/* 로그아웃 버튼 스타일 */
+.btn-danger {
+  width: 100%; /* 버튼의 너비를 증가 */
+  border-radius: 4px; /* 버튼 모서리 둥글게 */
+}
+
+.btn-danger:hover {
+  background-color: #c82333; /* 호버 시 버튼 색 변경 */
+}
+
+/* 메시지 출력 스타일 */
+p {
+  color: #777;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  /* 반응형 디자인: 화면이 768px 이하일 때 */
+  .btn-danger {
+    width: auto; /* 모바일 환경에서 버튼 너비 조정 */
+  }
+}
