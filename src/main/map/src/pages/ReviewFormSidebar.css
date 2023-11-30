@@ -1,0 +1,129 @@
+/*sidebar css*/
+.sidebar{
+    float:right;
+    margin-top: 20px;
+
+    width: 180px;
+    height: 2000px;
+    flex-shrink: 0;
+}
+
+.sidebar_content{
+    position: sticky;
+    top: 20px;
+
+    border-radius: 8px;
+    border: 1px solid var(--line-gray-200, #C9CDD2);
+    background: var(--black-white-white, #FFF);
+}
+
+.sidebar_content ul{
+    padding-left:20px;
+}
+
+.sidebar_content li{
+    margin-bottom: 3px;
+}
+.text_select_result{
+    height: 18px;
+    margin-bottom: 12px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    color: var(--text-secondary, #666);
+
+    /* Body 2/Regular */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+}
+
+.sidebar_title{
+    margin: 16px auto 11px auto;
+    color: var(--text-primary, #222);
+    text-align: center;
+    width:100%;
+
+    /* Title 2/SemiBold */
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 133.333% */
+}
+
+.sidebar_title::after{
+    content: "";
+    display: block;
+    border-bottom: 1px solid #e8ebed;
+    margin-top: 11px;
+}
+
+.sidebar_content_title{
+    margin-bottom: 20px;
+
+    color: var(--text-primary, #222);
+    text-decoration: none;
+
+    /* Body 1/Medium */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
+}
+
+#sidebar_btn_submit{
+    width: 140px;
+    height: 40px;
+    flex-shrink: 0;
+
+    border-radius: 4px;
+    border: none;
+    background: var(--primary-normal, #459830);
+
+    color: var(--text-white, #FFF);
+    text-align: center;
+
+    /* Title 2/SemiBold */
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 133.333% */
+}
+
+#sidebar_btn_return{
+    width: 140px;
+    height: 40px;
+    flex-shrink: 0;
+
+    border-radius: 4px;
+    border: 1px solid var(--primary-light, #77C662);
+    background: var(--black-white-white, #FFF);
+
+    color: var(--primary-normal, #459830);
+    text-align: center;
+
+    /* Title 2/Medium */
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 133.333% */
+}
+
+.sidebar_btn_certificatation{
+    color: var(--text-tertiary, #A4A4A4);
+
+    /* Body 2/Medium */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+}

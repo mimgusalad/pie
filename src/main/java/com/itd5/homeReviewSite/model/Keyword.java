@@ -19,4 +19,17 @@ public class Keyword {
     private double optionQuality;
     private double trash;
     private double sunlight;
+
+    public Keyword(){}
+    public Keyword(String noise, String smell, String safety, String convenience, String insect,
+                   String optionQuality, String trash, String sunlight){
+        this.noise = Double.parseDouble(noise);
+        this.smell = Double.parseDouble(smell);
+        this.safety = Double.parseDouble(safety);
+        this.convenience = Double.parseDouble(convenience);
+        this.insect = Double.parseDouble(insect);
+        this.optionQuality = Double.parseDouble(optionQuality);
+        this.trash = Double.parseDouble(trash);
+        this.sunlight = Double.parseDouble(sunlight);
+    }
 }

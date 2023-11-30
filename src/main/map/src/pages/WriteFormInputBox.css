@@ -1,0 +1,173 @@
+
+/* 라디오 버튼 css */
+.content_writeform_radioBtn{
+    display: inline-block;
+    margin:8px 10px;
+}
+
+.content_writeform_radioBtn input[type=radio] {
+    display: none;
+}
+
+.content_writeform_radioBtn label{
+    display: inline-flex;
+    padding: 8px 20px;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+
+    border-radius: 8px;
+    border: 1px solid #C9CDD2;
+    background: #FFF;
+    
+    color: #666;
+    text-align: center;
+    
+    /* Body 1/Medium */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
+    user-select: none;
+}
+
+.content_writeform_radioBtn input[type=radio]:checked + label{
+    border-color: #459830;
+    color: #459830;
+}
+
+.content_writeform_radioBtn label:hover{
+    color: #459830;
+}
+
+
+/*체크박스 css*/
+.content_writeform_checkBtn{
+    display: inline-block;
+    margin: 4px;
+}
+
+.content_writeform_checkBtn input[type=checkbox] {
+    display: none;
+}
+
+.content_writeform_checkBtn label{
+    display: inline-flex;
+    padding: 4px 16px;
+    align-items: flex-start;
+    gap: 10px;
+    cursor:pointer;
+    user-select:none;
+
+    border-radius: 8px;
+    border: 1px solid #C9CDD2;
+    background:  #FFF;
+
+    color: #666;
+    text-align: center;
+
+    /* Body 1/Medium */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
+}
+
+
+.content_writeform_checkBtn input[type=checkbox]:checked + label{
+    border-color : #459830;
+    color: #459830;
+}
+
+.content_writeform_checkBtn label:hover{
+    color: #459830;
+}
+
+
+/* keyword 선택 css */
+.content_cons_header{
+    height: 22px;
+    width:500px;
+}
+.content_cons_title{
+    width: 60px;
+    margin-left: 30px;
+    display: inline;
+    color: var(--text-primary, #222);
+
+    /* Body 1/Medium */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
+}
+
+.content_cons_form_keyword{
+    width: 420px;
+    text-align:left;
+    margin: 16px 0px 32px 0px;
+}
+
+.content_cons_form_keyword_title{
+    width: 80px;
+    text-align:left;
+    display:inline-block;
+    margin-right: 25px;
+
+    color: var(--text-primary, #222);
+
+    /* Body 1/Medium */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */ 
+}
+
+
+/*단점 선택*/
+.content_cons_form_radiobtn_red,
+.content_cons_form_radiobtn_orange,
+.content_cons_form_radiobtn_yellow,
+.content_cons_form_radiobtn_grey{
+    vertical-align: middle;
+    appearance: none;
+    margin-right: 40px;
+
+    background: #e8ebed;
+
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+
+    transition: border 0.25s ease-in-out;
+}
+
+.content_cons_form_radiobtn_red:checked{
+    border: 4px solid #e8ebed;
+    background-color: var(--3, #FC453A);
+}
+.content_cons_form_radiobtn_orange:checked{
+    border: 4px solid #e8ebed;
+    background-color: var(--3, #FF8B72);
+}
+.content_cons_form_radiobtn_yellow:checked{
+    border: 4px solid #e8ebed;
+    background-color: var(--3, #FFC34E);
+}
+.content_cons_form_radiobtn_grey:checked{
+    border: 4px solid #e8ebed;
+    background-color: var(--gray-gray-600, #454C53);
+}
+
+.content_cons_form_radiobtn_red:hover,
+.content_cons_form_radiobtn_orange:hover,
+.content_cons_form_radiobtn_yellow:hover,
+.content_cons_form_radiobtn_grey:hover{
+    box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
+    cursor: pointer;
+}

@@ -5,16 +5,23 @@ import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
 import com.itd5.homeReviewSite.repository.RoomRepository;
 import com.itd5.homeReviewSite.repository.SuccessionRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("ai")
+@RequiredArgsConstructor
+@EnableCaching
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class AiController {
     @Autowired
     ReviewRepository reviewRepository;
@@ -32,9 +39,10 @@ public class AiController {
         return "ai/list";
     }
     @PostMapping("list")
+    @ResponseBody
     //ai 화면에서 검색을 했을 시 처리하는 함수
-    public String processSearch(Model model, RoomServiceCriteria roomInput){
-        System.out.println(model);
+    public Map<String, Object> processSearch(@RequestBody RoomServiceCriteria roomInput){
+
         System.out.println(roomInput);
         String keyword = roomInput.getKeyword();
         if (keyword.equals("소음")) roomInput.setKeyword("k.noise");
@@ -52,6 +60,7 @@ public class AiController {
         roomInput.setMaxDeposit(5000);
         roomInput.setMaxMonthlyRent(5000);
 
+        System.out.println("getAllRoom 이전");
         list = roomRepository.getAllRooms(
                 roomInput.getMinDeposit(),
                 roomInput.getMaxDeposit(),
@@ -64,16 +73,16 @@ public class AiController {
 
         System.out.println(list);
         List<review_article> recommendReviewList = reviewRepository.getAllByAddressIdIn(list);
-        // 클남 이거 이제 안댐
         //List<succession_article> recommendSuccessionList = successionRepository.getAllByAddressIdIn(list);
+//        model.addAttribute("recommendSuccessionList", recommendSuccessionList);
+//        model.addAttribute("roomInput", roomInput);
 
-        model.addAttribute("recommendReviewPreList",recommendReviewList);
-        model.addAttribute("searchCheck", "check");
-        // 클남 이거 이제 안댐
-        //model.addAttribute("recommendSuccessionList", recommendSuccessionList);
-        model.addAttribute("roomInput", roomInput);
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("recommendReviewList", recommendReviewList);
+        resultMap.put("searchCheck", true);
 
-        return "ai/list";
+        System.out.println(resultMap);
+        return resultMap;
     }
     @GetMapping("homeDetail")
     public String homeDetail(Model model, @RequestParam(required = false)Long addressId){
