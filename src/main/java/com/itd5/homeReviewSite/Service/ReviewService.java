@@ -1,16 +1,17 @@
 package com.itd5.homeReviewSite.Service;
 
-import com.itd5.homeReviewSite.model.PhotoFile;
-import com.itd5.homeReviewSite.model.ReviewAndImgIn;
-import com.itd5.homeReviewSite.model.ReviewAndImgOut;
-import com.itd5.homeReviewSite.model.review_article;
+import com.itd5.homeReviewSite.model.*;
 
+import com.itd5.homeReviewSite.model.Map;
+import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.FileRepository;
+import com.itd5.homeReviewSite.repository.KeywordRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.security.Key;
 import java.util.*;
 
 @Service
@@ -22,13 +23,21 @@ public class ReviewService {
     @Autowired
     S3UploadService s3UploadService;
     @Autowired
+    AddressRepository addressRepository;
+    @Autowired
+    KeywordRepository keywordRepository;
+    @Autowired
     public ReviewService(
             ReviewRepository reviewRepository,
             FileRepository fileRepository,
-            S3UploadService s3UploadService) {
+            S3UploadService s3UploadService,
+            AddressRepository addressRepository,
+            KeywordRepository keywordRepository) {
         this.reviewRepository = reviewRepository;
         this.fileRepository = fileRepository;
         this.s3UploadService = s3UploadService;
+        this.addressRepository = addressRepository;
+        this.keywordRepository = keywordRepository;
     }
 
     // 리뷰글 업로드
@@ -129,8 +138,18 @@ public class ReviewService {
         return myReviewArticle;
     }
 
-    public review_article getArticle(Long articleNo) {
-        return reviewRepository.findByArticleNo(articleNo);
+    // 게시글 사진, 위도경도, 키워드 (한글로 처리), 리뷰개수(address table) 리뷰 정보
+
+
+    public String processKeyword(double keyword){
+        if(keyword <= 2){
+            return "문제 없음";
+        }else if(keyword > 2 && keyword <= 5){
+            return "주의";
+        }else if(keyword > 5 && keyword <= 8){
+            return "경계";
+        }
+        return "심각";
     }
 }
 

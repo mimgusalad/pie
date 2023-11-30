@@ -8,7 +8,6 @@ import java.util.List;
 public interface AddressRepository extends JpaRepository<Address, Long> {
 
     List<Address> findAll();
-
     Address findByLatitudeAndLongitude(Double latitude, Double longitude);
     Address findByAddressId(Long addressId);
 }

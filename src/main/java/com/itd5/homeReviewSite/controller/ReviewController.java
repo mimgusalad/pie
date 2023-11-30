@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itd5.homeReviewSite.model.Address;
 import com.itd5.homeReviewSite.model.PhotoFile;
-import com.itd5.homeReviewSite.model.keyword;
+import com.itd5.homeReviewSite.model.Keyword;
 import com.itd5.homeReviewSite.model.review_article;
 import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.FileRepository;
@@ -53,7 +53,7 @@ public class ReviewController {
     @GetMapping("form")
     public String form(Model model) {
         model.addAttribute("review", new review_article());
-        model.addAttribute("keyword", new keyword());
+        model.addAttribute("keyword", new Keyword());
         return "review/form";
     }
 
@@ -61,7 +61,7 @@ public class ReviewController {
     public String submitReview(HttpServletRequest request, @RequestParam(value = "files", required = false) List<MultipartFile> uploadFiles,
                                @RequestParam(value="contract_img", required = false) MultipartFile contractImg,
                                @RequestParam(value="addressName") String addressName,
-                               @Valid review_article review, @ModelAttribute keyword keyword,
+                               @Valid review_article review, @ModelAttribute Keyword keyword,
                                BindingResult bindingResult, Errors errors) throws Exception {
 
 
@@ -151,7 +151,7 @@ public class ReviewController {
             imgUrlList.add("/img/reviewUploadImg/reviewDetailExample.png");
         }
         // 키워드 전처리
-        keyword keyword = keywordRepository.findByReviewId(articleNo);
+        Keyword keyword = keywordRepository.findByReviewId(articleNo);
         List<String> keywordList  = Arrays.asList("", "", "", "","");
         System.out.println(keywordList);
         String inputValue = keywordList.get((int) keyword.getNoise()) + "소음  ";
