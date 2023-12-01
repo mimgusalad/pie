@@ -35,10 +35,10 @@ function MySuccession() {
 
   return (
     <div>
+     <h2 className="card-title">내가 쓴 승계글</h2>
+     <button onClick={handleBack} className="back-button">뒤로 가기</button>
       {successionData ? (
         <div>
-            <h2 className="card-title">내가 쓴 승계글</h2>
-            <button onClick={handleBack} className="back-button">뒤로 가기</button>
          <p><strong>주소:</strong> {successionData.address} / {successionData.addressDetail}</p>
                    <h3 className="content-title">{successionData.contentTitle}</h3>
                    <p className="content-text">{successionData.contentText}</p>

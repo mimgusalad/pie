@@ -43,8 +43,3 @@
   background-color: #0056b3;
 }
 /* 위치 조정을 위한 추가 스타일 */
-.back-button {
-  position: relative; /* 또는 absolute */
-  top: -20px; /* 버튼을 위로 20px 이동 */
-  right: 0;
-}

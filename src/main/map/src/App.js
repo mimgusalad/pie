@@ -87,7 +87,7 @@ function User(props){
     return(
         <div>
             <a onClick={()=> navigate('/chat')} className="fa-brands fa-twitter">메시지</a>
-            <Link to="http://localhost:8080/account/myPage" className="fa-brands fa-facebook">{props.user.name}</Link>
+            <Link to="http://localhost:3000/myPage" className="fa-brands fa-facebook">{props.user.name}</Link>
         </div>
     )
 }
@@ -141,7 +141,7 @@ export default function TempPage() {
                       ):(
                           <>
                               <li><a className="fa-brands fa-twitter" href="http://localhost:3000/chat">메시지</a></li>
-                              <li><a className="fa-brands fa-facebook" href="http://localhost:8080/account/myPage">{user.name}</a></li>
+                              <li><a className="fa-brands fa-facebook" href="http://localhost:3000/myPage">{user.name}</a></li>
                               </>)}
 
                         <li className="dropDown">
