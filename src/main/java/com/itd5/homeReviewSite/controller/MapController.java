@@ -10,17 +10,20 @@ import com.itd5.homeReviewSite.repository.ReviewRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @Controller
 @RequestMapping("/map")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class MapController {
     @Autowired
     AddressRepository addressRepository;
@@ -68,23 +71,36 @@ public class MapController {
         return reviewRepository.findByAddressId(addressId);
     }
 
+//    @ResponseBody
+//    @PostMapping("match")
+//    public void match(HttpServletResponse res, @RequestBody Search search) throws IOException {
+//        res.sendRedirect("http:localhost:3000/map/searchQuery?"
+//                +"firstKeyword="+mapService.korToEng(search.getFirstKeyword())
+//                +"&secondKeyword="+mapService.korToEng(search.getSecondKeyword())
+//                +"&thirdKeyword="+mapService.korToEng(search.getThirdKeyword()));
+//    }
     @ResponseBody
     @PostMapping("match")
-    public void match(HttpServletResponse res, @RequestParam Search search) throws IOException {
-        res.sendRedirect("/map/searchQuery?addressKeyword="+search.getAddressKeyword()
-                +"&firstKeyword="+search.getFirstKeyword()
-                +"&secondKeyword="+search.getSecondKeyword()
-                +"&thirdKeyword="+search.getThirdKeyword());
+    public ResponseEntity<Object> handleReq(@RequestBody Search search) throws IOException {
+        String queryString = "firstKeyword="+mapService.korToEng(search.getFirstKeyword())
+                +"&secondKeyword="+mapService.korToEng(search.getSecondKeyword())
+                +"&thirdKeyword="+mapService.korToEng(search.getThirdKeyword());
+        //String redirectUrl = "/map/searchQuery?"+queryString;
+        String redirectUrl = "http://localhost:3000/map";
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
+        headers.add("Access-Control-Allow-Methods", "POST");
+        headers.add("Access-Control-Allow-Headers", "Content-Type");
+        headers.add("Access-Control-Allow-Credentials", "true");
+        return ResponseEntity.ok().headers(headers).build();
     }
 
     @ResponseBody
     @GetMapping("searchQuery")
-    public List<Map> searchQuery(@RequestParam(value = "addressKeyword", required = false) String addressKeyword,
-                                 @RequestParam(value = "firstKeyword", required = false) String firstKeyword,
+    public List<Map> searchQuery(@RequestParam(value = "firstKeyword", required = false) String firstKeyword,
                                  @RequestParam(value = "secondKeyword", required = false) String secondKeyword,
-                                 @RequestParam(value = "thirdKeyword", required = false) String thirdKeyword,
-                                 Model model) {
-        return mapService.getSearchQuery(addressKeyword, firstKeyword, secondKeyword, thirdKeyword);
+                                 @RequestParam(value = "thirdKeyword", required = false) String thirdKeyword) {
+        return mapService.getSearchQuery(firstKeyword, secondKeyword, thirdKeyword);
     }
 
 
