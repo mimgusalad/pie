@@ -1,6 +1,6 @@
 package com.itd5.homeReviewSite.controller;
 
-import com.itd5.homeReviewSite.service.S3UploadService;
+import com.itd5.homeReviewSite.Service.S3UploadService;
 import net.minidev.json.JSONObject;
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
