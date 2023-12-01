@@ -45,13 +45,9 @@ export default function SuccSideInfo({ item }) {
             {/* <div className="infoCategory">옵션 항목</div> */}
             <div className="infoCategory">옵션<br/>항목</div>
             <div className="infoGrid">
-              {item.succession_article.optionQuality.map((item, index) => {
-                return (
-                    <div key={index} className="grid-item">
-                      {item}
-                    </div>
-                );
-              })}
+                 <div className="grid-item">
+                      {item.succession_article.optionQuality}
+                 </div>
             </div>
           </div>
           <Separator height={"12px"} />
@@ -59,13 +55,9 @@ export default function SuccSideInfo({ item }) {
             {/* <div className="infoCategory">승계 물품</div> */}
             <div className="infoCategory">승계<br/>물품</div>
             <div className="infoGrid">
-              {item.succession_article.successionQuality.map((item, index) => {
-                return (
-                    <div key={index} className="grid-item">
-                      {item}
+                    <div className="grid-item">
+                      {item.succession_article.successionQuality}
                     </div>
-                );
-              })}
             </div>
           </div>
         </div>

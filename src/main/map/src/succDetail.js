@@ -32,31 +32,38 @@ const mainMenus = [
   },
 ];
 
+//async function getData(){
+//console.log("요청 들어옴")
+//var res = await axios.get('localhost:8080/articles/18');
+//console.log(res.data);
+//}
 export default function SuccDetail() {
+//getData();
   let { succId } = useParams();
-  console.log(succId)
+  let succIdtoLong = parseInt(succId);
+  console.log(succIdtoLong)
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1);
   };
   const [loading, setLoading] = useState(false);
-  const [newData, setNewData] = useState([]);
- // useEffect 렌더링 후에 값이 return 값에 들어가야함
+  const [newData, setNewData] = useState(null);
+  const [filterData, setFilterData] = useState([]);
+  //setNewData(getData(18));
        useEffect(()=>{
-            setLoading(true)
     		const fetchData = async() => {
-              const res = await axios.get("http://localhost:8080/articles/18");
+//              const res = await axios.get(`http://localhost:8080/articles/succId`);
+            const res = await axios.get("http://localhost:8080/articles/"+`${succIdtoLong}`);
               return res.data;
             }
-
-            fetchData().then(setLoading(false),res => setNewData(res));
+            fetchData().then(res => setNewData(res));
        },[])
 
       console.log(newData)
-      if(loading) return(
-        <div>로딩중...</div>
-      )
 
+  if(newData == null){
+    return "Loading";
+  } else{
   return (
     <div className="layout_root">
       <div className="containerWrapper">
@@ -102,4 +109,5 @@ export default function SuccDetail() {
       </div>
     </div>
   );
+  }
 }

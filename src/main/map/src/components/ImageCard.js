@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import nextArrow from "../image/next.png";
 import prevArrow from "../image/back.png";
+import succImage from "../image/succ_1.png";
 
 export default function ImageCard({ imageItem, height, width }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -90,7 +91,7 @@ export default function ImageCard({ imageItem, height, width }) {
           >
             <img
               src={item}
-              alt="sample"
+              alt={succImage}
               style={{ width: "100%", height: "100%" }}
             />
           </div>
