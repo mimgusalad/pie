@@ -75,4 +75,8 @@ public class FavoriteService {
     public boolean checkFavorite(FavoritePK key) {
         return favoriteRepository.findById(key).orElse(null) != null;
     }
+
+    public Long getUserInfo(String email) {
+        return favoriteRepository.getUserId(email);
+    }
 }

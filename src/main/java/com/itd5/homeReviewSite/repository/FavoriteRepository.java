@@ -20,6 +20,9 @@ public interface FavoriteRepository extends JpaRepository<Favorite, FavoritePK> 
             "order by f.favdate desc", nativeQuery = true)
     List<review_article> getMyFavorites(int userId);
 
+    @Query(value = "select id from SocialAuth where email =:email", nativeQuery = true)
+    Long getUserId(String email);
+
     interface review_article{
         Long getArticleNo();
         Long getUserId();

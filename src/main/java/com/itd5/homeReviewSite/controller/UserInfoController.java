@@ -31,12 +31,12 @@ public class UserInfoController {
             String name = principalDetails.getMember().getName();
             String email = principalDetails.getMember().getEmail();
             String nickname = principalDetails.getMember().getNickname();
-            user = new UserInfo(name, email, nickname);
+            user = new UserInfo(name, email, nickname, principalDetails.getMember().getId());
             System.out.println(user.getName());
         } else if (principal instanceof String) {
             // Handle the case where principal is a String (e.g., username or identifier)
             // You can log an error or take appropriate action.
-            user = new UserInfo("anonymous", "anonymous", "anonymous");
+            user = new UserInfo("anonymous", "anonymous", "anonymous", null);
         }
         System.out.println("user name: " +user.getName());
 

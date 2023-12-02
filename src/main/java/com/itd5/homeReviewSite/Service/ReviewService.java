@@ -7,6 +7,8 @@ import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.FileRepository;
 import com.itd5.homeReviewSite.repository.KeywordRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
+import com.itd5.homeReviewSite.signup.MemberRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,17 +29,21 @@ public class ReviewService {
     @Autowired
     KeywordRepository keywordRepository;
     @Autowired
+    MemberRepository memberRepository;
+    @Autowired
     public ReviewService(
             ReviewRepository reviewRepository,
             FileRepository fileRepository,
             S3UploadService s3UploadService,
             AddressRepository addressRepository,
-            KeywordRepository keywordRepository) {
+            KeywordRepository keywordRepository,
+            MemberRepository memberRepository) {
         this.reviewRepository = reviewRepository;
         this.fileRepository = fileRepository;
         this.s3UploadService = s3UploadService;
         this.addressRepository = addressRepository;
         this.keywordRepository = keywordRepository;
+        this.memberRepository = memberRepository;
     }
 
     // 리뷰글 업로드
@@ -103,9 +109,15 @@ public class ReviewService {
         for (PhotoFile photoFile : photoFiles) {
             img_url.add(s3UploadService.getImgUrl(photoFile.getSaveFileName()));
         }
+        UserInfo userInfo = memberRepository.findWriter(review_article.getUserId());
+        KeywordProcessor keywordProcessor = new KeywordProcessor(this);
+        HashMap<String, List<String>> keyword = keywordProcessor.processKeywords(keywordRepository.findByReviewId(articleNo));
+
         ReviewAndImgOut reviewAndImgOut = new ReviewAndImgOut();
         reviewAndImgOut.setReview_article(review_article);
         reviewAndImgOut.setImg_url(img_url);
+        reviewAndImgOut.setUserInfo(userInfo);
+        reviewAndImgOut.setKeyword(keyword);
         return reviewAndImgOut;
     }
 
@@ -143,7 +155,7 @@ public class ReviewService {
 
     public String processKeyword(double keyword){
         if(keyword <= 2){
-            return "문제 없음";
+            return "문제없음";
         }else if(keyword > 2 && keyword <= 5){
             return "주의";
         }else if(keyword > 5 && keyword <= 8){
