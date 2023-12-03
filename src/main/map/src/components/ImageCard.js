@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import nextArrow from "../image/next.png";
 import prevArrow from "../image/back.png";
+import succImage from "../image/succ_1.png";
 
 export default function ImageCard({ imageItem, height, width }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,7 +15,7 @@ export default function ImageCard({ imageItem, height, width }) {
   };
 
   const handleNext = () => {
-    if (currentIndex < imageItem.images.length - 1) {
+    if (currentIndex < imageItem.img_url.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
       setCurrentIndex(0);
@@ -79,7 +80,7 @@ export default function ImageCard({ imageItem, height, width }) {
         />
       </button>
       <div style={sliderStyle}>
-        {imageItem.images.map((item, index) => (
+        {imageItem.img_url.map((item, index) => (
           <div
             key={index}
             style={{
@@ -89,8 +90,8 @@ export default function ImageCard({ imageItem, height, width }) {
             }}
           >
             <img
-              src={item.image}
-              alt="sample"
+              src={item}
+              alt={succImage}
               style={{ width: "100%", height: "100%" }}
             />
           </div>

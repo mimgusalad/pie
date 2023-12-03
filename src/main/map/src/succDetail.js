@@ -6,9 +6,12 @@ import ImageCard from "./components/ImageCard";
 import Separator from "./components/Separator";
 import shareIcon from "./image/share.png";
 import ReviewHeader from "./components/ReviewHeader/ReviewHeader";
+import SuccHeader from "./components/ReviewHeader/SuccHeader";
 import { Data } from "./data/Data";
 import SuccSideInfo from "./components/SuccSideInfo/SuccSideInfo";
 import { succData } from "./data/succData";
+import { useEffect, useState, useRef } from "react";
+import axios from 'axios';
 
 const mainMenus = [
   {
@@ -29,13 +32,38 @@ const mainMenus = [
   },
 ];
 
+//async function getData(){
+//console.log("요청 들어옴")
+//var res = await axios.get('localhost:8080/articles/18');
+//console.log(res.data);
+//}
 export default function SuccDetail() {
+//getData();
   let { succId } = useParams();
+  let succIdtoLong = parseInt(succId);
+  console.log(succIdtoLong)
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1);
   };
+  const [loading, setLoading] = useState(false);
+  const [newData, setNewData] = useState(null);
+  const [filterData, setFilterData] = useState([]);
+  //setNewData(getData(18));
+       useEffect(()=>{
+    		const fetchData = async() => {
+//              const res = await axios.get(`http://localhost:8080/articles/succId`);
+            const res = await axios.get("http://localhost:8080/articles/"+`${succIdtoLong}`);
+              return res.data;
+            }
+            fetchData().then(res => setNewData(res));
+       },[])
 
+      console.log(newData)
+
+  if(newData == null){
+    return "Loading";
+  } else{
   return (
     <div className="layout_root">
       <div className="containerWrapper">
@@ -48,49 +76,22 @@ export default function SuccDetail() {
             <Separator height={"12px"} />
             <div className="subHeader">승계방 {">"} 승계글 자세히 보기</div>
           </div>
-          {/* <div className="reviewContent">
-            <div className="userReviewContainer">
-              <ImageCard imageItem={Data[0]} height={"400px"} />
-              <ReviewHeader user={Data[0].reviews[succId]} />
-              <hr style={{ marginTop: "16px", color: "lightgray" }} />
-              <div style={{ fontSize: "12px", lineHeight: "1.3" }}>
-                {Data[0].reviews[succId].reviewComment}
-              </div>
-              <Separator height={"40px"} />
-              <div className="etcContainer">
-                <div className="etcText">
-                  {Data[0].reviews[succId].updatedAt}
-                </div>
-                <div className="etcText">
-                  조회 {Data[0].reviews[succId].veiw}
-                </div>
-                <img
-                  src={shareIcon}
-                  alt="shareIcon"
-                  style={{ width: "12px", height: "12px" }}
-                />
-              </div>
-            </div>
-            <div className="detailInfoContainer">
-              <SuccSideInfo item={Data[0]} />
-            </div>
-          </div> */}
           <div className="reviewContent">
             <div className="userReviewContainer">
-              <ImageCard imageItem={succData[succId]} height={"400px"} />
+              <ImageCard imageItem={newData} height={"400px"} />
               {/* reviewheader에 맞게 succData 수정 */}
-              <ReviewHeader user={succData[succId]} />
+              <SuccHeader user={newData} />
               <hr style={{ marginTop: "16px", color: "lightgray" }} />
               <div style={{ fontSize: "12px", lineHeight: "1.3" }}>
-                {succData[succId].contentText}
+                {newData.succession_article.contentText}
               </div>
               <Separator height={"40px"} />
               <div className="etcContainer">
                 <div className="etcText">
-                  {succData[succId].regdate}
+                  {newData.succession_article.regDate}
                 </div>
                 <div className="etcText">
-                  조회 {succData[succId].view}
+                  조회 {newData.succession_article.viewCnt}
                 </div>
                 <img
                   src={shareIcon}
@@ -100,7 +101,7 @@ export default function SuccDetail() {
               </div>
             </div>
             <div className="detailInfoContainer">
-              <SuccSideInfo item={succData[succId]} />
+              <SuccSideInfo item={newData} />
             </div>
           </div>
           <Separator height={"80px"} />
@@ -108,4 +109,5 @@ export default function SuccDetail() {
       </div>
     </div>
   );
+  }
 }

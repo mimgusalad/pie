@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { Data } from "../data/Data";
 import {useNavigate } from "react-router-dom";
 import "../style.css";
+import axios from 'axios';
+import sampleimage from "../image/room_1.png"
 
 const { kakao } = window;
 
@@ -73,21 +75,14 @@ const sideFilters = [
 function NavUnder() {
   const [newData, setNewData] = useState([]);
 
-  // useEffect(()=>{
-    // const res = axios.get("http://localhost:3001/get")
-      // .then(res => console.log(res))
-      // .catch()
-      // setNewData(res);
-  //     const fetchData = async () => {
-  //       try {
-  //         const result = await axios.get("http://localhost:3001/get");
-  //         setNewData(result.data)
-  //       }catch(error){
-  //         console.log(error);
-  //       }
-  //     };
-  //     fetchData();
-  // },[])
+   useEffect(()=>{
+		const fetchData = async() => {
+          const res = await axios.get("http://localhost:8080/map");
+          return res.data;
+        }
+
+        fetchData().then(res => setNewData(res));
+   },[])
 
   console.log(newData)
   // newData로 건들여보기
@@ -114,7 +109,7 @@ function NavUnder() {
   // 선택한 방구조
   let [curHouseType, setCurHouseType] = useState("방 구조");
 
-  let copyData = JSON.parse(JSON.stringify(Data));
+  let copyData = JSON.parse(JSON.stringify(newData));
   const navigate = useNavigate();
 
   //리뷰순, 가격순, 별점순
@@ -254,10 +249,27 @@ function NavUnder() {
   };
 
   const detailPost = (sideItem) => {
-    navigate(`/detail/${sideItem.id}`,{
+    navigate(`/detail/${sideItem.review_article.articleNo}`,{
       state: {
-        lat: `${sideItem.lat}`,
-        lng: `${sideItem.lng}`,
+        lat: `${sideItem.latitude}`,
+        lng: `${sideItem.longitude}`,
+        img_url: `${sideItem.img_url}`,
+        address: `${sideItem.review_article.address}`,
+        addressDetail: `${sideItem.review_article.addressDetail}`,
+        addressId: `${sideItem.review_article.addressId}`,
+        articleNo: `${sideItem.review_article.articleNo}`,
+        contentText: `${sideItem.review_article.contentText}`,
+        deposit: `${sideItem.review_article.deposit}`,
+        fee: `${sideItem.review_article.fee}`,
+        houseType: `${sideItem.review_article.houseType}`,
+        livingYear: `${sideItem.review_article.livingYear}`,
+        payment: `${sideItem.review_article.payment}`,
+        address: `${sideItem.review_article.address}`,
+        rating: `${sideItem.review_article.rating}`,
+        regdate: `${sideItem.review_article.regdate}`,
+        userId: `${sideItem.review_article.userId}`,
+        utility: `${sideItem.review_article.utility}`,
+        viewCnt: `${sideItem.review_article.viewCnt}`,
       }
     })
   }
@@ -405,17 +417,17 @@ function NavUnder() {
 
   useEffect(() => {
     if (price != 0 && worse != "" && houseType != "") {
-      let totalFilter = Data.filter(
+      let totalFilter = newData.filter(
         (el) =>
-          price <= el.price &&
-          el.price < price + 10 &&
-          worse != el.tags[0].label &&
-          houseType == el.houseType
+          price <= el.review_article.fee &&
+          el.review_article.fee < price + 10 &&
+          worse != "소음" &&
+          houseType == el.review_article.houseType
       );
       setListData(totalFilter);
     } else if (price == 0 && worse != "" && houseType != "") {
       let totalFilter = Data.filter(
-        (el) => worse != el.tags[0].label && houseType == el.houseType
+        (el) => worse != "소음" && houseType == el.review_article.houseType
       );
       setListData(totalFilter);
     } else if (price != 0 && worse == "" && houseType != "") {
@@ -438,7 +450,7 @@ function NavUnder() {
       let totalFilter = Data.filter((el) => houseType == el.houseType);
       setListData(totalFilter);
     } else if (price == 0 && worse != "" && houseType == "") {
-      let totalFilter = Data.filter((el) => worse != el.tags[0].label);
+      let totalFilter = newData.filter((el) => worse != el.tags[0].label);
       setListData(totalFilter);
     } else if (price != 0 && worse == "" && houseType == "") {
       let totalFilter = Data.filter(
@@ -971,20 +983,20 @@ function NavUnder() {
                 {/* End */}
               </div>
               <div className="side-nav__items">
-                {listData.map((sideItem, index) => {
+                {newData.map((sideItem) => {
                   return (
-                      <div onClick={() => detailPost(sideItem)} key={index} className="side-nav__item">
+                      <div onClick={() => detailPost(sideItem)} className="side-nav__item">
                         <div className="item-thumbnail"><img src={sideItem.mainimg} style={{ width: "120px", height: "120px" }} /></div>
                         {/* thumbnail에 원룸 메인 사진 들어감 */}
                         <div className="item-details">
-                          <div className="item__title">{sideItem.address}</div>
+                          <div className="item__title">{sideItem.review_article.address}</div>
                           <div className="item__content">
-                            {sideItem.addressDetail}
+                            {sideItem.review_article.addressDetail}
                           </div>
                           <div className="details__bottom-wrapper">
                             <div className="item__price-wrapper">
                               <div className="item__price">
-                                월세 {sideItem.deposit} / {sideItem.price}
+                                월세 {sideItem.review_article.deposit} / {sideItem.review_article.fee}
                               </div>
                               <div className="item__reviews">
                                 리뷰 {sideItem.reviewCount}
@@ -993,13 +1005,13 @@ function NavUnder() {
                             <div className="details__tags-wrapper">
                               <div className="tags">
                                 <div className="tag1">
-                                  {sideItem.tags[0].label}
+                                  소음
                                 </div>
                                 <div className="tag2">
-                                  {sideItem.tags[1].label}
+                                  벌레
                                 </div>
                                 <div className="tag3">
-                                  {sideItem.tags[2].label}
+                                  편의시설
                                 </div>
                               </div>
                               <div className="rating-wrapper">
@@ -1015,7 +1027,7 @@ function NavUnder() {
                                     clipRule="evenodd"
                                   />
                                 </svg>
-                                <span>{sideItem.rating.toFixed(1)}</span>
+                                <span>{sideItem.review_article.rating.toFixed(1)}</span>
                               </div>
                             </div>
                           </div>

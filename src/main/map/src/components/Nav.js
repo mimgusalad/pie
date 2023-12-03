@@ -1,22 +1,42 @@
-import React from "react";
+import React, {useState} from "react";
 import closeIcon from "../image/close.png";
 import shareIcon from "../image/share.png";
 import tagIcon from "../image/tag.png";
+import aftertagIcon from "../image/tag_after.png";
 import warningSign1 from "../image/warning_1.png";
 import warningSign2 from "../image/warning_2.png";
 import warningSign3 from "../image/warning_3.png";
 import warningSign4 from "../image/warning_4.png";
 import ImageCard from "../components/ImageCard";
+import ImageCardReview from "../components/ImageCardReview";
 import StarRating from "../components/StarRating";
 import ReviewComponent from "../components/ReviewComponent/ReviewComponent";
 import DetailInfo from "../components/DetailInfoComponent/DetailInfo";
 import SimilarItem from "../components/SimilarItemComponent/SimilarItemComponent";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+import {keywordData} from "../data/keywordData"
+import {similarItemData} from "../data/similarItemData"
 
 export default function Nav({ room }) {
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1);
+  };
+
+    // 북마크 기능
+  const [imageSrc, setImageSrc] = useState(tagIcon)
+  const [isClicked, setIsClicked] = useState(false); // 클릭 여부
+
+  const handleClick = () => {
+    if (isClicked) {
+      setImageSrc(tagIcon);
+        setIsClicked(false); // 초기 상태 false 일 땐 초기 상태 이미지 src
+        // 북마크 해제하면 db에서도 삭제
+      } else {
+        setImageSrc(aftertagIcon);
+        setIsClicked(true); // true일 땐 변경될 이미지 src
+        // 북마크 클릭했으니까 addressId를 db에 업데이트
+      }
   };
 
   return (
@@ -61,18 +81,19 @@ export default function Nav({ room }) {
             }}
           />
           <img
-            src={tagIcon}
+            src={imageSrc}
             alt="tagIcon"
             style={{
               width: "16px",
               height: "16px",
               strokeWidth: "10px",
             }}
+            onClick={handleClick}
           />
         </div>
       </div>
       <div className="side-nav__items-wrapper">
-        <ImageCard imageItem={room} height={"200px"} width={"100%"} />
+        <ImageCardReview imageItem={room} height={"200px"} width={"100%"} />
         <div className="blockContainer">
           <div
             className="titleContainer"
@@ -139,10 +160,10 @@ export default function Nav({ room }) {
             <div className="warningSign">
               <img src={warningSign1} alt="level1" className="warningIcon" />
               <span className="levelText"> 심각 </span>
-              {room.tags.map((item, index) => {
+              {keywordData.condition_1.map((item, index) => {
                 return (
                   <span className="tag" key={index}>
-                    {item.label}
+                    {item.tag}
                   </span>
                 );
               })}
@@ -150,10 +171,10 @@ export default function Nav({ room }) {
             <div className="warningSign">
               <img src={warningSign2} alt="level1" className="warningIcon" />
               <span className="levelText"> 경계 </span>
-              {room.tags.map((item, index) => {
+              {keywordData.condition_2.map((item, index) => {
                 return (
                   <span className="tag" key={index}>
-                    {item.label}
+                    {item.tag}
                   </span>
                 );
               })}
@@ -161,10 +182,10 @@ export default function Nav({ room }) {
             <div className="warningSign">
               <img src={warningSign3} alt="level1" className="warningIcon" />
               <span className="levelText"> 주의 </span>
-              {room.tags.map((item, index) => {
+              {keywordData.condition_3.map((item, index) => {
                 return (
                   <span className="tag" key={index}>
-                    {item.label}
+                    {item.tag}
                   </span>
                 );
               })}
@@ -172,10 +193,10 @@ export default function Nav({ room }) {
             <div className="warningSign">
               <img src={warningSign4} alt="level1" className="warningIcon" />
               <span className="levelText"> 문제없음 </span>
-              {room.tags.map((item, index) => {
+              {keywordData.condition_4.map((item, index) => {
                 return (
                   <span className="tag" key={index}>
-                    {item.label}
+                    {item.tag}
                   </span>
                 );
               })}
@@ -187,15 +208,11 @@ export default function Nav({ room }) {
             거주민 리뷰
           </div>
           <div className="reviewContainer">
-            {room.reviews.map((reviewItem, index) => {
               return (
                 <ReviewComponent
-                  roomId={room.id}
-                  key={index}
-                  review={reviewItem}
+                  review={room}
                 />
               );
-            })}
           </div>
         </div>
         <div className="blockContainer">
@@ -203,14 +220,14 @@ export default function Nav({ room }) {
             건물 상세 정보
           </div>
           <div style={{ width: "100px" }}>
-            <DetailInfo item={room} />
+            <DetailInfo />
           </div>
         </div>
         <div className="blockContainer">
           <div className="side-items-title" style={{ marginBottom: "8px" }}>
             비슷한 매물
           </div>
-          <SimilarItem item={room.similarItems} />
+          <SimilarItem item={similarItemData} />
         </div>
       </div>
     </div>

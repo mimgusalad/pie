@@ -1,11 +1,14 @@
 import "./style.css";
 import "./nav.css";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Link, Route, Routes, useNavigate} from "react-router-dom";
 
 import MainPage from "./pages/MainPage";
 import RoomList from "./RoomList";
+import RoomListPrc from "./RoomListPrc";
 import SuccDetail from "./succDetail";
+import SuccDetailPrc from "./succDetailPrc";
+import ReviewDetailPrc from "./ReviewDetailPrc";
 import ReviewDetail from "./ReviewDetail";
 import Chat from "./Chat";
 
@@ -162,11 +165,15 @@ export default function TempPage() {
     <Routes>
       <Route path="/" element={<MainPage/>}/>
       <Route path="/home" element={<NavUnder/>}/>
-      <Route path="/map" element={<NavUnder />} />
+      <Route path="/map" element={<NavUnder/>} />
       <Route path="/ai" element={< AiMainPage/>} />
       <Route path="/successionBoard" element={<RoomList />} />
       <Route path="/benefit" element={<BenefitPage />} />
       <Route path="/detail/:roomId" element={<MapPage2 />} />
+      <Route path="/reviewDetail/:reviewId" element={<ReviewDetailPrc />} />
+      <Route path="/succDetail/:succId" element={<SuccDetail />} />
+      <Route path="/successionBoard" element={<RoomList />} />
+//=======
       <Route path="/succDetail/:succId" element={<SuccDetail />} />
       <Route path="/review/form" element={<ReviewForm />} />
       <Route path="/review/my/writable-review" element={<WritableReview />} />
@@ -178,6 +185,7 @@ export default function TempPage() {
       <Route path="/myPage/myReviewList" element={<MyReviewList />} />
       <Route path="/myPage/mySuccession" element={<MySuccession />} />
       <Route path="/myPage/setting" element={<Setting />} />
+//>>>>>>> 496942c0406b20830062ed8cd1fc1a5a8566fb10
       <Route
         path="detail/:roomId/review/:reviewId"
         element={<ReviewDetail />}

@@ -1,12 +1,14 @@
 // 이전 버전의 RoomList.jsx 파일입니다.
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 import "./RoomList.css";
 import Separator from "./components/Separator";
 import ToggleBtn_1 from "./components/ToggleBtnFilled/ToggleBtn_1";
 import ToggleBtn_2 from "./components/ToggleBtnFilled/ToggleBtn_2";
 import ToggleBtn from "./components/ToggleBtnFilled/ToggleBtn";
 import RoomListCard from "./components/RoomListCard/RoomListCard";
+import RoomListCard2 from "./components/RoomListCard/RoomListCard2";
 import { succData } from "./data/succData";
 import BigToggleBtn from "./components/ToggleBtnFilled/BigToggleBtn";
 
@@ -119,18 +121,34 @@ const structureList = [
 const priceList = ["0~100", "10~20", "20~30", "30~40", "40~50"];
 //
 
+//function ListItem({ item }) {
+//  return (
+//      <div className="itemGrid" style={{ fontSize: "14px" }}>
+//        <div>{item.address}</div>
+//        <div>{item.contextTitle}</div>
+//        <div>
+//          {item.deposit}/{item.fee}
+//        </div>
+//        <div>
+//          {item.startDate}~{item.finishDate}
+//        </div>
+//        <div>{item.regdate}</div>
+//      </div>
+//  );
+//}
+
 function ListItem({ item }) {
   return (
       <div className="itemGrid" style={{ fontSize: "14px" }}>
-        <div>{item.address}</div>
-        <div>{item.contextTitle}</div>
+        <div>{item.succession_article.address}</div>
+        <div>{item.succession_article.contentTitle}</div>
         <div>
-          {item.deposit}/{item.fee}
+          {item.succession_article.deposit}/{item.succession_article.fee}
         </div>
         <div>
-          {item.startDate}~{item.finishDate}
+          {item.succession_article.startDate}~{item.succession_article.finishDate}
         </div>
-        <div>{item.regdate}</div>
+        <div>{item.succession_article.regDate}</div>
       </div>
   );
 }
@@ -143,8 +161,22 @@ export default function RoomList() {
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedStructure, setSelectedStructure] = useState("");
   const [selectedPrice, setSelectedPrice] = useState({ min: 0, max: 1000 });
-  const [filteredData, setFilteredData] = useState(succData);
+//  const [filteredData, setFilteredData] = useState(succData);
   const [selectFilter, setSelectFilter] = useState("최신순");
+
+    const [dbData, setdbNewData] = useState([]);
+
+     useEffect(()=>{
+  		const fetchData = async() => {
+            const res = await axios.get("http://localhost:8080/articles");
+            return res.data;
+          }
+
+          fetchData().then(res => setdbNewData(res));
+     },[])
+
+    const [filteredData, setFilteredData] = useState(dbData);
+    console.log(filteredData)
 
 
   console.log(selectFilter)
@@ -163,128 +195,89 @@ export default function RoomList() {
 
   useEffect(() => {
     if (selectedCity == "전국 전체" && selectedStructure != "" && selectedPrice.min != 0) {
-      const newData = succData.filter(
+      const newData = dbData.filter(
           (item) =>
-              item.houseType.includes(selectedStructure) &&
-              selectedPrice.min <= item.fee &&
-              item.fee <= selectedPrice.max
+              item.succession_article.houseType.includes(selectedStructure) &&
+              selectedPrice.min <= item.succession_article.fee &&
+              item.succession_article.fee <= selectedPrice.max
       );
       setFilteredData(newData);
     }
     else if (selectedCity == "전국 전체" && selectedStructure == "전체" && selectedPrice.min == 0) {
-      const newData = succData.filter(
+      const newData = dbData.filter(
           (item) =>
-              selectedPrice.min <= item.fee &&
-              item.fee <= selectedPrice.max
+              selectedPrice.min <= item.succession_article.fee &&
+              item.succession_article.fee <= selectedPrice.max
       );
       setFilteredData(newData);
     }
     else if (selectedCity == "전국 전체" && selectedStructure == "" && selectedPrice.min == 0) {
-      setFilteredData(succData);
+      setFilteredData(dbData);
     }
     else if (selectedCity == "전국 전체" && selectedStructure != "" && selectedPrice.min == 0) {
-      const newData = succData.filter(
+      const newData = dbData.filter(
           (item) =>
-              item.houseType.includes(selectedStructure) &&
-              selectedPrice.min <= item.fee &&
-              item.fee <= selectedPrice.max
+              item.succession_article.houseType.includes(selectedStructure) &&
+              selectedPrice.min <= item.succession_article.fee &&
+              item.succession_article.fee <= selectedPrice.max
       );
       setFilteredData(newData);
     }
     else if (selectedCity != "" && selectedStructure == "전체" && selectedPrice.min == 0) {
-      const newData = succData.filter(
+      const newData = dbData.filter(
           (item) =>
-              item.address.includes(selectedCity) &&
-              selectedPrice.min <= item.fee &&
-              item.fee <= selectedPrice.max
+              item.succession_article.address.includes(selectedCity) &&
+              selectedPrice.min <= item.succession_article.fee &&
+              item.succession_article.fee <= selectedPrice.max
       );
       setFilteredData(newData);
     }
     else if (selectedCity != "" && selectedStructure == "전체" && selectedPrice.min != 0) {
-      const newData = succData.filter(
+      const newData = dbData.filter(
           (item) =>
-              item.address.includes(selectedCity) &&
-              selectedPrice.min <= item.fee &&
-              item.fee <= selectedPrice.max
+              item.succession_article.address.includes(selectedCity) &&
+              selectedPrice.min <= item.succession_article.fee &&
+              item.succession_article.fee <= selectedPrice.max
       );
       setFilteredData(newData);
     }
     else if (selectedCity != "" && selectedStructure != "" && selectedPrice.min != 0) {
-      const newData = succData.filter(
+      const newData = dbData.filter(
           (item) =>
-              item.address.includes(selectedCity) &&
-              item.houseType.includes(selectedStructure) &&
-              selectedPrice.min <= item.fee &&
-              item.fee <= selectedPrice.max
+              item.succession_article.address.includes(selectedCity) &&
+              item.succession_article.houseType.includes(selectedStructure) &&
+              selectedPrice.min <= item.succession_article.fee &&
+              item.succession_article.fee <= selectedPrice.max
       );
       setFilteredData(newData);
     }
     else if (selectedCity != "" && selectedStructure == "" && selectedPrice.min == 0) {
-      const newData = succData.filter(
+      const newData = dbData.filter(
           (item) =>
-              item.address.includes(selectedCity) &&
-              selectedPrice.min <= item.fee &&
-              item.fee <= selectedPrice.max
+              item.succession_article.address.includes(selectedCity) &&
+              selectedPrice.min <= item.succession_article.fee &&
+              item.succession_article.fee <= selectedPrice.max
       );
       setFilteredData(newData);
     }
     else if (selectedCity != "" && selectedStructure != "" && selectedPrice.min == 0) {
-      const newData = succData.filter(
+      const newData = dbData.filter(
           (item) =>
-              item.address.includes(selectedCity) &&
-              item.houseType.includes(selectedStructure) &&
-              selectedPrice.min <= item.fee &&
-              item.fee <= selectedPrice.max
+              item.succession_article.address.includes(selectedCity) &&
+              item.succession_article.houseType.includes(selectedStructure) &&
+              selectedPrice.min <= item.succession_article.fee &&
+              item.succession_article.fee <= selectedPrice.max
       );
       setFilteredData(newData);
     }
 
   }, [selectedCity, selectedStructure, selectedPrice]);
 
-  // 최신순, 가격순
-  //  useEffect(()=>{
-  //   if(selectFilter == '가격순'){
-  //     const listData = succData.sort((a, b) => b.fee - a.fee)
-  //     setFilteredData(listData)
-  //   }
-  //   if(selectFilter == '최신순'){
-  //     const listData = succData.sort((a, b) => new Date(b.regdate) - new Date(a.regdate))
-  //     setFilteredData(listData)
-  //   }
-  // },[selectFilter])
-
   // 현재 페이지에 따라 게시물을 필터링
-  const currentData = succData.slice(
+  const currentData = dbData.slice(
       (currentPage - 1) * ITEMS_PER_PAGE,
       currentPage * ITEMS_PER_PAGE
   );
-
-  // 지역 데이터를 기본 데이터에서 가져옵니다. 만약 지역 데이터를 새로 만든다면 참고
-  // 새로운 DB를 만드는 것을 추천
-  // function getAreaData(data) {
-  //   const parts = data.split(" ");
-  //   const siDo = parts[0];
-  //   const subAddress = parts.slice(1).join(" ");
-
-  //   return {
-  //     siDo: siDo,
-  //     subAddress: subAddress,
-  //   };
-  // }
-
-  // const uniqueAddresses = new Set(succData.map((item) => item.address));
-
-  // const uniqueSuccData = succData.filter((item) => {
-  //   if (uniqueAddresses.has(item.address)) {
-  //     uniqueAddresses.delete(item.address);
-  //     return true;
-  //   }
-  //   return false;
-  // });
-
-  // const areaData = uniqueSuccData.map((item) => getAreaData(item.address));
-  // const siDo = areaData.map((item) => item.siDo);
-  // const subAddress = areaData.map((item) => item.subAddress);
 
   // 페이지네이션 컴포넌트
   const Pagination = () => {
@@ -351,7 +344,7 @@ export default function RoomList() {
           <div className="roomHeader">
             <div className="title-wrapper__title">전체</div>
             <div className="subText" style={{ marginLeft: "8px" }}>
-              {succData.length}개
+              {dbData.length}개
             </div>
           </div>
           <Separator height={"8px"} />
@@ -383,7 +376,7 @@ export default function RoomList() {
             /> */}
             </div>
             <div className="listWithImage__list">
-              <RoomListCard RoomList={filteredData} />
+              <RoomListCard2 RoomList={filteredData} />
             </div>
           </div>
           <Separator height={"20px"} />
@@ -412,13 +405,13 @@ export default function RoomList() {
               <div>계약 기간</div>
               <div>등록일</div>
             </div>
-            {filteredData
+            {dbData
                 .slice(
                     (currentPage - 1) * ITEMS_PER_PAGE,
                     currentPage * ITEMS_PER_PAGE
                 )
                 .map((item) => (
-                    <Link to={`/succDetail/${item.id}`}>
+                    <Link to={`/succDetail/${item.succession_article.articleNo}`}>
                       <ListItem item={item} />
                     </Link>
                 ))}
