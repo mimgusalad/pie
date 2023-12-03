@@ -86,18 +86,32 @@ const sideFilters = [
 function MapPage2({ id }) {
    let { roomId } = useParams();
    const [newData, setNewData] = useState(null);
+   const [navData, setNavData] = useState([]);
+   const [mapData, setMapData] = useState([]) // MapPage2에도 지도에 전체 데이터가 필요
 
    useEffect(()=>{
    	    const fetchData = async() => {
-             const res = await axios.get("http://localhost:8080/map/" + `${roomId}`);
+             const res = await axios.get("http://localhost:8080/reviews/" + `${roomId}`);
              return res.data;
            }
 
            fetchData().then(res => setNewData(res));
+
+        const allData = async() => {
+              const res = await axios.get("http://localhost:8080/map");
+              return res.data;
+            }
+
+            allData().then(res => setMapData(res));
    },[])
    console.log(roomId)
    console.log(newData)
-   const [toggle, setToggle] = useState("map")
+
+   let testData = JSON.parse(JSON.stringify(mapData));
+   let [testListData, setTestListData] = useState([]);
+   console.log(testData)
+
+  const [toggle, setToggle] = useState("map")
   const location = useLocation();
   // NavUnder.js에서 받아오는 값들
   const getlat = location.state.lat; // 클릭한 값 위도
@@ -118,6 +132,15 @@ function MapPage2({ id }) {
   const regdate = location.state.regdate;
   const userId = location.state.userId;
   const utility = location.state.utility;
+  const name = location.state.name;
+  const keyword1 = location.state.keyword1;
+  const keyword2 = location.state.keyword2;
+  const keyword3 = location.state.keyword3;
+  const keyword4 = location.state.keyword4;
+  const keyword5 = location.state.keyword5;
+  const keyword6 = location.state.keyword6;
+  const keyword7 = location.state.keyword7;
+  const keyword8 = location.state.keyword8;
 
   // <Nav/로 넘길 데이터>
   const NavData = {
@@ -136,6 +159,14 @@ function MapPage2({ id }) {
     regdate : regdate,
     userId : userId,
     utility : utility,
+    name : name,
+    keyword1 : keyword1,
+    keyword2 : keyword2,
+    keyword3 : keyword3,
+    keyword4 : keyword4,
+    keyword5 : keyword5,
+    keyword6 : keyword6,
+
   }
 
   const placePosition = {
@@ -321,548 +352,579 @@ function MapPage2({ id }) {
     console.log(detailId);
   };
 
+    // DB에 lat,lng 없는 데이터 클릭하면 오류 뜸
   const markerPost = (el) => {
-    navigate(`/detail/${el.id}`,{
-      state: {
-        lat: `${el.lat}`,
-        lng: `${el.lng}`
-      }
-    })
-  }
+      navigate(`/detail/${el.review_article.articleNo}`,{
+        state: {
+          lat: `${el.latitude}`,
+          lng: `${el.longitude}`,
+          lng: `${el.longitude}`,
+          img_url: `${el.img_url}`,
+          address: `${el.review_article.address}`,
+          addressDetail: `${el.review_article.addressDetail}`,
+          addressId: `${el.review_article.addressId}`,
+          articleNo: `${el.review_article.articleNo}`,
+          contentText: `${el.review_article.contentText}`,
+          deposit: `${el.review_article.deposit}`,
+          fee: `${el.review_article.fee}`,
+          houseType: `${el.review_article.houseType}`,
+          livingYear: `${el.review_article.livingYear}`,
+          payment: `${el.review_article.payment}`,
+          address: `${el.review_article.address}`,
+          rating: `${el.review_article.rating}`,
+          regdate: `${el.review_article.regdate}`,
+          userId: `${el.review_article.userId}`,
+          utility: `${el.review_article.utility}`,
+          viewCnt: `${el.review_article.viewCnt}`,
+          name: `${el.userInfo.name}`,
+          keyword1: `${el.keyword.심각[0]}`,
+          keyword2: `${el.keyword.심각[1]}`,
+          keyword3: `${el.keyword.경계[0]}`,
+          keyword4: `${el.keyword.경계[1]}`,
+          keyword5: `${el.keyword.주의[0]}`,
+          keyword6: `${el.keyword.주의[1]}`,
+        }
+      })
+    }
+
+// return이 렌더닝때매 늦게 돼서 지도가 설정이 안되어있는데 useEffect로 지도를 부르니까 오류가 나네
 
   // 장소 검색
-//  useEffect(() => {
-//    console.log(place);
-//    const container = document.getElementById("map");
-//    const options = {
-//      center: new kakao.maps.LatLng(state.center.lat, state.center.lng),
-//      level: 3,
-//    };
-//    const map = new kakao.maps.Map(container, options);
-//
-//    const ps = new kakao.maps.services.Places();
-//
-//    ps.keywordSearch(place, placesSearchCB);
-//
-//    function placesSearchCB(data, status, pagination) {
-//      if (status === kakao.maps.services.Status.OK) {
-//        const newSearch = data[0];
-//        setState({
-//          center: { lat: newSearch.y, lng: newSearch.x },
-//        });
-//      }
-//    }
-//
-//    let imageSrc = importmarker;
-//    let imageSize = new kakao.maps.Size(24, 39);
-//    let bigimageSize = new kakao.maps.Size(29, 44);
-//    let imageOption = { offset: new kakao.maps.Point(27, 69) };
-//
-//    let reviewMarker = new kakao.maps.MarkerImage(
-//      imageSrc,
-//      imageSize,
-//      imageOption
-//    );
-//
-//    let bigreviewMarker = new kakao.maps.MarkerImage(
-//      imageSrc,
-//      bigimageSize,
-//      imageOption
-//    );
-//
-//    setCountRoom(0);
-//    Data.forEach((el) => {
-//      setCountRoom((countRoom) => countRoom + 1);
-//      const marker = new kakao.maps.Marker({
-//        map: map,
-//        image: reviewMarker,
-//        position: new kakao.maps.LatLng(el.lat, el.lng),
-//      });
-//      // 마커 클릭 이벤트
-//      kakao.maps.event.addListener(marker, "click", function () {
-//        // navigate(`/detail/${el.id}`)
-//        markerPost(el)
-//      });
-//    });
-//  }, [place]);
-//
-//  useEffect(() => {
-//    const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-//
-//    const container = document.getElementById("map");
-//    const options = {
-//      center: new kakao.maps.LatLng(state.center.lat, state.center.lng),
-//      level: 3,
-//    };
-//
-//    var map = new kakao.maps.Map(container, options);
-//
-//    var ps = new kakao.maps.services.Places(map);
-//    console.log(store);
-//    ps.categorySearch(store, placesSearchCB, { useMapBounds: true });
-//
-//    function placesSearchCB(data, status, pagination) {
-//      if (status === kakao.maps.services.Status.OK) {
-//        for (var i = 0; i < data.length; i++) {
-//          displayMarker(data[i]);
-//        }
-//      }
-//    }
-//
-//    function displayMarker(storeplace) {
-//      // 마커를 생성하고 지도에 표시합니다
-//      var marker = new kakao.maps.Marker({
-//        map: map,
-//        position: new kakao.maps.LatLng(storeplace.y, storeplace.x),
-//      });
-//      marker.setMap(map);
-//    }
-//  }, [store]);
-//
-//  // price, worse, housetype 한 번에 필터링
-//
-//  useEffect(() => {
-//    if (price !== 0 && worse !== "" && houseType !== "") {
-//      let totalFilter = Data.filter(
-//        (el) =>
-//          price <= el.price &&
-//          el.price < price + 10 &&
-//          worse !== el.tags[0].label &&
-//          houseType === el.houseType
-//      );
-//      setListData(totalFilter);
-//    } else if (price === 0 && worse !== "" && houseType !== "") {
-//      let totalFilter = Data.filter(
-//        (el) => worse !== el.tags[0].label && houseType === el.houseType
-//      );
-//      setListData(totalFilter);
-//    } else if (price !== 0 && worse === "" && houseType !== "") {
-//      let totalFilter = Data.filter(
-//        (el) =>
-//          price <= el.price &&
-//          el.price < price + 10 &&
-//          houseType === el.houseType
-//      );
-//      setListData(totalFilter);
-//    } else if (price !== 0 && worse !== "" && houseType === "") {
-//      let totalFilter = Data.filter(
-//        (el) =>
-//          price <= el.price &&
-//          el.price < price + 10 &&
-//          worse !== el.tags[0].label
-//      );
-//      setListData(totalFilter);
-//    } else if (price === 0 && worse === "" && houseType !== "") {
-//      let totalFilter = Data.filter((el) => houseType === el.houseType);
-//      setListData(totalFilter);
-//    } else if (price === 0 && worse !== "" && houseType === "") {
-//      let totalFilter = Data.filter((el) => worse !== el.tags[0].label);
-//      setListData(totalFilter);
-//    } else if (price !== 0 && worse === "" && houseType === "") {
-//      let totalFilter = Data.filter(
-//        (el) => price <= el.price && el.price < price + 10
-//      );
-//      setListData(totalFilter);
-//    } else if (price === 0 && worse === "" && houseType === "") {
-//      setListData(Data);
-//    }
-//
-//    const container = document.getElementById("map");
-//    const options = {
-//      center: new kakao.maps.LatLng(state.center.lat, state.center.lng),
-//      level: 3,
-//    };
-//
-//    var map = new kakao.maps.Map(container, options);
-//
-//    let imageSrc = importmarker;
-//    let imageSize = new kakao.maps.Size(24, 39);
-//    let bigimageSize = new kakao.maps.Size(29, 44);
-//    let imageOption = { offset: new kakao.maps.Point(27, 69) };
-//
-//    let reviewMarker = new kakao.maps.MarkerImage(
-//      imageSrc,
-//      imageSize,
-//      imageOption
-//    );
-//
-//    let bigreviewMarker = new kakao.maps.MarkerImage(
-//      imageSrc,
-//      bigimageSize,
-//      imageOption
-//    );
-//
-//    setCountRoom(0);
-//    // 1
-//    if (price !== 0 && worse !== "" && houseType !== "") {
-//      copyData.forEach((el) => {
-//        if (
-//          price <= el.price &&
-//          el.price < price + 10 &&
-//          worse !== el.tags[0].label &&
-//          houseType === el.houseType
-//        ) {
-//          setCountRoom((countRoom) => countRoom + 1);
-//          const marker = new kakao.maps.Marker({
-//            map: map,
-//            image: reviewMarker,
-//            position: new kakao.maps.LatLng(el.lat, el.lng),
-//          });
-//          kakao.maps.event.addListener(marker, "click", function () {
-//            // navigate(`/detail/${el.id}`)
-//             markerPost(el)
-//             setrvMarker({
-//              center: { lat: el.lat, lng: el.lng },
-//            });
-//          });
-//        }
-//      });
-//    }
-//
-//    // 2
-//    else if (price == 0 && worse !== "" && houseType !== "") {
-//      copyData.forEach((el) => {
-//        if (worse !== el.tags[0].label && houseType == el.houseType) {
-//          setCountRoom((countRoom) => countRoom + 1);
-//          const marker = new kakao.maps.Marker({
-//            map: map,
-//            image: reviewMarker,
-//            position: new kakao.maps.LatLng(el.lat, el.lng),
-//          });
-//          kakao.maps.event.addListener(marker, "click", function () {
-//            // navigate(`/detail/${el.id}`)
-//              markerPost(el)
-//              setrvMarker({
-//                center: { lat: el.lat, lng: el.lng },
-//              });
-//          });
-//        }
-//      });
-//    }
-//
-//    // 3
-//    else if (price !== 0 && worse == "" && houseType !== "") {
-//      copyData.forEach((el) => {
-//        if (
-//          price <= el.price &&
-//          el.price < price + 10 &&
-//          houseType == el.houseType
-//        ) {
-//          setCountRoom((countRoom) => countRoom + 1);
-//          const marker = new kakao.maps.Marker({
-//            map: map,
-//            image: reviewMarker,
-//            position: new kakao.maps.LatLng(el.lat, el.lng),
-//          });
-//          kakao.maps.event.addListener(marker, "click", function () {
-//           // navigate(`/detail/${el.id}`)
-//              markerPost(el)
-//              setrvMarker({
-//                center: { lat: el.lat, lng: el.lng },
-//              });
-//          });
-//        }
-//      });
-//    }
-//
-//    // 4
-//    else if (price !== 0 && worse !== "" && houseType == "") {
-//      copyData.forEach((el) => {
-//        if (
-//          price <= el.price &&
-//          el.price < price + 10 &&
-//          worse !== el.tags[0].label
-//        ) {
-//          setCountRoom((countRoom) => countRoom + 1);
-//          const marker = new kakao.maps.Marker({
-//            map: map,
-//            image: reviewMarker,
-//            position: new kakao.maps.LatLng(el.lat, el.lng),
-//          });
-//          kakao.maps.event.addListener(marker, "click", function () {
-//            // navigate(`/detail/${el.id}`)
-//              markerPost(el)
-//              setrvMarker({
-//                center: { lat: el.lat, lng: el.lng },
-//              });
-//          });
-//        }
-//      });
-//    }
-//
-//    // 5
-//    else if (price == 0 && worse == "" && houseType !== "") {
-//      copyData.forEach((el) => {
-//        if (houseType == el.houseType) {
-//          setCountRoom((countRoom) => countRoom + 1);
-//          const marker = new kakao.maps.Marker({
-//            map: map,
-//            image: reviewMarker,
-//            position: new kakao.maps.LatLng(el.lat, el.lng),
-//          });
-//          kakao.maps.event.addListener(marker, "click", function () {
-//            // navigate(`/detail/${el.id}`)
-//              markerPost(el)
-//              setrvMarker({
-//                center: { lat: el.lat, lng: el.lng },
-//              });
-//          });
-//        }
-//      });
-//    }
-//
-//    // 6
-//    else if (price == 0 && worse !== "" && houseType == "") {
-//      copyData.forEach((el) => {
-//        if (worse !== el.tags[0].label) {
-//          setCountRoom((countRoom) => countRoom + 1);
-//          const marker = new kakao.maps.Marker({
-//            map: map,
-//            image: reviewMarker,
-//            position: new kakao.maps.LatLng(el.lat, el.lng),
-//          });
-//          kakao.maps.event.addListener(marker, "click", function () {
-//            // navigate(`/detail/${el.id}`)
-//              markerPost(el)
-//              setrvMarker({
-//                center: { lat: el.lat, lng: el.lng },
-//              });
-//          });
-//        }
-//      });
-//    }
-//
-//    // 7
-//    else if (price !== 0 && worse == "" && houseType == "") {
-//      copyData.forEach((el) => {
-//        if (price <= el.price && el.price < price + 10) {
-//          setCountRoom((countRoom) => countRoom + 1);
-//          const marker = new kakao.maps.Marker({
-//            map: map,
-//            image: reviewMarker,
-//            position: new kakao.maps.LatLng(el.lat, el.lng),
-//          });
-//          kakao.maps.event.addListener(marker, "click", function () {
-//            // navigate(`/detail/${el.id}`)
-//             markerPost(el)
-//             setrvMarker({
-//              center: { lat: el.lat, lng: el.lng },
-//            });
-//          });
-//        }
-//      });
-//    }
-//
-//    // 8
-//    else if (price == 0 && worse == "" && houseType == "") {
-//      copyData.forEach((el) => {
-//        setCountRoom((countRoom) => countRoom + 1);
-//        const marker = new kakao.maps.Marker({
-//          map: map,
-//          image: reviewMarker,
-//          position: new kakao.maps.LatLng(el.lat, el.lng),
-//        });
-//        kakao.maps.event.addListener(marker, "click", function () {
-//          // navigate(`/detail/${el.id}`)
-//              markerPost(el)
-//              setrvMarker({
-//                center: { lat: el.lat, lng: el.lng },
-//              });
-//        });
-//      });
-//    }
-//  }, [price, worse, houseType]);
-//
-//  useEffect(()=>{
-//    const roadviewContainer = document.getElementById('roadview');
-//    const roadview = new kakao.maps.Roadview(roadviewContainer);
-//    const roadviewClient = new kakao.maps.RoadviewClient();
-//    const position = new kakao.maps.LatLng(rvmarker.center.lat, rvmarker.center.lng);
-//
-//    roadviewClient.getNearestPanoId(position, 50, function (panoId) {
-//      roadview.setPanoId(panoId, position);
-//    });
-//  },[rvmarker])
-//
-////  if(newData == null){
-////      return "Loading";
-////    } else{
-//  return (
-//    <div className="layout_root">
-//      {/* 여기부터 navunderside 내용 들어감 */}
-//      <div>
-//      <div className="sub-menus">
-//      <div className="sub-menus__wrapper">
-//        <div className="left_sub_menu_button">
-//        </div>
-//        <div
-//          style={{
-//            display: "flex",
-//            justifyContent: "space-between",
-//            width: "80%",
-//            gap: "40px",
-//          }}
-//        >
-//          <div className="left_sub_menu__item left_sub_menu__search">
-//            <form className="inputForm" onSubmit={handleSubmit}>
-//              <input
-//                className="search__input"
-//                type="text"
-//                placeholder="원하시는 지역명, 지하철역, 단지명을 입력해주세요"
-//                onChange={onChange}
-//                value={inputText}
-//              />
-//            </form>
-//            <div className="search__icon">
-//              <svg
-//                xmlns="http://www.w3.org/2000/svg"
-//                fill="none"
-//                viewBox="0 0 24 24"
-//                strokeWidth={1.5}
-//                stroke="currentColor"
-//              >
-//                <path
-//                  strokeLinecap="round"
-//                  strokeLinejoin="round"
-//                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-//                />
-//              </svg>
-//            </div>
-//          </div>
-//          <div className="right_sub_menus">
-//            <div className="sub_menus_filter filter_1">
-//              <button className="sub_menus_filter filter_1">{curPrice}</button>
-//              {/* <button className="filter__label">전월세 금액</button> */}
-//              <div className="filter__details-wrapper">
-//                <a onClick={() => housePrice(0)}>
-//                  없음
-//                </a>
-//                <a onClick={() => housePrice(10)}>
-//                  10만~
-//                </a>
-//                <a onClick={() => housePrice(20)}>
-//                  20만~
-//                </a>
-//                <a onClick={() => housePrice(30)}>
-//                  30만~
-//                </a>
-//                <a onClick={() => housePrice(40)}>
-//                  40만~
-//                </a>
-//                <a onClick={() => housePrice(50)}>
-//                  50만~
-//                </a>
-//              </div>
-//            </div>
-//            <div className="sub_menus_filter filter_2">
-//              <button className="sub_menus_filter filter_2">
-//                {curHouseType}
-//              </button>
-//              <div className="filter__details-wrapper">
-//                <a onClick={() => changeHouseType("")}>
-//                  없음
-//                </a>
-//                <a onClick={() => changeHouseType("오픈형")}>
-//                  오픈형
-//                </a>
-//                <a onClick={() => changeHouseType("분리형")}>
-//                  분리형
-//                </a>
-//                <a onClick={() => changeHouseType("복층형")}>
-//                  복층형
-//                </a>
-//                <a onClick={() => changeHouseType("지상층")}>
-//                  지상층
-//                </a>
-//                <a onClick={() => changeHouseType("반지하")}>
-//                  반지하
-//                </a>
-//                <a onClick={() => changeHouseType("옥탑")}>
-//                  옥탑
-//                </a>
-//              </div>
-//            </div>
-//            <div className="sub_menus_filter filter_3">
-//              <button className="sub_menus_filter filter_3">편의시설</button>
-//              <div className="filter__details-wrapper">
-//                <a onClick={() => convenience("CS2")}>
-//                  편의점
-//                </a>
-//                <a onClick={() => convenience("PM9")}>
-//                  약국
-//                </a>
-//                <a onClick={() => convenience("HP8")}>
-//                  병원
-//                </a>
-//                <a onClick={() => convenience("SW8")}>
-//                  지하철역
-//                </a>
-//                <a onClick={() => convenience("OL7")}>
-//                  주유소
-//                </a>
-//                <a onClick={() => convenience("BK9")}>
-//                  은행
-//                </a>
-//              </div>
-//            </div>
-//          </div>
-//        </div>
-//      </div>
-//    </div>
-//        <div className="content">
-//          {<Nav room={NavData} />}
-//          <div style={{position: "relative"}}>
-//          <div
-//            id = "map"
-//            style={{
-//              display: toggle === "map" ? "block" : "none",
-//              width: "100%",
-//              height: "100%",
-//            }}
-//          >
-//          {toggle === "map" && (
-//          <input
-//            style={{
-//              position: "absolute",
-//              top: "5px",
-//              left: "5px",
-//              zIndex: 10,
-//            }}
-//            type="button"
-//            title="로드뷰 보기"
-//            value="로드뷰"
-//            onClick={() => setToggle("roadview")}
-//          />
-//        )}
-//          </div>
-//          <div
-//            id= "roadview"
-//            style={{
-//              display: toggle === "roadview" ? "block" : "none",
-//              width: "100%",
-//              height: "768px",
-//            }}
-//          >
-//          {toggle === "roadview" && (
-//          <input
-//            style={{
-//              position: "absolute",
-//              top: "5px",
-//              left: "5px",
-//              zIndex: 10,
-//            }}
-//            type="button"
-//            title="지도 보기"
-//            value="지도"
-//            onClick={() => setToggle("map")}
-//          />
-//          )}
-//          </div>
-//          </div>
-//        </div>
-//      </div>
-//    </div>
-//  );
+  useEffect(() => {
+    console.log(place);
+    const container = document.getElementById("map");
+    const options = {
+      center: new kakao.maps.LatLng(state.center.lat, state.center.lng),
+      level: 3,
+    };
+    const map = new kakao.maps.Map(container, options);
+
+    const ps = new kakao.maps.services.Places();
+
+    ps.keywordSearch(place, placesSearchCB);
+
+    function placesSearchCB(data, status, pagination) {
+      if (status === kakao.maps.services.Status.OK) {
+        const newSearch = data[0];
+        setState({
+          center: { lat: newSearch.y, lng: newSearch.x },
+        });
+      }
+    }
+
+    let imageSrc = importmarker;
+    let imageSize = new kakao.maps.Size(24, 39);
+    let bigimageSize = new kakao.maps.Size(29, 44);
+    let imageOption = { offset: new kakao.maps.Point(27, 69) };
+
+    let reviewMarker = new kakao.maps.MarkerImage(
+      imageSrc,
+      imageSize,
+      imageOption
+    );
+
+    let bigreviewMarker = new kakao.maps.MarkerImage(
+      imageSrc,
+      bigimageSize,
+      imageOption
+    );
+
+    setCountRoom(0);
+    testData.forEach((el) => {
+      setCountRoom((countRoom) => countRoom + 1);
+      const marker = new kakao.maps.Marker({
+        map: map,
+        image: reviewMarker,
+        position: new kakao.maps.LatLng(el.latitude, el.longitude),
+      });
+      // 마커 클릭 이벤트
+      kakao.maps.event.addListener(marker, "click", function () {
+        // navigate(`/detail/${el.id}`)
+        markerPost(el)
+      });
+    });
+  }, [place]);
+
+  useEffect(() => {
+    const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+
+    const container = document.getElementById("map");
+    const options = {
+      center: new kakao.maps.LatLng(state.center.lat, state.center.lng),
+      level: 3,
+    };
+
+    var map = new kakao.maps.Map(container, options);
+
+    var ps = new kakao.maps.services.Places(map);
+    console.log(store);
+    ps.categorySearch(store, placesSearchCB, { useMapBounds: true });
+
+    function placesSearchCB(data, status, pagination) {
+      if (status === kakao.maps.services.Status.OK) {
+        for (var i = 0; i < data.length; i++) {
+          displayMarker(data[i]);
+        }
+      }
+    }
+
+    function displayMarker(storeplace) {
+      // 마커를 생성하고 지도에 표시합니다
+      var marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(storeplace.y, storeplace.x),
+      });
+      marker.setMap(map);
+    }
+  }, [store]);
+
+  // price, worse, housetype 한 번에 필터링
+
+  useEffect(() => {
+    if (price != 0 && worse != "" && houseType != "") {
+      let totalFilter = testData.filter(
+        (el) =>
+          price <= el.review_article.fee &&
+          el.review_article.fee < price + 10 &&
+          worse != el.keyword.심각[0] &&
+          houseType == el.review_article.houseType
+      );
+      setTestListData(totalFilter);
+    } else if (price == 0 && worse != "" && houseType != "") {
+      let totalFilter = testData.filter(
+        (el) => worse != el.keyword.심각[0] && houseType == el.review_article.houseType
+      );
+      setTestListData(totalFilter);
+    } else if (price != 0 && worse == "" && houseType != "") {
+      let totalFilter = testData.filter(
+        (el) =>
+          price <= el.review_article.fee &&
+          el.review_article.fee < price + 10 &&
+          houseType == el.review_article.houseType
+      );
+      setTestListData(totalFilter);
+    } else if (price != 0 && worse != "" && houseType == "") {
+      let totalFilter = testData.filter(
+        (el) =>
+          price <= el.review_article.fee &&
+          el.review_article.fee < price + 10 &&
+          worse != el.keyword.심각[0]
+      );
+      setTestListData(totalFilter);
+    } else if (price == 0 && worse == "" && houseType != "") {
+      let totalFilter = testData.filter((el) => houseType == el.review_article.houseType);
+      setTestListData(totalFilter);
+    } else if (price == 0 && worse != "" && houseType == "") {
+      let totalFilter = testData.filter(
+        (el) =>
+            worse != el.keyword.심각[0]
+      );
+      setTestListData(totalFilter);
+    } else if (price != 0 && worse == "" && houseType == "") {
+      let totalFilter = testData.filter(
+        (el) => price <= el.review_article.fee && el.review_article.fee < price + 10
+      );
+      setTestListData(totalFilter);
+    } else if (price == 0 && worse == "" && houseType == "") {
+      setTestListData(testData);
+    }
+
+    const container = document.getElementById("map");
+    const options = {
+      center: new kakao.maps.LatLng(state.center.lat, state.center.lng),
+      level: 3,
+    };
+
+    var map = new kakao.maps.Map(container, options);
+
+    let imageSrc = importmarker;
+    let imageSize = new kakao.maps.Size(24, 39);
+    let bigimageSize = new kakao.maps.Size(29, 44);
+    let imageOption = { offset: new kakao.maps.Point(27, 69) };
+
+    let reviewMarker = new kakao.maps.MarkerImage(
+      imageSrc,
+      imageSize,
+      imageOption
+    );
+
+    let bigreviewMarker = new kakao.maps.MarkerImage(
+      imageSrc,
+      bigimageSize,
+      imageOption
+    );
+
+    setCountRoom(0);
+    // 1
+    if (price !== 0 && worse !== "" && houseType !== "") {
+      testData.forEach((el) => {
+        if (
+            price <= el.review_article.fee &&
+            el.review_article.fee < price + 10 &&
+            worse != el.keyword.심각[0] &&
+            houseType == el.review_article.houseType
+        ) {
+          setCountRoom((countRoom) => countRoom + 1);
+          const marker = new kakao.maps.Marker({
+            map: map,
+            image: reviewMarker,
+            position: new kakao.maps.LatLng(el.latitude, el.longitude),
+          });
+          kakao.maps.event.addListener(marker, "click", function () {
+            // navigate(`/detail/${el.id}`)
+             markerPost(el)
+             setrvMarker({
+              center: { lat: el.latitude, lng: el.longitude },
+            });
+          });
+        }
+      });
+    }
+
+    // 2
+    else if (price == 0 && worse !== "" && houseType !== "") {
+      testData.forEach((el) => {
+          if (worse != el.keyword.심각[0] && houseType == el.review_article.houseType) {
+          setCountRoom((countRoom) => countRoom + 1);
+          const marker = new kakao.maps.Marker({
+            map: map,
+            image: reviewMarker,
+            position: new kakao.maps.LatLng(el.latitude, el.longitude),
+          });
+          kakao.maps.event.addListener(marker, "click", function () {
+            // navigate(`/detail/${el.id}`)
+              markerPost(el)
+              setrvMarker({
+                center: { lat: el.latitude, lng: el.longitude },
+              });
+          });
+        }
+      });
+    }
+
+    // 3
+    else if (price !== 0 && worse == "" && houseType !== "") {
+      testData.forEach((el) => {
+          if (
+              price <= el.review_article.fee &&
+              el.review_article.fee < price + 10 &&
+              houseType == el.review_article.houseType
+          ) {
+          setCountRoom((countRoom) => countRoom + 1);
+          const marker = new kakao.maps.Marker({
+            map: map,
+            image: reviewMarker,
+            position: new kakao.maps.LatLng(el.latitude, el.longitude),
+          });
+          kakao.maps.event.addListener(marker, "click", function () {
+           // navigate(`/detail/${el.id}`)
+              markerPost(el)
+              setrvMarker({
+                center: { lat: el.latitude, lng: el.longitude },
+              });
+          });
+        }
+      });
+    }
+
+    // 4
+    else if (price !== 0 && worse !== "" && houseType == "") {
+      testData.forEach((el) => {
+          if (
+               price <= el.review_article.price &&
+               el.review_article.price < price + 10 &&
+               worse != el.keyword.심각[0]
+          ) {
+          setCountRoom((countRoom) => countRoom + 1);
+          const marker = new kakao.maps.Marker({
+            map: map,
+            image: reviewMarker,
+            position: new kakao.maps.LatLng(el.latitude, el.longitude),
+          });
+          kakao.maps.event.addListener(marker, "click", function () {
+            // navigate(`/detail/${el.id}`)
+              markerPost(el)
+              setrvMarker({
+                center: { lat: el.latitude, lng: el.longitude },
+              });
+          });
+        }
+      });
+    }
+
+    // 5
+    else if (price == 0 && worse == "" && houseType !== "") {
+      testData.forEach((el) => {
+          if (houseType == el.review_article.houseType) {
+          setCountRoom((countRoom) => countRoom + 1);
+          const marker = new kakao.maps.Marker({
+            map: map,
+            image: reviewMarker,
+            position: new kakao.maps.LatLng(el.latitude, el.longitude),
+          });
+          kakao.maps.event.addListener(marker, "click", function () {
+            // navigate(`/detail/${el.id}`)
+              markerPost(el)
+              setrvMarker({
+                center: { lat: el.latitude, lng: el.longitude },
+              });
+          });
+        }
+      });
+    }
+
+    // 6
+    else if (price == 0 && worse !== "" && houseType == "") {
+      testData.forEach((el) => {
+          if (worse != el.keyword.심각[0]) {
+          setCountRoom((countRoom) => countRoom + 1);
+          const marker = new kakao.maps.Marker({
+            map: map,
+            image: reviewMarker,
+            position: new kakao.maps.LatLng(el.latitude, el.longitude),
+          });
+          kakao.maps.event.addListener(marker, "click", function () {
+            // navigate(`/detail/${el.id}`)
+              markerPost(el)
+              setrvMarker({
+                center: { lat: el.latitude, lng: el.longitude },
+              });
+          });
+        }
+      });
+    }
+
+    // 7
+    else if (price !== 0 && worse == "" && houseType == "") {
+      testData.forEach((el) => {
+          if (price <= el.review_article.fee && el.review_article.fee < price + 10) {
+          setCountRoom((countRoom) => countRoom + 1);
+          const marker = new kakao.maps.Marker({
+            map: map,
+            image: reviewMarker,
+            position: new kakao.maps.LatLng(el.latitude, el.longitude),
+          });
+          kakao.maps.event.addListener(marker, "click", function () {
+            // navigate(`/detail/${el.id}`)
+             markerPost(el)
+             setrvMarker({
+              center: { lat: el.latitude, lng: el.longitude },
+            });
+          });
+        }
+      });
+    }
+
+    // 8
+    else if (price == 0 && worse == "" && houseType == "") {
+      testData.forEach((el) => {
+        setCountRoom((countRoom) => countRoom + 1);
+        const marker = new kakao.maps.Marker({
+          map: map,
+          image: reviewMarker,
+          position: new kakao.maps.LatLng(el.latitude, el.longitude),
+        });
+        kakao.maps.event.addListener(marker, "click", function () {
+          // navigate(`/detail/${el.id}`)
+              markerPost(el)
+              setrvMarker({
+                center: { lat: el.latitude, lng: el.longitude },
+              });
+        });
+      });
+    }
+  }, [price, worse, houseType]);
+
+  useEffect(()=>{
+    const roadviewContainer = document.getElementById('roadview');
+    const roadview = new kakao.maps.Roadview(roadviewContainer);
+    const roadviewClient = new kakao.maps.RoadviewClient();
+    const position = new kakao.maps.LatLng(rvmarker.center.lat, rvmarker.center.lng);
+
+    roadviewClient.getNearestPanoId(position, 50, function (panoId) {
+      roadview.setPanoId(panoId, position);
+    });
+  },[rvmarker])
+
+//  if(newData == null){
+//      return "Loading";
+//    } else{
+  return (
+    <div className="layout_root">
+      {/* 여기부터 navunderside 내용 들어감 */}
+      <div>
+      <div className="sub-menus">
+      <div className="sub-menus__wrapper">
+        <div className="left_sub_menu_button">
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "80%",
+            gap: "40px",
+          }}
+        >
+          <div className="left_sub_menu__item left_sub_menu__search">
+            <form className="inputForm" onSubmit={handleSubmit}>
+              <input
+                className="search__input"
+                type="text"
+                placeholder="원하시는 지역명, 지하철역, 단지명을 입력해주세요"
+                onChange={onChange}
+                value={inputText}
+              />
+            </form>
+            <div className="search__icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div className="right_sub_menus">
+            <div className="sub_menus_filter filter_1">
+              <button className="sub_menus_filter filter_1">{curPrice}</button>
+              {/* <button className="filter__label">전월세 금액</button> */}
+              <div className="filter__details-wrapper">
+                <a onClick={() => housePrice(0)}>
+                  없음
+                </a>
+                <a onClick={() => housePrice(10)}>
+                  10만~
+                </a>
+                <a onClick={() => housePrice(20)}>
+                  20만~
+                </a>
+                <a onClick={() => housePrice(30)}>
+                  30만~
+                </a>
+                <a onClick={() => housePrice(40)}>
+                  40만~
+                </a>
+                <a onClick={() => housePrice(50)}>
+                  50만~
+                </a>
+              </div>
+            </div>
+            <div className="sub_menus_filter filter_2">
+              <button className="sub_menus_filter filter_2">
+                {curHouseType}
+              </button>
+              <div className="filter__details-wrapper">
+                <a onClick={() => changeHouseType("")}>
+                  없음
+                </a>
+                <a onClick={() => changeHouseType("오픈형")}>
+                  오픈형
+                </a>
+                <a onClick={() => changeHouseType("분리형")}>
+                  분리형
+                </a>
+                <a onClick={() => changeHouseType("복층형")}>
+                  복층형
+                </a>
+                <a onClick={() => changeHouseType("지상층")}>
+                  지상층
+                </a>
+                <a onClick={() => changeHouseType("반지하")}>
+                  반지하
+                </a>
+                <a onClick={() => changeHouseType("옥탑")}>
+                  옥탑
+                </a>
+              </div>
+            </div>
+            <div className="sub_menus_filter filter_3">
+              <button className="sub_menus_filter filter_3">편의시설</button>
+              <div className="filter__details-wrapper">
+                <a onClick={() => convenience("CS2")}>
+                  편의점
+                </a>
+                <a onClick={() => convenience("PM9")}>
+                  약국
+                </a>
+                <a onClick={() => convenience("HP8")}>
+                  병원
+                </a>
+                <a onClick={() => convenience("SW8")}>
+                  지하철역
+                </a>
+                <a onClick={() => convenience("OL7")}>
+                  주유소
+                </a>
+                <a onClick={() => convenience("BK9")}>
+                  은행
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        <div className="content">
+          {<Nav room={NavData} />}
+          <div style={{position: "relative"}}>
+          <div
+            id = "map"
+            style={{
+              display: toggle === "map" ? "block" : "none",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+          {toggle === "map" && (
+          <input
+            style={{
+              position: "absolute",
+              top: "5px",
+              left: "5px",
+              zIndex: 10,
+            }}
+            type="button"
+            title="로드뷰 보기"
+            value="로드뷰"
+            onClick={() => setToggle("roadview")}
+          />
+        )}
+          </div>
+          <div
+            id= "roadview"
+            style={{
+              display: toggle === "roadview" ? "block" : "none",
+              width: "100%",
+              height: "768px",
+            }}
+          >
+          {toggle === "roadview" && (
+          <input
+            style={{
+              position: "absolute",
+              top: "5px",
+              left: "5px",
+              zIndex: 10,
+            }}
+            type="button"
+            title="지도 보기"
+            value="지도"
+            onClick={() => setToggle("map")}
+          />
+          )}
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 //  }
 }
 

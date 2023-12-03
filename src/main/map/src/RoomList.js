@@ -176,7 +176,7 @@ export default function RoomList() {
      },[])
 
     const [filteredData, setFilteredData] = useState(dbData);
-    console.log(filteredData)
+    console.log(dbData)
 
 
   console.log(selectFilter)

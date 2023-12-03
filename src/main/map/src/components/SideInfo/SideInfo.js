@@ -22,7 +22,7 @@ export default function SideInfo({ item }) {
       <div className="infoItem1">
         <div className="infoItemTitle">거래 정보</div>
         <Separator height={"8px"} />
-        <div className="infoText">{item.review_article.houseType}</div>
+        <div className="infoText">{item.review_article.payment}</div>
       </div>
       <div className="infoItem1">
         <div className="infoItemTitle">건물 정보</div>
@@ -46,28 +46,28 @@ export default function SideInfo({ item }) {
             <img src={warningSign1} alt="level1" className="warningIcon" />
             <span className="levelText"> 심각 </span>
                 <span className="tag" >
-                  소음
+                  {item.keyword.심각[0]} {item.keyword.심각[1]}
                 </span>
           </div>
           <div className="warningSign_1">
             <img src={warningSign2} alt="level1" className="warningIcon" />
             <span className="levelText"> 경계 </span>
                  <span className="tag" >
-                   소음
+                   {item.keyword.경계[0]} {item.keyword.경계[1]}
                  </span>
           </div>
           <div className="warningSign_1">
             <img src={warningSign3} alt="level1" className="warningIcon" />
             <span className="levelText"> 주의 </span>
                 <span className="tag" >
-                  소음
+                  {item.keyword.주의[0]} {item.keyword.주의[1]}
                 </span>
           </div>
           <div className="warningSign_1">
             <img src={warningSign4} alt="level1" className="warningIcon" />
             <span className="levelText"> 문제없음 </span>
                 <span className="tag" >
-                  소음
+                  {item.keyword.주의[0]} {item.keyword.주의[1]}
                 </span>
           </div>
         </div>
