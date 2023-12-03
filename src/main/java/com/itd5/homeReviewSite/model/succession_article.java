@@ -44,6 +44,8 @@ public class succession_article {
     private LocalDateTime regDate = LocalDateTime.now();     // 게시글 작성 날짜 및 수정 날짜 기록
     private int viewCnt;
     //private Long addressId;
+    private String startDate;
+    private String endDate;
 
     public succession_article(){};
     public succession_article(String houseType, String address, String addressDetail,

@@ -35,7 +35,7 @@ public class KeywordProcessor {
         keywordMap.put("주의", new ArrayList<>());
         keywordMap.put("경계", new ArrayList<>());
         keywordMap.put("심각", new ArrayList<>());
-        keywordMap.put("문제 없음", new ArrayList<>());
+        keywordMap.put("문제없음", new ArrayList<>());
     }
 
     private void processKeyword(String level, HashMap<String, List<String>> keywordMap, String keyword) {
@@ -43,7 +43,7 @@ public class KeywordProcessor {
             case "주의" -> keywordMap.get("주의").add(keyword);
             case "경계" -> keywordMap.get("경계").add(keyword);
             case "심각" -> keywordMap.get("심각").add(keyword);
-            default -> keywordMap.get("문제 없음").add(keyword);
+            default -> keywordMap.get("문제없음").add(keyword);
         }
     }
 
