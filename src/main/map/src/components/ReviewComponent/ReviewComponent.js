@@ -1,6 +1,8 @@
 import React from "react";
 import "./ReviewComponent.css";
 import { Link } from "react-router-dom";
+import userImage from "../../image/kakaoimg_1.png"
+import roomImage from "../../image/roomdetail_1.png"
 
 export default function ReviewComponent({ review }) {
   return (
@@ -9,18 +11,18 @@ export default function ReviewComponent({ review }) {
         <div className="reviewHeader">
           <div className="userID">
             <img
-              src={review.userImage}
-              alt="userImage"
+              src={userImage}
+              alt={userImage}
               style={{ width: "20px", height: "20px", borderRadius: "100%" }}
             />
-            <div className="reviewOwner">차라라</div>
+            <div className="reviewOwner">{review.name}</div>
           </div>
           <div className="grayText">{review.livingYear}</div>
         </div>
         <div className="reviewContent">
           <img
-            src={review.objectImage}
-            alt="objectImage"
+            src={roomImage}
+            alt={roomImage}
             style={{ width: "120px", height: "80px" }}
           />
           <div className="reviewText">

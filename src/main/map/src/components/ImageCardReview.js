@@ -2,25 +2,40 @@ import React, { useState } from "react";
 import nextArrow from "../image/next.png";
 import prevArrow from "../image/back.png";
 import succImage from "../image/succ_1.png";
+//import {imageData} from "../data/imageData.js"
 import roomdetail_1 from "../image/roomdetail_1.png";
 import roomdetail_2 from "../image/roomdetail_2.png";
 import roomdetail_3 from "../image/roomdetail_3.png";
-import succdetail_1 from "../image/succdetail_1.png";
-import {imageData} from "../data/imageData.js"
 
-export default function ImageCard({ imageItem, height, width }) {
+const imageData = [
+  {
+    images: [
+      {
+        image: roomdetail_1,
+      },
+      {
+        image: roomdetail_2,
+      },
+      {
+        image: roomdetail_3,
+      },
+    ],
+   }
+]
+
+export default function ImageCardReview({ imageItem, height, width }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrev = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
     } else {
-      setCurrentIndex(imageItem.images.length - 1);
+      setCurrentIndex(imageData.images.length - 1);
     }
   };
 
   const handleNext = () => {
-    if (currentIndex < imageItem.img_url.length - 1) {
+    if (currentIndex < imageData.images.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
       setCurrentIndex(0);
@@ -31,7 +46,7 @@ export default function ImageCard({ imageItem, height, width }) {
     transform: `translateX(-${currentIndex * 100}%)`,
     transition: "transform 0.5s ease-in-out",
     display: "flex",
-    // width: `${imageItem.images.length * 100}%`,
+//    width: `${imageData.images.length * 100}%`,
     height: "100%",
   };
 
@@ -86,8 +101,8 @@ export default function ImageCard({ imageItem, height, width }) {
       </button>
       <div style={sliderStyle}>
             <img
-              src={succdetail_1}
-              alt={succImage}
+              src={roomdetail_1}
+              alt="sample"
               style={{ width: "100%", height: "100%" }}
             />
       </div>

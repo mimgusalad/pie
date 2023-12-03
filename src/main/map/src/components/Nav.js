@@ -22,7 +22,7 @@ export default function Nav({ room }) {
   const handleGoBack = () => {
     navigate(-1);
   };
-
+    console.log(room)
     // 북마크 기능
   const [imageSrc, setImageSrc] = useState(tagIcon)
   const [isClicked, setIsClicked] = useState(false); // 클릭 여부
@@ -160,46 +160,30 @@ export default function Nav({ room }) {
             <div className="warningSign">
               <img src={warningSign1} alt="level1" className="warningIcon" />
               <span className="levelText"> 심각 </span>
-              {keywordData.condition_1.map((item, index) => {
-                return (
-                  <span className="tag" key={index}>
-                    {item.tag}
-                  </span>
-                );
-              })}
+                 <span className="tag">
+                     {room.keyword1} {room.keyword2}
+                 </span>
             </div>
             <div className="warningSign">
               <img src={warningSign2} alt="level1" className="warningIcon" />
               <span className="levelText"> 경계 </span>
-              {keywordData.condition_2.map((item, index) => {
-                return (
-                  <span className="tag" key={index}>
-                    {item.tag}
-                  </span>
-                );
-              })}
+                 <span className="tag">
+                     {room.keyword3} {room.keyword4}
+                 </span>
             </div>
             <div className="warningSign">
               <img src={warningSign3} alt="level1" className="warningIcon" />
               <span className="levelText"> 주의 </span>
-              {keywordData.condition_3.map((item, index) => {
-                return (
-                  <span className="tag" key={index}>
-                    {item.tag}
-                  </span>
-                );
-              })}
+                 <span className="tag">
+                     {room.keyword5} {room.keyword6}
+                 </span>
             </div>
             <div className="warningSign">
               <img src={warningSign4} alt="level1" className="warningIcon" />
               <span className="levelText"> 문제없음 </span>
-              {keywordData.condition_4.map((item, index) => {
-                return (
-                  <span className="tag" key={index}>
-                    {item.tag}
-                  </span>
-                );
-              })}
+                 <span className="tag">
+                     {room.keyword1} {room.keyword2}
+                 </span>
             </div>
           </div>
         </div>
@@ -207,12 +191,8 @@ export default function Nav({ room }) {
           <div className="side-items-title" style={{ marginBottom: "8px" }}>
             거주민 리뷰
           </div>
-          <div className="reviewContainer">
-              return (
-                <ReviewComponent
-                  review={room}
-                />
-              );
+          <div className="reviewContainer" style={{height: "130px", width: "349px"}}>
+           <ReviewComponent review={room}/>
           </div>
         </div>
         <div className="blockContainer">

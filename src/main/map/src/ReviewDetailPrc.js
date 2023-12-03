@@ -1,14 +1,16 @@
 import React from "react";
-import {useParams, useNavigate, Link } from "react-router-dom";
-import "./ReviewDetail.css";
-import backButton from "./image/backward.png";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import "./SuccDetail.css";
+import backButton from "./image/back.png";
 import ImageCard from "./components/ImageCard";
-import ImageCardReview from "./components/ImageCardReview";
 import Separator from "./components/Separator";
 import shareIcon from "./image/share.png";
 import ReviewHeader from "./components/ReviewHeader/ReviewHeader";
-import SideInfo from "./components/SideInfo/SideInfo";
+import SuccHeader from "./components/ReviewHeader/SuccHeader";
 import { Data } from "./data/Data";
+import SuccSideInfo from "./components/SuccSideInfo/SuccSideInfo";
+import SideInfo from "./components/SideInfo/SideInfo";
+import { succData } from "./data/succData";
 import { useEffect, useState, useRef } from "react";
 import axios from 'axios';
 
@@ -31,25 +33,34 @@ const mainMenus = [
   },
 ];
 
-export default function ReviewDetail() {
-  const { roomId} = useParams();
+//async function getData(){
+//console.log("요청 들어옴")
+//var res = await axios.get('localhost:8080/articles/18');
+//console.log(res.data);
+//}
+export default function ReviewDetailPrc() {
+//getData();
+  let { reviewId } = useParams();
+  let reviewIdtoLong = parseInt(reviewId);
+  console.log(reviewIdtoLong)
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1);
   };
-
+  const [loading, setLoading] = useState(false);
   const [newData, setNewData] = useState(null);
-    //setNewData(getData(18));
-         useEffect(()=>{
-      		const fetchData = async() => {
-  //              const res = await axios.get(`http://localhost:8080/articles/succId`);
-              const res = await axios.get("http://localhost:8080/reviews/"+`${roomId}`);
-                return res.data;
-              }
-              fetchData().then(res => setNewData(res));
-         },[])
+  const [filterData, setFilterData] = useState([]);
+  //setNewData(getData(18));
+       useEffect(()=>{
+    		const fetchData = async() => {
+//              const res = await axios.get(`http://localhost:8080/articles/succId`);
+            const res = await axios.get("http://localhost:8080/reviews/"+`${reviewIdtoLong}`);
+              return res.data;
+            }
+            fetchData().then(res => setNewData(res));
+       },[])
 
-        console.log(newData)
+      console.log(newData)
 
   if(newData == null){
     return "Loading";
@@ -64,11 +75,12 @@ export default function ReviewDetail() {
               뒤로가기
             </button>
             <Separator height={"12px"} />
-            <div className="subHeader">방 정보 {">"} 거주민리뷰</div>
+            <div className="subHeader">방 정보 {">"} 거주민 리뷰</div>
           </div>
           <div className="reviewContent">
             <div className="userReviewContainer">
-              <ImageCardReview imageItem={newData} height={"400px"} />
+              <ImageCard imageItem={newData} height={"400px"} />
+              {/* reviewheader에 맞게 succData 수정 */}
               <ReviewHeader user={newData} />
               <hr style={{ marginTop: "16px", color: "lightgray" }} />
               <div style={{ fontSize: "12px", lineHeight: "1.3" }}>

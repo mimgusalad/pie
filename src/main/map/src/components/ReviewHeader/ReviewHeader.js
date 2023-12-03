@@ -1,11 +1,21 @@
 import React from "react";
 import "./ReviewHeader.css";
+import userImage from "../../image/kakaoimg_1.png"
 
 export default function ReviewHeader({ user }) {
   return (
     <div className="reviewHeader">
       <div className="userID">
-        <div className="reviewOwner">{user.review_article.userId}</div>
+        <img
+          src= {userImage}
+          alt="userImage"
+          style={{
+            width: "32px",
+            height: "32px",
+            borderRadius: "100%",
+          }}
+        />
+        <div className="reviewOwner">{user.userInfo.name}</div>
       </div>
       <div className="userInfo">
         <div style={{ fontSize: "12px", marginRight: "8px" }}>
