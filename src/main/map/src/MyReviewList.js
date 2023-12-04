@@ -25,6 +25,19 @@ function MyReviewList() {
        navigate('/myPage');
   };
 
+  const handleDelete = (articleNo) => {
+      if (window.confirm('해당 리뷰를 삭제하시겠습니까?')) {
+        axios.delete(`http://localhost:8080/api/reviews/${articleNo}`)
+          .then(response => {
+            // 삭제 성공 후 UI 업데이트
+            setMyReviews(prevReviews => prevReviews.filter(review => review.articleNo !== articleNo));
+          })
+          .catch(error => {
+            console.error('리뷰 삭제에 실패했습니다.', error);
+          });
+      }
+    };
+
   if (isLoading) {
     return <p>로딩 중...</p>;
   }
@@ -43,6 +56,7 @@ function MyReviewList() {
                 <p><strong>보증금/월세:</strong> {review.deposit} / {review.fee}</p>
                 <p><strong>주거형태/거주기간:</strong> {review.houseType} / {review.livingYear}년</p>
                 <p><strong>작성일:</strong> {new Date(review.regdate).toLocaleDateString()}</p>
+                <button onClick={() => handleDelete(review.articleNo)} className="delete-button">삭제</button>
               </li>
             ))}
           </ul>

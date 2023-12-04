@@ -91,14 +91,6 @@ public class AccountReactController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 
-
-
-
-    @GetMapping("/savedAddress")
-    public List<Address> getSavedAddress() {
-        // 저장한 주소를 가져오는 로직
-        return null;
-    }
     @PostMapping("/updateUserInfo")
     public ResponseEntity<?> updateUserInfo(@RequestBody SocialAuth updatedUser) {
         // 사용자를 찾기 위한 ID 값 추출
@@ -115,6 +107,47 @@ public class AccountReactController {
         }
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("success", false, "message", "사용자를 찾을 수 없습니다."));
+    }
+
+    @DeleteMapping("/reviews/{articleNo}")
+    public ResponseEntity<?> deleteReview(@PathVariable Long articleNo) {
+        Long userId = getLoginUserId();
+        if (userId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("사용자 인증 실패");
+        }
+
+        Optional<review_article> reviewOptional = reviewRepository.findById(articleNo);
+        if (reviewOptional.isPresent()) {
+            review_article review = reviewOptional.get();
+            if (review.getUserId().equals(userId)) {
+                reviewRepository.delete(review);
+                return ResponseEntity.ok("리뷰가 삭제되었습니다.");
+            } else {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("리뷰 삭제 권한이 없습니다.");
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("리뷰를 찾을 수 없습니다.");
+        }
+    }
+    @DeleteMapping("/successions/{articleNo}")
+    public ResponseEntity<?> deleteSuccession(@PathVariable Long articleNo) {
+        Long userId = getLoginUserId();
+        if (userId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("사용자 인증 실패");
+        }
+
+        Optional<succession_article> successionOptional = successionRepository.findById(articleNo);
+        if (successionOptional.isPresent()) {
+            succession_article succession = successionOptional.get();
+            if (succession.getUserId().equals(userId)) {
+                successionRepository.delete(succession);
+                return ResponseEntity.ok("승계글이 삭제되었습니다.");
+            } else {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("승계글 삭제 권한이 없습니다.");
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("승계글을 찾을 수 없습니다.");
+        }
     }
 
     @PostMapping("/logout")
