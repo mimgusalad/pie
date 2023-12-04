@@ -97,7 +97,7 @@ public class AiController {
     @GetMapping("homeDetail/{roadAddress}")
     @ResponseBody
     public Map<String,Object> homeDetail(@PathVariable String roadAddress){
-        Address address = addressRepository.findByRoad_Address(roadAddress);
+        Address address = addressRepository.findByRoadAddress(roadAddress);
         if (address == null){
             address = getKakaoApiFromAddress(roadAddress);
         }
@@ -171,7 +171,7 @@ public class AiController {
             address.setLatitude(Double.parseDouble(adList.get("y")));
 
             address.setAddress((String) docAddressList.get("address_name"));
-            address.setRoad_address((String) docRoadList.get("address_name"));
+            address.setRoadAddress((String) docRoadList.get("address_name"));
             address.setBuildingName((String) docRoadList.get("building_name"));
             address.setZone_no(Integer.parseInt((String) docRoadList.get("zone_no")));
 

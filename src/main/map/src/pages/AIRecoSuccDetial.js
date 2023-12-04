@@ -40,7 +40,7 @@ export default function AIRecoSuccDetial(){
         <div className="content_first_info_area">
             <div className="content_home_address">
                 <h1 className="text_home_title" />건물 주소
-                <h4 className="text_home_address" > {address.road_address} </h4>
+                <h4 className="text_home_address" > {address.roadAddress} </h4>
                 <span className="text_home_stNum_title" >지번 </span>
                 <span className="text_home_stNum" > {address.address}</span>
                 <div className="content_map_area" id="map">
