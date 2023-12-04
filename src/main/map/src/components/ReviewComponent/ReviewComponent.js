@@ -5,6 +5,8 @@ import userImage from "../../image/kakaoimg_1.png"
 import roomImage from "../../image/roomdetail_1.png"
 
 export default function ReviewComponent({ review }) {
+  var substring = review.img_url.split(" ")
+  console.log(substring[0])
   return (
     <Link to={`/detail/review/${review.articleNo}`}>
       <div className="reviewBox">
@@ -20,11 +22,10 @@ export default function ReviewComponent({ review }) {
           <div className="grayText">{review.livingYear}</div>
         </div>
         <div className="reviewContent">
-          <img
-            src={roomImage}
-            alt={roomImage}
-            style={{ width: "120px", height: "80px" }}
-          />
+          {review.img_url ?
+            (<img src={substring[0]} style={{ width: "120px", height: "120px" }} />)
+              : (<img src={roomImage} style={{ width: "120px", height: "120px" }} />)
+            }
           <div className="reviewText">
             <div
               style={{

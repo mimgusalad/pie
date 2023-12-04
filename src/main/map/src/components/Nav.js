@@ -8,6 +8,7 @@ import warningSign2 from "../image/warning_2.png";
 import warningSign3 from "../image/warning_3.png";
 import warningSign4 from "../image/warning_4.png";
 import ImageCardReview from "../components/ImageCardReview";
+import ImageCardNav from "../components/ImageCardNav";
 import StarRating from "../components/StarRating";
 import ReviewComponent from "../components/ReviewComponent/ReviewComponent";
 import DetailInfo from "../components/DetailInfoComponent/DetailInfo";
@@ -21,21 +22,6 @@ export default function Nav({ room }) {
     navigate(-1);
   };
     console.log(room)
-    // 북마크 기능
-  const [imageSrc, setImageSrc] = useState(tagIcon)
-  const [isClicked, setIsClicked] = useState(false); // 클릭 여부
-
-  const handleClick = () => {
-    if (isClicked) {
-      setImageSrc(tagIcon);
-        setIsClicked(false); // 초기 상태 false 일 땐 초기 상태 이미지 src
-        // 북마크 해제하면 db에서도 삭제
-      } else {
-        setImageSrc(aftertagIcon);
-        setIsClicked(true); // true일 땐 변경될 이미지 src
-        // 북마크 클릭했으니까 addressId를 db에 업데이트
-      }
-  };
 
   return (
     <div
@@ -68,30 +54,10 @@ export default function Nav({ room }) {
           />
         </button>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <img
-            src={shareIcon}
-            alt="shareIcon"
-            style={{
-              width: "16px",
-              height: "16px",
-              strokeWidth: "10px",
-              marginRight: "20px",
-            }}
-          />
-          <img
-            src={imageSrc}
-            alt="tagIcon"
-            style={{
-              width: "16px",
-              height: "16px",
-              strokeWidth: "10px",
-            }}
-            onClick={handleClick}
-          />
         </div>
       </div>
       <div className="side-nav__items-wrapper">
-        <ImageCardReview imageItem={room} height={"200px"} width={"100%"} />
+        <ImageCardNav imageItem={room} height={"200px"} width={"100%"} />
         <div className="blockContainer">
           <div
             className="titleContainer"
@@ -180,7 +146,7 @@ export default function Nav({ room }) {
               <img src={warningSign4} alt="level1" className="warningIcon" />
               <span className="levelText"> 문제없음 </span>
                  <span className="tag">
-                     {room.keyword1} {room.keyword2}
+                     {room.keyword7} {room.keyword8}
                  </span>
             </div>
           </div>

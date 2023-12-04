@@ -67,7 +67,7 @@ export default function SideInfo({ item }) {
             <img src={warningSign4} alt="level1" className="warningIcon" />
             <span className="levelText"> 문제없음 </span>
                 <span className="tag" >
-                  {item.keyword.주의[0]} {item.keyword.주의[1]}
+                  {item.keyword.문제없음[0]} {item.keyword.문제없음[1]}
                 </span>
           </div>
         </div>

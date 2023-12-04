@@ -89,6 +89,12 @@ function NavUnder() {
   let [testListData, setTestListData] = useState([]);
   let markerData = JSON.parse(JSON.stringify(testListData));
   console.log(testListData)
+
+  // 사진 이미지 유무
+   newData.map((data, index) => {
+       if (data.img_url && data.img_url.length > 0) {
+           console.log(data.img_url[0]);
+       }});
   // newData로 건들여보기
   // keyword 하나에 접근하는법
   //console.log(newData[30].keyword.경계[0])
@@ -281,6 +287,8 @@ function NavUnder() {
         keyword4: `${sideItem.keyword.경계[1]}`,
         keyword5: `${sideItem.keyword.주의[0]}`,
         keyword6: `${sideItem.keyword.주의[1]}`,
+        keyword7: `${sideItem.keyword.문제없음[0]}`,
+        keyword8: `${sideItem.keyword.문제없음[1]}`,
       }
     })
   }
@@ -316,6 +324,8 @@ function NavUnder() {
         keyword4: `${el.keyword.경계[1]}`,
         keyword5: `${el.keyword.주의[0]}`,
         keyword6: `${el.keyword.주의[1]}`,
+        keyword7: `${el.keyword.문제없음[0]}`,
+        keyword8: `${el.keyword.문제없음[1]}`,
       }
     })
   }
@@ -1033,7 +1043,11 @@ markerPost(el);
                 {testListData.map((sideItem) => {
                   return (
                       <div onClick={() => detailPost(sideItem)} className="side-nav__item">
-                        <div className="item-thumbnail"><img src={sampleimage} style={{ width: "120px", height: "120px" }} /></div>
+                        <div className="item-thumbnail">{sideItem.img_url[0] ?
+                            (<img src={sideItem.img_url[0]} style={{ width: "120px", height: "120px" }} />)
+                            : (<img src={sampleimage} style={{ width: "120px", height: "120px" }} />)
+                        }
+                        </div>
                         {/* thumbnail에 원룸 메인 사진 들어감 */}
                         <div className="item-details">
                           <div className="item__title">{sideItem.review_article.address}</div>

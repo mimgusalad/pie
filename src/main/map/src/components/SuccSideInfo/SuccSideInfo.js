@@ -14,7 +14,7 @@ export default function SuccSideInfo({ item }) {
           <Separator height={"12px"} />
           <div className="infoText">{item.succession_article.address} {item.succession_article.addressDetail}</div>
           <Separator height={"8px"} />
-          <div className="infoText">{item.succession_article.periodDay}~{item.succession_article.periodYear}</div>
+          <div className="infoText">{item.succession_article.startDate}~{item.succession_article.endDate}</div>
         </div>
         <div className="infoItem1">
           <div className="infoItemTitle">방구조</div>

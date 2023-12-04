@@ -2,6 +2,8 @@ import React from "react";
 import {useParams, useNavigate, Link } from "react-router-dom";
 import "./ReviewDetail.css";
 import backButton from "./image/backward.png";
+import tagIcon from "./image/tag.png";
+import aftertagIcon from "./image/tag_after.png";
 import ImageCard from "./components/ImageCard";
 import ImageCardReview from "./components/ImageCardReview";
 import Separator from "./components/Separator";
@@ -39,19 +41,70 @@ export default function ReviewDetail() {
   };
 
   const [newData, setNewData] = useState(null);
-    //setNewData(getData(18));
          useEffect(()=>{
       		const fetchData = async() => {
-  //              const res = await axios.get(`http://localhost:8080/articles/succId`);
               const res = await axios.get("http://localhost:8080/reviews/"+`${roomId}`);
                 return res.data;
               }
               fetchData().then(res => setNewData(res));
          },[])
 
-        console.log(newData)
+  console.log(newData)
 
-  if(newData == null){
+    // userData
+   const [userData, setUserData] = useState([]);
+    useEffect(()=>{
+         const fetchData = async() => {
+              const res = await axios.get('http://localhost:8080/user-info');
+                   return res.data;
+         }
+         fetchData().then(res => setUserData(res));
+    },[])
+
+  console.log('user data :', userData)
+  const [imageSrc, setImageSrc] = useState(tagIcon)
+  const [isClicked, setIsClicked] = useState(false); // 클릭 여부
+
+       const handleClick = () => {
+         if (isClicked) {
+           setImageSrc(tagIcon);
+             setIsClicked(false); // 초기 상태 false 일 땐 초기 상태 이미지 src
+             // 북마크 해제하면 db에서도 삭제
+             axios
+                 .post("http://localhost:8080/favorite", {
+                     userId: userData.userId,
+                     articleNo: newData.review_article.articleNo
+                 })
+                 .then((response) => {
+                     console.log("200", response.data);
+
+                     if (response.status === 200) {
+                         console.log("즐찾 해제");
+                     }
+                 })
+                 .catch((error) => console.log(error.response));
+           } else {
+             setImageSrc(aftertagIcon);
+             setIsClicked(true); // true일 땐 변경될 이미지 src
+             // 북마크 클릭했으니까 addressId를 db에 업데이트
+             axios
+                 .post("http://localhost:8080/favorite", {
+                     userId: userData.userId,
+                     articleNo: newData.review_article.articleNo
+                 })
+                 .then((response) => {
+                     console.log("200", response.data);
+
+                     if (response.status === 200) {
+                         console.log("즐찾 성공");
+                     }
+                 })
+                 .catch((error) => console.log(error.response));
+           }
+       };
+
+
+  if(newData == null || userData == null){
     return "Loading";
   } else{
   return (
@@ -83,9 +136,14 @@ export default function ReviewDetail() {
                   조회 {newData.review_article.viewCnt}
                 </div>
                 <img
-                  src={shareIcon}
-                  alt="shareIcon"
-                  style={{ width: "12px", height: "12px" }}
+                   src={imageSrc}
+                   alt="tagIcon"
+                     style={{
+                       width: "16px",
+                       height: "16px",
+                       strokeWidth: "10px",
+                     }}
+                       onClick={handleClick}
                 />
               </div>
             </div>
