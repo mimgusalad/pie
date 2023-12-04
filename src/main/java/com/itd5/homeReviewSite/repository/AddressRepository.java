@@ -10,4 +10,5 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
     List<Address> findAll();
     Address findByLatitudeAndLongitude(Double latitude, Double longitude);
     Address findByAddressId(Long addressId);
+    Address findByRoad_Address(String roadAddress);
 }

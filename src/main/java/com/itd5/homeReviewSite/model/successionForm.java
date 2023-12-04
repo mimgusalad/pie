@@ -21,5 +21,5 @@ public class successionForm {
     private String contentText;
     private ArrayList optionQuality;
     private ArrayList successionQuality;
-    private String files;
+    private ArrayList files;
 }

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -41,15 +42,15 @@ public class SuccessionController {
     AddressRepository addressRepository;
     @Autowired
     S3UploadService s3UploadService;
+
     @GetMapping("form")
-    public String form(){
+    public String form() {
         Long userId = getLoginUserId();
         succession_article successionArticle = successionRepository.findByUserId(userId);
-        if(successionArticle == null){
+        if (successionArticle == null) {
             successionArticle = new succession_article();
-        }
-        else{
-            Message message = new Message("이미 작성된 승계글이 있습니다." ,"작성된 승계글 페이지로 전환됩니다.", "/succession/detail?articleNo="+successionArticle.getArticleNo(),"/",  RequestMethod.GET, null );
+        } else {
+            Message message = new Message("이미 작성된 승계글이 있습니다.", "작성된 승계글 페이지로 전환됩니다.", "/succession/detail?articleNo=" + successionArticle.getArticleNo(), "/", RequestMethod.GET, null);
             return "succession/form";
         }
         return "succession/form";
@@ -57,7 +58,9 @@ public class SuccessionController {
 
     @PostMapping("form")
     @ResponseBody
-    public Map<String, Object> submitSuccession(@RequestBody successionForm successionForm){
+    public Map<String, Object> submitSuccession(HttpServletRequest httpServletRequest, @RequestPart(value = "sendData") successionForm successionForm) {
+        MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) httpServletRequest;
+        List<MultipartFile> fileMap = multiRequest.getFiles("file");
 
         System.out.println(successionForm);
         succession_article succession = new succession_article(
@@ -76,7 +79,7 @@ public class SuccessionController {
         // 동일한 주소에 대한 처리
         // 동일한 주소가 없는 경우에만 save
         Address sameAddress = addressRepository.findByLatitudeAndLongitude(saveAddress.getLatitude(), saveAddress.getLongitude());
-        if (sameAddress == null){
+        if (sameAddress == null) {
             addressRepository.save(saveAddress);
             sameAddress = saveAddress;
         }
@@ -89,16 +92,17 @@ public class SuccessionController {
         successionRepository.save(succession);
 
         // 사진 save
-        //savePhoto(request, uploadFiles, succession.getArticleNo());
+        savePhoto(fileMap, succession.getArticleNo());
 
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("successionId",String.valueOf(succession.getArticleNo()));
+        resultMap.put("successionId", String.valueOf(succession.getArticleNo()));
         resultMap.put("successionForm", successionForm);
 
         return resultMap;
     }
+
     @GetMapping("delete")
-    public String delete(@RequestParam(required = false) Long articleNo){
+    public String delete(@RequestParam(required = false) Long articleNo) {
         succession_article successionArticle = successionRepository.findByArticleNo(articleNo);
         successionRepository.delete(successionArticle);
 
@@ -106,7 +110,7 @@ public class SuccessionController {
     }
 
     @GetMapping("list")
-    public String list(Model model){
+    public String list(Model model) {
         List<succession_article> successionList = successionRepository.findAll();
 
         model.addAttribute("totalCnt", successionList.size());
@@ -114,18 +118,19 @@ public class SuccessionController {
         model.addAttribute("sortSuccessionList", successionList);
         return "succession/list";
     }
+
     @GetMapping("detail")
-    public String detail(Model model, @RequestParam(required = false) Long articleNo){
+    public String detail(Model model, @RequestParam(required = false) Long articleNo) {
         List<String> imgUrlList = new ArrayList<>();
         succession_article succession;
 
-        if(articleNo == null){
+        if (articleNo == null) {
             succession = new succession_article();
         }
         succession = successionRepository.findByArticleNo(articleNo);
 
         List<PhotoFile> photoFileList = fileRepository.findBySuccessionIdAndArticleType(succession.getArticleNo(), "succession");
-        for(PhotoFile photoFile : photoFileList){
+        for (PhotoFile photoFile : photoFileList) {
             String url = s3UploadService.getImgUrl(photoFile.getSaveFileName());
             imgUrlList.add(url);
         }
@@ -134,6 +139,7 @@ public class SuccessionController {
 
         return "succession/detail";
     }
+
     public Address getKakaoApiFromAddress(String roadFullAddr) {
         String apiKey = "04519b1d8946746a4ea4438360fe8418";
         String apiUrl = "https://dapi.kakao.com/v2/local/search/address.json";
@@ -173,8 +179,8 @@ public class SuccessionController {
 
             List<Map<String, String>> docList = (List<Map<String, String>>) jsonMap.get("documents");
             Map<String, String> adList = (Map<String, String>) docList.get(0);
-            Map<String,Object> docAddressList = mapper.convertValue(adList.get("address"), typeReference);
-            Map<String,Object> docRoadList = mapper.convertValue(adList.get("road_address"), typeReference);
+            Map<String, Object> docAddressList = mapper.convertValue(adList.get("address"), typeReference);
+            Map<String, Object> docRoadList = mapper.convertValue(adList.get("road_address"), typeReference);
 
             // address 객체 정보 설정
             address.setLongitude(Double.parseDouble(adList.get("x")));
@@ -197,19 +203,19 @@ public class SuccessionController {
         return address;
     }
 
-    public Long getLoginUserId(){
-        Object principal= SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public Long getLoginUserId() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         PrincipalDetails principalDetails = (PrincipalDetails) principal;
         Long userId = principalDetails.getMember().getId();
 
         return userId;
     }
 
-    public void savePhoto(HttpServletRequest request, List<MultipartFile> uploadFiles, Long articleNo){
+    public void savePhoto(List<MultipartFile> uploadFiles, Long articleNo) {
 
-        for (MultipartFile imgFile : uploadFiles){
+        for (MultipartFile imgFile : uploadFiles) {
             PhotoFile photoFile = new PhotoFile();
-            if(!imgFile.isEmpty()){
+            if (!imgFile.isEmpty()) {
                 String originalFilename = imgFile.getOriginalFilename();
                 String saveFilename = UUID.randomUUID() + "." + extractExt(originalFilename);
                 try {
@@ -238,6 +244,7 @@ public class SuccessionController {
         model.addAttribute("params", params);
         return "messageRedirect";
     }
+
     // 이미지 확장자 출력
     private String extractExt(String originalFilename) {
         int pos = originalFilename.lastIndexOf(".");
