@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
+import axios from 'axios';
 import "./ReviewComponent.css";
 import { Link } from "react-router-dom";
 import userImage from "../../image/kakaoimg_1.png"
@@ -7,6 +8,20 @@ import roomImage from "../../image/roomdetail_1.png"
 export default function ReviewComponent({ review }) {
   var substring = review.img_url.split(" ")
   console.log(substring[0])
+
+    const[imageData, setImageData] = useState(null);
+       useEffect(()=>{
+       	    const fetchData = async() => {
+                 const res = await axios.get("http://localhost:8080/reviews/" + `${review.articleNo}`);
+                 return res.data;
+               }
+
+               fetchData().then(res => setImageData(res));
+       },[])
+
+if(imageData == null){
+    return "Loading"
+}else{
   return (
     <Link to={`/detail/review/${review.articleNo}`}>
       <div className="reviewBox">
@@ -22,8 +37,8 @@ export default function ReviewComponent({ review }) {
           <div className="grayText">{review.livingYear}</div>
         </div>
         <div className="reviewContent">
-          {review.img_url ?
-            (<img src={substring[0]} style={{ width: "120px", height: "120px" }} />)
+          {imageData.img_url[0] ?
+            (<img src={imageData.img_url[0]} style={{ width: "120px", height: "120px" }} />)
               : (<img src={roomImage} style={{ width: "120px", height: "120px" }} />)
             }
           <div className="reviewText">
@@ -51,4 +66,5 @@ export default function ReviewComponent({ review }) {
       </div>
     </Link>
   );
+  }
 }

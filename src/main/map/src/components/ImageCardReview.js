@@ -111,7 +111,7 @@ const imageData = [
 
 export default function ImageCardReview({ imageItem, height, width }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  console.log(imageItem.img_url)
+  console.log(imageItem)
 
   const handlePrev = () => {
     if (currentIndex > 0) {
@@ -188,7 +188,7 @@ export default function ImageCardReview({ imageItem, height, width }) {
       </button>
       <div style={sliderStyle}>
         {
-            imageItem.img_url ? (
+            imageItem.img_url[0] ? (
                 <img
                    src={imageItem.img_url[0]}
                    alt="sample"
