@@ -154,14 +154,18 @@ public class ReviewService {
 
 
     public String processKeyword(double keyword){
-        if(keyword <= 2){
-            return "문제없음";
-        }else if(keyword > 2 && keyword <= 5){
-            return "주의";
-        }else if(keyword > 5 && keyword <= 8){
-            return "경계";
+        switch ((int)keyword){
+            case 4:
+                return "문제없음";
+            case 3:
+                return "주의";
+            case 2:
+                return "경계";
+            case 1:
+                return "심각";
+            default:
+                return "알수없음";
         }
-        return "심각";
     }
 }
 
