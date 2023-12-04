@@ -85,7 +85,7 @@ export default function ReviewDetail() {
                  .catch((error) => console.log(error.response));
            } else {
              setImageSrc(tagIcon);
-             setIsClicked(true); // true일 땐 변경될 이미지 src
+             setIsClicked(true);
              // 북마크 클릭했으니까 addressId를 db에 업데이트
              axios
                  .post("http://localhost:8080/favorite", {

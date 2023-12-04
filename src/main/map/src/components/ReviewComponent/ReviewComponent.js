@@ -3,7 +3,7 @@ import axios from 'axios';
 import "./ReviewComponent.css";
 import { Link } from "react-router-dom";
 import userImage from "../../image/kakaoimg_1.png"
-import roomImage from "../../image/roomdetail_1.png"
+import roomImage from "../../image/roomdetail_2.png"
 
 export default function ReviewComponent({ review }) {
   var substring = review.img_url.split(" ")

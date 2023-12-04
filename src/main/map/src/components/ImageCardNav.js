@@ -59,7 +59,6 @@ export default function ImageCardNav({ imageItem, height, width }) {
     transform: `translateX(-${currentIndex * 100}%)`,
     transition: "transform 0.5s ease-in-out",
     display: "flex",
-//    width: `${imageData.images.length * 100}%`,
     height: "100%",
   };
 if(imageData == null){
