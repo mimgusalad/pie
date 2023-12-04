@@ -8,6 +8,21 @@ function MySuccession() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
+  const deleteSuccession = (articleNo) => {
+      if (window.confirm('해당 승계글을 삭제하시겠습니까?')) {
+        axios.delete(`http://localhost:8080/api/successions/${articleNo}`)
+          .then(response => {
+            alert('승계글이 삭제되었습니다.');
+            console.log('승계글 삭제 성공:', response.data);
+            // 승계글 삭제 후 페이지 새로고침 또는 상태 업데이트
+            window.location.reload();
+          })
+          .catch(error => {
+            console.error('승계글 삭제에 실패했습니다:', error);
+          });
+      }
+    };
+
   useEffect(() => {
     axios.get('http://localhost:8080/api/mySuccession')
       .then(response => {
@@ -46,6 +61,8 @@ function MySuccession() {
                    <p><strong>주거형태/결제유형:</strong> {successionData.houseType} / {successionData.payType}</p>
                    <p><strong>옵션 상태/승계 상태:</strong> {successionData.optionQuality} / {successionData.successionQuality}</p>
                    <p><strong>등록일:</strong> {new Date(successionData.regDate).toLocaleDateString()}</p>
+                   <button onClick={() => deleteSuccession(successionData.articleNo)} className="delete-button">삭제</button>
+
         </div>
       ) : (
         <p>아직 내가 쓴 승계글이 없습니다.</p>
