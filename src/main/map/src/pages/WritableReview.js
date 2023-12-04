@@ -40,7 +40,12 @@ function Review(props){
                         eleReview : props.oneReview,
                     },})
             }} /> 
-            : <img className="img_reviewPreview" src={props.myReviewImgSrc} />}
+            : <img className="img_reviewPreview" src={props.myReviewImgSrc} onClick={(e) => {
+                navigate(`/review/detail/${props.oneReview.articleNo}`,{
+                    state: {
+                        eleReview : props.oneReview,
+                    },})
+            }} />}
             <h1 className="text_address">{props.oneReview.address}</h1>
             <div className="bottom_info">
                 <div className="content_rating_area">

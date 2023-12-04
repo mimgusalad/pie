@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import styled from 'styled-components';
-import axios from 'axios'
 
 import "./MainPage.css";
 
@@ -261,7 +260,7 @@ function displayPagination(pagination) {
 // 키워드 input 창에 해당 장소명을 표시
 function displayInfoInput(title){
     document.getElementById('inputAddressKeyword').value = title;
-    document.getElementById("result").classList.add('invisible');
+    document.getElementById("resultMain").classList.add('invisible');
 }
  // 검색결과 목록의 자식 Element를 제거하는 함수입니다
 function removeAllChildNods(el) {

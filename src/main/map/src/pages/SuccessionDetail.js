@@ -5,11 +5,11 @@ import backButton from "../image/back.png";
 import Separator from "../components/Separator";
 import shareIcon from "../image/share.png";
 
-// import ReviewHeader from "./components/ReviewHeader/ReviewHeader";
+import ReviewHeader from "../components/ReviewHeader/ReviewHeader";
 // import { Data } from "./data/Data";
-// import SuccSideInfo from "./components/SuccSideInfo/SuccSideInfo";
+import SuccSideInfo from "../components/SuccSideInfo/SuccSideInfo";
 // import { succData } from "./data/succData";
-// import ImageCard from "./components/ImageCard";
+import ImageCard from "../components/ImageCard";
 
 export default function SuccessionDetial(){
     const location = useLocation();
@@ -62,9 +62,9 @@ export default function SuccessionDetial(){
               </div> */}
               <div className="reviewContent">
                 <div className="userReviewContainer">
-                  {/* <ImageCard imageItem={succData[succId]} height={"400px"} /> */}
+                  <ImageCard imageItem={succession} height={"400px"} />
                   {/* reviewheader에 맞게 succData 수정 */}
-                  {/* <ReviewHeader user={succData[succId]} /> */}
+                  <ReviewHeader user={succession} />
                   <hr style={{ marginTop: "16px", color: "lightgray" }} />
                   <div style={{ fontSize: "12px", lineHeight: "1.3" }}>
                     {succession.contentText}
@@ -85,7 +85,7 @@ export default function SuccessionDetial(){
                   </div>
                 </div>
                 <div className="detailInfoContainer">
-                  {/* <SuccSideInfo item={succData[succId]} /> */}
+                  <SuccSideInfo item={succession} />
                 </div>
               </div>
               <Separator height={"80px"} />

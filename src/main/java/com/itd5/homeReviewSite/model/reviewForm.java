@@ -2,6 +2,8 @@ package com.itd5.homeReviewSite.model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+
 @Data
 public class reviewForm {
     private String houseType;
@@ -9,7 +11,7 @@ public class reviewForm {
     private String managementFee;
     private String deposit;
     private String fee;
-    private String addressName;
+    private String address;
     private String addressDetail;
     private String livingYear;
     private String noise;
@@ -23,6 +25,6 @@ public class reviewForm {
     private String contentTitle;
     private String contentText;
     private String rating;
-    private String files;
+    private ArrayList files;
     private String certification;
 }

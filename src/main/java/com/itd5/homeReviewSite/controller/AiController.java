@@ -1,5 +1,7 @@
 package com.itd5.homeReviewSite.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itd5.homeReviewSite.model.*;
 import com.itd5.homeReviewSite.repository.AddressRepository;
 import com.itd5.homeReviewSite.repository.ReviewRepository;
@@ -13,6 +15,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,15 +94,20 @@ public class AiController {
         System.out.println(resultMap);
         return resultMap;
     }
-    @GetMapping("homeDetail")
-    public String homeDetail(Model model, @RequestParam(required = false)Long addressId){
-        Address address = addressRepository.findByAddressId(addressId);
-        List<review_article> reviewList = reviewRepository.findTop4ByAddressId(addressId);
+    @GetMapping("homeDetail/{roadAddress}")
+    @ResponseBody
+    public Map<String,Object> homeDetail(@PathVariable String roadAddress){
+        Address address = addressRepository.findByRoad_Address(roadAddress);
+        if (address == null){
+            address = getKakaoApiFromAddress(roadAddress);
+        }
+        List<review_article> reviewList = reviewRepository.findTop4ByAddressId(address.getAddressId());
 
-        model.addAttribute("homeInfo", address);
-        model.addAttribute("home_review_list", reviewList);
+        Map<String, Object> result = new HashMap<>();
+        result.put("address", address);
+        result.put("reviewList", reviewList);
 
-        return "ai/recommendHomeDetail";
+        return result;
     }
 
     @GetMapping("reviewMore")
@@ -107,6 +122,69 @@ public class AiController {
     private String showMessageAndRedirect(final Message params, Model model) {
         model.addAttribute("params", params);
         return "messageRedirect";
+    }
+
+    public Address getKakaoApiFromAddress(String roadFullAddr) {
+        String apiKey = "04519b1d8946746a4ea4438360fe8418";
+        String apiUrl = "https://dapi.kakao.com/v2/local/search/address.json";
+        String jsonString = null;
+        Address address = new Address();
+
+        try {
+            roadFullAddr = URLEncoder.encode(roadFullAddr, "UTF-8");
+
+            String addr = apiUrl + "?query=" + roadFullAddr;
+
+            URL url = new URL(addr);
+            URLConnection conn = url.openConnection();
+            conn.setRequestProperty("Authorization", "KakaoAK " + apiKey);
+
+            BufferedReader rd = null;
+            rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            StringBuffer docJson = new StringBuffer();
+            String line;
+            // api json file get
+            while ((line = rd.readLine()) != null) {
+                docJson.append(line);
+            }
+
+            jsonString = docJson.toString();
+
+            /*json Map type 변형
+             * docList key : [address, address_name, address_type, road_address, x,y]
+             * docAddressList : 지번 주소 상세 정보
+             * docRoadList : 도로명 주소 상세 정보
+             * */
+            ObjectMapper mapper = new ObjectMapper();
+            TypeReference<Map<String, Object>> typeReference = new TypeReference<Map<String, Object>>() {
+            };
+            Map<String, Object> jsonMap = mapper.readValue(jsonString, typeReference);
+
+
+            List<Map<String, String>> docList = (List<Map<String, String>>) jsonMap.get("documents");
+            Map<String, String> adList = (Map<String, String>) docList.get(0);
+            Map<String,Object> docAddressList = mapper.convertValue(adList.get("address"), typeReference);
+            Map<String,Object> docRoadList = mapper.convertValue(adList.get("road_address"), typeReference);
+
+            // address 객체 정보 설정
+            address.setLongitude(Double.parseDouble(adList.get("x")));
+            address.setLatitude(Double.parseDouble(adList.get("y")));
+
+            address.setAddress((String) docAddressList.get("address_name"));
+            address.setRoad_address((String) docRoadList.get("address_name"));
+            address.setBuildingName((String) docRoadList.get("building_name"));
+            address.setZone_no(Integer.parseInt((String) docRoadList.get("zone_no")));
+
+            rd.close();
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return address;
     }
 
 }

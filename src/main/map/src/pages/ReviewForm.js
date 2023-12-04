@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
@@ -18,7 +18,8 @@ export default function ReviewForm(){
     let [imgPreviewSrc,setImgPreviewSrc] = useState([]);
     let [imgPreivewName, setImgPreviewName] = useState([]);
     let [addressObj,setAddressObj] = useState("");
-    let [locationObj, setLocationObj] = useState("");
+    let [photoObject, setPhotoObject] = useState(new Array);
+    const inputRef= useRef(null);
 
     var houseTypeList = ['원룸', '투룸', '쓰리룸', '오피스텔','아파트'];
     var payTypeList=['월세','전세'];
@@ -30,7 +31,7 @@ export default function ReviewForm(){
             "houseType": sidebarInnerTextList[0],
             "payment": sidebarInnerTextList[1],
             "managementFee" : sidebarInnerTextList[2],
-            "addressName" : addressObj,
+            "address" : addressObj,
             'addressDetail' : sidebarInnerTextList[4],
             "deposit" : sidebarElseTextList[0],
             "fee" : sidebarElseTextList[1],
@@ -46,12 +47,18 @@ export default function ReviewForm(){
             "sunlight" : keywordValueList[5],
             "insect" : keywordValueList[6],
             "convenience" : keywordValueList[7],
-            "certification" : 0,
-            "files" :0 
+            "certification" : 0
         }
+        const formData = new FormData();
+        
+        const fileData = inputRef.current.files;
+        for(let i=0; i<fileData.length; i++){
+            formData.append("file", fileData[i]);
+        }
+        formData.append("sendData", new Blob([JSON.stringify(sendData)],  { type: "application/json" }));
+
         console.log(sendData)
-        axios.post('http://localhost:8080/review/form',sendData).then((response) =>{
-            console.log(response.data)
+        axios.post('http://localhost:8080/review/form',formData).then((response) =>{
             navigate(`/review/detail/${response.data.reviewId}`,{
                 state: {
                     eleReview : response.data.reviewForm,
@@ -99,6 +106,7 @@ export default function ReviewForm(){
             let plusName = [];
             let plusSrc = [];
             var files = e.target.files; //FileList object
+            setPhotoObject([...photoObject, files]);
             var output = files.length;
             var classCnt = imgPreviewSrc.length;
             
@@ -122,7 +130,6 @@ export default function ReviewForm(){
                 //Read the image
                 picReader.readAsDataURL(file);
             }
-            console.log(plusSrc)
             setImgPreviewName([...imgPreivewName,plusName]);
         } else {
             console.log("fail")
@@ -180,7 +187,7 @@ export default function ReviewForm(){
                         <form className="content_form_location" method="post">
                             <input className="content_form_addressInput" type="text" placeholder="도로명, 건물명 지번 입력" id="address" name="addressName" 
                             value={addressObj} required onInput={ (e) => insertSidebarInnerText(e)} />
-                            <DaumPost setAddressObj={setAddressObj} setLocationObj={setLocationObj}></DaumPost>
+                            <DaumPost setAddressObj={setAddressObj} ></DaumPost>
                             
                             <select name="livingYear" id="year" title="거주년도" className="select_year" required onChange={ (e) => insertElseData(e) }>
                                 <option value="">거주년도</option>
@@ -225,7 +232,7 @@ export default function ReviewForm(){
                             <span className="rating">
                             ★★★★★
                             <span className="rating_star">★★★★★</span>
-                            <input className="rating_input" id="rating" name="rating"  type="range" step="1" min="0" max="10" onInput={(e)=>{
+                            <input className="rating_input" id="rating" name="rating"  defaultValue="0" type="range" step="1" min="0" max="10" onInput={(e)=>{
                                 const rating_star = document.querySelector('.rating_star');
                                 rating_star.style.width = `${e.target.value * 10}%`;
                                 insertElseData(e);
@@ -238,17 +245,18 @@ export default function ReviewForm(){
                         <h3 className="content_form_title">사진 첨부하기</h3>
                         <p className="content_form_subtitle">방 리뷰할 사진을 등록해주세요.</p>
                         <div className="content_photo">
-                            <input className="content_photo_input" type="file" name="files" multiple="multiple" accept="image/*" onChange={ uploadPhoto}/>
-                            <div className="content_photo_imgarea" onClick={ () => {
-                                const realUpload = document.querySelector('.content_photo_input');
-                                realUpload.click();
-                            }}>
-                                <img src={UploadPhotoIcon} alt="사진올리기" />
-                            </div>
+                            <form enctype='multipart/form-data' method="post">
+                                <input className="content_photo_input" ref={inputRef} type="file" name="myfile" multiple="multiple" accept="image/*" onChange={ uploadPhoto}/>
+                                <div className="content_photo_imgarea" onClick={ () => {
+                                    const realUpload = document.querySelector('.content_photo_input');
+                                    realUpload.click();
+                                }}>
+                                    <img src={UploadPhotoIcon} alt="사진올리기" />
+                                </div>
+                            </form>
                             <output id="content_photo_preview" class="content_photo_preview">
                                 {
                                     imgPreviewSrc.map( (imgSrc, idx) => {
-                                        console.log(idx)
                                         return(
                                         <div>
                                             <img className="thumbnail" src={imgSrc} name={imgPreivewName[idx]}></img>

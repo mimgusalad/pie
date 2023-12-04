@@ -1,11 +1,10 @@
-import React, { useState }  from "react";
+import React, { useState,useRef }  from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 
 import FormNavbar  from "../components/WriteForm/formNavbar";
 import UploadPhotoIcon from "../img/writeForm/uploadPhoto.png";
 import DaumPost from "../components/WriteForm/DaumPost";
-import uploadPhoto from "../components/WriteForm/UploadPhoto";
 
 import "./ReviewFormSidebar.css";
 import "./WriteForm.css";
@@ -21,6 +20,7 @@ export default function SuccessionForm(){
     let [imgPreivewName, setImgPreviewName] = useState([]);
     let [addressObj,setAddressObj] = useState("");
     let [locationObj, setLocationObj] = useState("");
+    const inputRef= useRef(null);
 
     var houseTypeList = ['원룸', '투룸', '쓰리룸', '오피스텔','아파트'];
     var payTypeList=['월세','전세'];
@@ -44,10 +44,16 @@ export default function SuccessionForm(){
             "contentText" : sidebarElseTextList[4],
             "optionQuality" : optionCheckItems,
             "successionQuality" : successionCheckItems,
-            "files" :0 
         }
-        console.log(sendData)
-        axios.post('http://localhost:8080/succession/form',sendData).then((response) =>{
+        const formData = new FormData();
+        const fileData = inputRef.current.files;
+
+        for(let i=0; i< fileData.length; i++){
+            formData.append("file",fileData[i]);
+        }
+
+        formData.append("sendData", new Blob([JSON.stringify(sendData)],  { type: "application/json" }));
+        axios.post('http://localhost:8080/succession/form',formData).then((response) =>{
             console.log(response.data)
             // <Link to={`/detail/:roomId/review/:reviewId}`>
             navigate(`/succession/detail/${response.data.successionId}`,{
@@ -228,17 +234,18 @@ export default function SuccessionForm(){
                         <h3 className="content_form_title">사진 첨부하기</h3>
                         <p className="content_form_subtitle">방 리뷰할 사진을 등록해주세요.</p>
                         <div className="content_photo">
-                            <input className="content_photo_input" type="file" name="files" multiple="multiple" accept="image/*" onChange={uploadPhoto}/>
-                            <div className="content_photo_imgarea" onClick={ () => {
-                                const realUpload = document.querySelector('.content_photo_input');
-                                realUpload.click();
-                            }}>
-                                <img src={UploadPhotoIcon} alt="사진올리기" />
-                            </div>
+                            <form encType='multipart/form-data' method="post">
+                                <input className="content_photo_input" ref={inputRef} type="file" name="myfile" multiple="multiple" accept="image/*" onChange={uploadPhoto}/>
+                                <div className="content_photo_imgarea" onClick={ () => {
+                                    const realUpload = document.querySelector('.content_photo_input');
+                                    realUpload.click();
+                                }}>
+                                    <img src={UploadPhotoIcon} alt="사진올리기" />
+                                </div>
+                            </form>
                             <output id="content_photo_preview" class="content_photo_preview">
                                 {
                                     imgPreviewSrc.map( (imgSrc, idx) => {
-                                        console.log(idx)
                                         return(
                                         <div>
                                             <img className="thumbnail" src={imgSrc} name={imgPreivewName[idx]}></img>

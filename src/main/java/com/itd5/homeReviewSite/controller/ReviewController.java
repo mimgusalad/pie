@@ -23,6 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -51,8 +52,12 @@ public class ReviewController {
 
     @PostMapping("form")
     @ResponseBody
-    public Map<String, Object> submitReview(@RequestBody reviewForm reviewForm){
+    public Map<String, Object> submitReview(HttpServletRequest httpServletRequest, @RequestPart(value = "sendData") reviewForm reviewForm) {
+        MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) httpServletRequest;
+        List<MultipartFile> fileMap = multiRequest.getFiles("file");
 
+        System.out.println(fileMap);
+        System.out.println(reviewForm);
         review_article review = new review_article(
                 reviewForm.getHouseType(), reviewForm.getPayment(),
                 reviewForm.getLivingYear(), reviewForm.getRating(),
@@ -63,11 +68,11 @@ public class ReviewController {
         );
 
         //주소 정보 가지고 오기
-        Address saveAddress = getKakaoApiFromAddress(reviewForm.getAddressName());
+        Address saveAddress = getKakaoApiFromAddress(reviewForm.getAddress());
 
         // 동일한 주소에 대한 처리
         Address sameAddress = addressRepository.findByLatitudeAndLongitude(saveAddress.getLatitude(), saveAddress.getLongitude());
-        if (sameAddress == null){
+        if (sameAddress == null) {
             addressRepository.save(saveAddress);
             sameAddress = saveAddress;
         }
@@ -90,9 +95,10 @@ public class ReviewController {
         System.out.println("save keyword");
 
         // 리뷰 사진 save
-//        saveReviewPhoto(uploadFiles, review.getArticleNo());
+        saveReviewPhoto(fileMap, review.getArticleNo());
+
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("reviewId",String.valueOf(review.getArticleNo()));
+        resultMap.put("reviewId", String.valueOf(review.getArticleNo()));
         resultMap.put("reviewForm", reviewForm);
 
         return resultMap;
@@ -100,7 +106,7 @@ public class ReviewController {
 
     @GetMapping("myReview")
     @ResponseBody
-    public Map<String,Object> myReview() {
+    public Map<String, Object> myReview() {
         Map<String, Object> result = new HashMap<>();
 
         Long userId = getLoginUserId();
@@ -110,82 +116,84 @@ public class ReviewController {
         List<String> previewImgUrlList = new ArrayList<>();
 
         /*
-        * 이미지 Preview code
-        * review에 첨부된 사진이 있다면 upload한 사진 중 하나를 get
-        * 아니면 대체 이미지를 get(/img/reviewUploadImg/altRoomPicture.png)
-        * */
-        for(PhotoFile photoFile: previewImgList){
+         * 이미지 Preview code
+         * review에 첨부된 사진이 있다면 upload한 사진 중 하나를 get
+         * 아니면 대체 이미지를 get(/img/reviewUploadImg/altRoomPicture.png)
+         * */
+        for (PhotoFile photoFile : previewImgList) {
             if (photoFile != null)
                 previewImgUrlList.add(s3UploadService.getImgUrl(photoFile.getSaveFileName()));
             else
                 previewImgUrlList.add("/img/reviewUploadImg/altRoomPicture.png");
         }
-//        model.addAttribute("myReviewList", myReviewList);
-//        model.addAttribute("previewImgUrlList",previewImgUrlList);
+
         result.put("myReviewList", myReviewList);
         result.put("previewImgUrlList", previewImgUrlList);
 
         return result;
     }
 
-    @GetMapping("detail")
-    public String detail(Model model, @RequestParam(required = false) Long articleNo) {
+    @GetMapping("detail/{reviewId}")
+    @ResponseBody
+    public Map<String, Object> detail(@PathVariable Long reviewId) {
+        System.out.println(reviewId);
         List<String> imgUrlList = new ArrayList<>();
         review_article review;
 
-        if (articleNo == null) {
+        if (reviewId == null) {
             review = new review_article();
         }
-        review = reviewRepository.findById(articleNo).orElse(null);
-        List<PhotoFile> photoFileList = fileRepository.findByReviewIdAndArticleType(articleNo, "review");
+        review = reviewRepository.findById(reviewId).orElse(null);
+        List<PhotoFile> photoFileList = fileRepository.findByReviewIdAndArticleType(reviewId, "review");
         // aws img url get
         if (!photoFileList.isEmpty()) {
             for (PhotoFile photoFile : photoFileList) {
                 String url = s3UploadService.getImgUrl(photoFile.getSaveFileName());
                 imgUrlList.add(url);
             }
-        }
-        else{
+        } else {
             imgUrlList.add("/img/reviewUploadImg/reviewDetailExample.png");
         }
         // 키워드 전처리
-        Keyword keyword = keywordRepository.findByReviewId(articleNo);
-        List<String> keywordList  = Arrays.asList("", "", "", "","");
+        Keyword keyword = keywordRepository.findByReviewId(reviewId);
+        List<String> keywordList = Arrays.asList("", "", "", "", "");
         System.out.println(keywordList);
-        String inputValue = keywordList.get((int) keyword.getNoise()) + "소음  ";
-        keywordList.set((int) keyword.getNoise(),inputValue);
+        if (keyword != null) {
+            String inputValue = keywordList.get((int) keyword.getNoise()) + "소음  ";
+            keywordList.set((int) keyword.getNoise(), inputValue);
 
-        inputValue = keywordList.get((int) keyword.getSmell()) + "냄새  ";
-        keywordList.set((int) keyword.getSmell(),inputValue);
+            inputValue = keywordList.get((int) keyword.getSmell()) + "냄새  ";
+            keywordList.set((int) keyword.getSmell(), inputValue);
 
-        inputValue = keywordList.get((int) keyword.getSafety()) + "치안  ";
-        keywordList.set((int) keyword.getSafety(),inputValue);
+            inputValue = keywordList.get((int) keyword.getSafety()) + "치안  ";
+            keywordList.set((int) keyword.getSafety(), inputValue);
 
-        inputValue = keywordList.get((int) keyword.getConvenience()) + "편의시설  ";
-        keywordList.set((int) keyword.getConvenience(),inputValue);
+            inputValue = keywordList.get((int) keyword.getConvenience()) + "편의시설  ";
+            keywordList.set((int) keyword.getConvenience(), inputValue);
 
-        inputValue = keywordList.get((int) keyword.getInsect()) + "벌레  ";
-        keywordList.set((int) keyword.getInsect(),inputValue);
+            inputValue = keywordList.get((int) keyword.getInsect()) + "벌레  ";
+            keywordList.set((int) keyword.getInsect(), inputValue);
 
-        inputValue = keywordList.get((int) keyword.getOptionQuality()) + "옵션 상태  ";
-        keywordList.set((int) keyword.getOptionQuality(),inputValue);
+            inputValue = keywordList.get((int) keyword.getOptionQuality()) + "옵션 상태  ";
+            keywordList.set((int) keyword.getOptionQuality(), inputValue);
 
-        inputValue = keywordList.get((int) keyword.getTrash()) + "쓰레기 처리  ";
-        keywordList.set((int) keyword.getTrash(),inputValue);
+            inputValue = keywordList.get((int) keyword.getTrash()) + "쓰레기 처리  ";
+            keywordList.set((int) keyword.getTrash(), inputValue);
 
-        inputValue = keywordList.get((int) keyword.getSunlight()) + "일조량  ";
-        keywordList.set((int) keyword.getSunlight(),inputValue);
-
+            inputValue = keywordList.get((int) keyword.getSunlight()) + "일조량  ";
+            keywordList.set((int) keyword.getSunlight(), inputValue);
+        }
         System.out.println(keywordList);
-        model.addAttribute("review", review);
-        model.addAttribute("imgUrlList", imgUrlList);
-        model.addAttribute("keywordList", keywordList);
+        Map<String, Object> result = new HashMap<>();
+        result.put("review", review);
+        result.put("imgUrlList", imgUrlList);
+        result.put("keywordList", keywordList);
 
-        return "review/detail";
+        return result;
     }
 
     @GetMapping("delete")
-    public String deleteReview(@RequestParam(required = false) Long articleNo){
+    public String deleteReview(@RequestParam(required = false) Long articleNo) {
         review_article reviewArticle = reviewRepository.findByArticleNo(articleNo);
         reviewRepository.delete(reviewArticle);
 
@@ -219,10 +227,10 @@ public class ReviewController {
             jsonString = docJson.toString();
 
             /*json Map type 변형
-            * docList key : [address, address_name, address_type, road_address, x,y]
-            * docAddressList : 지번 주소 상세 정보
-            * docRoadList : 도로명 주소 상세 정보
-            * */
+             * docList key : [address, address_name, address_type, road_address, x,y]
+             * docAddressList : 지번 주소 상세 정보
+             * docRoadList : 도로명 주소 상세 정보
+             * */
             ObjectMapper mapper = new ObjectMapper();
             TypeReference<Map<String, Object>> typeReference = new TypeReference<Map<String, Object>>() {
             };
@@ -231,8 +239,8 @@ public class ReviewController {
 
             List<Map<String, String>> docList = (List<Map<String, String>>) jsonMap.get("documents");
             Map<String, String> adList = (Map<String, String>) docList.get(0);
-            Map<String,Object> docAddressList = mapper.convertValue(adList.get("address"), typeReference);
-            Map<String,Object> docRoadList = mapper.convertValue(adList.get("road_address"), typeReference);
+            Map<String, Object> docAddressList = mapper.convertValue(adList.get("address"), typeReference);
+            Map<String, Object> docRoadList = mapper.convertValue(adList.get("road_address"), typeReference);
 
             // address 객체 정보 설정
             address.setLongitude(Double.parseDouble(adList.get("x")));
@@ -260,8 +268,10 @@ public class ReviewController {
         for (MultipartFile imgFile : uploadFiles) {
             PhotoFile photoFile = new PhotoFile();
             if (!imgFile.isEmpty()) {
+
                 String originalFilename = imgFile.getOriginalFilename();
                 String saveFilename = UUID.randomUUID() + "." + extractExt(originalFilename);
+                System.out.println(saveFilename);
                 try {
                     // file save func
                     // file DB save
@@ -290,6 +300,7 @@ public class ReviewController {
 
         return userId;
     }
+
     // 확장자 추출
     private String extractExt(String originalFilename) {
         int pos = originalFilename.lastIndexOf(".");
