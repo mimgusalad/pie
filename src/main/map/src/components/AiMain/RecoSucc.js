@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useNavigate } from 'react-router-dom';
 import "./RecoSucc.css";
 
 import houseReplaceImg from "../../img/reviewUploadImg/aiReplaceImg.png";
@@ -20,6 +20,7 @@ export default function RecoSucc(props) {
 }
 
 function EleRecoSucc(props){
+    const navigate = useNavigate();
     return(
         <div class="content_result_one" >
             <a> <img src={houseReplaceImg} onClick={(e) => {
