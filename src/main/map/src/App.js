@@ -9,6 +9,7 @@ import SuccDetail from "./succDetail";
 import ReviewDetailPrc from "./ReviewDetailPrc";
 import ReviewDetail from "./ReviewDetail";
 import Chat from "./Chat";
+import {createSendbirdUser} from "./RegisterUser";
 
 import NavUnder from "./NaviBar/NavUnder";
 import MapPage2 from "./NaviBar/MapPage2";
@@ -43,6 +44,9 @@ const getUserInfo = async () => {
             const userData = res.data;
             if(userData.name !== "anonymous") {
                 sessionStorage.setItem('user', JSON.stringify(res.data));
+                createSendbirdUser(userData.email, userData.name)
+                    .then(r => console.log(r))
+                    .catch(e => console.log('여기 에러: ' + e));
             }
             return res.data;
         })
