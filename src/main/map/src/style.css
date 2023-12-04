@@ -606,7 +606,7 @@ a:visited {
 .side-toggle {
   width: 70px;
   font-size: 12px;
-  background-color: white;
+  background-color: #f5f5f5;
   padding: 0 0;
   border: none;
   align-items: center;

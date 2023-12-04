@@ -1,28 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import axios from 'axios';
 import nextArrow from "../image/next.png";
 import prevArrow from "../image/back.png";
 import succImage from "../image/succ_1.png";
 import roomdetail_1 from "../image/roomdetail_1.png";
 import roomdetail_2 from "../image/roomdetail_2.png";
 import roomdetail_3 from "../image/roomdetail_3.png";
-import succdetail_1 from "../image/succdetail_1.png";
-import {imageData} from "../data/imageData.js"
 
-export default function ImageCard({ imageItem, height, width }) {
+const imageData = [
+  {
+    images: [
+      {
+        image: roomdetail_1,
+      },
+      {
+        image: roomdetail_2,
+      },
+      {
+        image: roomdetail_3,
+      },
+    ],
+   }
+]
+
+
+export default function ImageCardNav({ imageItem, height, width }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  //split이 잘못됐을수도 object-array 변환 찾아봐
 
-   console.log(imageItem.img_url)
+  const[imageData, setImageData] = useState(null);
+     useEffect(()=>{
+     	    const fetchData = async() => {
+               const res = await axios.get("http://localhost:8080/reviews/" + `${imageItem.articleNo}`);
+               return res.data;
+             }
+
+             fetchData().then(res => setImageData(res));
+     },[])
+     console.log("이미지 : ", imageData)
 
   const handlePrev = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
     } else {
-      setCurrentIndex(imageItem.images.length - 1);
+      setCurrentIndex(imageData.images.length - 1);
     }
   };
 
   const handleNext = () => {
-    if (currentIndex < imageItem.img_url.length - 1) {
+    if (currentIndex < imageData.images.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
       setCurrentIndex(0);
@@ -33,10 +59,11 @@ export default function ImageCard({ imageItem, height, width }) {
     transform: `translateX(-${currentIndex * 100}%)`,
     transition: "transform 0.5s ease-in-out",
     display: "flex",
-    // width: `${imageItem.images.length * 100}%`,
     height: "100%",
   };
-
+if(imageData == null){
+    return "Loading"
+}else{
   return (
     <div
       style={{
@@ -87,14 +114,23 @@ export default function ImageCard({ imageItem, height, width }) {
         />
       </button>
       <div style={sliderStyle}>
-            <img
-              src={succdetail_1}
-              alt={succImage}
-              style={{ width: "100%", height: "100%" }}
-            />
+        {
+            imageData.img_url[0] ? (
+                <img
+                   src= {imageData.img_url[0]}
+                   alt="sample"
+                   style={{ width: "100%", height: "100%" }}
+                />
+               ) : (
+                <img
+                   src={roomdetail_1}
+                   alt="sample"
+                   style={{ width: "100%", height: "100%" }}
+                 />
+               )
+        }
       </div>
     </div>
   );
+  }
 }
-
-

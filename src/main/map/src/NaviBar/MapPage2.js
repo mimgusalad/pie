@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Data } from "../data/Data";
 import "./sub.css";
 import "../style.css";
+import axios from 'axios';
 
 import sampleImage1 from "../image/sample1.png";
 import sampleImage2 from "../image/sample2.png";
@@ -83,10 +84,93 @@ const sideFilters = [
 
 
 function MapPage2({ id }) {
+   let { roomId } = useParams();
+   const [newData, setNewData] = useState(null);
+   const [navData, setNavData] = useState([]);
+   const [mapData, setMapData] = useState([]) // MapPage2에도 지도에 전체 데이터가 필요
+
+   useEffect(()=>{
+   	    const fetchData = async() => {
+             const res = await axios.get("http://localhost:8080/reviews/" + `${roomId}`);
+             return res.data;
+           }
+
+           fetchData().then(res => setNewData(res));
+
+        const allData = async() => {
+              const res = await axios.get("http://localhost:8080/map");
+              return res.data;
+            }
+
+            allData().then(res => setMapData(res));
+   },[])
+   console.log(roomId)
+   console.log(newData)
+
+   let testData = JSON.parse(JSON.stringify(mapData));
+   let [testListData, setTestListData] = useState([]);
+   console.log(testData)
+
+  const [toggle, setToggle] = useState("map")
   const location = useLocation();
+  // NavUnder.js에서 받아오는 값들
   const getlat = location.state.lat; // 클릭한 값 위도
   const getlng = location.state.lng; // 클릭한 값 경도
-  const [toggle, setToggle] = useState("map")
+  // Nav에 필요한 데이터들
+  const img_url = location.state.img_url;
+  const address = location.state.address;
+  const addressDetail = location.state.addressDetail;
+  const addressId = location.state.addressId;
+  const articleNo = location.state.articleNo;
+  const contentText = location.state.contentText;
+  const deposit = location.state.deposit;
+  const fee = location.state.fee;
+  const gethouseType = location.state.houseType;
+  const livingYear = location.state.livingYear;
+  const payment = location.state.payment;
+  const rating = location.state.rating;
+  const regdate = location.state.regdate;
+  const userId = location.state.userId;
+  const utility = location.state.utility;
+  const name = location.state.name;
+  const keyword1 = location.state.keyword1;
+  const keyword2 = location.state.keyword2;
+  const keyword3 = location.state.keyword3;
+  const keyword4 = location.state.keyword4;
+  const keyword5 = location.state.keyword5;
+  const keyword6 = location.state.keyword6;
+  const keyword7 = location.state.keyword7;
+  const keyword8 = location.state.keyword8;
+
+  // <Nav/로 넘길 데이터>
+  const NavData = {
+    img_url : img_url,
+    address : address,
+    addressDetail : addressDetail,
+    addressId : addressId,
+    articleNo : articleNo,
+    contentText : contentText,
+    deposit : deposit,
+    fee : fee,
+    houseType : gethouseType,
+    livingYear : livingYear,
+    payment : payment,
+    rating : rating,
+    regdate : regdate,
+    userId : userId,
+    utility : utility,
+    name : name,
+    keyword1 : keyword1,
+    keyword2 : keyword2,
+    keyword3 : keyword3,
+    keyword4 : keyword4,
+    keyword5 : keyword5,
+    keyword6 : keyword6,
+    keyword7 : keyword7,
+    keyword8 : keyword8,
+
+  }
+
   const placePosition = {
     lat : getlat,
     lng : getlng,
@@ -97,7 +181,8 @@ function MapPage2({ id }) {
   let [rvmarker, setrvMarker] = useState({
     center: { lat: getlat, lng: getlng },
   });
-  let { roomId } = useParams();
+
+
   let [place, setPlace] = useState("");
   let [store, setStore] = useState("");
   // 전월세 필터링 Data.js에는 string으로 들어있어서 고쳐야 함
@@ -108,6 +193,7 @@ function MapPage2({ id }) {
   let [houseType, setHouseType] = useState("");
   let [listData, setListData] = useState([]);
   let [inputText, setInputText] = useState("");
+
 
   // detailpage에서 사용할 data 하나 선별
   let [reviewData, setReviewData] = useState([]);
@@ -268,14 +354,44 @@ function MapPage2({ id }) {
     console.log(detailId);
   };
 
+    // DB에 lat,lng 없는 데이터 클릭하면 오류 뜸
   const markerPost = (el) => {
-    navigate(`/detail/${el.id}`,{
-      state: {
-        lat: `${el.lat}`,
-        lng: `${el.lng}`
-      }
-    })
-  }
+      navigate(`/detail/${el.review_article.articleNo}`,{
+        state: {
+          lat: `${el.latitude}`,
+          lng: `${el.longitude}`,
+          lng: `${el.longitude}`,
+          img_url: `${el.img_url}`,
+          address: `${el.review_article.address}`,
+          addressDetail: `${el.review_article.addressDetail}`,
+          addressId: `${el.review_article.addressId}`,
+          articleNo: `${el.review_article.articleNo}`,
+          contentText: `${el.review_article.contentText}`,
+          deposit: `${el.review_article.deposit}`,
+          fee: `${el.review_article.fee}`,
+          houseType: `${el.review_article.houseType}`,
+          livingYear: `${el.review_article.livingYear}`,
+          payment: `${el.review_article.payment}`,
+          address: `${el.review_article.address}`,
+          rating: `${el.review_article.rating}`,
+          regdate: `${el.review_article.regdate}`,
+          userId: `${el.review_article.userId}`,
+          utility: `${el.review_article.utility}`,
+          viewCnt: `${el.review_article.viewCnt}`,
+          name: `${el.userInfo.name}`,
+          keyword1: `${el.keyword.심각[0]}`,
+          keyword2: `${el.keyword.심각[1]}`,
+          keyword3: `${el.keyword.경계[0]}`,
+          keyword4: `${el.keyword.경계[1]}`,
+          keyword5: `${el.keyword.주의[0]}`,
+          keyword6: `${el.keyword.주의[1]}`,
+          keyword7: `${el.keyword.문제없음[0]}`,
+          keyword8: `${el.keyword.문제없음[1]}`,
+        }
+      })
+    }
+
+// return이 렌더닝때매 늦게 돼서 지도가 설정이 안되어있는데 useEffect로 지도를 부르니까 오류가 나네
 
   // 장소 검색
   useEffect(() => {
@@ -318,12 +434,12 @@ function MapPage2({ id }) {
     );
 
     setCountRoom(0);
-    Data.forEach((el) => {
+    testData.forEach((el) => {
       setCountRoom((countRoom) => countRoom + 1);
       const marker = new kakao.maps.Marker({
         map: map,
         image: reviewMarker,
-        position: new kakao.maps.LatLng(el.lat, el.lng),
+        position: new kakao.maps.LatLng(el.latitude, el.longitude),
       });
       // 마커 클릭 이벤트
       kakao.maps.event.addListener(marker, "click", function () {
@@ -369,49 +485,52 @@ function MapPage2({ id }) {
   // price, worse, housetype 한 번에 필터링
 
   useEffect(() => {
-    if (price !== 0 && worse !== "" && houseType !== "") {
-      let totalFilter = Data.filter(
+    if (price != 0 && worse != "" && houseType != "") {
+      let totalFilter = testData.filter(
         (el) =>
-          price <= el.price &&
-          el.price < price + 10 &&
-          worse !== el.tags[0].label &&
-          houseType === el.houseType
+          price <= el.review_article.fee &&
+          el.review_article.fee < price + 10 &&
+          worse != el.keyword.심각[0] &&
+          houseType == el.review_article.houseType
       );
-      setListData(totalFilter);
-    } else if (price === 0 && worse !== "" && houseType !== "") {
-      let totalFilter = Data.filter(
-        (el) => worse !== el.tags[0].label && houseType === el.houseType
+      setTestListData(totalFilter);
+    } else if (price == 0 && worse != "" && houseType != "") {
+      let totalFilter = testData.filter(
+        (el) => worse != el.keyword.심각[0] && houseType == el.review_article.houseType
       );
-      setListData(totalFilter);
-    } else if (price !== 0 && worse === "" && houseType !== "") {
-      let totalFilter = Data.filter(
+      setTestListData(totalFilter);
+    } else if (price != 0 && worse == "" && houseType != "") {
+      let totalFilter = testData.filter(
         (el) =>
-          price <= el.price &&
-          el.price < price + 10 &&
-          houseType === el.houseType
+          price <= el.review_article.fee &&
+          el.review_article.fee < price + 10 &&
+          houseType == el.review_article.houseType
       );
-      setListData(totalFilter);
-    } else if (price !== 0 && worse !== "" && houseType === "") {
-      let totalFilter = Data.filter(
+      setTestListData(totalFilter);
+    } else if (price != 0 && worse != "" && houseType == "") {
+      let totalFilter = testData.filter(
         (el) =>
-          price <= el.price &&
-          el.price < price + 10 &&
-          worse !== el.tags[0].label
+          price <= el.review_article.fee &&
+          el.review_article.fee < price + 10 &&
+          worse != el.keyword.심각[0]
       );
-      setListData(totalFilter);
-    } else if (price === 0 && worse === "" && houseType !== "") {
-      let totalFilter = Data.filter((el) => houseType === el.houseType);
-      setListData(totalFilter);
-    } else if (price === 0 && worse !== "" && houseType === "") {
-      let totalFilter = Data.filter((el) => worse !== el.tags[0].label);
-      setListData(totalFilter);
-    } else if (price !== 0 && worse === "" && houseType === "") {
-      let totalFilter = Data.filter(
-        (el) => price <= el.price && el.price < price + 10
+      setTestListData(totalFilter);
+    } else if (price == 0 && worse == "" && houseType != "") {
+      let totalFilter = testData.filter((el) => houseType == el.review_article.houseType);
+      setTestListData(totalFilter);
+    } else if (price == 0 && worse != "" && houseType == "") {
+      let totalFilter = testData.filter(
+        (el) =>
+            worse != el.keyword.심각[0]
       );
-      setListData(totalFilter);
-    } else if (price === 0 && worse === "" && houseType === "") {
-      setListData(Data);
+      setTestListData(totalFilter);
+    } else if (price != 0 && worse == "" && houseType == "") {
+      let totalFilter = testData.filter(
+        (el) => price <= el.review_article.fee && el.review_article.fee < price + 10
+      );
+      setTestListData(totalFilter);
+    } else if (price == 0 && worse == "" && houseType == "") {
+      setTestListData(testData);
     }
 
     const container = document.getElementById("map");
@@ -442,24 +561,24 @@ function MapPage2({ id }) {
     setCountRoom(0);
     // 1
     if (price !== 0 && worse !== "" && houseType !== "") {
-      copyData.forEach((el) => {
+      testData.forEach((el) => {
         if (
-          price <= el.price &&
-          el.price < price + 10 &&
-          worse !== el.tags[0].label &&
-          houseType === el.houseType
+            price <= el.review_article.fee &&
+            el.review_article.fee < price + 10 &&
+            worse != el.keyword.심각[0] &&
+            houseType == el.review_article.houseType
         ) {
           setCountRoom((countRoom) => countRoom + 1);
           const marker = new kakao.maps.Marker({
             map: map,
             image: reviewMarker,
-            position: new kakao.maps.LatLng(el.lat, el.lng),
+            position: new kakao.maps.LatLng(el.latitude, el.longitude),
           });
           kakao.maps.event.addListener(marker, "click", function () {
             // navigate(`/detail/${el.id}`)
              markerPost(el)
              setrvMarker({
-              center: { lat: el.lat, lng: el.lng },
+              center: { lat: el.latitude, lng: el.longitude },
             });
           });
         }
@@ -468,19 +587,19 @@ function MapPage2({ id }) {
 
     // 2
     else if (price == 0 && worse !== "" && houseType !== "") {
-      copyData.forEach((el) => {
-        if (worse !== el.tags[0].label && houseType == el.houseType) {
+      testData.forEach((el) => {
+          if (worse != el.keyword.심각[0] && houseType == el.review_article.houseType) {
           setCountRoom((countRoom) => countRoom + 1);
           const marker = new kakao.maps.Marker({
             map: map,
             image: reviewMarker,
-            position: new kakao.maps.LatLng(el.lat, el.lng),
+            position: new kakao.maps.LatLng(el.latitude, el.longitude),
           });
           kakao.maps.event.addListener(marker, "click", function () {
             // navigate(`/detail/${el.id}`)
               markerPost(el)
               setrvMarker({
-                center: { lat: el.lat, lng: el.lng },
+                center: { lat: el.latitude, lng: el.longitude },
               });
           });
         }
@@ -489,23 +608,23 @@ function MapPage2({ id }) {
 
     // 3
     else if (price !== 0 && worse == "" && houseType !== "") {
-      copyData.forEach((el) => {
-        if (
-          price <= el.price &&
-          el.price < price + 10 &&
-          houseType == el.houseType
-        ) {
+      testData.forEach((el) => {
+          if (
+              price <= el.review_article.fee &&
+              el.review_article.fee < price + 10 &&
+              houseType == el.review_article.houseType
+          ) {
           setCountRoom((countRoom) => countRoom + 1);
           const marker = new kakao.maps.Marker({
             map: map,
             image: reviewMarker,
-            position: new kakao.maps.LatLng(el.lat, el.lng),
+            position: new kakao.maps.LatLng(el.latitude, el.longitude),
           });
           kakao.maps.event.addListener(marker, "click", function () {
            // navigate(`/detail/${el.id}`)
               markerPost(el)
               setrvMarker({
-                center: { lat: el.lat, lng: el.lng },
+                center: { lat: el.latitude, lng: el.longitude },
               });
           });
         }
@@ -514,23 +633,23 @@ function MapPage2({ id }) {
 
     // 4
     else if (price !== 0 && worse !== "" && houseType == "") {
-      copyData.forEach((el) => {
-        if (
-          price <= el.price &&
-          el.price < price + 10 &&
-          worse !== el.tags[0].label
-        ) {
+      testData.forEach((el) => {
+          if (
+               price <= el.review_article.price &&
+               el.review_article.price < price + 10 &&
+               worse != el.keyword.심각[0]
+          ) {
           setCountRoom((countRoom) => countRoom + 1);
           const marker = new kakao.maps.Marker({
             map: map,
             image: reviewMarker,
-            position: new kakao.maps.LatLng(el.lat, el.lng),
+            position: new kakao.maps.LatLng(el.latitude, el.longitude),
           });
           kakao.maps.event.addListener(marker, "click", function () {
             // navigate(`/detail/${el.id}`)
               markerPost(el)
               setrvMarker({
-                center: { lat: el.lat, lng: el.lng },
+                center: { lat: el.latitude, lng: el.longitude },
               });
           });
         }
@@ -539,19 +658,19 @@ function MapPage2({ id }) {
 
     // 5
     else if (price == 0 && worse == "" && houseType !== "") {
-      copyData.forEach((el) => {
-        if (houseType == el.houseType) {
+      testData.forEach((el) => {
+          if (houseType == el.review_article.houseType) {
           setCountRoom((countRoom) => countRoom + 1);
           const marker = new kakao.maps.Marker({
             map: map,
             image: reviewMarker,
-            position: new kakao.maps.LatLng(el.lat, el.lng),
+            position: new kakao.maps.LatLng(el.latitude, el.longitude),
           });
           kakao.maps.event.addListener(marker, "click", function () {
             // navigate(`/detail/${el.id}`)
               markerPost(el)
               setrvMarker({
-                center: { lat: el.lat, lng: el.lng },
+                center: { lat: el.latitude, lng: el.longitude },
               });
           });
         }
@@ -560,19 +679,19 @@ function MapPage2({ id }) {
 
     // 6
     else if (price == 0 && worse !== "" && houseType == "") {
-      copyData.forEach((el) => {
-        if (worse !== el.tags[0].label) {
+      testData.forEach((el) => {
+          if (worse != el.keyword.심각[0]) {
           setCountRoom((countRoom) => countRoom + 1);
           const marker = new kakao.maps.Marker({
             map: map,
             image: reviewMarker,
-            position: new kakao.maps.LatLng(el.lat, el.lng),
+            position: new kakao.maps.LatLng(el.latitude, el.longitude),
           });
           kakao.maps.event.addListener(marker, "click", function () {
             // navigate(`/detail/${el.id}`)
               markerPost(el)
               setrvMarker({
-                center: { lat: el.lat, lng: el.lng },
+                center: { lat: el.latitude, lng: el.longitude },
               });
           });
         }
@@ -581,19 +700,19 @@ function MapPage2({ id }) {
 
     // 7
     else if (price !== 0 && worse == "" && houseType == "") {
-      copyData.forEach((el) => {
-        if (price <= el.price && el.price < price + 10) {
+      testData.forEach((el) => {
+          if (price <= el.review_article.fee && el.review_article.fee < price + 10) {
           setCountRoom((countRoom) => countRoom + 1);
           const marker = new kakao.maps.Marker({
             map: map,
             image: reviewMarker,
-            position: new kakao.maps.LatLng(el.lat, el.lng),
+            position: new kakao.maps.LatLng(el.latitude, el.longitude),
           });
           kakao.maps.event.addListener(marker, "click", function () {
             // navigate(`/detail/${el.id}`)
              markerPost(el)
              setrvMarker({
-              center: { lat: el.lat, lng: el.lng },
+              center: { lat: el.latitude, lng: el.longitude },
             });
           });
         }
@@ -602,53 +721,23 @@ function MapPage2({ id }) {
 
     // 8
     else if (price == 0 && worse == "" && houseType == "") {
-      copyData.forEach((el) => {
+      testData.forEach((el) => {
         setCountRoom((countRoom) => countRoom + 1);
         const marker = new kakao.maps.Marker({
           map: map,
           image: reviewMarker,
-          position: new kakao.maps.LatLng(el.lat, el.lng),
+          position: new kakao.maps.LatLng(el.latitude, el.longitude),
         });
         kakao.maps.event.addListener(marker, "click", function () {
           // navigate(`/detail/${el.id}`)
               markerPost(el)
               setrvMarker({
-                center: { lat: el.lat, lng: el.lng },
+                center: { lat: el.latitude, lng: el.longitude },
               });
         });
       });
     }
   }, [price, worse, houseType]);
-
-  useEffect(() => {
-    console.log(detailId);
-    // data를 filter 사용해서 el.id랑 같은걸 찾고 각 내용을 state로 set해서 사용?
-    let reviewFilter = Data.filter((el) => el.id == detailId);
-    setReviewData(reviewFilter);
-  }, [detailId]);
-
-  const [detailAddress, setDetailAddress] = useState("");
-  const [detailPrice, setDetailPrice] = useState(0);
-  useEffect(() => {
-    reviewData.forEach((el) => {
-      setDetailAddress(el.address);
-      setDetailPrice(el.price);
-    });
-    console.log(detailAddress);
-  }, [reviewData]);
-
-
-  //로드뷰
-  // useEffect(()=>{
-  //   const roadviewContainer = document.getElementById('roadview');
-  //   const roadview = new kakao.maps.Roadview(roadviewContainer);
-  //   const roadviewClient = new kakao.maps.RoadviewClient();
-  //   const position = new kakao.maps.LatLng(getlat, getlng);
-
-  //   roadviewClient.getNearestPanoId(position, 50, function (panoId) {
-  //     roadview.setPanoId(panoId, position);
-  //   });
-  // },[])
 
   useEffect(()=>{
     const roadviewContainer = document.getElementById('roadview');
@@ -661,6 +750,9 @@ function MapPage2({ id }) {
     });
   },[rvmarker])
 
+//  if(newData == null){
+//      return "Loading";
+//    } else{
   return (
     <div className="layout_root">
       {/* 여기부터 navunderside 내용 들어감 */}
@@ -668,16 +760,6 @@ function MapPage2({ id }) {
       <div className="sub-menus">
       <div className="sub-menus__wrapper">
         <div className="left_sub_menu_button">
-          {/* {leftSubMenus.map((leftSubMenu, index) => {
-            return (
-              <div className="left_sub_menu__item" key={index}>
-                <button className="left_sub_menu__item">
-                  {leftSubMenu.label}
-                </button> */}
-                {/* {leftSubMenu.label} */}
-              {/* </div>
-            );
-          })} */}
         </div>
         <div
           style={{
@@ -794,15 +876,12 @@ function MapPage2({ id }) {
       </div>
     </div>
         <div className="content">
-          {<Nav room={Data[roomId]} />}
-          {/*  */}
+          {<Nav room={NavData} />}
           <div style={{position: "relative"}}>
           <div
             id = "map"
             style={{
               display: toggle === "map" ? "block" : "none",
-              // width: "1490px",
-              // height: "768px",
               width: "100%",
               height: "100%",
             }}
@@ -822,18 +901,12 @@ function MapPage2({ id }) {
           />
         )}
           </div>
-          {/* 지도 */}
-          {/*  */}
           <div
             id= "roadview"
             style={{
               display: toggle === "roadview" ? "block" : "none",
-              // width: "1490px",
-              // height: "768px",
               width: "100%",
               height: "768px",
-              // position: "absolute",
-              // zIndex: 2,
             }}
           >
           {toggle === "roadview" && (
@@ -845,7 +918,6 @@ function MapPage2({ id }) {
               zIndex: 10,
             }}
             type="button"
-            // onClick={() => setToggle("map")}
             title="지도 보기"
             value="지도"
             onClick={() => setToggle("map")}
@@ -853,11 +925,11 @@ function MapPage2({ id }) {
           )}
           </div>
           </div>
-          {/* 로드뷰 */}
         </div>
       </div>
     </div>
   );
+//  }
 }
 
 export default MapPage2;

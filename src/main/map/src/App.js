@@ -1,6 +1,6 @@
 import "./style.css";
 import "./nav.css";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Link, Route, Routes, useNavigate} from "react-router-dom";
 
 import MainPage from "./pages/MainPage";
@@ -8,6 +8,7 @@ import RoomList from "./RoomList";
 import SuccDetail from "./succDetail";
 import ReviewDetail from "./ReviewDetail";
 import Chat from "./Chat";
+import {createSendbirdUser} from "./RegisterUser";
 
 import NavUnder from "./NaviBar/NavUnder";
 import MapPage2 from "./NaviBar/MapPage2";
@@ -42,6 +43,9 @@ const getUserInfo = async () => {
             const userData = res.data;
             if(userData.name !== "anonymous") {
                 sessionStorage.setItem('user', JSON.stringify(res.data));
+                createSendbirdUser(userData.email, userData.name)
+                    .then(r => console.log(r))
+                    .catch(e => console.log('여기 에러: ' + e));
             }
             return res.data;
         })
@@ -85,10 +89,11 @@ function User(props){
     return(
         <div>
             <a onClick={()=> navigate('/chat')} className="fa-brands fa-twitter">메시지</a>
-            <Link to="http://localhost:8080/account/myPage" className="fa-brands fa-facebook">{props.user.name}</Link>
+            <Link to="http://localhost:3000/myPage" className="fa-brands fa-facebook">{props.user.name}</Link>
         </div>
     )
 }
+
 export default function TempPage() {
   let navigate = useNavigate();
   let JSESSIONID = "";
@@ -139,7 +144,7 @@ export default function TempPage() {
                       ):(
                           <>
                               <li><a className="fa-brands fa-twitter" href="http://localhost:3000/chat">메시지</a></li>
-                              <li><a className="fa-brands fa-facebook" href="http://localhost:8080/account/myPage">{user.name}</a></li>
+                              <li><a className="fa-brands fa-facebook" href="http://localhost:3000/myPage">{user.name}</a></li>
                               </>)}
 
                         <li className="dropDown">
@@ -162,11 +167,15 @@ export default function TempPage() {
     <Routes>
       <Route path="/" element={<MainPage/>}/>
       <Route path="/home" element={<NavUnder/>}/>
-      <Route path="/map" element={<NavUnder />} />
+      <Route path="/map" element={<NavUnder/>} />
       <Route path="/ai" element={< AiMainPage/>} />
       <Route path="/successionBoard" element={<RoomList />} />
       <Route path="/benefit" element={<BenefitPage />} />
       <Route path="/detail/:roomId" element={<MapPage2 />} />
+      <Route path="/detail/review/:roomId" element={<ReviewDetail />} />
+      <Route path="/succDetail/:succId" element={<SuccDetail />} />
+      <Route path="/successionBoard" element={<RoomList />} />
+//=======
       <Route path="/succDetail/:succId" element={<SuccDetail />} />
       <Route path="/review/form" element={<ReviewForm />} />
       <Route path="/review/my/writable-review" element={<WritableReview />} />
@@ -178,6 +187,7 @@ export default function TempPage() {
       <Route path="/myPage/myReviewList" element={<MyReviewList />} />
       <Route path="/myPage/mySuccession" element={<MySuccession />} />
       <Route path="/myPage/setting" element={<Setting />} />
+//>>>>>>> 496942c0406b20830062ed8cd1fc1a5a8566fb10
       <Route
         path="detail/:roomId/review/:reviewId"
         element={<ReviewDetail />}

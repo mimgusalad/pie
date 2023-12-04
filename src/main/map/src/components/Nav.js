@@ -1,23 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import closeIcon from "../image/close.png";
 import shareIcon from "../image/share.png";
 import tagIcon from "../image/tag.png";
+import aftertagIcon from "../image/tag_after.png";
 import warningSign1 from "../image/warning_1.png";
 import warningSign2 from "../image/warning_2.png";
 import warningSign3 from "../image/warning_3.png";
 import warningSign4 from "../image/warning_4.png";
-import ImageCard from "../components/ImageCard";
+import ImageCardReview from "../components/ImageCardReview";
+import ImageCardNav from "../components/ImageCardNav";
 import StarRating from "../components/StarRating";
 import ReviewComponent from "../components/ReviewComponent/ReviewComponent";
 import DetailInfo from "../components/DetailInfoComponent/DetailInfo";
 import SimilarItem from "../components/SimilarItemComponent/SimilarItemComponent";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+import {similarItemData} from "../data/similarItemData"
 
 export default function Nav({ room }) {
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1);
   };
+    console.log(room)
 
   return (
     <div
@@ -50,29 +54,10 @@ export default function Nav({ room }) {
           />
         </button>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <img
-            src={shareIcon}
-            alt="shareIcon"
-            style={{
-              width: "16px",
-              height: "16px",
-              strokeWidth: "10px",
-              marginRight: "20px",
-            }}
-          />
-          <img
-            src={tagIcon}
-            alt="tagIcon"
-            style={{
-              width: "16px",
-              height: "16px",
-              strokeWidth: "10px",
-            }}
-          />
         </div>
       </div>
       <div className="side-nav__items-wrapper">
-        <ImageCard imageItem={room} height={"200px"} width={"100%"} />
+        <ImageCardNav imageItem={room} height={"200px"} width={"100%"} />
         <div className="blockContainer">
           <div
             className="titleContainer"
@@ -139,46 +124,30 @@ export default function Nav({ room }) {
             <div className="warningSign">
               <img src={warningSign1} alt="level1" className="warningIcon" />
               <span className="levelText"> 심각 </span>
-              {room.tags.map((item, index) => {
-                return (
-                  <span className="tag" key={index}>
-                    {item.label}
-                  </span>
-                );
-              })}
+                 <span className="tag">
+                     {room.keyword1} {room.keyword2}
+                 </span>
             </div>
             <div className="warningSign">
               <img src={warningSign2} alt="level1" className="warningIcon" />
               <span className="levelText"> 경계 </span>
-              {room.tags.map((item, index) => {
-                return (
-                  <span className="tag" key={index}>
-                    {item.label}
-                  </span>
-                );
-              })}
+                 <span className="tag">
+                     {room.keyword3} {room.keyword4}
+                 </span>
             </div>
             <div className="warningSign">
               <img src={warningSign3} alt="level1" className="warningIcon" />
               <span className="levelText"> 주의 </span>
-              {room.tags.map((item, index) => {
-                return (
-                  <span className="tag" key={index}>
-                    {item.label}
-                  </span>
-                );
-              })}
+                 <span className="tag">
+                     {room.keyword5} {room.keyword6}
+                 </span>
             </div>
             <div className="warningSign">
               <img src={warningSign4} alt="level1" className="warningIcon" />
               <span className="levelText"> 문제없음 </span>
-              {room.tags.map((item, index) => {
-                return (
-                  <span className="tag" key={index}>
-                    {item.label}
-                  </span>
-                );
-              })}
+                 <span className="tag">
+                     {room.keyword7} {room.keyword8}
+                 </span>
             </div>
           </div>
         </div>
@@ -186,16 +155,8 @@ export default function Nav({ room }) {
           <div className="side-items-title" style={{ marginBottom: "8px" }}>
             거주민 리뷰
           </div>
-          <div className="reviewContainer">
-            {room.reviews.map((reviewItem, index) => {
-              return (
-                <ReviewComponent
-                  roomId={room.id}
-                  key={index}
-                  review={reviewItem}
-                />
-              );
-            })}
+          <div className="reviewContainer" style={{height: "130px", width: "349px"}}>
+           <ReviewComponent review={room}/>
           </div>
         </div>
         <div className="blockContainer">
@@ -203,14 +164,14 @@ export default function Nav({ room }) {
             건물 상세 정보
           </div>
           <div style={{ width: "100px" }}>
-            <DetailInfo item={room} />
+            <DetailInfo />
           </div>
         </div>
         <div className="blockContainer">
           <div className="side-items-title" style={{ marginBottom: "8px" }}>
             비슷한 매물
           </div>
-          <SimilarItem item={room.similarItems} />
+          <SimilarItem item={similarItemData} />
         </div>
       </div>
     </div>

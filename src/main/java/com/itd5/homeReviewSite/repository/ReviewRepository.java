@@ -19,12 +19,10 @@ public interface ReviewRepository extends JpaRepository<review_article, Long> {
     @Query(value = "select * from review_article group by addressId", nativeQuery = true)
     List<review_article> findDistinctByAddressId();
 
-    @Query(value="select * from review_article a, keyword " +
+    @Query(value="select * from review_article a, keyword k " +
             "where a.articleNo=k.reviewId " +
-            "and a.address LIKE CONCAT('%', :address, '%')" +
-            "and (k.:first <= 2 or k.:second <= 5 or k.:third <= 8", nativeQuery = true)
+            "and (:first <= 2 or :second <= 5 or :third <= 8)", nativeQuery = true)
     List<review_article> findByAddressKeywordAndFirstKeywordAndSecondKeywordAndThirdKeyword(
-            @Param("address") String addressKeyword,
             @Param("first") String firstKeyword,
             @Param("second") String secondKeyword,
             @Param("third") String thirdKeyword

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import RoomCard from "./RoomCard";
+import RoomCard2 from "./RoomCard2";
 import "./RoomListCard.css";
 import backIcon from "../../image/back.png";
 import nextIcon from "../../image/next.png";
 import { Link } from "react-router-dom";
 
-export default function RoomListCard({ RoomList }) {
+export default function RoomListCard2({ RoomList }) {
   const len = RoomList.length;
   const [index, setIndex] = useState(0);
   const [isBackDisabled, setIsBackDisabled] = useState(false);
@@ -60,7 +61,7 @@ export default function RoomListCard({ RoomList }) {
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <button
         onClick={onClickBack}
-        style={{ width: "5%", backgroundColor: "white", border: "none" }}
+        style={{ width: "5%", backgroundColor: "#f5f5f5", border: "none" }}
         disabled={isBackDisabled ? true : false}
       >
         <img
@@ -80,15 +81,15 @@ export default function RoomListCard({ RoomList }) {
           }}
         >
           {RoomList.map((item, idx) => (
-            <Link to={`/succDetail/${item.id}`}>
-              <RoomCard key={idx} item={item} />
+            <Link to={`/succDetail/${item.succession_article.articleNo}`}>
+              <RoomCard2 key={idx} item={item} />
             </Link>
           ))}
         </div>
       </div>
       <button
         onClick={onClickNext}
-        style={{ width: "5%", backgroundColor: "white", border: "none" }}
+        style={{ width: "5%", backgroundColor: "#f5f5f5", border: "none" }}
         disabled={isNextDisabled ? true : false}
       >
         <img

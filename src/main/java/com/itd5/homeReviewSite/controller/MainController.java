@@ -99,4 +99,10 @@ public class MainController {
         return favoriteService.checkFavorite(new FavoritePK(userId, articleNo));
     }
 
+    @GetMapping("user")
+    public Long getUserInfo(@RequestParam("email") String email){
+        return favoriteService.getUserInfo(email);
+
+    }
+
 }
