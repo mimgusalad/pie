@@ -7,14 +7,12 @@ import warningSign1 from "../image/warning_1.png";
 import warningSign2 from "../image/warning_2.png";
 import warningSign3 from "../image/warning_3.png";
 import warningSign4 from "../image/warning_4.png";
-import ImageCard from "../components/ImageCard";
 import ImageCardReview from "../components/ImageCardReview";
 import StarRating from "../components/StarRating";
 import ReviewComponent from "../components/ReviewComponent/ReviewComponent";
 import DetailInfo from "../components/DetailInfoComponent/DetailInfo";
 import SimilarItem from "../components/SimilarItemComponent/SimilarItemComponent";
 import { useNavigate} from "react-router-dom";
-import {keywordData} from "../data/keywordData"
 import {similarItemData} from "../data/similarItemData"
 
 export default function Nav({ room }) {

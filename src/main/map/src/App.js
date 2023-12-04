@@ -5,9 +5,7 @@ import {Link, Route, Routes, useNavigate} from "react-router-dom";
 
 import MainPage from "./pages/MainPage";
 import RoomList from "./RoomList";
-import RoomListPrc from "./RoomListPrc";
 import SuccDetail from "./succDetail";
-import SuccDetailPrc from "./succDetailPrc";
 import ReviewDetailPrc from "./ReviewDetailPrc";
 import ReviewDetail from "./ReviewDetail";
 import Chat from "./Chat";
@@ -92,6 +90,7 @@ function User(props){
         </div>
     )
 }
+
 export default function TempPage() {
   let navigate = useNavigate();
   let JSESSIONID = "";
