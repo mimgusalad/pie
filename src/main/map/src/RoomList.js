@@ -119,25 +119,9 @@ const structureList = [
   "옥탑",
 ];
 const priceList = ["0~100", "10~20", "20~30", "30~40", "40~50"];
-//
-
-//function ListItem({ item }) {
-//  return (
-//      <div className="itemGrid" style={{ fontSize: "14px" }}>
-//        <div>{item.address}</div>
-//        <div>{item.contextTitle}</div>
-//        <div>
-//          {item.deposit}/{item.fee}
-//        </div>
-//        <div>
-//          {item.startDate}~{item.finishDate}
-//        </div>
-//        <div>{item.regdate}</div>
-//      </div>
-//  );
-//}
 
 function ListItem({ item }) {
+
   return (
       <div className="itemGrid" style={{ fontSize: "14px" }}>
         <div>{item.succession_article.address}</div>
@@ -146,7 +130,7 @@ function ListItem({ item }) {
           {item.succession_article.deposit}/{item.succession_article.fee}
         </div>
         <div>
-          {item.succession_article.startDate}~{item.succession_article.finishDate}
+          {item.succession_article.startDate}~{item.succession_article.endDate}
         </div>
         <div>{item.succession_article.regDate}</div>
       </div>
@@ -176,22 +160,10 @@ export default function RoomList() {
      },[])
 
     const [filteredData, setFilteredData] = useState(dbData);
-    console.log(dbData)
+    console.log(filteredData)
 
 
   console.log(selectFilter)
-  //원본
-  // useEffect(() => {
-  //   const newData = succData.filter(
-  //     (item) =>
-  //       item.address.includes(selectedCity) &&
-  //       item.houseType.includes(selectedStructure) &&
-  //       selectedPrice.min <= item.fee &&
-  //       item.fee <= selectedPrice.max
-  //   );
-  //   setFilteredData(newData);
-
-  // }, [selectedCity, selectedStructure, selectedPrice]);
 
   useEffect(() => {
     if (selectedCity == "전국 전체" && selectedStructure != "" && selectedPrice.min != 0) {
@@ -274,7 +246,7 @@ export default function RoomList() {
   }, [selectedCity, selectedStructure, selectedPrice]);
 
   // 현재 페이지에 따라 게시물을 필터링
-  const currentData = dbData.slice(
+  const currentData = filteredData.slice(
       (currentPage - 1) * ITEMS_PER_PAGE,
       currentPage * ITEMS_PER_PAGE
   );
@@ -342,10 +314,7 @@ export default function RoomList() {
       <div className="layout_root">
         <div className="roomContainer">
           <div className="roomHeader">
-            <div className="title-wrapper__title">전체</div>
-            <div className="subText" style={{ marginLeft: "8px" }}>
-              {dbData.length}개
-            </div>
+            <div className="title-wrapper__title">전체 {filteredData.length}개</div>
           </div>
           <Separator height={"8px"} />
           <div className="listWithImage">
@@ -370,10 +339,6 @@ export default function RoomList() {
                     setSelectedPrice={setSelectedPrice}
                 />
               </div>
-              {/* <ToggleBtn
-              items={["최신순", "가격순"]}
-              filled={true}
-            /> */}
             </div>
             <div className="listWithImage__list">
               <RoomListCard2 RoomList={filteredData} />
@@ -382,12 +347,6 @@ export default function RoomList() {
           <Separator height={"20px"} />
           <div className="listWithImage__top">
             <div style={{ fontSize: "20px", fontWeight: "700" }}>승계 목록</div>
-            {/* <ToggleBtn
-            items={["최신순", "가격순"]}
-            filled={true}
-            selectFilter={selectFilter}
-            setSelectFilter={setSelectFilter}
-          /> */}
           </div>
           <div className="textList">
             <div
@@ -405,7 +364,7 @@ export default function RoomList() {
               <div>계약 기간</div>
               <div>등록일</div>
             </div>
-            {dbData
+            {filteredData
                 .slice(
                     (currentPage - 1) * ITEMS_PER_PAGE,
                     currentPage * ITEMS_PER_PAGE

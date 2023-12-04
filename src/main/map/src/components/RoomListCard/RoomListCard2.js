@@ -45,12 +45,6 @@ export default function RoomListCard2({ RoomList }) {
     }
   };
 
-  // const onClickBack = () => {
-  //   setIndex(index - 1);
-  // };
-  // const onClickNext = () => {
-  //   setIndex(index + 1);
-  // };
   useEffect(() => {
     if (index === 0) {
       setIsBackDisabled(true);
@@ -67,7 +61,7 @@ export default function RoomListCard2({ RoomList }) {
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <button
         onClick={onClickBack}
-        style={{ width: "5%", backgroundColor: "white", border: "none" }}
+        style={{ width: "5%", backgroundColor: "#f5f5f5", border: "none" }}
         disabled={isBackDisabled ? true : false}
       >
         <img
@@ -95,7 +89,7 @@ export default function RoomListCard2({ RoomList }) {
       </div>
       <button
         onClick={onClickNext}
-        style={{ width: "5%", backgroundColor: "white", border: "none" }}
+        style={{ width: "5%", backgroundColor: "#f5f5f5", border: "none" }}
         disabled={isNextDisabled ? true : false}
       >
         <img

@@ -44,12 +44,6 @@ export default function RoomListCard({ RoomList }) {
     }
   };
 
-  // const onClickBack = () => {
-  //   setIndex(index - 1);
-  // };
-  // const onClickNext = () => {
-  //   setIndex(index + 1);
-  // };
   useEffect(() => {
     if (index === 0) {
       setIsBackDisabled(true);

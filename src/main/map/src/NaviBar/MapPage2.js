@@ -166,6 +166,8 @@ function MapPage2({ id }) {
     keyword4 : keyword4,
     keyword5 : keyword5,
     keyword6 : keyword6,
+    keyword7 : keyword7,
+    keyword8 : keyword8,
 
   }
 
@@ -383,6 +385,8 @@ function MapPage2({ id }) {
           keyword4: `${el.keyword.경계[1]}`,
           keyword5: `${el.keyword.주의[0]}`,
           keyword6: `${el.keyword.주의[1]}`,
+          keyword7: `${el.keyword.문제없음[0]}`,
+          keyword8: `${el.keyword.문제없음[1]}`,
         }
       })
     }

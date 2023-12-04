@@ -3,6 +3,7 @@ import "./RoomListCard.css";
 import tagIcon from "../../image/tag.png";
 import { Link } from "react-router-dom";
 import roomImage from "../../image/succ_1.png"
+import userImage from "../../image/kakaoimg_1.png"
 
 function RoomImage({ item, icon }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -44,9 +45,6 @@ function RoomImage({ item, icon }) {
       >
         <div style={{ paddingLeft: "12px" }}>{item.succession_article.address}</div>
       </div>
-      <div style={{ position: "absolute", top: "10px", right: "10px" }}>
-        <img src={icon} alt="icon" style={{ width: "16px" }} />
-      </div>
     </div>
   );
 }
@@ -70,14 +68,9 @@ export default function RoomCard2({ item }) {
   return (
     <div>
       <RoomImage item={item} icon={tagIcon} />
-      <img
-        src={roomImage}
-        alt="itemImage"
-        style={{ width: (windowWidth * 0.5) / 4, height: "240px" }}
-      />
       <div className="infoContainer">
         <div className="listUserInfo">
-          <img src={"userImage"} alt="userImage" className="userImage" />
+          <img src={userImage} alt="userImage" className="userImage" />
           <div>{item.userInfo.nickname}</div>
         </div>
         <div style={{ fontSize: "12px" }}>{item.succession_article.fee}</div>
