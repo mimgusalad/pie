@@ -15,10 +15,13 @@ export const createSendbirdUser = async (email, nickname) => {
         "profile_url": ""
       })
     });
-    const responseData = response.data;
+    if (!response.ok) {
+      throw new Error(`Failed to create user: ${response.status} - ${response.statusText}`);
+    }
+    const responseData = await response.data;
     return JSON.stringify(responseData);
   } catch (error) {
-    console.log('createSendbirdUser error: ' + error.response.status);
+    console.log('createSendbirdUser error: ' + error);
     return null;
   }
 };

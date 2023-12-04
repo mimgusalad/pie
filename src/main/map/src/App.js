@@ -36,23 +36,21 @@ const cookies = new Cookies();
 axios.defaults.withCredentials = true;
 
 const getUserInfo = async () => {
+    try {
+        const res = await axios.get('http://localhost:8080/user-info');
+        console.log('user data:', res.data);
+        const userData = res.data;
 
-    return await axios.get('http://localhost:8080/user-info')
-        .then((res) => {
-            console.log('user data:', res.data);
-            const userData = res.data;
-            if(userData.name !== "anonymous") {
-                sessionStorage.setItem('user', JSON.stringify(res.data));
-                createSendbirdUser(userData.email, userData.name)
-                    .then(r => console.log(r))
-                    .catch(e => console.log('여기 에러: ' + e));
-            }
-            return res.data;
-        })
-        .catch((err) => {
-            console.log('user data err:', err);
-        });
-}
+        if (userData.name !== "anonymous") {
+            sessionStorage.setItem('user', JSON.stringify(res.data));
+//            await createSendbirdUser(userData.email, userData.name);
+        }
+
+        return res.data;
+    } catch (err) {
+        console.log('user data err:', err);
+    }
+};
 
 function getCookie(){
     return axios.get("http://localhost:8080/getCookie")
