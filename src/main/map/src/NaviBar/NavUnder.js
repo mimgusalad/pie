@@ -864,10 +864,6 @@ markerPost(el);
                   키워드를 선택해보세요.
                 </div>
                 <div className="title-wrapper__filter-toggle">
-                  <div className="toggle-wrapper">
-                    <span className="gongsil">공실만 보기</span>
-                    <input role="switch" type="checkbox" />
-                  </div>
                 </div>
               </div>
               <div className="filter-container__side-filters">
