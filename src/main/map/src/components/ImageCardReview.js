@@ -113,16 +113,21 @@ export default function ImageCardReview({ imageItem, height, width }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   console.log(imageItem)
 
+   imageItem.img_url && imageItem.img_url.map((item)=>{
+       console.log(item)
+   })
+
+
   const handlePrev = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
     } else {
-      setCurrentIndex(imageData.images.length - 1);
+      setCurrentIndex(imageItem.img_url.length - 1);
     }
   };
 
   const handleNext = () => {
-    if (currentIndex < imageData.images.length - 1) {
+    if (currentIndex < imageItem.img_url.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
       setCurrentIndex(0);
@@ -186,22 +191,34 @@ export default function ImageCardReview({ imageItem, height, width }) {
         />
       </button>
       <div style={sliderStyle}>
-        {
-            imageItem.img_url[0] ? (
-                <img
-                   src={imageItem.img_url[0]}
-                   alt="sample"
-                   style={{ width: "100%", height: "100%" }}
-                />
-               ) : (
-                <img
-                   src={roomdetail_1}
-                   alt="sample"
-                   style={{ width: "100%", height: "100%" }}
-                 />
-               )
-        }
+          {
+              imageItem.img_url[0] ? (
+                  imageItem.img_url.map((item)=>(
+                  <div
+                    style={{
+                      flex: "0 0 auto",
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  >
+                  <img
+                    src= {item}
+                    alt="sample"
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                  </div>
+                  )
+                 )
+
+                 ) : (
+                  <img
+                    src={roomdetail_1}
+                    alt="sample"
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                )
+          }
+        </div>
       </div>
-    </div>
-  );
+    );
 }

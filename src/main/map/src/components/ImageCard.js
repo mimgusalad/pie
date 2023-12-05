@@ -11,8 +11,6 @@ import {imageData} from "../data/imageData.js"
 export default function ImageCard({ imageItem, height, width }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-   console.log(imageItem.img_url)
-
   const handlePrev = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
@@ -87,14 +85,36 @@ export default function ImageCard({ imageItem, height, width }) {
         />
       </button>
       <div style={sliderStyle}>
-            <img
-              src={succdetail_1}
-              alt={succImage}
-              style={{ width: "100%", height: "100%" }}
-            />
-      </div>
-    </div>
-  );
-}
+                {
+                    imageItem.img_url[0] ? (
+                        imageItem.img_url.map((item)=>(
+                        <div
+                          style={{
+                            flex: "0 0 auto",
+                            width: "100%",
+                            height: "100%",
+                          }}
+                        >
+                        <img
+                          src= {item}
+                          alt="sample"
+                          style={{ width: "100%", height: "100%" }}
+                        />
+                        </div>
+                        )
+                       )
+
+                       ) : (
+                        <img
+                          src={succdetail_1}
+                          alt="sample"
+                          style={{ width: "100%", height: "100%" }}
+                        />
+                      )
+                }
+              </div>
+            </div>
+          );
+      }
 
 

@@ -67,7 +67,7 @@ export default function ReviewDetail() {
 
        const handleClick = () => {
          if (isClicked) {
-           setImageSrc(aftertagIcon);
+           setImageSrc(tagIcon);
              setIsClicked(false); // 초기 상태 false 일 땐 초기 상태 이미지 src
              // 북마크 해제하면 db에서도 삭제
              axios
@@ -84,7 +84,7 @@ export default function ReviewDetail() {
                  })
                  .catch((error) => console.log(error.response));
            } else {
-             setImageSrc(tagIcon);
+             setImageSrc(aftertagIcon);
              setIsClicked(true);
              // 북마크 클릭했으니까 addressId를 db에 업데이트
              axios
