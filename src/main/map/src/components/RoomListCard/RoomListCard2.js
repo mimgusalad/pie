@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 export default function RoomListCard2({ RoomList }) {
   const len = RoomList.length;
+  console.log(RoomList)
   const [index, setIndex] = useState(0);
   const [isBackDisabled, setIsBackDisabled] = useState(false);
   const [isNextDisabled, setIsNextDisabled] = useState(false);
@@ -25,6 +26,7 @@ export default function RoomListCard2({ RoomList }) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   const onClickBack = () => {
     if (index > 0) {
       setIsAnimating(true);
@@ -57,6 +59,7 @@ export default function RoomListCard2({ RoomList }) {
       setIsNextDisabled(false);
     }
   }, [index]);
+
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <button
