@@ -41,13 +41,13 @@ function MyReviewList() {
     };
 
   if (isLoading) {
-    return <p>로딩 중...</p>;
-  }
+      return <p className="loading-message_myReviewList">로딩 중...</p>;
+    }
 
-  return (
+    return (
       <div className="myReviewList-container">
         <h2 className="card-title">내가 쓴 리뷰</h2>
-        <button onClick={handleBack} className="back-button">뒤로 가기</button>
+        <button onClick={handleBack} className="back-button_myReviewList">뒤로 가기</button>
         {myReviews.length > 0 ? (
           <ul>
             {myReviews.map((review) => (
@@ -63,7 +63,7 @@ function MyReviewList() {
             ))}
           </ul>
         ) : (
-          <p>아직 내가 쓴 리뷰가 없습니다.</p>
+          <p className="loading-message_myReviewList">아직 내가 쓴 리뷰가 없습니다.</p>
         )}
       </div>
     );
