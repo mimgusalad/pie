@@ -60,45 +60,21 @@ function MyPage() {
         };
 
   return (
-    <div className="container mt-4">
+    <div className="container_myPage mt-4">
       <div className="row">
         <div className="col-md-3">
-          <div className="card">
-            <div className="card-body">
-              <h2 className="card-title">사용자 정보</h2>
+          <div className="card_myPage">
+            <div className="card-body_myPage">
+              <h2 className="card-title_myPage">사용자 정보</h2>
               <ul className="list-group list-group-flush">
-                <li className="list-group-item"><a href="#" onClick={navigateToMyReviews}>내가 쓴 리뷰</a></li>
-                <li className="list-group-item"><a href="#" onClick={navigateToMySuccessions}>내가 쓴 승계글</a></li>
-                <li className="list-group-item"><a href="#" onClick={navigateToFavorites}>즐겨찾기</a></li>
-                <li className="list-group-item"><a href="#" onClick={navigateToSettings}>계정설정</a></li>
-                <li className="list-group-item">
-                  <button className="btn btn-danger" onClick={handleLogout}>로그아웃</button>
+                <li className="list-group-item_myPage"><a href="#" onClick={navigateToMyReviews}>내가 쓴 리뷰</a></li>
+                <li className="list-group-item_myPage"><a href="#" onClick={navigateToMySuccessions}>내가 쓴 승계글</a></li>
+                <li className="list-group-item_myPage"><a href="#" onClick={navigateToFavorites}>즐겨찾기</a></li>
+                <li className="list-group-item_myPage"><a href="#" onClick={navigateToSettings}>계정설정</a></li>
+                <li className="list-group-item_myPage">
+                  <button className="btn btn-danger_myPage" onClick={handleLogout}>로그아웃</button>
                 </li>
               </ul>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-body" id="centerContent">
-              {myReviewList.length > 0 ? (
-                <div>
-                  <h2 className="card-title"></h2>
-                  {myReviewList.map(myReview => (
-                    <div key={myReview.articleNo} className="content_each_review">
-                      <h1 className="text_address">{myReview.address}</h1>
-                      <div className="bottom_info">
-                        <h1 className="text_regdate">{myReview.regdate}</h1>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div>
-                  {noReview && <p>아직 내가 쓴 리뷰가 없습니다.</p>}
-                  {noSuccession && <p>아직 내가 쓴 승계글이 없습니다.</p>}
-                </div>
-              )}
             </div>
           </div>
         </div>
