@@ -30,6 +30,8 @@ function MyReviewList() {
         axios.delete(`http://localhost:8080/api/reviews/${articleNo}`)
           .then(response => {
             // 삭제 성공 후 UI 업데이트
+            alert('리뷰가 삭제되었습니다.');
+            console.log('리뷰 삭제 성공:', response.data);
             setMyReviews(prevReviews => prevReviews.filter(review => review.articleNo !== articleNo));
           })
           .catch(error => {
