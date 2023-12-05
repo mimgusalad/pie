@@ -55,7 +55,7 @@ function MySuccession() {
       {successionData ? (
         <div>
          <p><strong>주소:</strong> {successionData.address} / {successionData.addressDetail}</p>
-                   <h3 className="content-title_mySuccession>{successionData.contentTitle}</h3>
+                   <h3 className="content-title_mySuccession">{successionData.contentTitle}</h3>
                    <p className="content-text_mySuccession">{successionData.contentText}</p>
                    <p><strong>보증금/월세:</strong> {successionData.deposit} / {successionData.fee}</p>
                    <p><strong>주거형태/결제유형:</strong> {successionData.houseType} / {successionData.payType}</p>
