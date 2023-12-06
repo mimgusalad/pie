@@ -11,6 +11,7 @@ public interface SuccessionRepository extends JpaRepository<succession_article,L
     succession_article findByUserId(Long userId);
     // 클남 이거 이제 안댐
     //List<succession_article> getAllByAddressIdIn(List<Long> list);
+    List<succession_article> getTop3ByOrderByArticleNoDesc();
 
     succession_article findByArticleNo(Long articleNo);
     List<succession_article> findAllByOrderByRegDateDesc();

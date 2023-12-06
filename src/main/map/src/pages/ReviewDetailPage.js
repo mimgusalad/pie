@@ -3,6 +3,8 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import "./ReviewDetailPage.css";
 
 import Separator from "../components/Separator";
+import nextArrow from "../image/next.png";
+import prevArrow from "../image/back.png";
 
 import backButton from "../image/backward.png";
 import shareIcon from "../img/btnImg/shareIcon.png";
@@ -20,6 +22,7 @@ export default function ReviewDetailPage(){
     const review = getData.eleReview;
     const navigate = useNavigate();
     const { reviewId } = useParams();
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     let [keywordList, setKeywordList] = useState(new Array);
     let [imgUrlList, setImgUrlList] = useState(new Array);
@@ -27,6 +30,28 @@ export default function ReviewDetailPage(){
     const handleGoBack = () => {
       navigate(-1);
     };
+    const sliderStyle = {
+      transform: `translateX(-${currentIndex * 100}%)`,
+      transition: "transform 0.5s ease-in-out",
+      display: "flex",
+      height: "100%",
+    };
+    
+  const handlePrev = () => {
+    // if (currentIndex > 0) {
+    //   setCurrentIndex(currentIndex - 1);
+    // } else {
+    //   setCurrentIndex(imageData.images.length - 1);
+    // }
+  };
+
+  const handleNext = () => {
+    // if (currentIndex < imageData.images.length - 1) {
+    //   setCurrentIndex(currentIndex + 1);
+    // } else {
+    //   setCurrentIndex(0);
+    // }
+  };
 
     useEffect(() => {
         axios.get(`http://localhost:8080/review/detail/${reviewId}`).then((res)=>{
@@ -41,7 +66,7 @@ export default function ReviewDetailPage(){
     return (
         <div className="layout_root">
           <div className="containerWrapper">
-            <div className="container">
+            <div >
               <div className="header">
                 <button onClick={handleGoBack} className="custom-button-with-icon">
                   <img src={backButton} alt="backButton" />
@@ -55,7 +80,27 @@ export default function ReviewDetailPage(){
                     <div className="slider_content">
                         <div className="slider__img">
                             <div className="slider__inner">
-                                <div className="imgInfo">
+                            <button
+        type="button"
+        onClick={handlePrev}
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "0",
+          transform: "translateY(-50%)",
+          backgroundColor: "transparent",
+          border: "none",
+          cursor: "pointer",
+          zIndex: 10,
+        }}
+      >
+        <img
+          src={prevArrow}
+          alt="Previous"
+          style={{ width: "15px", height: "15px" }}
+        />
+      </button>
+                                <div className="imgInfo" >
                                     {
                                         imgUrlList.map(function(imgUrl){
                                             console.log(imgUrl)
@@ -65,12 +110,30 @@ export default function ReviewDetailPage(){
                                         })
                                     }
                                 </div>
+                                <button
+        type="button"
+        onClick={handleNext}
+        style={{
+          position: "absolute",
+          top: "50%",
+          right: "0",
+          transform: "translateY(-50%)",
+          backgroundColor: "transparent",
+          border: "none",
+          cursor: "pointer",
+          zIndex: 10,
+        }}
+      >
+        <img
+          src={nextArrow}
+          alt="Next"
+          style={{ width: "15px", height: "15px" }}
+        />
+      </button>
                             </div>
                         </div>
-                        <div class="slider__btn">
-                            <a href="#" class="prev" role="button" aria-label="왼쪽 이미지">prev</a>
-                            <a href="#" class="next" role="button" aria-label="오른쪽 이미지">next</a>
-                        </div>
+                            
+
                     </div>
                     <div className="sucContent">
                         <span className="writerNickname">닉네임</span>
