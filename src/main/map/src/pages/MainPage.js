@@ -22,7 +22,6 @@ let MainConatiner = styled.div`
     grid-template-columns: 5fr 3fr;
     background-color: rgba(69, 152, 48, 0.03);
 `
-
 let MainTitle=styled.p`
     width: 820px;
     position: relative;
@@ -35,7 +34,6 @@ let MainTitle=styled.p`
     font-weight: 550;
     line-height: 100px; /* 156.25% */
 `
-
 let SubTitle=styled.p`
     margin-top : 1.875rem;
     margin-bottom: 10.9375rem;

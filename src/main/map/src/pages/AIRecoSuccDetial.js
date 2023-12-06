@@ -61,7 +61,7 @@ export default function AIRecoSuccDetial(){
                 <h4 className="text_home_address" > {addressObj?.roadAddress} </h4>
                 <span className="text_home_stNum_title" >지번 </span>
                 <span className="text_home_stNum" > {addressObj?.address}</span>
-                <KakaoMap latitude={addressObj?.latitude} longitude={addressObj?.longitude}/>
+                {/* <KakaoMap latitude={addressObj?.latitude} longitude={addressObj?.longitude}/> */}
             </div>
 
             <div className="content_home_disInfo">

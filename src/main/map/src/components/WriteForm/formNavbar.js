@@ -53,6 +53,7 @@ export default function FormNavbar(props){
                 state: {
                     myReviewList : response.data.myReviewList,
                     myReviewImgSrc : response.data.previewImgUrlList,
+                    userId : response.data.userId,
                 },});
             //<WritableReview myReviewList={response.data.myReviewList}  myReviewImgSrc={response.data.previewImgUrlList}/>
         })
