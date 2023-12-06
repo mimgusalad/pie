@@ -66,11 +66,17 @@ export default function ReviewDetail() {
 
     // 즐겨찾기 했는지 여부 가져오는 api
     const [isLike, setIsLike] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
         useEffect(()=>{
         console.log(roomId)
              const fetchData = async() => {
-                  const res = await axios.get("http://localhost:8080/reviews/favorite?userId="+`${getUserId}`+"&"+"articleNo="+`${roomId}`);
-                       return res.data;
+             var user = JSON.parse(sessionStorage.getItem('user'));
+             if(user != null){
+                const res = await axios.get("http://localhost:8080/reviews/favorite?userId="+`${user.userId}`+"&"+"articleNo="+`${roomId}`);
+                return res.data;
+             }else{
+                setIsLogin(false)
+             }
              }
              fetchData().then(res => setIsLike(res));
         },[])
@@ -186,10 +192,7 @@ export default function ReviewDetail() {
               <Separator height={"40px"} />
               <div className="etcContainer">
                 <div className="etcText">
-                  {newData.review_article.regDate}
-                </div>
-                <div className="etcText">
-                  조회 {newData.review_article.viewCnt}
+                  {newData.review_article.regdate}
                 </div>
                 <img
                    src={imageSrc}
@@ -237,10 +240,7 @@ export default function ReviewDetail() {
                   <Separator height={"40px"} />
                   <div className="etcContainer">
                     <div className="etcText">
-                      {newData.review_article.regDate}
-                    </div>
-                    <div className="etcText">
-                      조회 {newData.review_article.viewCnt}
+                      {newData.review_article.regdate}
                     </div>
                     <img
                        src={favImage}
@@ -263,5 +263,45 @@ export default function ReviewDetail() {
           </div>
         </div>
       );
+  }
+  // 로그인 안하면 북마크 안되게
+  else if(isLogin == false){
+    return (
+            <div className="layout_root">
+              <div className="containerWrapper">
+                <div className="container">
+                  <div className="header">
+                    <button onClick={handleGoBack} className="custom-button-with-icon">
+                      <img src={backButton} alt="backButton" />
+                      뒤로가기
+                    </button>
+                    <Separator height={"12px"} />
+                    <div className="subHeader">방 정보 {">"} 거주민리뷰</div>
+                  </div>
+                  <div className="reviewContent">
+                    <div className="userReviewContainer">
+                      <ImageCardReview imageItem={newData} height={"400px"} />
+                      <ReviewHeader user={newData} />
+                      <hr style={{ marginTop: "16px", color: "lightgray" }} />
+                      <div style={{ fontSize: "12px", lineHeight: "1.3" }}>
+                        {newData.review_article.contentText}
+                      </div>
+                      <Separator height={"40px"} />
+                      <div className="etcContainer">
+                        <div className="etcText">
+                          {newData.review_article.regDate}
+                        </div>
+
+                      </div>
+                    </div>
+                    <div className="detailInfoContainer">
+                      <SideInfo item={newData} />
+                    </div>
+                  </div>
+                  <Separator height={"80px"} />
+                </div>
+              </div>
+            </div>
+          );
   }
 }

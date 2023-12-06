@@ -88,16 +88,7 @@ function NavUnder() {
   let testData = JSON.parse(JSON.stringify(newData));
   let [testListData, setTestListData] = useState([]);
   let markerData = JSON.parse(JSON.stringify(testListData));
-  console.log(testListData)
-
-  // 사진 이미지 유무
-   newData.map((data, index) => {
-       if (data.img_url && data.img_url.length > 0) {
-           console.log(data.img_url[0]);
-       }});
-  // newData로 건들여보기
-  // keyword 하나에 접근하는법
-  //console.log(newData[30].keyword.경계[0])
+  console.log(newData)
 
   let [inputText, setInputText] = useState("");
   let [place, setPlace] = useState("");
@@ -123,7 +114,7 @@ function NavUnder() {
   const navigate = useNavigate();
 
   //리뷰순, 가격순, 별점순
-  const [myToggle, setMyToggle] = useState("리뷰순");
+  const [myToggle, setMyToggle] = useState("전체");
 
   const onChange = (e) => {
     setInputText(e.target.value);
@@ -968,7 +959,7 @@ markerPost(el);
             <div className="side-nav__items-wrapper">
               <div className="side-items-title-wrapper">
                 <div className="side-items-title">
-                  해당 지역 목록 {countRoom}개
+                  해당 지역 목록
                 </div>
                 <div className="side-items-tags">
                   <div className="side-tag">
@@ -1001,13 +992,12 @@ markerPost(el);
                     <a
                       href="#"
                       onClick={(event) => {
-                        setMyToggle("리뷰순");
+                        setMyToggle("전체");
                         setSubToggle(false);
-                        const filterData = testData.sort((a, b) => b.reviewCount - a.reviewCount);
-                        setTestListData(filterData);
+                        setTestListData(testData);
                       }}
                     >
-                      리뷰순
+                      전체
                     </a>
                     <a
                       href="#"
@@ -1036,7 +1026,7 @@ markerPost(el);
                 {/* End */}
               </div>
               <div className="side-nav__items">
-                {testListData.map((sideItem) => {
+                {newData && testListData.map((sideItem) => {
                   return (
                       <div onClick={() => detailPost(sideItem)} className="side-nav__item">
                         <div className="item-thumbnail">{sideItem.img_url[0] ?
