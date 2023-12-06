@@ -22,12 +22,12 @@
 }
 
 /* 로딩 메시지 스타일 */
-.loading-message {
+.loading-message_myReviewList {
   text-align: center;
   color: #888;
 }
 /* 뒤로 가기 버튼 스타일 */
-.back-button {
+.back-button_myReviewList {
   background-color: #007bff;
   color: white;
   padding: 8px 15px;
@@ -39,7 +39,7 @@
   transition: background-color 0.3s ease;
 }
 
-.back-button:hover {
+.back-button:hover_myReviewList {
   background-color: #0056b3;
 }
 /* 위치 조정을 위한 추가 스타일 */

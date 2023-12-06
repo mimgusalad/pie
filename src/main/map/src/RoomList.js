@@ -162,9 +162,6 @@ export default function RoomList() {
     const [filteredData, setFilteredData] = useState(dbData);
     console.log(filteredData)
 
-
-  console.log(selectFilter)
-
   useEffect(() => {
     if (selectedCity == "전국 전체" && selectedStructure != "" && selectedPrice.min != 0) {
       const newData = dbData.filter(

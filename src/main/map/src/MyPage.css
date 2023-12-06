@@ -6,22 +6,22 @@ body {
   background-color: #f8f9fa;
 }
 
-.container {
-  margin-top: 20px;
+.container_myPage {
+  /* margin-top: 20px; */
   display: flex; /* Flexbox 사용 */
   justify-content: center; /* 가운데 정렬 */
   align-items: center; /* 가운데 정렬 */
 }
 
 /* 사용자 정보 카드 스타일 */
-.card {
+.card_myPage {
   margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 그림자 추가 */
   border-radius: 8px; /* 둥근 모서리 */
   width: 100%; /* 전체 너비 사용 */
 }
 
-.card-title {
+.card-title_myPage {
   font-size: 1.75rem;
   font-weight: bold;
   color: #0056b3;
@@ -29,7 +29,7 @@ body {
   text-align: center; /* 제목 중앙 정렬 */
 }
 
-.list-group-item {
+.list-group-item_myPage {
   cursor: pointer;
   border-bottom: 1px solid #eee;
   transition: background-color 0.3s; /* 부드러운 배경색 변경 효과 */
@@ -40,7 +40,7 @@ body {
 }
 
 /* 내가 쓴 리뷰/승계글 목록 스타일 */
-.card-body {
+.card-body_myPage {
   padding: 20px;
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -56,23 +56,19 @@ body {
   background-color: #f9f9f9; /* 호버 시 배경색 변경 */
 }
 
-.text_address {
+.text_address_myPage {
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
 }
 
-.text_regdate {
-  color: #777;
-}
-
 /* 로그아웃 버튼 스타일 */
-.btn-danger {
+.btn-danger_myPage {
   width: 100%; /* 버튼의 너비를 증가 */
   border-radius: 4px; /* 버튼 모서리 둥글게 */
 }
 
-.btn-danger:hover {
+.btn-danger:hover_myPage {
   background-color: #c82333; /* 호버 시 버튼 색 변경 */
 }
 

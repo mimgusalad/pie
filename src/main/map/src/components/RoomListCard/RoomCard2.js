@@ -7,7 +7,6 @@ import userImage from "../../image/kakaoimg_1.png"
 
 function RoomImage({ item, icon }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -19,35 +18,96 @@ function RoomImage({ item, icon }) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  if(item.img_url[0] == null){
   return (
-    <div
-      style={{
-        backgroundImage: `url(${roomImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        position: "relative",
-        width: `${(windowWidth * 0.51 - 16) / 4}px`,
-        height: "240px",
-        borderRadius: "10px",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          bottom: "0",
-          left: "0",
-          right: "0",
-          background: "rgba(0,0,0,0.5)",
-          color: "white",
-          padding: "10px 0",
-          borderRadius: "0 0 10px 10px",
-        }}
-      >
-        <div style={{ paddingLeft: "12px" }}>{item.succession_article.address}</div>
+        <div
+          style={{
+            backgroundImage: `url(${roomImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            position: "relative",
+            width: `${(windowWidth * 0.51 - 16) / 4}px`,
+            height: "240px",
+            borderRadius: "10px",
+          }}
+        >
+        <div
+          style={{
+            position: "absolute",
+            bottom: "0",
+            left: "0",
+            right: "0",
+            background: "rgba(0,0,0,0.5)",
+            color: "white",
+            padding: "10px 0",
+            borderRadius: "0 0 10px 10px",
+          }}
+        >
+          <div style={{ paddingLeft: "12px" }}>{item.succession_article.address}</div>
+        </div>
       </div>
-    </div>
+//    <div
+//      style={{
+//        backgroundImage: `url(${roomImage})`,
+//        backgroundSize: "cover",
+//        backgroundPosition: "center",
+//        position: "relative",
+//        width: `${(windowWidth * 0.51 - 16) / 4}px`,
+//        height: "240px",
+//        borderRadius: "10px",
+//      }}
+//    >
+//      <div
+//        style={{
+//          position: "absolute",
+//          bottom: "0",
+//          left: "0",
+//          right: "0",
+//          background: "rgba(0,0,0,0.5)",
+//          color: "white",
+//          padding: "10px 0",
+//          borderRadius: "0 0 10px 10px",
+//        }}
+//      >
+//        <div style={{ paddingLeft: "12px" }}>{item.succession_article.address}</div>
+//      </div>
+//    </div>
   );
+  }
+  else {
+      return(
+       <div
+         style={{
+           backgroundImage: `url(${item.img_url[0]})`,
+           backgroundSize: "cover",
+           backgroundPosition: "center",
+           position: "relative",
+           width: `${(windowWidth * 0.51 - 16) / 4}px`,
+           height: "240px",
+           borderRadius: "10px",
+         }}
+       >
+       <div
+         style={{
+           position: "absolute",
+           bottom: "0",
+           left: "0",
+           right: "0",
+           background: "rgba(0,0,0,0.5)",
+           color: "white",
+           padding: "10px 0",
+           borderRadius: "0 0 10px 10px",
+         }}
+       >
+         <div style={{ paddingLeft: "12px" }}>{item.succession_article.address}</div>
+       </div>
+     </div>
+    );
+  }
 }
+
+
 
 export default function RoomCard2({ item }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);

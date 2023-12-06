@@ -7,23 +7,6 @@ import roomdetail_1 from "../image/roomdetail_1.png";
 import roomdetail_2 from "../image/roomdetail_2.png";
 import roomdetail_3 from "../image/roomdetail_3.png";
 
-const imageData = [
-  {
-    images: [
-      {
-        image: roomdetail_1,
-      },
-      {
-        image: roomdetail_2,
-      },
-      {
-        image: roomdetail_3,
-      },
-    ],
-   }
-]
-
-
 export default function ImageCardNav({ imageItem, height, width }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   //split이 잘못됐을수도 object-array 변환 찾아봐
@@ -37,18 +20,17 @@ export default function ImageCardNav({ imageItem, height, width }) {
 
              fetchData().then(res => setImageData(res));
      },[])
-     console.log("이미지 : ", imageData)
-
+  console.log("Nav 이미지 : ", imageItem.img_url)
   const handlePrev = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
     } else {
-      setCurrentIndex(imageData.images.length - 1);
+      setCurrentIndex(imageData.img_url.length - 1);
     }
   };
 
   const handleNext = () => {
-    if (currentIndex < imageData.images.length - 1) {
+    if (currentIndex < imageData.img_url.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
       setCurrentIndex(0);
@@ -61,6 +43,7 @@ export default function ImageCardNav({ imageItem, height, width }) {
     display: "flex",
     height: "100%",
   };
+
 if(imageData == null){
     return "Loading"
 }else{
@@ -116,11 +99,23 @@ if(imageData == null){
       <div style={sliderStyle}>
         {
             imageData.img_url[0] ? (
+                imageData.img_url.map((item)=>(
+                <div
+                  style={{
+                    flex: "0 0 auto",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
                 <img
-                   src= {imageData.img_url[0]}
-                   alt="sample"
-                   style={{ width: "100%", height: "100%" }}
+                  src= {item}
+                  alt="sample"
+                  style={{ width: "100%", height: "100%" }}
                 />
+                </div>
+                )
+               )
+
                ) : (
                 <img
                    src={roomdetail_1}
