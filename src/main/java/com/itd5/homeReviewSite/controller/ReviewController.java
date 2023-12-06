@@ -55,6 +55,7 @@ public class ReviewController {
     public Map<String, Object> submitReview(HttpServletRequest httpServletRequest, @RequestPart(value = "sendData") reviewForm reviewForm) {
         MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) httpServletRequest;
         List<MultipartFile> fileMap = multiRequest.getFiles("file");
+        Long userId = getLoginUserId();
 
         System.out.println(fileMap);
         System.out.println(reviewForm);
@@ -78,7 +79,7 @@ public class ReviewController {
         }
 
         // 리뷰 객체 생성
-        review.setUserId(getLoginUserId());
+        review.setUserId(userId);
         review.setAddressId(sameAddress.getAddressId());
         review.setAddress(sameAddress.getAddress());
 
@@ -100,6 +101,7 @@ public class ReviewController {
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("reviewId", String.valueOf(review.getArticleNo()));
         resultMap.put("reviewForm", reviewForm);
+        resultMap.put("userId", userId);
 
         return resultMap;
     }
@@ -129,6 +131,7 @@ public class ReviewController {
 
         result.put("myReviewList", myReviewList);
         result.put("previewImgUrlList", previewImgUrlList);
+        result.put("userId", userId);
 
         return result;
     }

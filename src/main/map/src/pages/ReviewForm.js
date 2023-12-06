@@ -59,7 +59,7 @@ export default function ReviewForm(){
 
         console.log(sendData)
         axios.post('http://localhost:8080/review/form',formData).then((response) =>{
-            navigate(`/review/detail/${response.data.reviewId}`,{
+            navigate(`/detail/review/${response.data.reviewId}/${response.data.userId}`,{
                 state: {
                     eleReview : response.data.reviewForm,
                 },})

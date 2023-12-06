@@ -1,6 +1,6 @@
 .content_review_area{
     width: 1380px;
-    height: 350px;
+    height: 250px;
 }
 .content_review_title{
     color: var(--text-primary, #222);

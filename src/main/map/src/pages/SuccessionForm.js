@@ -56,7 +56,7 @@ export default function SuccessionForm(){
         axios.post('http://localhost:8080/succession/form',formData).then((response) =>{
             console.log(response.data)
             // <Link to={`/detail/:roomId/review/:reviewId}`>
-            navigate(`/succession/detail/${response.data.successionId}`,{
+            navigate(`/succDetail/${response.data.successionId}`,{
                 state: {
                     eleSuccession : response.data.successionForm,
                 },})

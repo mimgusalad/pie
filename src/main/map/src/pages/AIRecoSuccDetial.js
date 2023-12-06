@@ -1,4 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+
+import redMark from "../img/disadvantageMark/redMark.png";
+import orangeMark from "../img/disadvantageMark/orangeMark.png";
+import yellowMark from "../img/disadvantageMark/yellowMark.png";
+import noneMark from "../img/disadvantageMark/noneMark.png";
+
+import KakaoMap from "../components/AiMain/KakaoMap";
 
 import "./AiRecoSuccDetail.css";
 
@@ -7,24 +16,33 @@ export default function AIRecoSuccDetial(){
     
     let [addressObj, setAddressObj] = useState();
     let [reviewList, setReviewList] = useState(new Array);
+    const navigate = useNavigate();
+    const { articleNo } = useParams();
 
+    const handleGoBack = () => {
+        navigate(-1);
+      };
+
+    const GetData = async() => {
+        await axios.get(`http://localhost:8080/ai/homeDetail/${articleNo}`).then((res)=>{
+            console.log(res.data)
+            // keywordList = res.data.keywordList;
+            setAddressObj(res.data.address);
+            setReviewList([...res.data.reviewList]);
+            console.log(res.data.imgUrlList)
+        })
+    }
     useEffect(() => {
-        axios.get(`http://localhost:8080/AI/homeDetail/${addressName}`).then((res)=>{
-                console.log(res.data)
-                keywordList = res.data.keywordList;
-                setAddressObj({...res.data.address});
-                setReviewList([...res.data.reviewList]);
-                console.log(res.data.imgUrlList)
-            })
+        GetData()
       }, []);
 
       return(
-        <div className="container" id="container">
+        <div style={{margin: "0px 200px"}}>
         <div className="content_subTop">
-            <a href="/ai/list">{"<"} </a>
+            <a onClick={handleGoBack}>{"<"} </a>
             <span className="text_site_route">AI 추천 {">"} 추천 집 상세보기</span>
             <button type="button">
-                <img src="/img/shareIcon.png" alt="공유" />
+                {/* <img src="/img/shareIcon.png" alt="공유" /> */}
             </button>
             <button>
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -40,17 +58,16 @@ export default function AIRecoSuccDetial(){
         <div className="content_first_info_area">
             <div className="content_home_address">
                 <h1 className="text_home_title" />건물 주소
-                <h4 className="text_home_address" > {address.roadAddress} </h4>
+                <h4 className="text_home_address" > {addressObj?.roadAddress} </h4>
                 <span className="text_home_stNum_title" >지번 </span>
-                <span className="text_home_stNum" > {address.address}</span>
-                <div className="content_map_area" id="map">
-                </div>
+                <span className="text_home_stNum" > {addressObj?.address}</span>
+                {/* <KakaoMap latitude={addressObj?.latitude} longitude={addressObj?.longitude}/> */}
             </div>
 
             <div className="content_home_disInfo">
                 <h1 className="text_home_title">건물 정보</h1>
                 <div className="home_disInfo_area">
-                    <showKeyword></showKeyword>
+                    <ShowKeyword></ShowKeyword>
                 </div>
             </div>
         </div>
@@ -61,12 +78,12 @@ export default function AIRecoSuccDetial(){
                 <a className="href_more_review" > 더보기</a>
             </div>
 
-            <showReview reviewList={reviewList}></showReview>
+            <ShowReview reviewList={reviewList}></ShowReview>
         </div>
         <div className="content_home_detail_info">
             <h1 className="text_home_title">건물 상세 정보 </h1>
             <div>
-                <showAddressDetail address={addressObj}></showAddressDetail>
+                <ShowAddressDetail address={addressObj}></ShowAddressDetail>
             </div>
 
         </div>
@@ -76,15 +93,15 @@ export default function AIRecoSuccDetial(){
 
 }
 
-function showKeyword(){
+function ShowKeyword(){
     var keywordList = ['심각', '주의','경계', '문제없음'];
-    var colorList = ['red', 'orange', 'yellow', 'grey'];
+    var colorList = [redMark, orangeMark, yellowMark, noneMark];
 
     return(
         keywordList.map(function(keyword, index){
             return(
                 <div className="home_eachDis_area">
-                    <img src={`/img/disadvantageMark/${colorList[index]}Mark.png`} />
+                    <img src={colorList[index]} />
                     <span className="text_dis_title">{keyword} </span>
                     <div className="home_disInfo_text_area">
                     </div>
@@ -94,7 +111,7 @@ function showKeyword(){
     )
 }
 
-function showReview(props){
+function ShowReview(props){
     return(
         props.reviewList.map(function(review){
             return(
@@ -123,7 +140,7 @@ function showReview(props){
     )
 }
 
-function showAddressDetail(props){
+function ShowAddressDetail(props){
     const detailContent_kor = ["빌딩 이름", "우편 번호", "건물 용도", "건물 구조", "주차 대수","세대 수", "방향", "공급면적", "층 수"];
     const detailContent_eng = ["buildingName", "zone_no", "household","","","household","","",""];
 
@@ -134,7 +151,9 @@ function showAddressDetail(props){
                     return(
                         <tr>
                             <th className="table_column_title">{title}</th>
-                            {detailContent_eng[index] == "" ? <td className="table_content"></td> : <td className="table_content">{`props.addressObj.${detailContent_eng[index]}`}</td>}
+                            {index == 0 ? <td className="table_content">{props.address?.buildingName}</td> : 
+                            (index == 1 ? <td className="table_content">{props.address?.zone_no}</td> : 
+                            (index == 2 ? <td className="table_content">{props.address?.household}</td> :<td className="table_content"></td> ))}
                         </tr>
                     )
                 })

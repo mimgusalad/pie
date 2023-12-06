@@ -54,6 +54,7 @@ export default function AiMainPage() {
             console.log(res.data);
             setResultCheck(res.data.searchCheck);
             setRecommentReviewList(res.data.recommendReviewList);
+            setRecommendSuccList(res.data.recommendSuccessionList);
             //setRecommendSuccList(res.data.recommendSuccessionList);
         }catch(err){
             console.log('err : '+err);

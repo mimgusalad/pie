@@ -19,7 +19,7 @@ export default function WritableReview(){
                 {
                 reviewList.myReviewList.map(function(review, index){
                     const myReviewImgSrc = reviewList.myReviewImgSrc;
-                    return(<Review oneReview = {review} myReviewImgSrc={reviewList.myReviewImgSrc[index]}></Review>)
+                    return(<Review oneReview = {review} myReviewImgSrc={reviewList.myReviewImgSrc[index]} userId={reviewList.userId}></Review>)
                 })
                 }
                 </div>
@@ -35,13 +35,13 @@ function Review(props){
         <div className="content_each_review" >
             { props.myReviewImgSrc == "/img/reviewUploadImg/altRoomPicture.png" ? 
             <img className="img_reviewPreview" src={Alterimg} onClick={(e) => {
-                navigate(`/review/detail/${props.oneReview.articleNo}`,{
+                navigate(`/detail/review/${props.oneReview.articleNo}/${props.userId}`,{
                     state: {
                         eleReview : props.oneReview,
                     },})
             }} /> 
             : <img className="img_reviewPreview" src={props.myReviewImgSrc} onClick={(e) => {
-                navigate(`/review/detail/${props.oneReview.articleNo}`,{
+                navigate(`/detail/review/${props.oneReview.articleNo}/${props.userId}`,{
                     state: {
                         eleReview : props.oneReview,
                     },})

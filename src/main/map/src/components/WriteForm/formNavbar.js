@@ -53,6 +53,7 @@ export default function FormNavbar(props){
                 state: {
                     myReviewList : response.data.myReviewList,
                     myReviewImgSrc : response.data.previewImgUrlList,
+                    userId : response.data.userId,
                 },});
             //<WritableReview myReviewList={response.data.myReviewList}  myReviewImgSrc={response.data.previewImgUrlList}/>
         })
@@ -79,7 +80,6 @@ export default function FormNavbar(props){
                     : (
                         <>
                             <ComList><LinkText onClick={NavigateToSuccessionForm}>승계글 쓰기</LinkText></ComList>
-                            <ComList><LinkText >내가 작성한 글</LinkText></ComList>
                         </>
                     )
                 }

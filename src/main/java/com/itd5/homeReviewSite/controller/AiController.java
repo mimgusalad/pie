@@ -83,28 +83,31 @@ public class AiController {
 
         System.out.println(list);
         List<review_article> recommendReviewList = reviewRepository.getAllByAddressIdIn(list);
+        List<succession_article> recommendSuccessionList = successionRepository.getTop3ByOrderByArticleNoDesc();
         //List<succession_article> recommendSuccessionList = successionRepository.getAllByAddressIdIn(list);
 //        model.addAttribute("recommendSuccessionList", recommendSuccessionList);
 //        model.addAttribute("roomInput", roomInput);
 
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("recommendReviewList", recommendReviewList);
+        resultMap.put("recommendSuccessionList", recommendSuccessionList);
         resultMap.put("searchCheck", true);
 
         System.out.println(resultMap);
         return resultMap;
     }
-    @GetMapping("homeDetail/{roadAddress}")
+    @GetMapping("homeDetail/{articleNo}")
     @ResponseBody
-    public Map<String,Object> homeDetail(@PathVariable String roadAddress){
-        Address address = addressRepository.findByRoadAddress(roadAddress);
-        if (address == null){
-            address = getKakaoApiFromAddress(roadAddress);
+    public Map<String,Object> homeDetail(@PathVariable Long articleNo){
+        String address = successionRepository.findByArticleNo(articleNo).getAddress();
+        Address addressObj = addressRepository.findByRoadAddress(address);
+        if (addressObj == null){
+            addressObj = getKakaoApiFromAddress(address);
         }
-        List<review_article> reviewList = reviewRepository.findTop4ByAddressId(address.getAddressId());
+        List<review_article> reviewList = reviewRepository.findTop4ByAddressId(addressObj.getAddressId());
 
         Map<String, Object> result = new HashMap<>();
-        result.put("address", address);
+        result.put("address", addressObj);
         result.put("reviewList", reviewList);
 
         return result;
