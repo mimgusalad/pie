@@ -90,14 +90,6 @@ export default function SuccDetail() {
                 <div className="etcText">
                   {newData.succession_article.regDate}
                 </div>
-                <div className="etcText">
-                  조회 {newData.succession_article.viewCnt}
-                </div>
-                <img
-                  src={shareIcon}
-                  alt="shareIcon"
-                  style={{ width: "12px", height: "12px" }}
-                />
               </div>
             </div>
             <div className="detailInfoContainer">
