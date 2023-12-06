@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import './MySuccession.css';
 
 function MySuccession() {
@@ -54,7 +54,8 @@ function MySuccession() {
      <button onClick={handleBack} className="back-button_mySuccession">뒤로 가기</button>
       {successionData ? (
         <div>
-         <p><strong>주소:</strong> {successionData.address} / {successionData.addressDetail}</p>
+         <Link to={`/succDetail/${successionData.articleNo}`}>
+          <p><strong>주소:</strong> {successionData.address} / {successionData.addressDetail}</p>
                    <h3 className="content-title_mySuccession">{successionData.contentTitle}</h3>
                    <p className="content-text_mySuccession">{successionData.contentText}</p>
                    <p><strong>보증금/월세:</strong> {successionData.deposit} / {successionData.fee}</p>
@@ -62,7 +63,7 @@ function MySuccession() {
                    <p><strong>옵션 상태/승계 상태:</strong> {successionData.optionQuality} / {successionData.successionQuality}</p>
                    <p><strong>등록일:</strong> {new Date(successionData.regDate).toLocaleDateString()}</p>
                    <button onClick={() => deleteSuccession(successionData.articleNo)} className="delete-button">삭제</button>
-
+          </Link>
         </div>
       ) : (
         <p className="no-succession-message">아직 내가 쓴 승계글이 없습니다.</p>

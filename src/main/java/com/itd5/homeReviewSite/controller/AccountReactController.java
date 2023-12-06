@@ -1,9 +1,8 @@
 package com.itd5.homeReviewSite.controller;
 
-import org.springframework.context.annotation.Bean;
+import com.itd5.homeReviewSite.signup.FavoriteWithUserInfo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import com.itd5.homeReviewSite.model.*;
@@ -12,15 +11,12 @@ import com.itd5.homeReviewSite.repository.SuccessionRepository;
 import com.itd5.homeReviewSite.signup.MemberRepository;
 import com.itd5.homeReviewSite.signup.PrincipalDetails;
 import com.itd5.homeReviewSite.signup.SocialAuth;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Optional;
 
-import com.itd5.homeReviewSite.controller.UserInfoController;
+import java.util.*;
+import java.util.Map;
+
 import org.springframework.web.client.RestTemplate;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Configuration;
+
 @RestController
 @RequestMapping("/api")
 public class AccountReactController {
@@ -154,7 +150,25 @@ public class AccountReactController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("승계글을 찾을 수 없습니다.");
         }
     }
+    @GetMapping("/favorites")
+    public ResponseEntity<?> getFavorites(@RequestParam Long userId) {
+        List<review_article> favoriteReviews = reviewRepository.findByUserId(userId);
+        List<FavoriteWithUserInfo> favoriteWithUserInfos = new ArrayList<>();
 
+        for (review_article review : favoriteReviews) {
+            SocialAuth author = memberRepository.findById(review.getUserId()).orElse(null);
+            if (author != null) {
+                UserInfo userInfo = new UserInfo(author.getName(), author.getEmail(), author.getNickname(), author.getId());
+                favoriteWithUserInfos.add(new FavoriteWithUserInfo(review, userInfo));
+            } else {
+                // 작성자가 없는 경우 처리
+                System.out.println("No user found for userId: " + review.getUserId());
+                favoriteWithUserInfos.add(new FavoriteWithUserInfo(review, new UserInfo("알 수 없음", "", "", null)));
+            }
+        }
+
+        return ResponseEntity.ok(favoriteWithUserInfos);
+    }
     @PostMapping("/logout")
     public ResponseEntity<String> logout() {
         SecurityContextHolder.clearContext();
