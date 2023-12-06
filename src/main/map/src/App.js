@@ -170,7 +170,7 @@ export default function TempPage() {
       <Route path="/successionBoard" element={<RoomList />} />
       <Route path="/benefit" element={<BenefitPage />} />
       <Route path="/detail/:roomId" element={<MapPage2 />} />
-      <Route path="/detail/review/:roomId" element={<ReviewDetail />} />
+      <Route path="/detail/review/:roomId/:getUserId" element={<ReviewDetail />} />
       <Route path="/succDetail/:succId" element={<SuccDetail />} />
       <Route path="/successionBoard" element={<RoomList />} />
 //=======

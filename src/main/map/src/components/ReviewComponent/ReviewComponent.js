@@ -6,8 +6,7 @@ import userImage from "../../image/kakaoimg_1.png"
 import roomImage from "../../image/roomdetail_2.png"
 
 export default function ReviewComponent({ review }) {
-  var substring = review.img_url.split(" ")
-  console.log(substring[0])
+
 
     const[imageData, setImageData] = useState(null);
        useEffect(()=>{
@@ -19,11 +18,23 @@ export default function ReviewComponent({ review }) {
                fetchData().then(res => setImageData(res));
        },[])
 
+
+       const [userData, setUserData] = useState([]);
+           useEffect(()=>{
+                const fetchData = async() => {
+                     const res = await axios.get('http://localhost:8080/user-info');
+                          return res.data;
+                }
+                fetchData().then(res => setUserData(res));
+           },[])
+
+           console.log(userData)
+
 if(imageData == null){
     return "Loading"
 }else{
   return (
-    <Link to={`/detail/review/${review.articleNo}`}>
+    <Link to={`/detail/review/${review.articleNo}/${userData.userId}`}>
       <div className="reviewBox">
         <div className="reviewHeader">
           <div className="userID">
