@@ -5,7 +5,7 @@ import "./benefitPage.css";
 
 export default function benefitPage(){
     return (
-        <div className="container">
+        <div style={{background: "#fff"}} >
             <div className="content_user_point">
                 <div className="content_user_info">
                     <img className="img_user_profile" />
@@ -16,7 +16,15 @@ export default function benefitPage(){
                 <UserPointCard></UserPointCard>
             </div>
             <div className="content_point_exchange">
-                <p className="content_title">포인트 교환하기</p>
+                <p style={{
+                    color: "var(--text-primary, #222)",
+                    marginBottom: "20px",
+                    fontFamily:"Pretendard",
+                    fontSize: "24px",
+                    fontStyle: "normal",
+                    fontWeight: "600",
+                    lineHeight: "32px"
+                }}>포인트 교환하기</p>
                 <div className="point_exchange_item" style={{background: "#FF3C6C"}}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="158" height="46" viewBox="0 0 158 46" fill="none" style={{marginLeft:"65px", marginTop: "10px"}}>
                     <path d="M79.21 20.27V34.04H72.95V20.79C72.95 18.04 71.15 15.96 67.91 15.96C64.96 15.96 62.86 18.04 62.86 20.85V34.05H56.61V10.58H62.61V13.34C64.12 11.03 67.21 10.31 69.4 10.31C76.59 10.31 79.21 15 79.21 20.27ZM19.87 10.59L13.67 25.3L7.31 10.59H0L10.33 32.59L4.43 45.66H11.48L27.2 10.59H19.87ZM107.64 22.48C107.64 29.18 102.15 34.62 95.39 34.62C88.63 34.62 83.14 29.19 83.14 22.48C83.14 15.77 88.63 10.34 95.39 10.34C102.15 10.34 107.64 15.77 107.64 22.48ZM101.48 22.48C101.48 19.15 98.75 16.44 95.38 16.44C92.01 16.44 89.29 19.14 89.29 22.48C89.29 25.82 92.02 28.52 95.38 28.52C98.74 28.52 101.48 25.82 101.48 22.48ZM51.66 23.18V34.05H46.01V31.63C44.17 33.47 41.78 34.59 39.22 34.59C32.45 34.59 26.97 29.16 26.97 22.45C26.97 15.74 32.46 10.31 39.22 10.31C45.98 10.31 51.66 15.6 51.66 23.18ZM45.31 22.48C45.31 19.15 42.58 16.44 39.22 16.44C35.86 16.44 33.13 19.14 33.13 22.48C33.13 25.82 35.86 28.52 39.22 28.52C42.58 28.52 45.31 25.82 45.31 22.48ZM157.99 23.18V34.05H152.34V31.63C150.5 33.47 148.12 34.59 145.55 34.59C138.78 34.59 133.3 29.16 133.3 22.45C133.3 15.74 138.79 10.31 145.55 10.31C152.31 10.31 157.99 15.6 157.99 23.18ZM151.64 22.48C151.64 19.15 148.91 16.44 145.54 16.44C142.17 16.44 139.45 19.14 139.45 22.48C139.45 25.82 142.18 28.52 145.54 28.52C148.9 28.52 151.64 25.82 151.64 22.48ZM111.62 34.04H117.99V0H111.62V34.04ZM123.11 33.71C123.11 38.06 120.47 39.49 118.04 39.49V45.72C121.67 45.72 129.37 44.7 129.41 33.83V10.58H123.1V33.71H123.11Z" fill="white"/>
@@ -49,7 +57,15 @@ export default function benefitPage(){
             </div>
 
             <div className="content_point_event">
-                <p className="content_title">이벤트</p>
+                <p style={{
+                    color: "var(--text-primary, #222)",
+                    marginBottom: "20px",
+                    fontFamily:"Pretendard",
+                    fontSize: "24px",
+                    fontStyle: "normal",
+                    fontWeight: "600",
+                    lineHeight: "32px"
+                }}>이벤트</p>
                 <div className="list-control cont mb-20">
                     <div className="how-many">
                         <p>총 <strong className="highlight">39</strong>건</p>

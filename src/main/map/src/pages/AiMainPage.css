@@ -118,7 +118,7 @@ body{
 }
 .content_main_title{
     position: absolute;
-    left: 42%;
+    left: 40%;
     top: 18%;
     color: var(--text-white, #FFF);
     text-align: center;
@@ -132,7 +132,7 @@ body{
 }
 .content_main_subTitle{
     position: absolute;
-    left: 42%;
+    left: 40%;
     top: 55%;
     color: var(--text-white, #FFF);
     text-align: center;

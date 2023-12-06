@@ -18,8 +18,7 @@ import BenefitPage from "./pages/benefitPage";
 import ReviewForm from "./pages/ReviewForm";
 import SuccessionForm from "./pages/SuccessionForm";
 import WritableReview from "./pages/WritableReview";
-import SuccessionDetial from "./pages/SuccessionDetail";
-import ReviewDetailPage from "./pages/ReviewDetailPage";
+import AiRecoSuccDetail from "./pages/AIRecoSuccDetial";
 
 import MyReviewList from "./MyReviewList";
 import MySuccession from "./MySuccession";
@@ -178,8 +177,7 @@ export default function TempPage() {
       <Route path="/review/form" element={<ReviewForm />} />
       <Route path="/review/my/writable-review" element={<WritableReview />} />
       <Route path="/succession/form" element={<SuccessionForm />} />
-      <Route path="/review/detail/:reviewId" element={<ReviewDetailPage />}></Route>
-      <Route path="/succession/detail/:successionId" element = {<SuccessionDetial/>}></Route>
+      <Route path="/ai/homeDetail/:articleNo" element={<AiRecoSuccDetail />}></Route>
       <Route path="/myPage" element={<MyPage />} />
       <Route path="/myPage/favorites" element={<Favorite />}/>
       <Route path="/myPage/myReviewList" element={<MyReviewList />} />
